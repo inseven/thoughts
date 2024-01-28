@@ -43,6 +43,11 @@ struct Items: View {
             // Open the window.
             openWindow(id: "note", value: url)
         }
+        Button {
+            NSApplication.shared.terminate(nil)
+        } label: {
+            Text("Quit")
+        }
     }
 
 }
