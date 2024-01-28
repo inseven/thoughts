@@ -43,6 +43,7 @@ struct Items: View {
             // Open the window.
             openWindow(id: "note", value: url)
         }
+        Divider()
         Button {
             NSApplication.shared.terminate(nil)
         } label: {
