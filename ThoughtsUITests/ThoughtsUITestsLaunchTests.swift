@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class Disk_StickiesUITestsLaunchTests: XCTestCase {
+final class ThoughtsUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

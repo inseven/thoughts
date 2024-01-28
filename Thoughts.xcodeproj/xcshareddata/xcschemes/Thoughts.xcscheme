@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D852AEFD2B6027CA00B77A3D"
-               BuildableName = "Moments.app"
-               BlueprintName = "Moments"
-               ReferencedContainer = "container:Moments.xcodeproj">
+               BuildableName = "Thoughts.app"
+               BlueprintName = "Thoughts"
+               ReferencedContainer = "container:Thoughts.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,9 +35,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D852AF0E2B6027CD00B77A3D"
-               BuildableName = "MomentsTests.xctest"
-               BlueprintName = "MomentsTests"
-               ReferencedContainer = "container:Moments.xcodeproj">
+               BuildableName = "ThoughtsTests.xctest"
+               BlueprintName = "ThoughtsTests"
+               ReferencedContainer = "container:Thoughts.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -46,9 +46,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D852AF182B6027CD00B77A3D"
-               BuildableName = "MomentsUITests.xctest"
-               BlueprintName = "MomentsUITests"
-               ReferencedContainer = "container:Moments.xcodeproj">
+               BuildableName = "ThoughtsUITests.xctest"
+               BlueprintName = "ThoughtsUITests"
+               ReferencedContainer = "container:Thoughts.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -68,9 +68,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D852AEFD2B6027CA00B77A3D"
-            BuildableName = "Moments.app"
-            BlueprintName = "Moments"
-            ReferencedContainer = "container:Moments.xcodeproj">
+            BuildableName = "Thoughts.app"
+            BlueprintName = "Thoughts"
+            ReferencedContainer = "container:Thoughts.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D852AEFD2B6027CA00B77A3D"
-            BuildableName = "Moments.app"
-            BlueprintName = "Moments"
-            ReferencedContainer = "container:Moments.xcodeproj">
+            BuildableName = "Thoughts.app"
+            BlueprintName = "Thoughts"
+            ReferencedContainer = "container:Thoughts.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

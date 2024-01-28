@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct MomentsApp: App {
+struct ThoughtsApp: App {
 
     var applicationModel = ApplicationModel()
 
