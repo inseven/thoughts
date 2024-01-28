@@ -26,4 +26,32 @@ class ApplicationModel: ObservableObject {
 
     @Published var notes: [Note] = []
 
+    func new() -> URL {
+        dispatchPrecondition(condition: .onQueue(.main))
+
+        let timestamp = Date()
+
+        // Filename.
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd-HH-mm-ss"
+        formatter.timeZone = .gmt
+        let filename = formatter.string(from: timestamp)
+        let url = ApplicationModel.folderURL.appendingPathComponent(filename).appendingPathExtension("md")
+
+        // Date.
+        // N.B. The date formatter uses the GMT time zone by default so we explicitly set it to match our current time
+        // zone to ensure we don't loose localtime.
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.timeZone = Calendar.current.timeZone
+        let date = dateFormatter.string(from: timestamp)
+
+        // Create the file if it doesn't exist.
+        if !FileManager.default.fileExists(atPath: url.path) {
+            let contents = "---\ndate: \(date)\ntags:\n---\n\n"
+            try! contents.write(to: url, atomically: true, encoding: .utf8)
+        }
+
+        return url
+    }
+
 }
