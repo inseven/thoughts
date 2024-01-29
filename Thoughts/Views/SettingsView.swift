@@ -20,29 +20,17 @@
 
 import SwiftUI
 
-@main
-struct ThoughtsApp: App {
+struct SettingsView: View {
 
-    var applicationModel = ApplicationModel()
+    @ObservedObject var applicationModel: ApplicationModel
 
-    var body: some Scene {
-
-        MenuBarExtra {
-            Items(applicationModel: applicationModel)
-        } label: {
-            Image(systemName: "note.text")
-        }
-
-        WindowGroup(id: "note", for: URL.self) { url in
-            if let url = url.wrappedValue {
-                NoteView(url: url)
+    var body: some View {
+        Form {
+            Section {
+                Text("Hello, World!")
             }
         }
-        .defaultSize(width: 800, height: 600)
-
-        Settings {
-            SettingsView(applicationModel: applicationModel)
-        }
-
+        .formStyle(.grouped)
     }
+
 }

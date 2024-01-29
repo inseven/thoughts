@@ -32,6 +32,10 @@ struct Items: View {
             openWindow(id: "note", value: url)
         }
         Divider()
+        SettingsLink {
+            Text("Settings")
+        }
+        Divider()
         Button {
             NSApplication.shared.terminate(nil)
         } label: {
