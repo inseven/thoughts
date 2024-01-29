@@ -26,13 +26,12 @@ struct MainMenu: View {
 
     @ObservedObject var applicationModel: ApplicationModel
 
-    @Environment(\.openWindow) var openWindow
     @Environment(\.openURL) var openURL
 
     var body: some View {
-        Button("New Note...") {
-            let url = applicationModel.new()
-            openWindow(id: "note", value: url)
+        Button("New...") {
+            applicationModel.new()
+            openURL(ThoughtsApp.composeURL)
         }
         Divider()
         Button {

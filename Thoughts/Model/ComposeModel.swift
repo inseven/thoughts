@@ -18,34 +18,38 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Combine
 import SwiftUI
 
-struct NoteView: View {
+class ComposeModel: ObservableObject {
 
-    let url: URL
+    @Published var error: Error?
 
-    @StateObject var note: Note
+    let applicationModel: ApplicationModel
 
-    init(url: URL) {
-        self.url = url
-        _note = StateObject(wrappedValue: Note(url: url))
+    private var cancellables: Set<AnyCancellable> = []
+
+    init(applicationModel: ApplicationModel) {
+        self.applicationModel = applicationModel
     }
 
-    var body: some View {
-        HStack {
-            TextEditor(text: $note.content)
-                .scrollContentBackground(.hidden)
-                .frame(minWidth: 400)
-                .font(.system(size: 14, design: .monospaced))
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.background)
-        .onAppear {
-            note.start()
-        }
-        .onDisappear {
-            note.stop()
-        }
+    func start() {
+        dispatchPrecondition(condition: .onQueue(.main))
+        applicationModel.$document
+            .debounce(for: .seconds(0.1), scheduler: DispatchQueue.main)
+            .sink { document in
+                do {
+                    try document.save()
+                } catch {
+                    self.error = error
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    func stop() {
+        dispatchPrecondition(condition: .onQueue(.main))
+        cancellables.removeAll()
     }
 
 }

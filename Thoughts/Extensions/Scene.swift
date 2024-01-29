@@ -18,17 +18,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import SwiftUI
 
-class ApplicationModel: ObservableObject {
+import Diligence
+import Interact
 
-    static let folderURL = URL(fileURLWithPath: "/Users/jbmorley/Notes/Thoughts/")
+extension Scene {
 
-    @Published var document = Document()
-
-    func new() {
-        dispatchPrecondition(condition: .onQueue(.main))
-        document = Document()
+    public func handlesExternalEvents(matching conditions: Set<URL>) -> some Scene {
+        return handlesExternalEvents(matching: Set(conditions.map { $0.absoluteString }))
     }
 
 }

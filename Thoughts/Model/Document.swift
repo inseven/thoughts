@@ -20,15 +20,30 @@
 
 import Foundation
 
-class ApplicationModel: ObservableObject {
+struct Document {
 
-    static let folderURL = URL(fileURLWithPath: "/Users/jbmorley/Notes/Thoughts/")
+    static func url(for timestamp: Date) -> URL {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd-HH-mm-ss"
+        formatter.timeZone = .gmt
+        let filename = formatter.string(from: timestamp)
+        return ApplicationModel.folderURL.appendingPathComponent(filename).appendingPathExtension("md")
+    }
 
-    @Published var document = Document()
+    var date: Date
+    var content: String
 
-    func new() {
-        dispatchPrecondition(condition: .onQueue(.main))
-        document = Document()
+    init(date: Date = Date()) {
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.timeZone = Calendar.current.timeZone
+        let dateString = dateFormatter.string(from: date)
+        self.date = date
+        self.content = "---\ndate: \(dateString)\ntags:\n---\n\n"
+    }
+
+    func save() throws {
+        let url = Self.url(for: date)
+        try content.write(to: url, atomically: true, encoding: .utf8)
     }
 
 }

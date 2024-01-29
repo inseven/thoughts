@@ -18,17 +18,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import SwiftUI
 
-class ApplicationModel: ObservableObject {
+struct ComposeWindow: Scene {
 
-    static let folderURL = URL(fileURLWithPath: "/Users/jbmorley/Notes/Thoughts/")
+    @EnvironmentObject var applicationModel: ApplicationModel
 
-    @Published var document = Document()
+    static let windowID = "compose-window"
 
-    func new() {
-        dispatchPrecondition(condition: .onQueue(.main))
-        document = Document()
+    var body: some Scene {
+        Window("Thoughts", id: Self.windowID) {
+            ComposeView(applicationModel: applicationModel)
+        }
     }
 
 }

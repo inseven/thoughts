@@ -18,40 +18,34 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Combine
 import SwiftUI
 
-class Note: ObservableObject {
+struct ComposeView: View {
 
-    let url: URL
+    @ObservedObject var applicationModel: ApplicationModel
+    @StateObject var composeModel: ComposeModel
 
-    @Published var content: String = ""
-
-    private var cancellables: Set<AnyCancellable> = []
-
-    init(url: URL) {
-        self.url = url
+    init(applicationModel: ApplicationModel) {
+        self.applicationModel = applicationModel
+        _composeModel = StateObject(wrappedValue: ComposeModel(applicationModel: applicationModel))
     }
 
-    func start() {
-        dispatchPrecondition(condition: .onQueue(.main))
-        $content
-            .debounce(for: .seconds(0.1), scheduler: DispatchQueue.main)
-            .sink { content in
-                // TODO: Report the error.
-                try! content.write(to: self.url, atomically: true, encoding: .utf8)
-            }
-            .store(in: &cancellables)
-
-        // Load the content before starting.
-        if FileManager.default.fileExists(atPath: url.path) {
-            content = try! String(contentsOf: url)
+    var body: some View {
+        HStack {
+            TextEditor(text: $applicationModel.document.content)
+                .scrollContentBackground(.hidden)
+                .frame(minWidth: 400)
+                .font(.system(size: 14, design: .monospaced))
         }
-    }
-
-    func stop() {
-        dispatchPrecondition(condition: .onQueue(.main))
-        cancellables.removeAll()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.background)
+        .presents($composeModel.error)
+        .onAppear {
+            composeModel.start()
+        }
+        .onDisappear {
+            composeModel.stop()
+        }
     }
 
 }
