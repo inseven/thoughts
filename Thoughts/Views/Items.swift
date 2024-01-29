@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import Diligence
+
 struct Items: View {
 
     @ObservedObject var applicationModel: ApplicationModel
@@ -32,9 +34,8 @@ struct Items: View {
             openWindow(id: "note", value: url)
         }
         Divider()
-        SettingsLink {
-            Text("Settings")
-        }
+        AboutLink()
+        SettingsLink()
         Divider()
         Button {
             NSApplication.shared.terminate(nil)
