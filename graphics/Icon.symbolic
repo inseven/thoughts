@@ -1,0 +1,34 @@
+{
+  "topColor" : {
+    "green" : 0.23504769802093506,
+    "red" : 1,
+    "alpha" : 1,
+    "blue" : 0.5970104336738586
+  },
+  "iconScale" : 1.1036529118342595,
+  "version" : 1,
+  "shadowOpacity" : 0.2176015625,
+  "shadowHeight" : 0.24728841145833333,
+  "symbolColor" : {
+    "green" : 0.9999999403953552,
+    "alpha" : 1,
+    "blue" : 0.9999999403953552,
+    "red" : 0.9999999403953552
+  },
+  "id" : "24670896-9CE6-40DD-86CB-111B3E0DEB8D",
+  "symbol" : {
+    "name" : "bubble_chart",
+    "variant" : "sharp",
+    "family" : "material-icons"
+  },
+  "iconOffset" : [
+    0,
+    0
+  ],
+  "bottomColor" : {
+    "red" : 1,
+    "green" : 0,
+    "blue" : 0,
+    "alpha" : 1
+  }
+}
