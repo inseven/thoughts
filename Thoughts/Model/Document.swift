@@ -29,16 +29,20 @@ struct Document {
         return "---\ndate: \(dateString)\n---\n\n"
     }
 
-    static func url(for timestamp: Date) -> URL {
+    var date: Date
+    var content: String
+
+    var url: URL {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd-HH-mm-ss"
         formatter.timeZone = .gmt
-        let filename = formatter.string(from: timestamp)
+        let filename = formatter.string(from: date)
         return ApplicationModel.folderURL.appendingPathComponent(filename).appendingPathExtension("md")
     }
 
-    var date: Date
-    var content: String
+    var isEmpty: Bool {
+        return content.isEmpty
+    }
 
     init(date: Date = Date()) {
         self.date = date
@@ -46,7 +50,6 @@ struct Document {
     }
 
     func save() throws {
-        let url = Self.url(for: date)
         let content = Self.header(for: date) + self.content
         try content.write(to: url, atomically: true, encoding: .utf8)
     }

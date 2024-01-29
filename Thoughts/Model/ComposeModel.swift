@@ -39,7 +39,14 @@ class ComposeModel: ObservableObject {
             .debounce(for: .seconds(0.1), scheduler: DispatchQueue.main)
             .sink { document in
                 do {
-                    try document.save()
+                    if document.isEmpty {
+                        let fileManager = FileManager.default
+                        if fileManager.fileExists(atPath: document.url.path) {
+                            try fileManager.removeItem(at: document.url)
+                        }
+                    } else {
+                        try document.save()
+                    }
                 } catch {
                     self.error = error
                 }
