@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,8 @@
 		D852AF662B604B1200B77A3D /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852AF652B604B1200B77A3D /* NoteView.swift */; };
 		D852AF692B604B3E00B77A3D /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852AF682B604B3E00B77A3D /* Items.swift */; };
 		D852AF6B2B604B5100B77A3D /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852AF6A2B604B5100B77A3D /* Note.swift */; };
+		D8F06D4B2B67275B0039AEF4 /* Diligence in Frameworks */ = {isa = PBXBuildFile; productRef = D8F06D4A2B67275B0039AEF4 /* Diligence */; };
+		D8F06D4E2B6727630039AEF4 /* Interact in Frameworks */ = {isa = PBXBuildFile; productRef = D8F06D4D2B6727630039AEF4 /* Interact */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8F06D4E2B6727630039AEF4 /* Interact in Frameworks */,
+				D8F06D4B2B67275B0039AEF4 /* Diligence in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +158,10 @@
 			dependencies = (
 			);
 			name = Thoughts;
+			packageProductDependencies = (
+				D8F06D4A2B67275B0039AEF4 /* Diligence */,
+				D8F06D4D2B6727630039AEF4 /* Interact */,
+			);
 			productName = "Disk Stickies";
 			productReference = D852AEFE2B6027CA00B77A3D /* Thoughts.app */;
 			productType = "com.apple.product-type.application";
@@ -226,6 +234,10 @@
 				Base,
 			);
 			mainGroup = D852AEF52B6027CA00B77A3D;
+			packageReferences = (
+				D8F06D492B67275B0039AEF4 /* XCLocalSwiftPackageReference "diligence" */,
+				D8F06D4C2B6727630039AEF4 /* XCLocalSwiftPackageReference "interact" */,
+			);
 			productRefGroup = D852AEFF2B6027CA00B77A3D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -595,6 +607,28 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		D8F06D492B67275B0039AEF4 /* XCLocalSwiftPackageReference "diligence" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = diligence;
+		};
+		D8F06D4C2B6727630039AEF4 /* XCLocalSwiftPackageReference "interact" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = interact;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D8F06D4A2B67275B0039AEF4 /* Diligence */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Diligence;
+		};
+		D8F06D4D2B6727630039AEF4 /* Interact */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Interact;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D852AEF62B6027CA00B77A3D /* Project object */;
 }
