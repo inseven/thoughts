@@ -31,7 +31,7 @@ struct ThoughtsApp: App {
     var body: some Scene {
 
         MenuBarExtra {
-            Items(applicationModel: applicationModel)
+            MainMenu(applicationModel: applicationModel)
         } label: {
             Image(systemName: "note.text")
         }

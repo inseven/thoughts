@@ -22,7 +22,7 @@ import SwiftUI
 
 import Diligence
 
-struct Items: View {
+struct MainMenu: View {
 
     @ObservedObject var applicationModel: ApplicationModel
 

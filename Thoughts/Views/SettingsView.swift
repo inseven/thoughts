@@ -20,14 +20,16 @@
 
 import SwiftUI
 
+import Interact
+
 struct SettingsView: View {
 
-    @ObservedObject var applicationModel: ApplicationModel
+    @ObservedObject var application = Application.shared
 
     var body: some View {
         Form {
             Section {
-                Text("Hello, World!")
+                Toggle("Open at Login", isOn: $application.openAtLogin)
             }
         }
         .formStyle(.grouped)
