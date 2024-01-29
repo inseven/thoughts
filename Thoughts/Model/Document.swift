@@ -22,6 +22,13 @@ import Foundation
 
 struct Document {
 
+    static func header(for date: Date) -> String {
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.timeZone = Calendar.current.timeZone
+        let dateString = dateFormatter.string(from: date)
+        return "---\ndate: \(dateString)\n---\n\n"
+    }
+
     static func url(for timestamp: Date) -> URL {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd-HH-mm-ss"
@@ -34,15 +41,13 @@ struct Document {
     var content: String
 
     init(date: Date = Date()) {
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.timeZone = Calendar.current.timeZone
-        let dateString = dateFormatter.string(from: date)
         self.date = date
-        self.content = "---\ndate: \(dateString)\ntags:\n---\n\n"
+        self.content = ""
     }
 
     func save() throws {
         let url = Self.url(for: date)
+        let content = Self.header(for: date) + self.content
         try content.write(to: url, atomically: true, encoding: .utf8)
     }
 

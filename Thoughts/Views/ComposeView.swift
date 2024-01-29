@@ -39,6 +39,7 @@ struct ComposeView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.background)
+        .navigationTitle(applicationModel.document.date.formatted())
         .presents($composeModel.error)
         .onAppear {
             composeModel.start()
