@@ -35,7 +35,7 @@ struct ThoughtsApp: App {
         MenuBarExtra {
             MainMenu(applicationModel: applicationModel)
         } label: {
-            Image(systemName: "note.text")
+            Image(systemName: "text.justify.left")
         }
 
         WindowGroup(id: "note", for: URL.self) { url in
