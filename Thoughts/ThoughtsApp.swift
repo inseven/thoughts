@@ -1,4 +1,4 @@
-// Copyright (c) 2021-2024 Jason Morley
+// Copyright (c) 2024 Jason Morley
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -50,7 +50,7 @@ struct ThoughtsApp: App {
 
         let title = "Thoughts Support (\(Bundle.main.version ?? "Unknown Version"))"
 
-        About(repository: "inseven/thoughts", copyright: "Copyright © 2021-2024 Jason Morley") {
+        About(repository: "inseven/thoughts", copyright: "Copyright © 2024 Jason Morley") {
             Diligence.Action("GitHub", url: URL(string: "https://github.com/inseven/thoughts")!)
             Diligence.Action("Support", url: URL(address: "support@jbmorley.co.uk", subject: title)!)
         } acknowledgements: {
