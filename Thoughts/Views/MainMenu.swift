@@ -27,6 +27,7 @@ struct MainMenu: View {
     @ObservedObject var applicationModel: ApplicationModel
 
     @Environment(\.openWindow) var openWindow
+    @Environment(\.openURL) var openURL
 
     var body: some View {
         Button("New Note...") {
@@ -34,7 +35,11 @@ struct MainMenu: View {
             openWindow(id: "note", value: url)
         }
         Divider()
-        AboutLink()
+        Button {
+            openURL(ThoughtsApp.aboutURL)
+        } label: {
+            Text("About...")
+        }
         SettingsLink()
         Divider()
         Button {

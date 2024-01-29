@@ -26,6 +26,8 @@ import Interact
 @main
 struct ThoughtsApp: App {
 
+    static let aboutURL = URL(string: "x-thoughts://about")!
+
     var applicationModel = ApplicationModel()
 
     var body: some Scene {
@@ -44,7 +46,7 @@ struct ThoughtsApp: App {
         .defaultSize(width: 800, height: 600)
 
         Settings {
-            SettingsView(applicationModel: applicationModel)
+            SettingsView()
         }
 
         let title = "Thoughts Support (\(Bundle.main.version ?? "Unknown Version"))"
@@ -65,6 +67,7 @@ struct ThoughtsApp: App {
             License("Material Icons", author: "Google", filename: "material-icons-license")
             License("Thoughts", author: "Jason Morley", filename: "thoughts-license")
         }
+        .handlesExternalEvents(matching: [ThoughtsApp.aboutURL.absoluteString])
 
     }
 }
