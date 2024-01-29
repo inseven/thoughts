@@ -22,7 +22,7 @@ import Foundation
 
 class ApplicationModel: ObservableObject {
 
-    static let folderURL = URL(fileURLWithPath: "/Users/jbmorley/Notes/Stream/")
+    static let folderURL = URL(fileURLWithPath: "/Users/jbmorley/Notes/Thoughts/")
 
     @Published var notes: [Note] = []
 
