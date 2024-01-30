@@ -4,3 +4,9 @@
 [submodule "interact"]
 	path = interact
 	url = git@github.com:inseven/interact.git
+[submodule "scripts/changes"]
+	path = scripts/changes
+	url = https://github.com/jbmorley/changes.git
+[submodule "scripts/build-tools"]
+	path = scripts/build-tools
+	url = https://github.com/jbmorley/build-tools.git
