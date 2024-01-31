@@ -18,17 +18,51 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import AppKit
 import Foundation
+
+import Interact
 
 class ApplicationModel: ObservableObject {
 
-    static let folderURL = URL(fileURLWithPath: "/Users/jbmorley/Notes/Thoughts/")
+    enum SettingsKey: String {
+        case rootURL
+    }
+
+    @Published var rootURL: URL? {
+        didSet {
+            do {
+                try keyedDefaults.set(securityScopedURL: rootURL, forKey: .rootURL)
+            } catch {
+                print("Failed to save bookmark data with error \(error).")
+            }
+        }
+    }
 
     @Published var document = Document()
+
+    let keyedDefaults = KeyedDefaults<SettingsKey>()
+
+    init() {
+        rootURL = try? keyedDefaults.securityScopedURL(forKey: .rootURL)
+    }
 
     func new() {
         dispatchPrecondition(condition: .onQueue(.main))
         document = Document()
+    }
+
+    func setRootURL() {
+        dispatchPrecondition(condition: .onQueue(.main))
+        let openPanel = NSOpenPanel()
+        openPanel.canChooseFiles = false
+        openPanel.canChooseDirectories = true
+        openPanel.canCreateDirectories = true
+        guard openPanel.runModal() ==  NSApplication.ModalResponse.OK,
+              let url = openPanel.url else {
+            return
+        }
+        rootURL = url
     }
 
 }

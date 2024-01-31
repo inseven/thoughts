@@ -35,18 +35,24 @@ class ComposeModel: ObservableObject {
 
     func start() {
         dispatchPrecondition(condition: .onQueue(.main))
-        applicationModel.$document
+
+        // Create a new document if the root url changes.
+        applicationModel
+            .$rootURL
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                self.applicationModel.document = Document()
+            }
+            .store(in: &cancellables)
+
+        // Save the current document when it changes.
+        applicationModel
+            .$document
+            .combineLatest(applicationModel.$rootURL.compactMap { $0 })
             .debounce(for: .seconds(0.1), scheduler: DispatchQueue.main)
-            .sink { document in
+            .sink { document, rootURL in
                 do {
-                    if document.isEmpty {
-                        let fileManager = FileManager.default
-                        if fileManager.fileExists(atPath: document.url.path) {
-                            try fileManager.removeItem(at: document.url)
-                        }
-                    } else {
-                        try document.save()
-                    }
+                    try document.sync(to: rootURL)
                 } catch {
                     self.error = error
                 }

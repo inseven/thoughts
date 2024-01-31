@@ -18,18 +18,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct ComposeWindow: Scene {
+import Interact
 
-    @EnvironmentObject var applicationModel: ApplicationModel
+extension KeyedDefaults {
 
-    static let windowID = "compose-window"
+    func set(securityScopedURL url: URL?, forKey key: Key) throws {
+        let bookmarkData = try url?.bookmarkData(options: .withSecurityScope,
+                                                 includingResourceValuesForKeys: nil,
+                                                 relativeTo: nil)
+        set(bookmarkData, forKey: key)
+    }
 
-    var body: some Scene {
-        Window("Thoughts", id: Self.windowID) {
-            ContentView(applicationModel: applicationModel)
+    func securityScopedURL(forKey key: Key) throws -> URL? {
+        guard let bookmarkData = object(forKey: key) as? Data else {
+            return nil
         }
+        var isStale = true
+        let url = try URL(resolvingBookmarkData: bookmarkData,
+                          options: .withSecurityScope,
+                          bookmarkDataIsStale: &isStale)
+        guard url.startAccessingSecurityScopedResource() else {
+            return nil
+        }
+        return url
     }
 
 }

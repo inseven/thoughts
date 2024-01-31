@@ -20,16 +20,27 @@
 
 import SwiftUI
 
-struct ComposeWindow: Scene {
+struct ContentView: View {
 
-    @EnvironmentObject var applicationModel: ApplicationModel
+    @ObservedObject var applicationModel: ApplicationModel
 
-    static let windowID = "compose-window"
-
-    var body: some Scene {
-        Window("Thoughts", id: Self.windowID) {
-            ContentView(applicationModel: applicationModel)
+    var body: some View {
+        if let rootURL = applicationModel.rootURL {
+            ComposeView(applicationModel: applicationModel)
+        } else {
+            ContentUnavailableView {
+                Label("No Folder Set", systemImage: "folder")
+            } description: {
+                Text("Select a folder to store your notes.")
+                Button {
+                    applicationModel.setRootURL()
+                } label: {
+                    Text("Set Notes Folder")
+                }
+            }
         }
+
     }
+
 
 }

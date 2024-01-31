@@ -45,7 +45,7 @@ struct ThoughtsApp: App {
             .defaultSize(width: 800, height: 600)
 
         Settings {
-            SettingsView()
+            SettingsView(applicationModel: applicationModel)
         }
 
         let title = "Thoughts Support (\(Bundle.main.version ?? "Unknown Version"))"

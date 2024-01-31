@@ -24,12 +24,21 @@ import Interact
 
 struct SettingsView: View {
 
+    let applicationModel: ApplicationModel
+
     @ObservedObject var application = Application.shared
+
+    init(applicationModel: ApplicationModel) {
+        self.applicationModel = applicationModel
+    }
 
     var body: some View {
         Form {
             Section {
                 Toggle("Open at Login", isOn: $application.openAtLogin)
+                Button("Set Notes Folder") {
+                    applicationModel.setRootURL()
+                }
             }
         }
         .formStyle(.grouped)
