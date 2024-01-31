@@ -32,13 +32,6 @@ struct Document {
     var date: Date
     var content: String
 
-    var url: URL {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd-HH-mm-ss"
-        formatter.timeZone = .gmt
-        let filename = formatter.string(from: date)
-        return ApplicationModel.folderURL.appendingPathComponent(filename).appendingPathExtension("md")
-    }
 
     var isEmpty: Bool {
         return content.isEmpty
@@ -49,9 +42,21 @@ struct Document {
         self.content = ""
     }
 
-    func save() throws {
-        let content = Self.header(for: date) + self.content
-        try content.write(to: url, atomically: true, encoding: .utf8)
+    func sync(to rootURL: URL) throws {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd-HH-mm-ss"
+        formatter.timeZone = .gmt
+        let filename = formatter.string(from: date)
+        let url = rootURL.appendingPathComponent(filename).appendingPathExtension("md")
+        if isEmpty {
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: url.path) {
+                try fileManager.removeItem(at: url)
+            }
+        } else {
+            let content = Self.header(for: date) + self.content
+            try content.write(to: url, atomically: true, encoding: .utf8)
+        }
     }
 
 }
