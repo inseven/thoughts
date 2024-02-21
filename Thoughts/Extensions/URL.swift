@@ -23,10 +23,9 @@ import SwiftUI
 import Diligence
 import Interact
 
-extension Scene {
+extension URL {
 
-    public func handlesExternalEvents(matching conditions: Set<URL>) -> some Scene {
-        return handlesExternalEvents(matching: Set(conditions.map { $0.absoluteString }))
-    }
+    static let about = URL(string: "x-thoughts://about")!
+    static let compose = URL(string: "x-thoughts://compose")!
 
 }
