@@ -60,7 +60,7 @@ struct ThoughtsApp: App {
                 Credit("Sarah Barbour")
             }
         } licenses: {
-            License(Interact.Package.name, author: Interact.Package.author, url: Interact.Package.licenseURL)
+            .interact
             License("Material Icons", author: "Google", filename: "material-icons-license")
             License("Thoughts", author: "Jason Morley", filename: "thoughts-license")
         }
