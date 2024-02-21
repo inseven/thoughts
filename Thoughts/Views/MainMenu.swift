@@ -31,11 +31,11 @@ struct MainMenu: View {
     var body: some View {
         Button("New...") {
             applicationModel.new()
-            openURL(ThoughtsApp.composeURL)
+            openURL(.compose)
         }
         Divider()
         Button {
-            openURL(ThoughtsApp.aboutURL)
+            openURL(.about)
         } label: {
             Text("About...")
         }

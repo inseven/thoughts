@@ -26,8 +26,6 @@ import Interact
 @main
 struct ThoughtsApp: App {
 
-    static let aboutURL = URL(string: "x-thoughts://about")!
-    static let composeURL = URL(string: "x-thoughts://compose")!
 
     var applicationModel = ApplicationModel()
 
@@ -41,7 +39,7 @@ struct ThoughtsApp: App {
 
         ComposeWindow()
             .environmentObject(applicationModel)
-            .handlesExternalEvents(matching: [Self.composeURL])
+            .handlesExternalEvents(matching: [.compose])
             .defaultSize(width: 800, height: 600)
 
         Settings {
@@ -66,7 +64,7 @@ struct ThoughtsApp: App {
             License("Material Icons", author: "Google", filename: "material-icons-license")
             License("Thoughts", author: "Jason Morley", filename: "thoughts-license")
         }
-        .handlesExternalEvents(matching: [Self.aboutURL])
+        .handlesExternalEvents(matching: [.about])
 
     }
 }
