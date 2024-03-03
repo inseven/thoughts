@@ -26,7 +26,6 @@ import Interact
 @main
 struct ThoughtsApp: App {
 
-
     var applicationModel = ApplicationModel()
 
     var body: some Scene {
