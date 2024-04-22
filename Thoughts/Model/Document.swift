@@ -22,16 +22,19 @@ import Foundation
 
 struct Document {
 
-    static func header(for date: Date) -> String {
+    static func header(date: Date, tags: [String]) -> String {
         let dateFormatter = ISO8601DateFormatter()
         dateFormatter.timeZone = Calendar.current.timeZone
         let dateString = dateFormatter.string(from: date)
-        return "---\ndate: \(dateString)\n---\n\n"
+        let tagsString = tags
+            .map { "- " + $0 }
+            .joined(separator: "\n")
+        return "---\ndate: \(dateString)\ntags:\n\(tagsString)\n---\n\n"
     }
 
     var date: Date
     var content: String
-
+    var tags: String
 
     var isEmpty: Bool {
         return content.isEmpty
@@ -40,6 +43,7 @@ struct Document {
     init(date: Date = Date()) {
         self.date = date
         self.content = ""
+        self.tags = ""
     }
 
     func sync(to rootURL: URL) throws {
@@ -54,7 +58,10 @@ struct Document {
                 try fileManager.removeItem(at: url)
             }
         } else {
-            let content = Self.header(for: date) + self.content
+            let tags = tags
+                .split(separator: /\s+/)
+                .map { String($0)}
+            let content = Self.header(date: date, tags: tags) + self.content
             try content.write(to: url, atomically: true, encoding: .utf8)
         }
     }
