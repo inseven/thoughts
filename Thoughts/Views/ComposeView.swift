@@ -31,11 +31,12 @@ struct ComposeView: View {
     }
 
     var body: some View {
-        HStack {
+        VStack {
             TextEditor(text: $applicationModel.document.content)
                 .scrollContentBackground(.hidden)
                 .frame(minWidth: 400)
                 .font(.system(size: 14, design: .monospaced))
+            TextField("Tags", text: $applicationModel.document.tags)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.background)
