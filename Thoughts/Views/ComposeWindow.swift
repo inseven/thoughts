@@ -22,7 +22,7 @@ import SwiftUI
 
 struct ComposeWindow: Scene {
 
-    @EnvironmentObject var applicationModel: ApplicationModel
+    @Environment(ApplicationModel.self) var applicationModel: ApplicationModel
 
     static let windowID = "compose-window"
 

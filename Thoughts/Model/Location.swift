@@ -18,15 +18,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import XCTest
-@testable import Thoughts
+import CoreLocation
+import Foundation
 
-final class ThoughtsTests: XCTestCase {
+struct Location: Codable {
 
-    override func setUpWithError() throws {
+    var latitude: CLLocationDegrees?
+    var longitude: CLLocationDegrees?
+    var locality: String?
+
+    init(_ location: CLLocation) {
+        self.latitude = location.coordinate.latitude
+        self.longitude = location.coordinate.longitude
+        self.locality = nil
     }
 
-    override func tearDownWithError() throws {
+    init(_ placemark: CLPlacemark) {
+        self.latitude = placemark.location?.coordinate.latitude
+        self.longitude = placemark.location?.coordinate.longitude
+        self.locality = placemark.locality
     }
 
 }

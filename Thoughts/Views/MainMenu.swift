@@ -24,7 +24,7 @@ import Diligence
 
 struct MainMenu: View {
 
-    @ObservedObject var applicationModel: ApplicationModel
+    var applicationModel: ApplicationModel
 
     @Environment(\.openURL) var openURL
 

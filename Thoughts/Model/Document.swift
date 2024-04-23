@@ -18,23 +18,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import CoreLocation
 import Foundation
 
-struct Document {
+import Yams
 
-    static func header(date: Date, tags: [String]) -> String {
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.timeZone = Calendar.current.timeZone
-        let dateString = dateFormatter.string(from: date)
-        let tagsString = tags
-            .map { "- " + $0 }
-            .joined(separator: "\n")
-        return "---\ndate: \(dateString)\ntags:\n\(tagsString)\n---\n\n"
-    }
+struct Document {
 
     var date: Date
     var content: String
     var tags: String
+    var location: Location? = nil
 
     var isEmpty: Bool {
         return content.isEmpty
@@ -44,6 +38,23 @@ struct Document {
         self.date = date
         self.content = ""
         self.tags = ""
+    }
+
+    func header() -> String {
+        do {
+            let tags = tags
+                .split(separator: /\s+/)
+                .map { String($0)}
+            let metadata = Metadata(date: RegionalDate(date, timeZone: .current),
+                                    tags: tags,
+                                    location: location)
+            let encoder = YAMLEncoder()
+            let frontmatter = try encoder.encode(metadata)
+            return "---\n\(frontmatter)\n---\n"
+        } catch {
+            print("Failed to encode metadata with error \(error).")
+            return ""
+        }
     }
 
     func sync(to rootURL: URL) throws {
@@ -58,10 +69,7 @@ struct Document {
                 try fileManager.removeItem(at: url)
             }
         } else {
-            let tags = tags
-                .split(separator: /\s+/)
-                .map { String($0)}
-            let content = Self.header(date: date, tags: tags) + self.content
+            let content = header() + self.content
             try content.write(to: url, atomically: true, encoding: .utf8)
         }
     }

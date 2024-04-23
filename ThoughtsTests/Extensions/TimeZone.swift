@@ -18,19 +18,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Combine
-import SwiftUI
+import Foundation
 
-class ComposeModel: ObservableObject {
+extension TimeZone {
 
-    @Published var error: Error?
+    static let asiaTokyo = TimeZone(identifier: "Asia/Tokyo")!
 
-    let applicationModel: ApplicationModel
-
-    private var cancellables: Set<AnyCancellable> = []
-
-    init(applicationModel: ApplicationModel) {
-        self.applicationModel = applicationModel
+    init?(hours: Int, minutes: Int) {
+        self.init(secondsFromGMT: (hours * 60 + minutes) * 60)
     }
 
 }

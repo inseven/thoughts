@@ -37,7 +37,7 @@ struct ThoughtsApp: App {
         }
 
         ComposeWindow()
-            .environmentObject(applicationModel)
+            .environment(applicationModel)
             .handlesExternalEvents(matching: [.compose])
             .defaultSize(width: 800, height: 600)
 

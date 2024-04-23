@@ -18,19 +18,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Combine
-import SwiftUI
+import CoreLocation
+import Foundation
 
-class ComposeModel: ObservableObject {
+struct Metadata: Codable {
 
-    @Published var error: Error?
-
-    let applicationModel: ApplicationModel
-
-    private var cancellables: Set<AnyCancellable> = []
-
-    init(applicationModel: ApplicationModel) {
-        self.applicationModel = applicationModel
-    }
+    let date: RegionalDate
+    let tags: [String]
+    let location: Location?
 
 }

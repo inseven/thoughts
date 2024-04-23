@@ -22,24 +22,37 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @ObservedObject var applicationModel: ApplicationModel
+    var applicationModel: ApplicationModel
 
     var body: some View {
-        if let rootURL = applicationModel.rootURL {
-            ComposeView(applicationModel: applicationModel)
-        } else {
-            ContentUnavailableView {
-                Label("No Folder Set", systemImage: "folder")
-            } description: {
-                Text("Select a folder to store your notes.")
-                Button {
-                    applicationModel.setRootURL()
-                } label: {
-                    Text("Set Notes Folder")
+        HStack {
+            if applicationModel.rootURL != nil {
+                ComposeView(applicationModel: applicationModel)
+            } else {
+                ContentUnavailableView {
+                    Label("No Folder Set", systemImage: "folder")
+                } description: {
+                    Text("Select a folder to store your notes.")
+                    Button {
+                        applicationModel.setRootURL()
+                    } label: {
+                        Text("Set Notes Folder")
+                    }
                 }
             }
         }
-
+        .toolbar {
+            ToolbarItem {
+                Button {
+                    applicationModel.userLocation()
+                } label: {
+                    let hasLocation = applicationModel.document.location != nil
+                    Label("Use Location", systemImage: hasLocation ? "location.fill" : "location")
+                        .foregroundColor(.purple)
+                }
+                .disabled(applicationModel.rootURL == nil)
+            }
+        }
     }
 
 
