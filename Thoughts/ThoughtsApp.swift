@@ -62,6 +62,7 @@ struct ThoughtsApp: App {
             .interact
             License("Material Icons", author: "Google", filename: "material-icons-license")
             License("Thoughts", author: "Jason Morley", filename: "thoughts-license")
+            License("Yams", author: "JP Simard", filename: "yams-license")
         }
         .handlesExternalEvents(matching: [.about])
 
