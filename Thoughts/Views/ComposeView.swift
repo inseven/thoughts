@@ -22,32 +22,44 @@ import SwiftUI
 
 struct ComposeView: View {
 
-    @ObservedObject var applicationModel: ApplicationModel
-    @StateObject var composeModel: ComposeModel
+    var applicationModel: ApplicationModel
 
     init(applicationModel: ApplicationModel) {
         self.applicationModel = applicationModel
-        _composeModel = StateObject(wrappedValue: ComposeModel(applicationModel: applicationModel))
     }
 
     var body: some View {
-        VStack {
+        @Bindable var applicationModel = applicationModel
+        VStack(spacing: 0) {
             TextEditor(text: $applicationModel.document.content)
                 .scrollContentBackground(.hidden)
                 .frame(minWidth: 400)
                 .font(.system(size: 14, design: .monospaced))
-            TextField("Tags", text: $applicationModel.document.tags)
+                .monospaced()
+                .edgesIgnoringSafeArea(.all)
+            Divider()
+            HStack {
+                TextField("Tags", text: $applicationModel.document.tags)
+                    .textFieldStyle(.plain)
+                Spacer()
+                HStack {
+                    if let location = applicationModel.document.location {
+                        if let locality = location.locality {
+                            Text(locality)
+                        } else if let latitude = location.latitude,
+                                  let longitude = location.longitude {
+                            Text("\(latitude), \(longitude)")
+                        }
+                    }
+                }
+                .foregroundStyle(.secondary)
+            }
+            .padding()
+            .background(.windowBackground)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.background)
-        .navigationTitle(applicationModel.document.date.formatted())
-        .presents($composeModel.error)
-        .onAppear {
-            composeModel.start()
-        }
-        .onDisappear {
-            composeModel.stop()
-        }
+        .navigationTitle(applicationModel.document.date.formatted(date: .complete, time: .standard))
     }
 
 }

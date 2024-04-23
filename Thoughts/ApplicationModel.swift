@@ -19,17 +19,19 @@
 // SOFTWARE.
 
 import AppKit
+import CoreLocation
 import Foundation
 
 import Interact
 
-class ApplicationModel: ObservableObject {
+@Observable
+class ApplicationModel: NSObject {
 
     enum SettingsKey: String {
         case rootURL
     }
 
-    @Published var rootURL: URL? {
+    var rootURL: URL? {
         didSet {
             do {
                 try keyedDefaults.set(securityScopedURL: rootURL, forKey: .rootURL)
@@ -39,17 +41,43 @@ class ApplicationModel: ObservableObject {
         }
     }
 
-    @Published var document = Document()
+    var document = Document() {
+        didSet {
+            guard let url = rootURL else {
+                return
+            }
+            do {
+                try document.sync(to: url)
+            } catch {
+                print("Failed to save file with error \(error).")
+            }
+        }
+    }
 
     let keyedDefaults = KeyedDefaults<SettingsKey>()
+    let locationManager = CLLocationManager()
+    var lastKnownLocation: Location? = nil
 
-    init() {
+    override init() {
         rootURL = try? keyedDefaults.securityScopedURL(forKey: .rootURL)
+        super.init()
+        locationManager.delegate = self
     }
 
     func new() {
         dispatchPrecondition(condition: .onQueue(.main))
         document = Document()
+        document.location = lastKnownLocation
+    }
+
+    func userLocation() {
+        guard locationManager.authorizationStatus != .notDetermined else {
+            print("Requesting location authorization...")
+            locationManager.requestWhenInUseAuthorization()
+            return
+        }
+        print("Requsting location...")
+        locationManager.requestLocation()
     }
 
     func setRootURL() {
@@ -63,6 +91,74 @@ class ApplicationModel: ObservableObject {
             return
         }
         rootURL = url
+        document = Document()
+    }
+
+}
+
+extension ApplicationModel: CLLocationManagerDelegate {
+
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        print("Location authorization status = \(manager.authorizationStatus.name)")
+        guard manager.authorizationStatus == .authorized else {
+            return
+        }
+        print("Requsting location...")
+        manager.requestLocation()
+    }
+
+    func resolveLocation(_ location: CLLocation) async -> Location {
+        let geocoder = CLGeocoder()
+        do {
+            guard let placemark = try await geocoder.reverseGeocodeLocation(location).first else {
+                return Location(location)
+            }
+            return Location(placemark)
+        } catch {
+            print("Failed to geocode location with error \(error).")
+            return Location(location)
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        Task {
+            guard let location = locations.first else {
+                return
+            }
+            let lastKnownLocation = await resolveLocation(location)
+            print(lastKnownLocation)
+            await MainActor.run {
+                self.lastKnownLocation = lastKnownLocation
+            }
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
+        print("Location manager did fail with error \(error).")
+    }
+
+    func locationManager(_ manager: CLLocationManager, 
+                         monitoringDidFailFor region: CLRegion?, withError error: any Error) {
+        print("Location manager monitoring did fail with error \(error).")
+    }
+
+}
+
+extension CLAuthorizationStatus {
+
+    var name: String {
+        switch self {
+        case .notDetermined:
+            return "not determined"
+        case .restricted:
+            return "restricted"
+        case .denied:
+            return "denied"
+        case .authorizedAlways:
+            return "authorized always"
+        @unknown default:
+            return "unknown (\(self.rawValue))"
+        }
     }
 
 }

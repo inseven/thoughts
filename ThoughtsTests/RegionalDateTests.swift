@@ -18,19 +18,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Combine
-import SwiftUI
+import XCTest
 
-class ComposeModel: ObservableObject {
+@testable import Thoughts
 
-    @Published var error: Error?
+final class RegionalDateTests: XCTestCase {
 
-    let applicationModel: ApplicationModel
-
-    private var cancellables: Set<AnyCancellable> = []
-
-    init(applicationModel: ApplicationModel) {
-        self.applicationModel = applicationModel
+    func testRegionalDate() throws {
+        let date = RegionalDate(2024, 04, 21, 12, 53, 16, timeZone: .asiaTokyo)
+        let encoder = JSONEncoder()
+        let data = try encoder.encode(date)
+        print(String(data: data, encoding: .utf8)!)
+        let decoder = JSONDecoder()
+        let decodedDate = try decoder.decode(RegionalDate.self, from: data)
+        XCTAssertEqual(date, decodedDate)
     }
 
 }
