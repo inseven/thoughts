@@ -19,6 +19,7 @@
 // SOFTWARE.
 
 import AppKit
+import Combine
 import CoreLocation
 import Foundation
 
@@ -54,29 +55,42 @@ class ApplicationModel: NSObject {
         }
     }
 
-    var locationRequests: [(Result<LocationDetails, Error>) -> Void] = []
-
     var document = Document() {
         didSet {
-            guard let url = rootURL else {
-                return
-            }
-            do {
-                try document.sync(to: url)
-            } catch {
-                print("Failed to save file with error \(error).")
-            }
+            documentChanges.send(document)
         }
     }
 
-    let keyedDefaults = KeyedDefaults<SettingsKey>()
-    let locationManager = CLLocationManager()
+    private var cancellables = Set<AnyCancellable>()
+    private var locationRequests: [(Result<LocationDetails, Error>) -> Void] = []
+
+    private let documentChanges = PassthroughSubject<Document?, Never>()
+    private let keyedDefaults = KeyedDefaults<SettingsKey>()
+    private let locationManager = CLLocationManager()
 
     override init() {
         rootURL = try? keyedDefaults.securityScopedURL(forKey: .rootURL)
         shouldSaveLocation = keyedDefaults.bool(forKey: .shouldSaveLocation, default: false)
         super.init()
         locationManager.delegate = self
+        self.start()
+    }
+
+    private func start() {
+        documentChanges
+            .compactMap { $0 }
+            .debounce(for: 0.2, scheduler: DispatchQueue.main)
+            .sink { document in
+                guard let url = self.rootURL else {
+                    return
+                }
+                do {
+                    try document.sync(to: url)
+                } catch {
+                    print("Failed to save file with error \(error).")
+                }
+            }
+            .store(in: &cancellables)
     }
 
     func new() {
