@@ -576,9 +576,9 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = Cheese;
-				INFOPLIST_KEY_NSLocationUsageDescription = Cheese;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = Cheese;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Thoughts needs access to your location to save it in notes metadata.";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Thoughts needs access to your location to save it in notes metadata.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Thoughts needs access to your location to save it in notes metadata.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -612,9 +612,9 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = Cheese;
-				INFOPLIST_KEY_NSLocationUsageDescription = Cheese;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = Cheese;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Thoughts needs access to your location to save it in notes metadata.";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Thoughts needs access to your location to save it in notes metadata.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Thoughts needs access to your location to save it in notes metadata.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
