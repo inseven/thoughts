@@ -24,6 +24,18 @@ struct ContentView: View {
 
     var applicationModel: ApplicationModel
 
+    var systemImage: String {
+        if applicationModel.shouldSaveLocation {
+            if applicationModel.document.location != nil {
+                return "location.fill"
+            } else {
+                return "location"
+            }
+        } else {
+            return "location.slash"
+        }
+    }
+
     var body: some View {
         HStack {
             if applicationModel.rootURL != nil {
@@ -44,11 +56,11 @@ struct ContentView: View {
         .toolbar {
             ToolbarItem {
                 Button {
-                    applicationModel.userLocation()
+                    applicationModel.shouldSaveLocation.toggle()
                 } label: {
                     let hasLocation = applicationModel.document.location != nil
-                    Label("Use Location", systemImage: hasLocation ? "location.fill" : "location")
-                        .foregroundColor(.purple)
+                    Label("Use Location", systemImage: systemImage)
+                        .foregroundColor(hasLocation ? .purple : nil)
                 }
                 .disabled(applicationModel.rootURL == nil)
             }

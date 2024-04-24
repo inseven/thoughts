@@ -28,7 +28,7 @@ struct Document {
     var date: Date
     var content: String
     var tags: String
-    var location: Location? = nil
+    var location: LocationDetails? = nil
 
     var isEmpty: Bool {
         return content.isEmpty

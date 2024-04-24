@@ -29,6 +29,7 @@ class ApplicationModel: NSObject {
 
     enum SettingsKey: String {
         case rootURL
+        case shouldSaveLocation
     }
 
     var rootURL: URL? {
@@ -40,6 +41,20 @@ class ApplicationModel: NSObject {
             }
         }
     }
+
+    var shouldSaveLocation: Bool {
+        didSet {
+            keyedDefaults.set(shouldSaveLocation, forKey: .shouldSaveLocation)
+            if shouldSaveLocation {
+                updateUserLocation()
+            } else {
+                document.location = nil
+                locationManager.stopUpdatingLocation()
+            }
+        }
+    }
+
+    var locationRequests: [(Result<LocationDetails, Error>) -> Void] = []
 
     var document = Document() {
         didSet {
@@ -56,10 +71,10 @@ class ApplicationModel: NSObject {
 
     let keyedDefaults = KeyedDefaults<SettingsKey>()
     let locationManager = CLLocationManager()
-    var lastKnownLocation: Location? = nil
 
     override init() {
         rootURL = try? keyedDefaults.securityScopedURL(forKey: .rootURL)
+        shouldSaveLocation = keyedDefaults.bool(forKey: .shouldSaveLocation, default: false)
         super.init()
         locationManager.delegate = self
     }
@@ -67,17 +82,18 @@ class ApplicationModel: NSObject {
     func new() {
         dispatchPrecondition(condition: .onQueue(.main))
         document = Document()
-        document.location = lastKnownLocation
+        updateUserLocation()
     }
 
-    func userLocation() {
-        guard locationManager.authorizationStatus != .notDetermined else {
-            print("Requesting location authorization...")
-            locationManager.requestWhenInUseAuthorization()
-            return
+    func updateUserLocation() {
+        requestUserLocation { result in
+            switch result {
+            case .success(let location):
+                self.document.location = location
+            case .failure(let error):
+                print("Failed to fetch location with error \(error)")
+            }
         }
-        print("Requsting location...")
-        locationManager.requestLocation()
     }
 
     func setRootURL() {
@@ -98,67 +114,76 @@ class ApplicationModel: NSObject {
 
 extension ApplicationModel: CLLocationManagerDelegate {
 
+    func requestUserLocation(completion: @escaping (Result<LocationDetails, Error>) -> Void) {
+        guard shouldSaveLocation else {
+            return
+        }
+        locationRequests.append(completion)
+        guard locationManager.authorizationStatus != .notDetermined else {
+            print("Requesting location authorization...")
+            locationManager.requestWhenInUseAuthorization()
+            return
+        }
+        print("Requsting location...")
+        locationManager.requestLocation()
+    }
+
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        dispatchPrecondition(condition: .onQueue(.main))
         print("Location authorization status = \(manager.authorizationStatus.name)")
         guard manager.authorizationStatus == .authorized else {
             return
         }
         print("Requsting location...")
+        guard locationRequests.count > 0 else {
+            return
+        }
         manager.requestLocation()
     }
 
-    func resolveLocation(_ location: CLLocation) async -> Location {
+    func resolveLocation(_ location: CLLocation) async -> LocationDetails {
         let geocoder = CLGeocoder()
         do {
             guard let placemark = try await geocoder.reverseGeocodeLocation(location).first else {
-                return Location(location)
+                return LocationDetails(location)
             }
-            return Location(placemark)
+            return LocationDetails(placemark)
         } catch {
             print("Failed to geocode location with error \(error).")
-            return Location(location)
+            return LocationDetails(location)
         }
     }
 
+    func resolveRequests(_ result: Result<LocationDetails, Error>) {
+        dispatchPrecondition(condition: .onQueue(.main))
+        for locationRequest in self.locationRequests {
+            locationRequest(result)
+        }
+        locationRequests = []
+    }
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("Did update locations.")
         Task {
             guard let location = locations.first else {
                 return
             }
-            let lastKnownLocation = await resolveLocation(location)
-            print(lastKnownLocation)
+            let locationDetails = await resolveLocation(location)
             await MainActor.run {
-                self.lastKnownLocation = lastKnownLocation
+                resolveRequests(.success(locationDetails))
             }
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
         print("Location manager did fail with error \(error).")
+        resolveRequests(.failure(error))
     }
 
     func locationManager(_ manager: CLLocationManager, 
                          monitoringDidFailFor region: CLRegion?, withError error: any Error) {
         print("Location manager monitoring did fail with error \(error).")
-    }
-
-}
-
-extension CLAuthorizationStatus {
-
-    var name: String {
-        switch self {
-        case .notDetermined:
-            return "not determined"
-        case .restricted:
-            return "restricted"
-        case .denied:
-            return "denied"
-        case .authorizedAlways:
-            return "authorized always"
-        @unknown default:
-            return "unknown (\(self.rawValue))"
-        }
+        resolveRequests(.failure(error))
     }
 
 }

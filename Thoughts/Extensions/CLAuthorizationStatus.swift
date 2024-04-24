@@ -19,24 +19,22 @@
 // SOFTWARE.
 
 import CoreLocation
-import Foundation
 
-struct Location: Codable {
+extension CLAuthorizationStatus {
 
-    var latitude: CLLocationDegrees?
-    var longitude: CLLocationDegrees?
-    var locality: String?
-
-    init(_ location: CLLocation) {
-        self.latitude = location.coordinate.latitude
-        self.longitude = location.coordinate.longitude
-        self.locality = nil
-    }
-
-    init(_ placemark: CLPlacemark) {
-        self.latitude = placemark.location?.coordinate.latitude
-        self.longitude = placemark.location?.coordinate.longitude
-        self.locality = placemark.locality
+    var name: String {
+        switch self {
+        case .notDetermined:
+            return "not determined"
+        case .restricted:
+            return "restricted"
+        case .denied:
+            return "denied"
+        case .authorizedAlways:
+            return "authorized always"
+        @unknown default:
+            return "unknown (\(self.rawValue))"
+        }
     }
 
 }
