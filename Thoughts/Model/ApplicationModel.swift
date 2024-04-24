@@ -129,6 +129,7 @@ class ApplicationModel: NSObject {
 extension ApplicationModel: CLLocationManagerDelegate {
 
     func requestUserLocation(completion: @escaping (Result<LocationDetails, Error>) -> Void) {
+        // TODO: Check if enabled.
         guard shouldSaveLocation else {
             return
         }
@@ -138,8 +139,8 @@ extension ApplicationModel: CLLocationManagerDelegate {
             locationManager.requestWhenInUseAuthorization()
             return
         }
-        print("Requsting location...")
-        locationManager.requestLocation()
+        print("Starting updating location...")
+        locationManager.startUpdatingLocation()
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -148,11 +149,11 @@ extension ApplicationModel: CLLocationManagerDelegate {
         guard manager.authorizationStatus == .authorized else {
             return
         }
-        print("Requsting location...")
         guard locationRequests.count > 0 else {
             return
         }
-        manager.requestLocation()
+        print("Starting updating location...")
+        manager.startUpdatingLocation()
     }
 
     func resolveLocation(_ location: CLLocation) async -> LocationDetails {
@@ -174,6 +175,8 @@ extension ApplicationModel: CLLocationManagerDelegate {
             locationRequest(result)
         }
         locationRequests = []
+        print("Stopping updating location...")
+        locationManager.stopUpdatingLocation()
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -198,6 +201,14 @@ extension ApplicationModel: CLLocationManagerDelegate {
                          monitoringDidFailFor region: CLRegion?, withError error: any Error) {
         print("Location manager monitoring did fail with error \(error).")
         resolveRequests(.failure(error))
+    }
+
+    func locationManagerDidPauseLocationUpdates(_ manager: CLLocationManager) {
+        print("Did pause location updates!")
+    }
+
+    func locationManagerDidResumeLocationUpdates(_ manager: CLLocationManager) {
+        print("Did resume location updates!")
     }
 
 }
