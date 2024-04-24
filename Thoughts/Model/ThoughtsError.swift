@@ -23,4 +23,5 @@ import Foundation
 
 enum ThoughtsError: Error {
     case encodingError
+    case locationServicesDisabled
 }
