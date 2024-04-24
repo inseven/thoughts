@@ -129,7 +129,10 @@ class ApplicationModel: NSObject {
 extension ApplicationModel: CLLocationManagerDelegate {
 
     func requestUserLocation(completion: @escaping (Result<LocationDetails, Error>) -> Void) {
-        // TODO: Check if enabled.
+        guard CLLocationManager.locationServicesEnabled() else {
+            completion(.failure(ThoughtsError.locationServicesDisabled))
+            return
+        }
         guard shouldSaveLocation else {
             return
         }
