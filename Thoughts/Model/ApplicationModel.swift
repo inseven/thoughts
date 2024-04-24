@@ -73,6 +73,7 @@ class ApplicationModel: NSObject {
         shouldSaveLocation = keyedDefaults.bool(forKey: .shouldSaveLocation, default: false)
         super.init()
         locationManager.delegate = self
+        locationManager.pausesLocationUpdatesAutomatically = false
         self.start()
     }
 
