@@ -55,7 +55,11 @@ extension LayoutSubviews {
 
 struct CenteredFlowLayout: Layout {
 
-    let spacing: CGFloat = 4.0
+    let spacing: CGFloat
+
+    init(spacing: CGFloat) {
+        self.spacing = spacing
+    }
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let rows = subviews.rows(proposal: proposal, spacing: spacing)

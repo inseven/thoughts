@@ -57,7 +57,7 @@ public struct TokenView: View {
     public var body: some View {
 #if os(macOS)
         VStack {
-            CenteredFlowLayout {
+            CenteredFlowLayout(spacing: 4.0) {
                 ForEach(model.items) { item in
                     TagView(item.text)
                 }

@@ -48,7 +48,6 @@ struct ComposeView: View {
                 .monospaced()
                 .edgesIgnoringSafeArea(.all)
             Divider()
-                .padding(.horizontal)
             HStack {
                 TokenView("Add tags...", tokens: $applicationModel.document.tags)
                 Spacer()

@@ -254,10 +254,10 @@
 				D80E08A02B675AAC0023DD4F /* ComposeWindow.swift */,
 				D850C2D52B69D8D500338546 /* ContentView.swift */,
 				D852AF682B604B3E00B77A3D /* MainMenu.swift */,
-				D8F06D502B6731CE0039AEF4 /* SettingsView.swift */,
-				D8C283E42BD9939E00161C82 /* TokenView.swift */,
 				D8C283EF2BD995AD00161C82 /* PickerTextField.swift */,
+				D8F06D502B6731CE0039AEF4 /* SettingsView.swift */,
 				D8C283F12BD995CC00161C82 /* TagView.swift */,
+				D8C283E42BD9939E00161C82 /* TokenView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
