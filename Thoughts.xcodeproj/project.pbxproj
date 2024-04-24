@@ -31,6 +31,12 @@
 		D89224A42BD7368F00DA0932 /* TimeZoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89224A32BD7368F00DA0932 /* TimeZoneTests.swift */; };
 		D89224A72BD736B900DA0932 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89224A62BD736B900DA0932 /* Date.swift */; };
 		D89224A92BD736DF00DA0932 /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89224A82BD736DF00DA0932 /* TimeZone.swift */; };
+		D8C283E52BD9939E00161C82 /* TokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C283E42BD9939E00161C82 /* TokenView.swift */; };
+		D8C283E92BD9954F00161C82 /* HashRainbow in Frameworks */ = {isa = PBXBuildFile; productRef = D8C283E82BD9954F00161C82 /* HashRainbow */; };
+		D8C283EE2BD9957700161C82 /* TokenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C283ED2BD9957700161C82 /* TokenViewModel.swift */; };
+		D8C283F02BD995AD00161C82 /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C283EF2BD995AD00161C82 /* PickerTextField.swift */; };
+		D8C283F22BD995CC00161C82 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C283F12BD995CC00161C82 /* TagView.swift */; };
+		D8C283F52BD9988200161C82 /* CenteredFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C283F42BD9988200161C82 /* CenteredFlowLayout.swift */; };
 		D8DFFCC82BD82DE900C9532A /* CLAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DFFCC72BD82DE900C9532A /* CLAuthorizationStatus.swift */; };
 		D8F06D4B2B67275B0039AEF4 /* Diligence in Frameworks */ = {isa = PBXBuildFile; productRef = D8F06D4A2B67275B0039AEF4 /* Diligence */; };
 		D8F06D4E2B6727630039AEF4 /* Interact in Frameworks */ = {isa = PBXBuildFile; productRef = D8F06D4D2B6727630039AEF4 /* Interact */; };
@@ -85,6 +91,11 @@
 		D89224A32BD7368F00DA0932 /* TimeZoneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneTests.swift; sourceTree = "<group>"; };
 		D89224A62BD736B900DA0932 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		D89224A82BD736DF00DA0932 /* TimeZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZone.swift; sourceTree = "<group>"; };
+		D8C283E42BD9939E00161C82 /* TokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenView.swift; sourceTree = "<group>"; };
+		D8C283ED2BD9957700161C82 /* TokenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenViewModel.swift; sourceTree = "<group>"; };
+		D8C283EF2BD995AD00161C82 /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
+		D8C283F12BD995CC00161C82 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		D8C283F42BD9988200161C82 /* CenteredFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenteredFlowLayout.swift; sourceTree = "<group>"; };
 		D8DFFCC72BD82DE900C9532A /* CLAuthorizationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLAuthorizationStatus.swift; sourceTree = "<group>"; };
 		D8F06D502B6731CE0039AEF4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D8F06D532B6733650039AEF4 /* thoughts-license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "thoughts-license"; sourceTree = "<group>"; };
@@ -98,6 +109,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8F06D4E2B6727630039AEF4 /* Interact in Frameworks */,
+				D8C283E92BD9954F00161C82 /* HashRainbow in Frameworks */,
 				D892249A2BD70CC300DA0932 /* Yams in Frameworks */,
 				D8F06D4B2B67275B0039AEF4 /* Diligence in Frameworks */,
 			);
@@ -129,6 +141,7 @@
 				D892249B2BD735A100DA0932 /* Metadata.swift */,
 				D892249F2BD735DA00DA0932 /* RegionalDate.swift */,
 				D892249D2BD735BE00DA0932 /* ThoughtsError.swift */,
+				D8C283ED2BD9957700161C82 /* TokenViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -151,6 +164,7 @@
 				D852AF122B6027CD00B77A3D /* ThoughtsTests */,
 				D852AF1C2B6027CD00B77A3D /* ThoughtsUITests */,
 				D852AEFF2B6027CA00B77A3D /* Products */,
+				D8C283EA2BD9955D00161C82 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -173,6 +187,7 @@
 				D852AF012B6027CA00B77A3D /* ThoughtsApp.swift */,
 				D852AF052B6027CC00B77A3D /* Assets.xcassets */,
 				D80E08A22B675AD40023DD4F /* Extensions */,
+				D8C283F32BD9987500161C82 /* Layouts */,
 				D8F06D522B6733440039AEF4 /* Licenses */,
 				D80E089F2B67572E0023DD4F /* Model */,
 				D852AF072B6027CC00B77A3D /* Preview Content */,
@@ -217,6 +232,21 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		D8C283EA2BD9955D00161C82 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D8C283F32BD9987500161C82 /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				D8C283F42BD9988200161C82 /* CenteredFlowLayout.swift */,
+			);
+			path = Layouts;
+			sourceTree = "<group>";
+		};
 		D8F06D4F2B6731C00039AEF4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +255,9 @@
 				D850C2D52B69D8D500338546 /* ContentView.swift */,
 				D852AF682B604B3E00B77A3D /* MainMenu.swift */,
 				D8F06D502B6731CE0039AEF4 /* SettingsView.swift */,
+				D8C283E42BD9939E00161C82 /* TokenView.swift */,
+				D8C283EF2BD995AD00161C82 /* PickerTextField.swift */,
+				D8C283F12BD995CC00161C82 /* TagView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -259,6 +292,7 @@
 				D8F06D4A2B67275B0039AEF4 /* Diligence */,
 				D8F06D4D2B6727630039AEF4 /* Interact */,
 				D89224992BD70CC300DA0932 /* Yams */,
+				D8C283E82BD9954F00161C82 /* HashRainbow */,
 			);
 			productName = "Disk Stickies";
 			productReference = D852AEFE2B6027CA00B77A3D /* Thoughts.app */;
@@ -336,6 +370,7 @@
 				D8F06D492B67275B0039AEF4 /* XCLocalSwiftPackageReference "diligence" */,
 				D8F06D4C2B6727630039AEF4 /* XCLocalSwiftPackageReference "interact" */,
 				D89224982BD70CC300DA0932 /* XCRemoteSwiftPackageReference "Yams" */,
+				D8C283E72BD9954F00161C82 /* XCRemoteSwiftPackageReference "HashRainbow" */,
 			);
 			productRefGroup = D852AEFF2B6027CA00B77A3D /* Products */;
 			projectDirPath = "";
@@ -384,16 +419,21 @@
 			files = (
 				D852AF642B604AF500B77A3D /* ApplicationModel.swift in Sources */,
 				D850C2D62B69D8D500338546 /* ContentView.swift in Sources */,
+				D8C283EE2BD9957700161C82 /* TokenViewModel.swift in Sources */,
 				D840967F2BD73CBE00926C85 /* LocationDetails.swift in Sources */,
 				D8DFFCC82BD82DE900C9532A /* CLAuthorizationStatus.swift in Sources */,
 				D852AF692B604B3E00B77A3D /* MainMenu.swift in Sources */,
 				D83C2F882B857B8C00CE60F7 /* URL.swift in Sources */,
+				D8C283E52BD9939E00161C82 /* TokenView.swift in Sources */,
 				D89224A02BD735DA00DA0932 /* RegionalDate.swift in Sources */,
+				D8C283F02BD995AD00161C82 /* PickerTextField.swift in Sources */,
 				D892249E2BD735BE00DA0932 /* ThoughtsError.swift in Sources */,
+				D8C283F22BD995CC00161C82 /* TagView.swift in Sources */,
 				D850C2D42B69D85400338546 /* KeyedDefaults.swift in Sources */,
 				D852AF662B604B1200B77A3D /* ComposeView.swift in Sources */,
 				D8F06D512B6731CE0039AEF4 /* SettingsView.swift in Sources */,
 				D80E08A62B6761370023DD4F /* Document.swift in Sources */,
+				D8C283F52BD9988200161C82 /* CenteredFlowLayout.swift in Sources */,
 				D852AF022B6027CA00B77A3D /* ThoughtsApp.swift in Sources */,
 				D80E08A12B675AAC0023DD4F /* ComposeWindow.swift in Sources */,
 				D89224A22BD7365C00DA0932 /* TimeZone.swift in Sources */,
@@ -766,6 +806,14 @@
 				minimumVersion = 5.1.2;
 			};
 		};
+		D8C283E72BD9954F00161C82 /* XCRemoteSwiftPackageReference "HashRainbow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/saramah/HashRainbow.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -773,6 +821,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D89224982BD70CC300DA0932 /* XCRemoteSwiftPackageReference "Yams" */;
 			productName = Yams;
+		};
+		D8C283E82BD9954F00161C82 /* HashRainbow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8C283E72BD9954F00161C82 /* XCRemoteSwiftPackageReference "HashRainbow" */;
+			productName = HashRainbow;
 		};
 		D8F06D4A2B67275B0039AEF4 /* Diligence */ = {
 			isa = XCSwiftPackageProductDependency;

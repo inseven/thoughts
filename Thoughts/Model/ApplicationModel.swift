@@ -163,13 +163,11 @@ extension ApplicationModel: CLLocationManagerDelegate {
     func resolveLocation(_ location: CLLocation) async -> LocationDetails {
         let geocoder = CLGeocoder()
         do {
-            guard let placemark = try await geocoder.reverseGeocodeLocation(location).first else {
-                return LocationDetails(location)
-            }
-            return LocationDetails(placemark)
+            return LocationDetails(location: location,
+                                   placemark: try await geocoder.reverseGeocodeLocation(location).first)
         } catch {
             print("Failed to geocode location with error \(error).")
-            return LocationDetails(location)
+            return LocationDetails(location: location)
         }
     }
 

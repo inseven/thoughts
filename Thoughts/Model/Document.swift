@@ -27,7 +27,7 @@ struct Document {
 
     var date: Date
     var content: String
-    var tags: String
+    var tags: [String]
     var location: LocationDetails? = nil
 
     var isEmpty: Bool {
@@ -37,14 +37,11 @@ struct Document {
     init(date: Date = Date()) {
         self.date = date
         self.content = ""
-        self.tags = ""
+        self.tags = []
     }
 
     func header() -> String {
         do {
-            let tags = tags
-                .split(separator: /\s+/)
-                .map { String($0)}
             let metadata = Metadata(date: RegionalDate(date, timeZone: .current),
                                     tags: tags,
                                     location: location)

@@ -23,20 +23,24 @@ import Foundation
 
 struct LocationDetails: Codable {
 
-    var latitude: CLLocationDegrees?
-    var longitude: CLLocationDegrees?
-    var locality: String?
-
-    init(_ location: CLLocation) {
-        self.latitude = location.coordinate.latitude
-        self.longitude = location.coordinate.longitude
-        self.locality = nil
+    var summary: String {
+        if let name, let locality {
+            return [name, locality].joined(separator: ", ")
+        } else {
+            return "(\(String(format: "%.3f", latitude)), \(String(format: "%.3f", longitude)))"
+        }
     }
 
-    init(_ placemark: CLPlacemark) {
-        self.latitude = placemark.location?.coordinate.latitude
-        self.longitude = placemark.location?.coordinate.longitude
-        self.locality = placemark.locality
+    var latitude: CLLocationDegrees
+    var longitude: CLLocationDegrees
+    var name: String?
+    var locality: String?
+
+    init(location: CLLocation, placemark: CLPlacemark? = nil) {
+        self.latitude = location.coordinate.latitude
+        self.longitude = location.coordinate.longitude
+        self.name = placemark?.name
+        self.locality = placemark?.locality
     }
 
 }

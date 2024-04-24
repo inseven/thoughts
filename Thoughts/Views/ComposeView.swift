@@ -28,6 +28,16 @@ struct ComposeView: View {
         self.applicationModel = applicationModel
     }
 
+    var subtitle: String {
+        var components: [String] = [
+            applicationModel.document.date.formatted(date: .omitted, time: .standard)
+        ]
+        if let locationSummary = applicationModel.document.location?.summary {
+            components.append(locationSummary)
+        }
+        return components.joined(separator: ", ")
+    }
+
     var body: some View {
         @Bindable var applicationModel = applicationModel
         VStack(spacing: 0) {
@@ -38,31 +48,25 @@ struct ComposeView: View {
                 .monospaced()
                 .edgesIgnoringSafeArea(.all)
             Divider()
+                .padding(.horizontal)
             HStack {
-                TextField("Tags", text: $applicationModel.document.tags)
-                    .textFieldStyle(.plain)
+                TokenView("Add tags...", tokens: $applicationModel.document.tags)
                 Spacer()
-                HStack {
-                    if let location = applicationModel.document.location {
-                        if let locality = location.locality {
-                            Text(locality)
-                        } else if let latitude = location.latitude,
-                                  let longitude = location.longitude {
-                            Text("\(latitude), \(longitude)")
-                        }
-                    } else if applicationModel.shouldSaveLocation {
-                        ProgressView()
-                            .controlSize(.small)
-                    }
-                }
-                .foregroundStyle(.secondary)
             }
             .padding()
-            .background(.windowBackground)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.background)
         .navigationTitle(applicationModel.document.date.formatted(date: .complete, time: .standard))
+        .navigationSubtitle(applicationModel.document.location?.summary ?? "")
+        .toolbar {
+            if applicationModel.shouldSaveLocation && applicationModel.document.location == nil {
+                ToolbarItem(placement: .navigation) {
+                    ProgressView()
+                        .controlSize(.small)
+                }
+            }
+        }
     }
 
 }
