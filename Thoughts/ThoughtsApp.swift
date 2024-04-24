@@ -59,7 +59,8 @@ struct ThoughtsApp: App {
                 Credit("Sarah Barbour")
             }
         } licenses: {
-            .interact
+            (.interact)
+            License("HashRainbow", author: "Sarah Barbour", filename: "hashrainbow-license")
             License("Material Icons", author: "Google", filename: "material-icons-license")
             License("Thoughts", author: "Jason Morley", filename: "thoughts-license")
             License("Yams", author: "JP Simard", filename: "yams-license")

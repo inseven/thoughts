@@ -37,6 +37,7 @@
 		D8C283F02BD995AD00161C82 /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C283EF2BD995AD00161C82 /* PickerTextField.swift */; };
 		D8C283F22BD995CC00161C82 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C283F12BD995CC00161C82 /* TagView.swift */; };
 		D8C283F52BD9988200161C82 /* CenteredFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C283F42BD9988200161C82 /* CenteredFlowLayout.swift */; };
+		D8C283F72BD9ADC400161C82 /* hashrainbow-license in Resources */ = {isa = PBXBuildFile; fileRef = D8C283F62BD9ADC400161C82 /* hashrainbow-license */; };
 		D8DFFCC82BD82DE900C9532A /* CLAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DFFCC72BD82DE900C9532A /* CLAuthorizationStatus.swift */; };
 		D8F06D4B2B67275B0039AEF4 /* Diligence in Frameworks */ = {isa = PBXBuildFile; productRef = D8F06D4A2B67275B0039AEF4 /* Diligence */; };
 		D8F06D4E2B6727630039AEF4 /* Interact in Frameworks */ = {isa = PBXBuildFile; productRef = D8F06D4D2B6727630039AEF4 /* Interact */; };
@@ -96,6 +97,7 @@
 		D8C283EF2BD995AD00161C82 /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
 		D8C283F12BD995CC00161C82 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		D8C283F42BD9988200161C82 /* CenteredFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenteredFlowLayout.swift; sourceTree = "<group>"; };
+		D8C283F62BD9ADC400161C82 /* hashrainbow-license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "hashrainbow-license"; sourceTree = "<group>"; };
 		D8DFFCC72BD82DE900C9532A /* CLAuthorizationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLAuthorizationStatus.swift; sourceTree = "<group>"; };
 		D8F06D502B6731CE0039AEF4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D8F06D532B6733650039AEF4 /* thoughts-license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "thoughts-license"; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				D8F06D552B6734540039AEF4 /* material-icons-license */,
 				D8F06D532B6733650039AEF4 /* thoughts-license */,
 				D84010C42BD74C760049715E /* yams-license */,
+				D8C283F62BD9ADC400161C82 /* hashrainbow-license */,
 			);
 			path = Licenses;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				D8F06D562B6734540039AEF4 /* material-icons-license in Resources */,
 				D852AF062B6027CC00B77A3D /* Assets.xcassets in Resources */,
 				D84010C52BD74C760049715E /* yams-license in Resources */,
+				D8C283F72BD9ADC400161C82 /* hashrainbow-license in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
