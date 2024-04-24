@@ -50,6 +50,9 @@ struct ComposeView: View {
                                   let longitude = location.longitude {
                             Text("\(latitude), \(longitude)")
                         }
+                    } else if applicationModel.shouldSaveLocation {
+                        ProgressView()
+                            .controlSize(.small)
                     }
                 }
                 .foregroundStyle(.secondary)

@@ -18,19 +18,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Combine
-import SwiftUI
+import CoreLocation
+import Foundation
 
-class ComposeModel: ObservableObject {
+struct LocationDetails: Codable {
 
-    @Published var error: Error?
+    var latitude: CLLocationDegrees?
+    var longitude: CLLocationDegrees?
+    var locality: String?
 
-    let applicationModel: ApplicationModel
+    init(_ location: CLLocation) {
+        self.latitude = location.coordinate.latitude
+        self.longitude = location.coordinate.longitude
+        self.locality = nil
+    }
 
-    private var cancellables: Set<AnyCancellable> = []
-
-    init(applicationModel: ApplicationModel) {
-        self.applicationModel = applicationModel
+    init(_ placemark: CLPlacemark) {
+        self.latitude = placemark.location?.coordinate.latitude
+        self.longitude = placemark.location?.coordinate.longitude
+        self.locality = placemark.locality
     }
 
 }

@@ -25,6 +25,6 @@ struct Metadata: Codable {
 
     let date: RegionalDate
     let tags: [String]
-    let location: Location?
+    let location: LocationDetails?
 
 }
