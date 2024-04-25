@@ -28,7 +28,17 @@ fileprivate let materialIconsLicense = License(id: "https://github.com/google/ma
                                                author: "Google",
                                                text: String(contentsOfResource: "material-icons-license"),
                                                attributes: [
-                                                .url(URL(string: "https://github.com/google/material-design-icons")!, title: "GitHub"),
+                                                .url(URL(string: "https://github.com/google/material-design-icons")!,
+                                                     title: "GitHub"),
+                                               ])
+
+fileprivate let hashRainbowLicense = License(id: "https://github.com/saramah/HashRainbow",
+                                               name: "HashRainbow",
+                                               author: "Sarah Barbour",
+                                               text: String(contentsOfResource: "hashrainbow-license"),
+                                               attributes: [
+                                                .url(URL(string: "https://github.com/saramah/HashRainbow")!,
+                                                     title: "GitHub"),
                                                ])
 
 fileprivate let yamsLicense = License(id: "https://github.com/jpsim/Yams",
@@ -50,6 +60,7 @@ fileprivate let thoughtsLicense = License(id: "https://github.com/inseven/though
                                             .interact,
                                             .licensable,
                                             materialIconsLicense,
+                                            hashRainbowLicense,
                                             yamsLicense,
                                           ])
 

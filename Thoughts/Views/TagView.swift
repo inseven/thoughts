@@ -18,29 +18,38 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreLocation
-import Foundation
+import SwiftUI
 
-struct LocationDetails: Codable {
+import HashRainbow
 
-    var summary: String {
-        if let name, let locality {
-            return [name, locality].joined(separator: ", ")
-        } else {
-            return "(\(String(format: "%.3f", latitude)), \(String(format: "%.3f", longitude)))"
-        }
+public struct TagView: View {
+
+    struct LayoutMetrics {
+        static let cornerRadius = 4.0
     }
 
-    var latitude: CLLocationDegrees
-    var longitude: CLLocationDegrees
-    var name: String?
-    var locality: String?
+    let text: String
+    let color: Color
 
-    init(location: CLLocation, placemark: CLPlacemark? = nil) {
-        self.latitude = location.coordinate.latitude
-        self.longitude = location.coordinate.longitude
-        self.name = placemark?.name
-        self.locality = placemark?.locality
+    public init(_ text: String) {
+        self.text = text
+        self.color = HashRainbow.colorForString(text, colors: .tags)  // TODO: Inject the color palette.
+    }
+
+    public var body: some View {
+        HStack(spacing: 0) {
+            Text(text)
+                .lineLimit(1)
+                .padding([.top, .bottom], 2)
+                .padding([.leading, .trailing], 6)
+        }
+        .padding(2)
+        .foregroundColor(color)
+        .background(color
+            .opacity(0.3)
+            .background(.background))
+        .clipShape(RoundedRectangle(cornerRadius: LayoutMetrics.cornerRadius))
+        .fixedSize(horizontal: true, vertical: true)
     }
 
 }
