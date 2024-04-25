@@ -26,6 +26,8 @@ import Interact
 @main
 struct ThoughtsApp: App {
 
+    static let title = "Thoughts Support (\(Bundle.main.version ?? "Unknown Version"))"
+
     var applicationModel = ApplicationModel()
 
     var body: some Scene {
@@ -45,11 +47,9 @@ struct ThoughtsApp: App {
             SettingsView(applicationModel: applicationModel)
         }
 
-        let title = "Thoughts Support (\(Bundle.main.version ?? "Unknown Version"))"
-
         About(repository: "inseven/thoughts", copyright: "Copyright © 2024 Jason Morley") {
             Diligence.Action("GitHub", url: URL(string: "https://github.com/inseven/thoughts")!)
-            Diligence.Action("Support", url: URL(address: "support@jbmorley.co.uk", subject: title)!)
+            Diligence.Action("Support", url: URL(address: "support@jbmorley.co.uk", subject: Self.title)!)
         } acknowledgements: {
             Acknowledgements("Developers") {
                 Credit("Jason Morley", url: URL(string: "https://jbmorley.co.uk"))
@@ -59,10 +59,7 @@ struct ThoughtsApp: App {
                 Credit("Sarah Barbour")
             }
         } licenses: {
-            .interact
-            License("Material Icons", author: "Google", filename: "material-icons-license")
-            License("Thoughts", author: "Jason Morley", filename: "thoughts-license")
-            License("Yams", author: "JP Simard", filename: "yams-license")
+            (.thoughts)
         }
         .handlesExternalEvents(matching: [.about])
 

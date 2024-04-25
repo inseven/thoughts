@@ -32,6 +32,8 @@
 		D89224A72BD736B900DA0932 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89224A62BD736B900DA0932 /* Date.swift */; };
 		D89224A92BD736DF00DA0932 /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89224A82BD736DF00DA0932 /* TimeZone.swift */; };
 		D8DFFCC82BD82DE900C9532A /* CLAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DFFCC72BD82DE900C9532A /* CLAuthorizationStatus.swift */; };
+		D8E27EA42BD9EA53001EEE98 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E27EA32BD9EA53001EEE98 /* String.swift */; };
+		D8E27EA62BD9EB61001EEE98 /* Licensable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E27EA52BD9EB61001EEE98 /* Licensable.swift */; };
 		D8F06D4B2B67275B0039AEF4 /* Diligence in Frameworks */ = {isa = PBXBuildFile; productRef = D8F06D4A2B67275B0039AEF4 /* Diligence */; };
 		D8F06D4E2B6727630039AEF4 /* Interact in Frameworks */ = {isa = PBXBuildFile; productRef = D8F06D4D2B6727630039AEF4 /* Interact */; };
 		D8F06D512B6731CE0039AEF4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F06D502B6731CE0039AEF4 /* SettingsView.swift */; };
@@ -86,6 +88,8 @@
 		D89224A62BD736B900DA0932 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		D89224A82BD736DF00DA0932 /* TimeZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZone.swift; sourceTree = "<group>"; };
 		D8DFFCC72BD82DE900C9532A /* CLAuthorizationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLAuthorizationStatus.swift; sourceTree = "<group>"; };
+		D8E27EA32BD9EA53001EEE98 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		D8E27EA52BD9EB61001EEE98 /* Licensable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Licensable.swift; sourceTree = "<group>"; };
 		D8F06D502B6731CE0039AEF4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D8F06D532B6733650039AEF4 /* thoughts-license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "thoughts-license"; sourceTree = "<group>"; };
 		D8F06D552B6734540039AEF4 /* material-icons-license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "material-icons-license"; sourceTree = "<group>"; };
@@ -138,6 +142,8 @@
 			children = (
 				D8DFFCC72BD82DE900C9532A /* CLAuthorizationStatus.swift */,
 				D850C2D32B69D85400338546 /* KeyedDefaults.swift */,
+				D8E27EA52BD9EB61001EEE98 /* Licensable.swift */,
+				D8E27EA32BD9EA53001EEE98 /* String.swift */,
 				D89224A12BD7365C00DA0932 /* TimeZone.swift */,
 				D83C2F872B857B8C00CE60F7 /* URL.swift */,
 			);
@@ -391,8 +397,10 @@
 				D89224A02BD735DA00DA0932 /* RegionalDate.swift in Sources */,
 				D892249E2BD735BE00DA0932 /* ThoughtsError.swift in Sources */,
 				D850C2D42B69D85400338546 /* KeyedDefaults.swift in Sources */,
+				D8E27EA62BD9EB61001EEE98 /* Licensable.swift in Sources */,
 				D852AF662B604B1200B77A3D /* ComposeView.swift in Sources */,
 				D8F06D512B6731CE0039AEF4 /* SettingsView.swift in Sources */,
+				D8E27EA42BD9EA53001EEE98 /* String.swift in Sources */,
 				D80E08A62B6761370023DD4F /* Document.swift in Sources */,
 				D852AF022B6027CA00B77A3D /* ThoughtsApp.swift in Sources */,
 				D80E08A12B675AAC0023DD4F /* ComposeWindow.swift in Sources */,
