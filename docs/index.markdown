@@ -12,7 +12,7 @@ layout: showcase
 
 # Thoughts
 
-<p class="tagline">Ephemeral Note Taking</p>
+<p class="tagline">Ephemeral note taking for macOS</p>
 
 <picture class="hero">
     <source srcset="/images/screenshot-dark@2x.png" media="(prefers-color-scheme: dark)">
