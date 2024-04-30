@@ -1,0 +1,13 @@
+title: Thoughts
+email: support@jbmorley.co.uk
+description: ""
+baseurl: ""
+url: "https://thoughts.jbmorley.co.uk"
+
+plugins:
+  - jekyll-feed
+destination: ../_site
+
+defaults:
+  - values:
+      layout: "default"
