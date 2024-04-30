@@ -4,8 +4,6 @@ description: ""
 baseurl: ""
 url: "https://thoughts.jbmorley.co.uk"
 
-# Build settings
-theme: minima
 plugins:
   - jekyll-feed
 destination: ../_site
