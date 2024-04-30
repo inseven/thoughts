@@ -15,8 +15,6 @@ layout: showcase
 <p class="tagline">Ephemeral Note Taking</p>
 
 <picture class="hero">
-    <source srcset="/images/screenshot-default-dark@2x.png" media="(prefers-color-scheme: dark)">
-    <img class="hero" src="/images/screenshot-default@2x.png" width="1367" />
+    <source srcset="/images/screenshot-dark@2x.png" media="(prefers-color-scheme: dark)">
+    <img class="hero" src="/images/screenshot@2x.png" width="689" />
 </picture>
-
-Thoughts is currently in private beta. Please send me an [email](mailto:support@jbmorley.co.uk?subject=Thoughts%20Beta) if you'd like an invite.
