@@ -32,6 +32,8 @@
 		D89224A42BD7368F00DA0932 /* TimeZoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89224A32BD7368F00DA0932 /* TimeZoneTests.swift */; };
 		D89224A72BD736B900DA0932 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89224A62BD736B900DA0932 /* Date.swift */; };
 		D89224A92BD736DF00DA0932 /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89224A82BD736DF00DA0932 /* TimeZone.swift */; };
+		D8BA4D492BE59E16001A2A26 /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = D8BA4D482BE59E16001A2A26 /* HighlightedTextEditor */; };
+		D8BA4D4B2BE5A2FD001A2A26 /* highlightedtexteditor-license in Resources */ = {isa = PBXBuildFile; fileRef = D8BA4D4A2BE5A2FD001A2A26 /* highlightedtexteditor-license */; };
 		D8C283E52BD9939E00161C82 /* TokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C283E42BD9939E00161C82 /* TokenView.swift */; };
 		D8C283E92BD9954F00161C82 /* HashRainbow in Frameworks */ = {isa = PBXBuildFile; productRef = D8C283E82BD9954F00161C82 /* HashRainbow */; };
 		D8C283EE2BD9957700161C82 /* TokenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C283ED2BD9957700161C82 /* TokenViewModel.swift */; };
@@ -96,6 +98,7 @@
 		D89224A32BD7368F00DA0932 /* TimeZoneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneTests.swift; sourceTree = "<group>"; };
 		D89224A62BD736B900DA0932 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		D89224A82BD736DF00DA0932 /* TimeZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZone.swift; sourceTree = "<group>"; };
+		D8BA4D4A2BE5A2FD001A2A26 /* highlightedtexteditor-license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "highlightedtexteditor-license"; sourceTree = "<group>"; };
 		D8C283E42BD9939E00161C82 /* TokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenView.swift; sourceTree = "<group>"; };
 		D8C283ED2BD9957700161C82 /* TokenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenViewModel.swift; sourceTree = "<group>"; };
 		D8C283EF2BD995AD00161C82 /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
@@ -118,6 +121,7 @@
 			files = (
 				D8F06D4E2B6727630039AEF4 /* Interact in Frameworks */,
 				D8C283E92BD9954F00161C82 /* HashRainbow in Frameworks */,
+				D8BA4D492BE59E16001A2A26 /* HighlightedTextEditor in Frameworks */,
 				D892249A2BD70CC300DA0932 /* Yams in Frameworks */,
 				D8F06D4B2B67275B0039AEF4 /* Diligence in Frameworks */,
 			);
@@ -280,6 +284,7 @@
 				D8F06D552B6734540039AEF4 /* material-icons-license */,
 				D8F06D532B6733650039AEF4 /* thoughts-license */,
 				D84010C42BD74C760049715E /* yams-license */,
+				D8BA4D4A2BE5A2FD001A2A26 /* highlightedtexteditor-license */,
 			);
 			path = Licenses;
 			sourceTree = "<group>";
@@ -305,6 +310,7 @@
 				D8F06D4D2B6727630039AEF4 /* Interact */,
 				D89224992BD70CC300DA0932 /* Yams */,
 				D8C283E82BD9954F00161C82 /* HashRainbow */,
+				D8BA4D482BE59E16001A2A26 /* HighlightedTextEditor */,
 			);
 			productName = "Disk Stickies";
 			productReference = D852AEFE2B6027CA00B77A3D /* Thoughts.app */;
@@ -383,6 +389,7 @@
 				D8F06D4C2B6727630039AEF4 /* XCLocalSwiftPackageReference "interact" */,
 				D89224982BD70CC300DA0932 /* XCRemoteSwiftPackageReference "Yams" */,
 				D8C283E72BD9954F00161C82 /* XCRemoteSwiftPackageReference "HashRainbow" */,
+				D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "HighlightedTextEditor" */,
 			);
 			productRefGroup = D852AEFF2B6027CA00B77A3D /* Products */;
 			projectDirPath = "";
@@ -406,6 +413,7 @@
 				D852AF062B6027CC00B77A3D /* Assets.xcassets in Resources */,
 				D84010C52BD74C760049715E /* yams-license in Resources */,
 				D8C283F72BD9ADC400161C82 /* hashrainbow-license in Resources */,
+				D8BA4D4B2BE5A2FD001A2A26 /* highlightedtexteditor-license in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -803,6 +811,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "HighlightedTextEditor" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = HighlightedTextEditor;
+		};
 		D8F06D492B67275B0039AEF4 /* XCLocalSwiftPackageReference "diligence" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = diligence;
@@ -837,6 +849,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D89224982BD70CC300DA0932 /* XCRemoteSwiftPackageReference "Yams" */;
 			productName = Yams;
+		};
+		D8BA4D482BE59E16001A2A26 /* HighlightedTextEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "HighlightedTextEditor" */;
+			productName = HighlightedTextEditor;
 		};
 		D8C283E82BD9954F00161C82 /* HashRainbow */ = {
 			isa = XCSwiftPackageProductDependency;

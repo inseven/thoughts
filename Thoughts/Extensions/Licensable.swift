@@ -41,6 +41,15 @@ fileprivate let hashRainbowLicense = License(id: "https://github.com/saramah/Has
                                                      title: "GitHub"),
                                                ])
 
+fileprivate let highlightedTextEditorLicense = License(id: "https://github.com/kyle-n/HighlightedTextEditor",
+                                                       name: "HighlightedTextEditor",
+                                                       author: "Kyle Nazario",
+                                                       text: String(contentsOfResource: "highlightedtexteditor-license"),
+                                                       attributes: [
+                                                        .url(URL(string: "https://github.com/kyle-n/HighlightedTextEditor/")!,
+                                                             title: "GitHub"),
+                                                       ])
+
 fileprivate let yamsLicense = License(id: "https://github.com/jpsim/Yams",
                                       name: "Yams",
                                       author: "JP Simard",
@@ -59,8 +68,9 @@ fileprivate let thoughtsLicense = License(id: "https://github.com/inseven/though
                                           licenses: [
                                             .interact,
                                             .licensable,
-                                            materialIconsLicense,
                                             hashRainbowLicense,
+                                            highlightedTextEditorLicense,
+                                            materialIconsLicense,
                                             yamsLicense,
                                           ])
 

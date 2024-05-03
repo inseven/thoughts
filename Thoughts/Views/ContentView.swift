@@ -20,6 +20,16 @@
 
 import SwiftUI
 
+struct FontInspector: View {
+
+    @Environment(\.font) var font
+
+    var body: some View {
+        Text("Cheeese")
+    }
+
+}
+
 struct ContentView: View {
 
     var applicationModel: ApplicationModel

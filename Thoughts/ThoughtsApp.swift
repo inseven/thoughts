@@ -48,8 +48,10 @@ struct ThoughtsApp: App {
         }
 
         About(repository: "inseven/thoughts", copyright: "Copyright © 2024 Jason Morley") {
-            Diligence.Action("GitHub", url: URL(string: "https://github.com/inseven/thoughts")!)
-            Diligence.Action("Support", url: URL(address: "support@jbmorley.co.uk", subject: Self.title)!)
+            Action("Website", url: URL(string: "https://thoughts.jbmorley.co.uk")!)
+            Action("Privacy Policy", url: URL(string: "https://thoughts.jbmorley.co.uk/privacy-policy")!)
+            Action("GitHub", url: URL(string: "https://github.com/inseven/thoughts")!)
+            Action("Support", url: URL(address: "support@jbmorley.co.uk", subject: Self.title)!)
         } acknowledgements: {
             Acknowledgements("Developers") {
                 Credit("Jason Morley", url: URL(string: "https://jbmorley.co.uk"))

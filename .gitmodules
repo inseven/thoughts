@@ -10,3 +10,6 @@
 [submodule "scripts/build-tools"]
 	path = scripts/build-tools
 	url = https://github.com/jbmorley/build-tools.git
+[submodule "HighlightedTextEditor"]
+	path = HighlightedTextEditor
+	url = git@github.com:jbmorley/HighlightedTextEditor.git
