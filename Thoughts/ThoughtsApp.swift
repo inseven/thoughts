@@ -43,9 +43,9 @@ struct ThoughtsApp: App {
             .handlesExternalEvents(matching: [.compose])
             .defaultSize(width: 800, height: 600)
 
-        Settings {
-            SettingsView(applicationModel: applicationModel)
-        }
+        SettingsWindow()
+            .environment(applicationModel)
+            .handlesExternalEvents(matching: [.settings])
 
         About(repository: "inseven/thoughts", copyright: "Copyright © 2024 Jason Morley") {
             Action("Website", url: URL(string: "https://thoughts.jbmorley.co.uk")!)
