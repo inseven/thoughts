@@ -32,6 +32,7 @@
 		D89224A42BD7368F00DA0932 /* TimeZoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89224A32BD7368F00DA0932 /* TimeZoneTests.swift */; };
 		D89224A72BD736B900DA0932 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89224A62BD736B900DA0932 /* Date.swift */; };
 		D89224A92BD736DF00DA0932 /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89224A82BD736DF00DA0932 /* TimeZone.swift */; };
+		D8BA4D492BE59E16001A2A26 /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = D8BA4D482BE59E16001A2A26 /* HighlightedTextEditor */; };
 		D8C283E52BD9939E00161C82 /* TokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C283E42BD9939E00161C82 /* TokenView.swift */; };
 		D8C283E92BD9954F00161C82 /* HashRainbow in Frameworks */ = {isa = PBXBuildFile; productRef = D8C283E82BD9954F00161C82 /* HashRainbow */; };
 		D8C283EE2BD9957700161C82 /* TokenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C283ED2BD9957700161C82 /* TokenViewModel.swift */; };
@@ -118,6 +119,7 @@
 			files = (
 				D8F06D4E2B6727630039AEF4 /* Interact in Frameworks */,
 				D8C283E92BD9954F00161C82 /* HashRainbow in Frameworks */,
+				D8BA4D492BE59E16001A2A26 /* HighlightedTextEditor in Frameworks */,
 				D892249A2BD70CC300DA0932 /* Yams in Frameworks */,
 				D8F06D4B2B67275B0039AEF4 /* Diligence in Frameworks */,
 			);
@@ -305,6 +307,7 @@
 				D8F06D4D2B6727630039AEF4 /* Interact */,
 				D89224992BD70CC300DA0932 /* Yams */,
 				D8C283E82BD9954F00161C82 /* HashRainbow */,
+				D8BA4D482BE59E16001A2A26 /* HighlightedTextEditor */,
 			);
 			productName = "Disk Stickies";
 			productReference = D852AEFE2B6027CA00B77A3D /* Thoughts.app */;
@@ -383,6 +386,7 @@
 				D8F06D4C2B6727630039AEF4 /* XCLocalSwiftPackageReference "interact" */,
 				D89224982BD70CC300DA0932 /* XCRemoteSwiftPackageReference "Yams" */,
 				D8C283E72BD9954F00161C82 /* XCRemoteSwiftPackageReference "HashRainbow" */,
+				D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "HighlightedTextEditor" */,
 			);
 			productRefGroup = D852AEFF2B6027CA00B77A3D /* Products */;
 			projectDirPath = "";
@@ -803,6 +807,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "HighlightedTextEditor" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = HighlightedTextEditor;
+		};
 		D8F06D492B67275B0039AEF4 /* XCLocalSwiftPackageReference "diligence" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = diligence;
@@ -837,6 +845,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D89224982BD70CC300DA0932 /* XCRemoteSwiftPackageReference "Yams" */;
 			productName = Yams;
+		};
+		D8BA4D482BE59E16001A2A26 /* HighlightedTextEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "HighlightedTextEditor" */;
+			productName = HighlightedTextEditor;
 		};
 		D8C283E82BD9954F00161C82 /* HashRainbow */ = {
 			isa = XCSwiftPackageProductDependency;

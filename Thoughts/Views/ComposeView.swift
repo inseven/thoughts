@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import HighlightedTextEditor
+
 struct ComposeView: View {
 
     var applicationModel: ApplicationModel
@@ -41,12 +43,21 @@ struct ComposeView: View {
     var body: some View {
         @Bindable var applicationModel = applicationModel
         VStack(spacing: 0) {
-            TextEditor(text: $applicationModel.document.content)
-                .scrollContentBackground(.hidden)
+            HighlightedTextEditor(text: $applicationModel.document.content, highlightRules: .markdown)
+//                .introspect { editor in
+//                    let font = NSFont.monospacedSystemFont(ofSize: 14, weight: .regular)
+//                    editor.textView.font = font
+//                }
+//                .scrollContentBackground(.hidden)
                 .frame(minWidth: 400)
-                .font(.system(size: 14, design: .monospaced))
-                .monospaced()
                 .edgesIgnoringSafeArea(.all)
+
+//            TextEditor(text: $applicationModel.document.content)
+//                .scrollContentBackground(.hidden)
+//                .frame(minWidth: 400)
+//                .font(.system(size: 14, design: .monospaced))
+//                .monospaced()
+//                .edgesIgnoringSafeArea(.all)
             Divider()
             HStack {
                 TokenView("Add tags...", tokens: $applicationModel.document.tags)
