@@ -113,7 +113,6 @@
 		D8F06D502B6731CE0039AEF4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D8F06D532B6733650039AEF4 /* thoughts-license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "thoughts-license"; sourceTree = "<group>"; };
 		D8F06D552B6734540039AEF4 /* material-icons-license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "material-icons-license"; sourceTree = "<group>"; };
-		D8F8D7232B68C77900464A37 /* ThoughtsRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ThoughtsRelease.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,7 +198,6 @@
 			isa = PBXGroup;
 			children = (
 				D852AF0A2B6027CC00B77A3D /* Thoughts.entitlements */,
-				D8F8D7232B68C77900464A37 /* ThoughtsRelease.entitlements */,
 				D80E089E2B674E900023DD4F /* Info.plist */,
 				D852AF012B6027CA00B77A3D /* ThoughtsApp.swift */,
 				D852AF052B6027CC00B77A3D /* Assets.xcassets */,
@@ -664,7 +662,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Thoughts/ThoughtsRelease.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Thoughts/Thoughts.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "3rd Party Mac Developer Application";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
