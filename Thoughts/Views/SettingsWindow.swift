@@ -20,36 +20,18 @@
 
 import SwiftUI
 
-import Diligence
+struct SettingsWindow: Scene {
 
-struct MainMenu: View {
+    @Environment(ApplicationModel.self) var applicationModel: ApplicationModel
 
-    var applicationModel: ApplicationModel
+    static let windowID = "settings-window"
 
-    @Environment(\.openURL) var openURL
-
-    var body: some View {
-        Button("New...") {
-            applicationModel.new()
-            openURL(.compose)
+    var body: some Scene {
+        Window("Thoughts Settings", id: Self.windowID) {
+            SettingsView(applicationModel: applicationModel)
         }
-        Divider()
-        Button {
-            openURL(.about)
-        } label: {
-            Text("About...")
-        }
-        Button {
-            openURL(.settings)
-        } label: {
-            Text("Settings...")
-        }
-        Divider()
-        Button {
-            NSApplication.shared.terminate(nil)
-        } label: {
-            Text("Quit")
-        }
+        .defaultPosition(.center)
+        .windowResizability(.contentSize)
     }
 
 }

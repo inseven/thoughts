@@ -34,6 +34,7 @@
 		D89224A92BD736DF00DA0932 /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89224A82BD736DF00DA0932 /* TimeZone.swift */; };
 		D8BA4D492BE59E16001A2A26 /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = D8BA4D482BE59E16001A2A26 /* HighlightedTextEditor */; };
 		D8BA4D4B2BE5A2FD001A2A26 /* highlightedtexteditor-license in Resources */ = {isa = PBXBuildFile; fileRef = D8BA4D4A2BE5A2FD001A2A26 /* highlightedtexteditor-license */; };
+		D8BA4D4D2BE5A9CB001A2A26 /* SettingsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BA4D4C2BE5A9CB001A2A26 /* SettingsWindow.swift */; };
 		D8C283E52BD9939E00161C82 /* TokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C283E42BD9939E00161C82 /* TokenView.swift */; };
 		D8C283E92BD9954F00161C82 /* HashRainbow in Frameworks */ = {isa = PBXBuildFile; productRef = D8C283E82BD9954F00161C82 /* HashRainbow */; };
 		D8C283EE2BD9957700161C82 /* TokenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C283ED2BD9957700161C82 /* TokenViewModel.swift */; };
@@ -99,6 +100,7 @@
 		D89224A62BD736B900DA0932 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		D89224A82BD736DF00DA0932 /* TimeZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZone.swift; sourceTree = "<group>"; };
 		D8BA4D4A2BE5A2FD001A2A26 /* highlightedtexteditor-license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "highlightedtexteditor-license"; sourceTree = "<group>"; };
+		D8BA4D4C2BE5A9CB001A2A26 /* SettingsWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindow.swift; sourceTree = "<group>"; };
 		D8C283E42BD9939E00161C82 /* TokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenView.swift; sourceTree = "<group>"; };
 		D8C283ED2BD9957700161C82 /* TokenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenViewModel.swift; sourceTree = "<group>"; };
 		D8C283EF2BD995AD00161C82 /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				D852AF682B604B3E00B77A3D /* MainMenu.swift */,
 				D8C283EF2BD995AD00161C82 /* PickerTextField.swift */,
 				D8F06D502B6731CE0039AEF4 /* SettingsView.swift */,
+				D8BA4D4C2BE5A9CB001A2A26 /* SettingsWindow.swift */,
 				D8C283F12BD995CC00161C82 /* TagView.swift */,
 				D8C283E42BD9939E00161C82 /* TokenView.swift */,
 			);
@@ -454,6 +457,7 @@
 				D8E27EA62BD9EB61001EEE98 /* Licensable.swift in Sources */,
 				D87310CF2BD9B03300E2064A /* Color.swift in Sources */,
 				D852AF662B604B1200B77A3D /* ComposeView.swift in Sources */,
+				D8BA4D4D2BE5A9CB001A2A26 /* SettingsWindow.swift in Sources */,
 				D8F06D512B6731CE0039AEF4 /* SettingsView.swift in Sources */,
 				D8E27EA42BD9EA53001EEE98 /* String.swift in Sources */,
 				D80E08A62B6761370023DD4F /* Document.swift in Sources */,

@@ -27,5 +27,6 @@ extension URL {
 
     static let about = URL(string: "x-thoughts://about")!
     static let compose = URL(string: "x-thoughts://compose")!
+    static let settings = URL(string: "x-thoughts://settings")!
 
 }
