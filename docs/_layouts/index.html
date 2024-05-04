@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <title>Thoughts</title>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+                background-color: #eff;
+                text-align: center;
+                margin-top: 2rem;
+                transition: background-color 0.3s eas-in-out;
+            }
+
+            .full {
+                position: absolute;
+                top: 0;
+                height: 100vh;
+                width: 100vw;
+                min-height: 800px;
+                z-index: -1;
+            }
+
+            .center {
+                margin: 0;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+
+            .window {
+                box-sizing: border-box;
+                background-size: 689px 171px;
+                width: 689px;
+                margin: auto;
+                border-width: 91px 57px 133.5px 57px;
+                border-style: solid;
+                border-image: url("images/window@2x.png") 182 114 267 114 round;
+                transition: border-image 0.3s ease-in-out;
+            }
+
+            .container {
+                text-align: left;
+                padding: 1px 4px;
+                font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'DejaVu Sans Mono', Menlo, Consolas, monospace;
+                font-size: 14px;
+                line-height: 1.5em;
+                min-height: 500px;
+                background-color: white;
+                transition: all 0.3s ease-in-out;
+            }
+
+            @media (prefers-color-scheme: dark) {
+
+                body {
+                    background-color: #1a1e2f;
+                    transition: background-color 0.3s ease-in-out;
+                }
+
+                .window {
+                    border-image-source: url("images/window-dark@2x.png");
+                    transition: border-image 0.3s ease-in-out;
+                }
+
+                .container {
+                    background-color: #171616;
+                    color: #fff;
+                    transition: all 0.3s ease-in-out;
+                }
+
+            }
+
+            #source {
+                display: none;
+            }
+
+            h1 {
+                font-family: Helvetica, sans-serif;
+                font-size: 40px;
+            }
+
+            a {
+                color: blue;
+                text-decoration: none;
+            }
+
+            .container a {
+                font-weight: bold;
+            }
+
+            footer {
+                font-size: 14px;
+                font-weight: 100;
+                color: #888;
+            }
+
+            footer a {
+                font-size: 14px;
+                color: #888;
+                text-decoration: underline;
+            }
+
+            footer ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            footer ul li {
+                display: inline;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="full">
+            <div class="center">
+                <div class="window">
+                    <div id="container" class="container"></div>
+                </div>
+                <footer>
+                    <nav>
+                        <ul>
+                            <li><a href="/release-notes">Release Notes</a></li>
+                            <li><a href="/privacy-policy">Privacy Policy</a></li>
+                            <li><a href="https://github.com/inseven/jbmorley">GitHub</a></li>
+                        </ul>
+                    </nav>
+                    <p>Copyright &copy; 2024 <a href="https://jbmorley.co.uk">Jason Morley</a></p>
+                </footer>
+            </div>
+            <div id="source">
+                <div>
+                    <strong>**Thoughts**</strong> is a lightweight note taking app for macOS.
+                </div>
+                <div>&nbsp;</div>
+                <div>
+                    It’s for recording <em>_ephemeral_</em> notes. For when you just want to get something down and out of your head, happy in the knowledge that it’s recorded <em>_somewhere_</em>.
+                </div>
+                <div>&nbsp;</div>
+                <div>
+                    Thoughts doesn’t offer any viewing functionality--it’s all about file-and-forget. It saves notes in <strong>**Markdown**</strong> and <strong>**Frontmatter**</strong> so it pairs perfectly with tools like <a href="https://obsidian.md" target="_blank">[Obsidian](https://obsidian.md)</a> and static site builders like <a href="https://jekyllrb.com" target="_blank">[Jekyll](https://jekyllrb.com)</a>, <a href="https://gohugo.io" target="_blank">[Hugo](https://gohugo.io)</a>, and <a href="https://incontext.app" target="_blank">[InContext](https://incontext.app)</a>.
+                </div>
+                <div>&nbsp;</div>
+                <div>
+                    Get it on <a href="https://testflight.apple.com/join/FgskNeh0" target="_blank">[Test Flight](https://testflight.apple.com/join/FgskNeh0)</a>.
+                </div>
+            </div>
+        </div>
+        <script>
+
+            async function typeChildren(from, to) {
+                const delay = ms => new Promise(res => setTimeout(res, ms));
+                const isWhitespaceString = str => !/\S/.test(str)
+                for (const child of from.childNodes) {
+
+                    console.log(child);
+                    console.log(child.nodeType)
+
+                    if (child.nodeType == Node.TEXT_NODE) {
+                        const text = child.nodeValue
+                        if (isWhitespaceString(text)) {
+                            to.innerHTML += text
+                        } else {
+                            for (const c of text) {
+                                await delay(60);
+                                console.log(c);
+                                to.innerHTML += c;
+                            }
+                        }
+                    } else {
+                        // Create a placeholder destination node to type in.
+                        var placeholder = document.createElement("span");
+                        to.appendChild(placeholder);
+
+                        // Type the contents.
+                        await typeChildren(child, placeholder);
+
+                        // Create the actual node and replace the placeholder node.
+                        // var destinationChild = document.createElement(child.tagName);
+                        // if (child.tagName == "A") {
+                        //     destinationChild.href = child.href;
+                        // }
+                        placeholder.replaceWith(child.cloneNode(true));
+                    }
+                }
+            }
+
+            async function update() {
+                let container = document.getElementById("source");
+                let destination = document.getElementById("container");
+                typeChildren(container, destination);
+            }
+
+            update();
+
+        </script>
+    </body>
+</html>

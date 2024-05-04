@@ -1,6 +1,6 @@
 ---
 title: About
-layout: showcase
+layout: index
 ---
 
 <p class="header">
