@@ -56,8 +56,10 @@ struct PickerTextField: NSViewRepresentable {
                     return false
                 }
                 parent.onDelete()
+                return true
             } else if event.keyCode == kVK_Return || event.keyCode == kVK_Tab {
                 parent.onCommit()
+                return true
             }
 
             return false
@@ -113,7 +115,7 @@ struct PickerTextField: NSViewRepresentable {
     }
 
     func makeNSView(context: Context) -> NSTextField {
-        let textField = NSTextField()
+        let textField = AutoGrowingTextField()
         textField.delegate = context.coordinator
         textField.isBordered = false
         textField.isBezeled = false
@@ -121,6 +123,7 @@ struct PickerTextField: NSViewRepresentable {
         textField.placeholderString = prompt
         textField.backgroundColor = .clear
         textField.font = NSFont.preferredFont(forTextStyle: .body)
+        textField.maximumNumberOfLines = 1
         return textField
     }
 

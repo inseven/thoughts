@@ -20,7 +20,7 @@
 
 import SwiftUI
 
-extension LayoutSubviews {
+fileprivate extension LayoutSubviews {
 
     typealias SubviewDetails = (LayoutSubviews.Element, CGSize)
 
@@ -36,14 +36,23 @@ extension LayoutSubviews {
         var rows: [[SubviewDetails]] = []
         var row: [SubviewDetails] = []
         var rowWidth: CGFloat = -spacing
-        for (subview, size) in details {
+        for (index, (subview, size)) in details.enumerated() {
             if rowWidth + spacing + size.width > width {
                 rows.append(row)
                 row = []
                 rowWidth = 0.0
             }
-            row.append((subview, size))
-            rowWidth += spacing + size.width
+
+            // We treat the last element differently to force it to fill the entire space since we know it's the text
+            // entry field.
+            if index + 1 >= details.count {
+                let size = CGSize(width: width - rowWidth - spacing, height: size.height)
+                row.append((subview, size))
+                rowWidth += spacing + size.width
+            } else {
+                row.append((subview, size))
+                rowWidth += spacing + size.width
+            }
         }
         if !row.isEmpty {
             rows.append(row)
@@ -53,7 +62,7 @@ extension LayoutSubviews {
 
 }
 
-struct CenteredFlowLayout: Layout {
+struct TagViewLayout: Layout {
 
     let spacing: CGFloat
 
@@ -81,8 +90,6 @@ struct CenteredFlowLayout: Layout {
                 .reduce(0.0, max)
             }
             .reduce(0.0, +)
-
-        print("size = (\(width), \(height))")
 
         return CGSize(width: width, height: height)
     }

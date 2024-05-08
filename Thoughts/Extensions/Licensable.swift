@@ -23,6 +23,18 @@ import Foundation
 import Interact
 import Licensable
 
+
+
+fileprivate let autoGrowingTextFieldLicense = License(id: "https://christiantietze.de/posts/2020/02/auto-growing-nstextfield/",
+                                                      name: "AutoGrowingTextField",
+                                                      author: "Christian Tietze",
+                                                      text: String(contentsOfResource: "autogrowingtextfield-license"),
+                                                      attributes: [
+                                                        .url(URL(string: "https://christiantietze.de/posts/2020/02/auto-growing-nstextfield/")!,
+                                                             title: "Website"),
+                                                      ])
+
+
 fileprivate let materialIconsLicense = License(id: "https://github.com/google/material-design-icons",
                                                name: "Material Icons",
                                                author: "Google",
@@ -68,6 +80,7 @@ fileprivate let thoughtsLicense = License(id: "https://github.com/inseven/though
                                           licenses: [
                                             .interact,
                                             .licensable,
+                                            autoGrowingTextFieldLicense,
                                             hashRainbowLicense,
                                             highlightedTextEditorLicense,
                                             materialIconsLicense,
