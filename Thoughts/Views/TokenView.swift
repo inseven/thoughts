@@ -57,7 +57,7 @@ public struct TokenView: View {
     public var body: some View {
 #if os(macOS)
         VStack {
-            CenteredFlowLayout(spacing: 4.0) {
+            TagViewLayout(spacing: 4.0) {
                 ForEach(model.items) { item in
                     TagView(item.text)
                 }
@@ -68,7 +68,6 @@ public struct TokenView: View {
                 } suggestion: { candidate in
                     return suggestion(candidate, model.items.map({ $0.text }), 1)
                 }
-                .frame(width: 100)
                 .padding([.top, .bottom], 4)
             }
         }
