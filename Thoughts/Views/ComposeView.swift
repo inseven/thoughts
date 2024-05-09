@@ -24,6 +24,13 @@ import HighlightedTextEditor
 
 struct ComposeView: View {
 
+    enum Focus {
+        case text
+        case tags
+    }
+
+    @FocusState var focus: Focus?
+
     var applicationModel: ApplicationModel
 
     init(applicationModel: ApplicationModel) {
@@ -46,12 +53,21 @@ struct ComposeView: View {
             HighlightedTextEditor(text: $applicationModel.document.content, highlightRules: .markdown)
                 .frame(minWidth: 400)
                 .edgesIgnoringSafeArea(.all)
+                .focused($focus, equals: .text)
             Divider()
             HStack {
                 TokenView("Add tags...", tokens: $applicationModel.document.tags)
+                    .focused($focus, equals: .tags)
                 Spacer()
             }
             .padding()
+        }
+        .onAppear {
+            // Unfortunately the `defaultFocus` modifier doesn't work out of the box with `NSViewRepresentable` views
+            // so we fall back on the old tchnique of dispatching async to set the initial focus.
+            DispatchQueue.main.async {
+                focus = .text
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.background)
@@ -63,6 +79,15 @@ struct ComposeView: View {
                     ProgressView()
                         .controlSize(.small)
                 }
+            }
+        }
+        .onOpenURL { url in
+            switch url {
+            case .compose:
+                // Reset the default focus on a new compose.
+                focus = .text
+            default:
+                return
             }
         }
     }
