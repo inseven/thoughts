@@ -91,7 +91,7 @@ struct TagViewLayout: Layout {
             }
             .reduce(0.0, +)
 
-        return CGSize(width: width, height: height)
+        return CGSize(width: proposal.width ?? width, height: height)
     }
 
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
