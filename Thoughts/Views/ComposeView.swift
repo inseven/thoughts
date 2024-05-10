@@ -55,12 +55,9 @@ struct ComposeView: View {
                 .edgesIgnoringSafeArea(.all)
                 .focused($focus, equals: .text)
             Divider()
-            HStack {
-                TokenView("Add tags...", tokens: $applicationModel.document.tags)
-                    .focused($focus, equals: .tags)
-                Spacer()
-            }
-            .padding()
+            TokenView("Add tags...", tokens: $applicationModel.document.tags)
+                .focused($focus, equals: .tags)
+                .padding()
         }
         .onAppear {
             // Unfortunately the `defaultFocus` modifier doesn't work out of the box with `NSViewRepresentable` views
