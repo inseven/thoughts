@@ -57,7 +57,9 @@ struct ThoughtsApp: App {
                 Credit("Jason Morley", url: URL(string: "https://jbmorley.co.uk"))
             }
             Acknowledgements("Thanks") {
+                Credit("Jon Mountjoy")
                 Credit("Lukas Fittl")
+                Credit("Pavlos Vinieratos")
                 Credit("Sarah Barbour")
             }
         } licenses: {
