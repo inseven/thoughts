@@ -13,3 +13,6 @@
 [submodule "HighlightedTextEditor"]
 	path = HighlightedTextEditor
 	url = git@github.com:jbmorley/HighlightedTextEditor.git
+[submodule "TagField"]
+	path = TagField
+	url = git@github.com:jbmorley/TagField.git

@@ -22,18 +22,7 @@ import Foundation
 
 import Interact
 import Licensable
-
-
-
-fileprivate let autoGrowingTextFieldLicense = License(id: "https://christiantietze.de/posts/2020/02/auto-growing-nstextfield/",
-                                                      name: "AutoGrowingTextField",
-                                                      author: "Christian Tietze",
-                                                      text: String(contentsOfResource: "autogrowingtextfield-license"),
-                                                      attributes: [
-                                                        .url(URL(string: "https://christiantietze.de/posts/2020/02/auto-growing-nstextfield/")!,
-                                                             title: "Website"),
-                                                      ])
-
+import TagField
 
 fileprivate let materialIconsLicense = License(id: "https://github.com/google/material-design-icons",
                                                name: "Material Icons",
@@ -41,15 +30,6 @@ fileprivate let materialIconsLicense = License(id: "https://github.com/google/ma
                                                text: String(contentsOfResource: "material-icons-license"),
                                                attributes: [
                                                 .url(URL(string: "https://github.com/google/material-design-icons")!,
-                                                     title: "GitHub"),
-                                               ])
-
-fileprivate let hashRainbowLicense = License(id: "https://github.com/saramah/HashRainbow",
-                                               name: "HashRainbow",
-                                               author: "Sarah Barbour",
-                                               text: String(contentsOfResource: "hashrainbow-license"),
-                                               attributes: [
-                                                .url(URL(string: "https://github.com/saramah/HashRainbow")!,
                                                      title: "GitHub"),
                                                ])
 
@@ -80,8 +60,7 @@ fileprivate let thoughtsLicense = License(id: "https://github.com/inseven/though
                                           licenses: [
                                             .interact,
                                             .licensable,
-                                            autoGrowingTextFieldLicense,
-                                            hashRainbowLicense,
+                                            .tagField,
                                             highlightedTextEditorLicense,
                                             materialIconsLicense,
                                             yamsLicense,
