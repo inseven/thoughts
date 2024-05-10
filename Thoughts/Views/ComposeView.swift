@@ -21,6 +21,7 @@
 import SwiftUI
 
 import HighlightedTextEditor
+import TagField
 
 struct ComposeView: View {
 
