@@ -61,6 +61,8 @@ class ApplicationModel: NSObject {
         }
     }
 
+    var tags: [String] = []
+
     private var cancellables = Set<AnyCancellable>()
     private var locationRequests: [(Result<LocationDetails, Error>) -> Void] = []
 
@@ -75,6 +77,25 @@ class ApplicationModel: NSObject {
         locationManager.delegate = self
         locationManager.pausesLocationUpdatesAutomatically = false
         self.start()
+
+        Task {
+            guard let rootURL else {
+                return
+            }
+            let fileManager = FileManager.default
+            guard let enumerator = fileManager.enumerator(at: rootURL,
+                                                          includingPropertiesForKeys: [.nameKey, .isDirectoryKey],
+                                                          options: .skipsSubdirectoryDescendants) else {
+                return
+            }
+            for case let url as URL in enumerator {
+                let isDirectory = try url.resourceValues(forKeys: [.isDirectoryKey]).isDirectory!
+                guard !isDirectory else {
+                    continue
+                }
+                print(url)
+            }
+        }
     }
 
     private func start() {
