@@ -31,8 +31,8 @@ struct MainMenu: View {
     var body: some View {
         Button("New...") {
             applicationModel.new()
-            openURL(.compose)
         }
+        .keyboardShortcut("t", modifiers: [.command, .option, .control])
         Divider()
         Button {
             openURL(.about)

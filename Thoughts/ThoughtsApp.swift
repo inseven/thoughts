@@ -21,6 +21,7 @@
 import SwiftUI
 
 import Diligence
+import HotKey
 import Interact
 
 @main
@@ -28,7 +29,17 @@ struct ThoughtsApp: App {
 
     static let title = "Thoughts Support (\(Bundle.main.version ?? "Unknown Version"))"
 
-    var applicationModel = ApplicationModel()
+    var applicationModel: ApplicationModel
+    let hotKey: HotKey
+
+    init() {
+        let applicationModel = ApplicationModel()
+        let hotKey = HotKey(key: .t, modifiers: [.command, .option, .control], keyDownHandler: {
+           applicationModel.new()
+       })
+        self.applicationModel = applicationModel
+        self.hotKey = hotKey
+    }
 
     var body: some Scene {
 
