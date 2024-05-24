@@ -98,6 +98,7 @@ class ApplicationModel: NSObject {
         dispatchPrecondition(condition: .onQueue(.main))
         document = Document()
         updateUserLocation()
+        NSWorkspace.shared.open(.compose)
     }
 
     func updateUserLocation() {
