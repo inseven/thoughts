@@ -11,12 +11,34 @@
                 transition: background-color 0.3s eas-in-out;
             }
 
-            .full {
+            header {
                 height: 100vh;
                 width: 100vw;
                 min-height: 800px;
                 z-index: -1;
                 background-image: radial-gradient(#03fbfe, #008eeb);
+            }
+
+            header nav {
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+
+            header ul {
+                list-style: none;
+                margin: 0;
+                padding: 0 0.5em;
+            }
+
+            header ul li {
+                display: inline;
+            }
+
+            header nav a {
+                color: #fff;
+                display: inline-block;
+                padding: 1em 0.5em;
             }
 
             .center {
@@ -87,14 +109,21 @@
                 font-size: 14px;
             }
 
-            footer ul {
-                list-style: none;
-                margin: 0;
-                padding: 0;
+            a.symbol::before {
+                content: "";
+                display: inline-block;
+                width: 1.2em;
+                height: 1.2em;
+                background-image: url("/images/github.svg");
+                filter: invert(92%) sepia(100%) saturate(0%) hue-rotate(202deg) brightness(106%) contrast(106%);
+                background-repeat: no-repeat;
+                background-size: 1.2em;
+                padding-right: 0.3em;
+                vertical-align: text-top;
             }
 
-            footer ul li {
-                display: inline;
+            a.symbol.testflight::before {
+                background-image: url("/images/download.svg");
             }
 
             @media (prefers-color-scheme: dark) {
@@ -106,7 +135,7 @@
                     color: #fff;
                 }
 
-                .full {
+                header {
                     background-color: #1a1e2f;
                     background-image: radial-gradient(#003a3b, #1a1e2f);
                 }
@@ -132,44 +161,32 @@
         </style>
     </head>
     <body>
-        <div class="full">
+        <header>
+            <nav>
+                <ul>
+                    <li><a class="symbol testflight" target="_blank" href="https://testflight.apple.com/join/FgskNeh0">TestFlight</a></li>
+                    <li><a class="symbol github" target="_blank" href="https://github.com/inseven/thoughts">GitHub</a></li>
+                </ul>
+            </nav>
             <div class="center">
                 <div class="window">
                     <div id="container" class="container"></div>
                 </div>
             </div>
             <div id="source">
-                <div>
-                    <strong>**Thoughts**</strong> is a lightweight note taking app for macOS.
-                </div>
-                <div>&nbsp;</div>
-                <div>
-                    It’s for recording <em>_ephemeral_</em> notes. For when you just want to get something down and out of your head, happy in the knowledge that it’s recorded <em>_somewhere_</em>.
-                </div>
-                <div>&nbsp;</div>
-                <div>
-                    Thoughts doesn’t offer any viewing functionality--it’s all about file-and-forget. It saves notes in <strong>**Markdown**</strong> and <strong>**Frontmatter**</strong> so it pairs perfectly with tools like <a href="https://obsidian.md" target="_blank">[Obsidian](https://obsidian.md)</a> and static site builders like <a href="https://jekyllrb.com" target="_blank">[Jekyll](https://jekyllrb.com)</a>, <a href="https://gohugo.io" target="_blank">[Hugo](https://gohugo.io)</a>, and <a href="https://incontext.app" target="_blank">[InContext](https://incontext.app)</a>.
-                </div>
-                <div>&nbsp;</div>
-                <div>
-                    Get it on <a href="https://testflight.apple.com/join/FgskNeh0" target="_blank">[Test Flight](https://testflight.apple.com/join/FgskNeh0)</a>.
-                </div>
+                {{ content }}
             </div>
-        </div>
+        </header>
         <div class="details">
             <a id="release-notes"></a>
             {% include fetch_page.html page_path='release-notes/index.markdown' %}
             <a id="privacy-policy"></a>
             {% include fetch_page.html page_path='privacy-policy/index.markdown' %}
             <footer>
-                <nav>
-                    <ul>
-                        <li><a href="https://github.com/inseven/thoughts">GitHub</a></li>
-                    </ul>
-                </nav>
                 <p>Copyright &copy; 2024 <a href="https://jbmorley.co.uk">Jason Morley</a></p>
             </footer>
         </div>
+
         <script>
 
             async function typeChildren(from, to) {
