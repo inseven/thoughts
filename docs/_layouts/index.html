@@ -16,7 +16,7 @@
                 width: 100vw;
                 min-height: 800px;
                 z-index: -1;
-                background-color: #eff;
+                background-image: radial-gradient(#03fbfe, #008eeb);
             }
 
             .center {
@@ -64,10 +64,6 @@
                 }
             }
 
-            footer {
-                text-align: center;
-            }
-
             #source {
                 display: none;
             }
@@ -78,7 +74,7 @@
             }
 
             a {
-                color: blue;
+                color: #007aff;
                 text-decoration: none;
             }
 
@@ -87,15 +83,8 @@
             }
 
             footer {
+                text-align: center;
                 font-size: 14px;
-                font-weight: 100;
-                /* color: #888; */
-            }
-
-            footer a {
-                font-size: 14px;
-                color: #007aff;
-                text-decoration: underline;
             }
 
             footer ul {
@@ -119,6 +108,7 @@
 
                 .full {
                     background-color: #1a1e2f;
+                    background-image: radial-gradient(#003a3b, #1a1e2f);
                 }
 
                 .window {
@@ -210,10 +200,6 @@
                         await typeChildren(child, placeholder);
 
                         // Create the actual node and replace the placeholder node.
-                        // var destinationChild = document.createElement(child.tagName);
-                        // if (child.tagName == "A") {
-                        //     destinationChild.href = child.href;
-                        // }
                         placeholder.replaceWith(child.cloneNode(true));
                     }
                 }
