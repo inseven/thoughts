@@ -6,19 +6,17 @@
         <style>
             body {
                 font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-                background-color: #eff;
                 text-align: center;
-                margin-top: 2rem;
+                margin: 0;
                 transition: background-color 0.3s eas-in-out;
             }
 
             .full {
-                position: absolute;
-                top: 0;
                 height: 100vh;
                 width: 100vw;
                 min-height: 800px;
                 z-index: -1;
+                background-color: #eff;
             }
 
             .center {
@@ -52,24 +50,22 @@
                 transition: all 0.3s ease-in-out;
             }
 
-            @media (prefers-color-scheme: dark) {
+            .details {
+                text-align: left;
+                max-width: 720px;
+                margin: auto;
+                font-weight: 200;
+                line-height: 1.4em;
+            }
 
-                body {
-                    background-color: #1a1e2f;
-                    transition: background-color 0.3s ease-in-out;
+            @media (max-width: 760px) {
+                .details {
+                    margin: 2rem;
                 }
+            }
 
-                .window {
-                    border-image-source: url("images/window-dark@2x.png");
-                    transition: border-image 0.3s ease-in-out;
-                }
-
-                .container {
-                    background-color: #171616;
-                    color: #fff;
-                    transition: all 0.3s ease-in-out;
-                }
-
+            footer {
+                text-align: center;
             }
 
             #source {
@@ -93,12 +89,12 @@
             footer {
                 font-size: 14px;
                 font-weight: 100;
-                color: #888;
+                /* color: #888; */
             }
 
             footer a {
                 font-size: 14px;
-                color: #888;
+                color: #007aff;
                 text-decoration: underline;
             }
 
@@ -111,6 +107,38 @@
             footer ul li {
                 display: inline;
             }
+
+            @media (prefers-color-scheme: dark) {
+
+                body {
+                    transition: background-color 0.3s ease-in-out;
+                    transition: color 0.3s ease-in-out;
+                    background-color: #171616;
+                    color: #fff;
+                }
+
+                .full {
+                    background-color: #1a1e2f;
+                }
+
+                .window {
+                    border-image-source: url("images/window-dark@2x.png");
+                    transition: border-image 0.3s ease-in-out;
+                }
+
+                .container {
+                    background-color: #171616;
+                    color: #fff;
+                    transition: all 0.3s ease-in-out;
+                }
+
+                a {
+                    color: #0b84ff;
+                }
+
+            }
+
+
         </style>
     </head>
     <body>
@@ -119,16 +147,6 @@
                 <div class="window">
                     <div id="container" class="container"></div>
                 </div>
-                <footer>
-                    <nav>
-                        <ul>
-                            <li><a href="/release-notes">Release Notes</a></li>
-                            <li><a href="/privacy-policy">Privacy Policy</a></li>
-                            <li><a href="https://github.com/inseven/thoughts">GitHub</a></li>
-                        </ul>
-                    </nav>
-                    <p>Copyright &copy; 2024 <a href="https://jbmorley.co.uk">Jason Morley</a></p>
-                </footer>
             </div>
             <div id="source">
                 <div>
@@ -147,6 +165,20 @@
                     Get it on <a href="https://testflight.apple.com/join/FgskNeh0" target="_blank">[Test Flight](https://testflight.apple.com/join/FgskNeh0)</a>.
                 </div>
             </div>
+        </div>
+        <div class="details">
+            <a id="release-notes"></a>
+            {% include fetch_page.html page_path='release-notes/index.markdown' %}
+            <a id="privacy-policy"></a>
+            {% include fetch_page.html page_path='privacy-policy/index.markdown' %}
+            <footer>
+                <nav>
+                    <ul>
+                        <li><a href="https://github.com/inseven/thoughts">GitHub</a></li>
+                    </ul>
+                </nav>
+                <p>Copyright &copy; 2024 <a href="https://jbmorley.co.uk">Jason Morley</a></p>
+            </footer>
         </div>
         <script>
 
