@@ -72,7 +72,12 @@
                 transition: all 0.3s ease-in-out;
             }
 
+            h1, h2 {
+                font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'DejaVu Sans Mono', Menlo, Consolas, monospace;
+            }
+
             .details {
+                font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'DejaVu Sans Mono', Menlo, Consolas, monospace;
                 text-align: left;
                 max-width: 720px;
                 margin: auto;
@@ -88,11 +93,6 @@
 
             #source {
                 display: none;
-            }
-
-            h1 {
-                font-family: Helvetica, sans-serif;
-                font-size: 40px;
             }
 
             a {
@@ -180,6 +180,7 @@
         <div class="details">
             <a id="release-notes"></a>
             {% include fetch_page.html page_path='release-notes/index.markdown' %}
+            <hr />
             <a id="privacy-policy"></a>
             {% include fetch_page.html page_path='privacy-policy/index.markdown' %}
             <footer>
