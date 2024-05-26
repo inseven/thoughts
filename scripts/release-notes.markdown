@@ -13,4 +13,3 @@ title: Release Notes
 - {{ change.description }}{% if change.scope %}{{ change.scope }}{% endif %}
 {% endfor %}{% endfor %}
 {% endfor %}
-
