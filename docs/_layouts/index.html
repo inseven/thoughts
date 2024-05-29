@@ -3,162 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>Thoughts</title>
-        <style>
-            body {
-                font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-                text-align: center;
-                margin: 0;
-                transition: background-color 0.3s eas-in-out;
-            }
-
-            header {
-                height: 100vh;
-                width: 100vw;
-                min-height: 800px;
-                z-index: -1;
-                background-image: radial-gradient(#03fbfe, #008eeb);
-            }
-
-            header nav {
-                position: absolute;
-                top: 0;
-                right: 0;
-            }
-
-            header ul {
-                list-style: none;
-                margin: 0;
-                padding: 0 0.5em;
-            }
-
-            header ul li {
-                display: inline;
-            }
-
-            header nav a {
-                color: #fff;
-                display: inline-block;
-                padding: 1em 0.5em;
-            }
-
-            .center {
-                margin: 0;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                -ms-transform: translate(-50%, -50%);
-                transform: translate(-50%, -50%);
-            }
-
-            .window {
-                box-sizing: border-box;
-                background-size: 689px 171px;
-                width: 689px;
-                margin: auto;
-                border-width: 91px 57px 133.5px 57px;
-                border-style: solid;
-                border-image: url("images/window@2x.png") 182 114 267 114 round;
-                transition: border-image 0.3s ease-in-out;
-            }
-
-            .container {
-                text-align: left;
-                padding: 1px 4px;
-                font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'DejaVu Sans Mono', Menlo, Consolas, monospace;
-                font-size: 14px;
-                line-height: 1.5em;
-                min-height: 500px;
-                background-color: white;
-                transition: all 0.3s ease-in-out;
-            }
-
-            h1, h2 {
-                font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'DejaVu Sans Mono', Menlo, Consolas, monospace;
-            }
-
-            .details {
-                font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'DejaVu Sans Mono', Menlo, Consolas, monospace;
-                text-align: left;
-                max-width: 720px;
-                margin: auto;
-                font-weight: 200;
-                line-height: 1.4em;
-            }
-
-            @media (max-width: 760px) {
-                .details {
-                    margin: 2rem;
-                }
-            }
-
-            #source {
-                display: none;
-            }
-
-            a {
-                color: #007aff;
-                text-decoration: none;
-            }
-
-            .container a {
-                font-weight: bold;
-            }
-
-            footer {
-                text-align: center;
-                font-size: 14px;
-            }
-
-            a.symbol::before {
-                content: "";
-                display: inline-block;
-                width: 1.2em;
-                height: 1.2em;
-                background-image: url("/images/github.svg");
-                filter: invert(92%) sepia(100%) saturate(0%) hue-rotate(202deg) brightness(106%) contrast(106%);
-                background-repeat: no-repeat;
-                background-size: 1.2em;
-                padding-right: 0.3em;
-                vertical-align: text-top;
-            }
-
-            a.symbol.testflight::before {
-                background-image: url("/images/download.svg");
-            }
-
-            @media (prefers-color-scheme: dark) {
-
-                body {
-                    transition: background-color 0.3s ease-in-out;
-                    transition: color 0.3s ease-in-out;
-                    background-color: #171616;
-                    color: #fff;
-                }
-
-                header {
-                    background-color: #1a1e2f;
-                    background-image: radial-gradient(#003a3b, #1a1e2f);
-                }
-
-                .window {
-                    border-image-source: url("images/window-dark@2x.png");
-                    transition: border-image 0.3s ease-in-out;
-                }
-
-                .container {
-                    background-color: #171616;
-                    color: #fff;
-                    transition: all 0.3s ease-in-out;
-                }
-
-                a {
-                    color: #0b84ff;
-                }
-
-            }
-
-
-        </style>
+        <meta property="og:title" content="Thoughts">
+        <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
         <header>
@@ -170,6 +16,7 @@
             </nav>
             <div class="center">
                 <div class="window">
+                    <div id="title" class="title">Friday 3 May 2024 at 11:11:15</div>
                     <div id="container" class="container"></div>
                 </div>
             </div>
@@ -182,12 +29,8 @@
             <a id="release-notes"></a>
             {% include fetch_page.html page_path='release-notes/index.markdown' %}
 
-            <hr />
-
             <a id="privacy-policy"></a>
             {% include fetch_page.html page_path='privacy-policy/index.markdown' %}
-
-            <hr />
 
             <a id="license"></a>
             {% include fetch_page.html page_path='license/index.markdown' %}
@@ -232,12 +75,33 @@
                 }
             }
 
+            function setTitle() {
+
+                let title = document.getElementById("title");
+
+                var now = new Date();
+                const weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+                let weekday = weekdays[now.getDay()];
+
+                const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+                let month = months[now.getMonth()];
+
+                var dd = now.getDate();
+                var yyyy = now.getFullYear();
+                var hours = now.getHours();
+                var minutes = now.getMinutes().toString().padStart(2, '0');
+                var seconds = now.getSeconds().toString().padStart(2, '0');
+
+                title.innerHTML = weekday + ' ' + dd + ' ' + month + ' ' + yyyy + ' at ' + hours + ':' + minutes + ':' + seconds;
+            }
+
             async function update() {
                 let container = document.getElementById("source");
                 let destination = document.getElementById("container");
                 typeChildren(container, destination);
             }
 
+            setTitle();
             update();
 
         </script>
