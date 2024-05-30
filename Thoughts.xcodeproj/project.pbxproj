@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D804FB112C081A2F004F8666 /* FrontmatterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D804FB102C081A2F004F8666 /* FrontmatterSwift */; };
 		D80E08A12B675AAC0023DD4F /* ComposeWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E08A02B675AAC0023DD4F /* ComposeWindow.swift */; };
 		D80E08A62B6761370023DD4F /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E08A52B6761370023DD4F /* Document.swift */; };
 		D828CFF82BEECDDF00AC8E8B /* highlightedtexteditor-license in Resources */ = {isa = PBXBuildFile; fileRef = D86C389D2BEECDAA00248CD0 /* highlightedtexteditor-license */; };
@@ -113,6 +114,7 @@
 				D8F06D4E2B6727630039AEF4 /* Interact in Frameworks */,
 				D8C283E92BD9954F00161C82 /* HashRainbow in Frameworks */,
 				D85FC1412BEEC3EC0004FAB3 /* TagField in Frameworks */,
+				D804FB112C081A2F004F8666 /* FrontmatterSwift in Frameworks */,
 				D8BA4D492BE59E16001A2A26 /* HighlightedTextEditor in Frameworks */,
 				D892249A2BD70CC300DA0932 /* Yams in Frameworks */,
 				D8F06D4B2B67275B0039AEF4 /* Diligence in Frameworks */,
@@ -292,6 +294,7 @@
 				D8BA4D482BE59E16001A2A26 /* HighlightedTextEditor */,
 				D85FC1402BEEC3EC0004FAB3 /* TagField */,
 				D87707B42C01592400362786 /* HotKey */,
+				D804FB102C081A2F004F8666 /* FrontmatterSwift */,
 			);
 			productName = "Disk Stickies";
 			productReference = D852AEFE2B6027CA00B77A3D /* Thoughts.app */;
@@ -366,13 +369,14 @@
 			);
 			mainGroup = D852AEF52B6027CA00B77A3D;
 			packageReferences = (
-				D8F06D492B67275B0039AEF4 /* XCLocalSwiftPackageReference "diligence" */,
-				D8F06D4C2B6727630039AEF4 /* XCLocalSwiftPackageReference "interact" */,
+				D8F06D492B67275B0039AEF4 /* XCLocalSwiftPackageReference "dependencies/diligence" */,
+				D8F06D4C2B6727630039AEF4 /* XCLocalSwiftPackageReference "dependencies/interact" */,
 				D89224982BD70CC300DA0932 /* XCRemoteSwiftPackageReference "Yams" */,
 				D8C283E72BD9954F00161C82 /* XCRemoteSwiftPackageReference "HashRainbow" */,
-				D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "HighlightedTextEditor" */,
-				D85FC13F2BEEC3EC0004FAB3 /* XCLocalSwiftPackageReference "TagField" */,
+				D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "dependencies/HighlightedTextEditor" */,
+				D85FC13F2BEEC3EC0004FAB3 /* XCLocalSwiftPackageReference "dependencies/TagField" */,
 				D87707B32C01592400362786 /* XCRemoteSwiftPackageReference "HotKey" */,
+				D804FB0F2C081A2F004F8666 /* XCLocalSwiftPackageReference "dependencies/FrontmatterSwift" */,
 			);
 			productRefGroup = D852AEFF2B6027CA00B77A3D /* Products */;
 			projectDirPath = "";
@@ -789,21 +793,25 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		D85FC13F2BEEC3EC0004FAB3 /* XCLocalSwiftPackageReference "TagField" */ = {
+		D804FB0F2C081A2F004F8666 /* XCLocalSwiftPackageReference "dependencies/FrontmatterSwift" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "dependencies/TagField";
+			relativePath = dependencies/FrontmatterSwift;
 		};
-		D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "HighlightedTextEditor" */ = {
+		D85FC13F2BEEC3EC0004FAB3 /* XCLocalSwiftPackageReference "dependencies/TagField" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "dependencies/HighlightedTextEditor";
+			relativePath = dependencies/TagField;
 		};
-		D8F06D492B67275B0039AEF4 /* XCLocalSwiftPackageReference "diligence" */ = {
+		D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "dependencies/HighlightedTextEditor" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "dependencies/diligence";
+			relativePath = dependencies/HighlightedTextEditor;
 		};
-		D8F06D4C2B6727630039AEF4 /* XCLocalSwiftPackageReference "interact" */ = {
+		D8F06D492B67275B0039AEF4 /* XCLocalSwiftPackageReference "dependencies/diligence" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "dependencies/interact";
+			relativePath = dependencies/diligence;
+		};
+		D8F06D4C2B6727630039AEF4 /* XCLocalSwiftPackageReference "dependencies/interact" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = dependencies/interact;
 		};
 /* End XCLocalSwiftPackageReference section */
 
@@ -835,6 +843,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D804FB102C081A2F004F8666 /* FrontmatterSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FrontmatterSwift;
+		};
 		D85FC1402BEEC3EC0004FAB3 /* TagField */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TagField;
@@ -851,7 +863,7 @@
 		};
 		D8BA4D482BE59E16001A2A26 /* HighlightedTextEditor */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "HighlightedTextEditor" */;
+			package = D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "dependencies/HighlightedTextEditor" */;
 			productName = HighlightedTextEditor;
 		};
 		D8C283E82BD9954F00161C82 /* HashRainbow */ = {

@@ -20,6 +20,7 @@
 
 import Foundation
 
+import FrontmatterSwift
 import Interact
 import Licensable
 import TagField
@@ -58,6 +59,7 @@ fileprivate let thoughtsLicense = License(id: "https://github.com/inseven/though
                                             .url(URL(string: "https://github.com/inseven/thoughts")!, title: "GitHub"),
                                           ],
                                           licenses: [
+                                            .frontmatterSwift,
                                             .interact,
                                             .licensable,
                                             .tagField,
