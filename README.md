@@ -4,6 +4,8 @@
 
 Lightweight note taking for macOS.
 
+![](images/screenshot@2x.png)
+
 ## License
 
 Thoughts is licensed under the MIT License (see [LICENSE](LICENSE)). It depends on the following separately licensed third-party libraries and components:
