@@ -4,7 +4,7 @@
 
 Lightweight note taking for macOS.
 
-![](images/screenshot@2x.png)
+<img width="708" src="images/screenshot@2x.png">
 
 ## License
 
