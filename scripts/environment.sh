@@ -29,4 +29,4 @@ export PATH="${PYTHONUSERBASE}/bin":$PATH
 
 export PATH=$PATH:"${SCRIPTS_DIRECTORY}/changes"
 export PATH=$PATH:"${SCRIPTS_DIRECTORY}/build-tools"
-export PATH=$PATH:"${ROOT_DIRECTORY}/diligence/scripts"
+export PATH=$PATH:"${ROOT_DIRECTORY}/dependencies/diligence/scripts"
