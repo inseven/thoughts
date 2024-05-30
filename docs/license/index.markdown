@@ -1,14 +1,10 @@
-# Thoughts
+---
+title: License
+---
 
-[![build](https://github.com/inseven/thoughts/actions/workflows/build.yaml/badge.svg)](https://github.com/inseven/thoughts/actions/workflows/build.yaml)
+# License
 
-Lightweight note taking for macOS.
-
-<img width="708" src="images/screenshot@2x.png">
-
-## License
-
-Thoughts is licensed under the MIT License (see [LICENSE](LICENSE)). It depends on the following separately licensed third-party libraries and components:
+TagField is licensed under the MIT License (see [LICENSE](https://github.com/inseven/thoughts/blob/main/LICENSE)). It depends on the following separately licensed third-party libraries and components:
 
 - [AutoGrowingTextField](https://christiantietze.de/posts/2020/02/auto-growing-nstextfield/), CC BY-SA 4.0
 - [Diligence](https://github.com/inseven/diligence), MIT License

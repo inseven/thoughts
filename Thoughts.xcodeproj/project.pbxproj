@@ -26,6 +26,7 @@
 		D852AF692B604B3E00B77A3D /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852AF682B604B3E00B77A3D /* MainMenu.swift */; };
 		D85FC1412BEEC3EC0004FAB3 /* TagField in Frameworks */ = {isa = PBXBuildFile; productRef = D85FC1402BEEC3EC0004FAB3 /* TagField */; };
 		D876ABDB2BEC842800667F8E /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D876ABDA2BEC842800667F8E /* Sequence.swift */; };
+		D87707B52C01592400362786 /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = D87707B42C01592400362786 /* HotKey */; };
 		D892249A2BD70CC300DA0932 /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = D89224992BD70CC300DA0932 /* Yams */; };
 		D892249C2BD735A100DA0932 /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = D892249B2BD735A100DA0932 /* Metadata.swift */; };
 		D892249E2BD735BE00DA0932 /* ThoughtsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D892249D2BD735BE00DA0932 /* ThoughtsError.swift */; };
@@ -115,6 +116,7 @@
 				D8BA4D492BE59E16001A2A26 /* HighlightedTextEditor in Frameworks */,
 				D892249A2BD70CC300DA0932 /* Yams in Frameworks */,
 				D8F06D4B2B67275B0039AEF4 /* Diligence in Frameworks */,
+				D87707B52C01592400362786 /* HotKey in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +291,7 @@
 				D8C283E82BD9954F00161C82 /* HashRainbow */,
 				D8BA4D482BE59E16001A2A26 /* HighlightedTextEditor */,
 				D85FC1402BEEC3EC0004FAB3 /* TagField */,
+				D87707B42C01592400362786 /* HotKey */,
 			);
 			productName = "Disk Stickies";
 			productReference = D852AEFE2B6027CA00B77A3D /* Thoughts.app */;
@@ -369,6 +372,7 @@
 				D8C283E72BD9954F00161C82 /* XCRemoteSwiftPackageReference "HashRainbow" */,
 				D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "HighlightedTextEditor" */,
 				D85FC13F2BEEC3EC0004FAB3 /* XCLocalSwiftPackageReference "TagField" */,
+				D87707B32C01592400362786 /* XCRemoteSwiftPackageReference "HotKey" */,
 			);
 			productRefGroup = D852AEFF2B6027CA00B77A3D /* Products */;
 			projectDirPath = "";
@@ -787,23 +791,31 @@
 /* Begin XCLocalSwiftPackageReference section */
 		D85FC13F2BEEC3EC0004FAB3 /* XCLocalSwiftPackageReference "TagField" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = TagField;
+			relativePath = "dependencies/TagField";
 		};
 		D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "HighlightedTextEditor" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = HighlightedTextEditor;
+			relativePath = "dependencies/HighlightedTextEditor";
 		};
 		D8F06D492B67275B0039AEF4 /* XCLocalSwiftPackageReference "diligence" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = diligence;
+			relativePath = "dependencies/diligence";
 		};
 		D8F06D4C2B6727630039AEF4 /* XCLocalSwiftPackageReference "interact" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = interact;
+			relativePath = "dependencies/interact";
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D87707B32C01592400362786 /* XCRemoteSwiftPackageReference "HotKey" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/soffes/HotKey";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		D89224982BD70CC300DA0932 /* XCRemoteSwiftPackageReference "Yams" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jpsim/Yams.git";
@@ -826,6 +838,11 @@
 		D85FC1402BEEC3EC0004FAB3 /* TagField */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TagField;
+		};
+		D87707B42C01592400362786 /* HotKey */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D87707B32C01592400362786 /* XCRemoteSwiftPackageReference "HotKey" */;
+			productName = HotKey;
 		};
 		D89224992BD70CC300DA0932 /* Yams */ = {
 			isa = XCSwiftPackageProductDependency;

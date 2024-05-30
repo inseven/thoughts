@@ -63,78 +63,78 @@ public extension Sequence where Iterator.Element == HighlightRule {
     static var markdown: [HighlightRule] {
         [
             HighlightRule(pattern: .all, formattingRule: TextFormattingRule(key: .font, value: defaultEditorFont)),
-//            HighlightRule(pattern: inlineCodeRegex, formattingRule: TextFormattingRule(key: .font, value: codeFont)),
-//            HighlightRule(pattern: codeBlockRegex, formattingRule: TextFormattingRule(key: .font, value: codeFont)),
-//            HighlightRule(pattern: headingRegex, formattingRules: [
-//                TextFormattingRule(fontTraits: headingTraits),
-//                TextFormattingRule(key: .kern, value: 0.5),
-//                TextFormattingRule(key: .font, calculateValue: { content, _ in
-//                    let uncappedLevel = content.prefix(while: { char in char == "#" }).count
-//                    let level = Swift.min(maxHeadingLevel, uncappedLevel)
-//                    let fontSize = CGFloat(maxHeadingLevel - level) * 2.5 + defaultEditorFont.pointSize
-//                    return SystemFontAlias(descriptor: defaultEditorFont.fontDescriptor, size: fontSize) as Any
-//                })
-//            ]),
-//            HighlightRule(
-//                pattern: linkOrImageRegex,
-//                formattingRules: [
-//                    TextFormattingRule(fontTraits: boldTraits),
-//                    TextFormattingRule(key: .foregroundColor, value: NSColor.systemBlue),
-//                ]
-//            ),
-//            HighlightRule(
-//                pattern: linkOrImageTagRegex,
-//                formattingRule: TextFormattingRule(key: .underlineStyle, value: NSUnderlineStyle.single.rawValue)
-//            ),
-//            HighlightRule(pattern: boldRegex, formattingRule: TextFormattingRule(fontTraits: boldTraits)),
-//            HighlightRule(
-//                pattern: asteriskEmphasisRegex,
-//                formattingRule: TextFormattingRule(fontTraits: emphasisTraits)
-//            ),
-//            HighlightRule(
-//                pattern: underscoreEmphasisRegex,
-//                formattingRule: TextFormattingRule(fontTraits: emphasisTraits)
-//            ),
-//            HighlightRule(
-//                pattern: boldEmphasisAsteriskRegex,
-//                formattingRule: TextFormattingRule(fontTraits: boldEmphasisTraits)
-//            ),
-//            HighlightRule(
-//                pattern: blockquoteRegex,
-//                formattingRule: TextFormattingRule(key: .backgroundColor, value: secondaryBackground)
-//            ),
-//            HighlightRule(
-//                pattern: horizontalRuleRegex,
-//                formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)
-//            ),
-//            HighlightRule(
-//                pattern: unorderedListRegex,
-//                formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)
-//            ),
-//            HighlightRule(
-//                pattern: orderedListRegex,
-//                formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)
-//            ),
-//            HighlightRule(
-//                pattern: buttonRegex,
-//                formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)
-//            ),
-//            HighlightRule(pattern: strikethroughRegex, formattingRules: [
-//                TextFormattingRule(key: .strikethroughStyle, value: NSUnderlineStyle.single.rawValue),
-//                TextFormattingRule(key: .strikethroughColor, value: textColor)
-//            ]),
-//            HighlightRule(
-//                pattern: tagRegex,
-//                formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)
-//            ),
-//            HighlightRule(
-//                pattern: footnoteRegex,
-//                formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)
-//            ),
-//            HighlightRule(pattern: htmlRegex, formattingRules: [
-//                TextFormattingRule(key: .font, value: codeFont),
-//                TextFormattingRule(key: .foregroundColor, value: lighterColor)
-//            ]),
+            HighlightRule(pattern: inlineCodeRegex, formattingRule: TextFormattingRule(key: .font, value: codeFont)),
+            HighlightRule(pattern: codeBlockRegex, formattingRule: TextFormattingRule(key: .font, value: codeFont)),
+            HighlightRule(pattern: headingRegex, formattingRules: [
+                TextFormattingRule(fontTraits: headingTraits),
+                TextFormattingRule(key: .kern, value: 0.5),
+                TextFormattingRule(key: .font, calculateValue: { content, _ in
+                    let uncappedLevel = content.prefix(while: { char in char == "#" }).count
+                    let level = Swift.min(maxHeadingLevel, uncappedLevel)
+                    let fontSize = CGFloat(maxHeadingLevel - level) * 2.5 + defaultEditorFont.pointSize
+                    return SystemFontAlias(descriptor: defaultEditorFont.fontDescriptor, size: fontSize) as Any
+                })
+            ]),
+            HighlightRule(
+                pattern: linkOrImageRegex,
+                formattingRules: [
+                    TextFormattingRule(fontTraits: boldTraits),
+                    TextFormattingRule(key: .foregroundColor, value: NSColor.systemBlue),
+                ]
+            ),
+            HighlightRule(
+                pattern: linkOrImageTagRegex,
+                formattingRule: TextFormattingRule(key: .underlineStyle, value: NSUnderlineStyle.single.rawValue)
+            ),
+            HighlightRule(pattern: boldRegex, formattingRule: TextFormattingRule(fontTraits: boldTraits)),
+            HighlightRule(
+                pattern: asteriskEmphasisRegex,
+                formattingRule: TextFormattingRule(fontTraits: emphasisTraits)
+            ),
+            HighlightRule(
+                pattern: underscoreEmphasisRegex,
+                formattingRule: TextFormattingRule(fontTraits: emphasisTraits)
+            ),
+            HighlightRule(
+                pattern: boldEmphasisAsteriskRegex,
+                formattingRule: TextFormattingRule(fontTraits: boldEmphasisTraits)
+            ),
+            HighlightRule(
+                pattern: blockquoteRegex,
+                formattingRule: TextFormattingRule(key: .backgroundColor, value: secondaryBackground)
+            ),
+            HighlightRule(
+                pattern: horizontalRuleRegex,
+                formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)
+            ),
+            HighlightRule(
+                pattern: unorderedListRegex,
+                formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)
+            ),
+            HighlightRule(
+                pattern: orderedListRegex,
+                formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)
+            ),
+            HighlightRule(
+                pattern: buttonRegex,
+                formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)
+            ),
+            HighlightRule(pattern: strikethroughRegex, formattingRules: [
+                TextFormattingRule(key: .strikethroughStyle, value: NSUnderlineStyle.single.rawValue),
+                TextFormattingRule(key: .strikethroughColor, value: textColor)
+            ]),
+            HighlightRule(
+                pattern: tagRegex,
+                formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)
+            ),
+            HighlightRule(
+                pattern: footnoteRegex,
+                formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)
+            ),
+            HighlightRule(pattern: htmlRegex, formattingRules: [
+                TextFormattingRule(key: .font, value: codeFont),
+                TextFormattingRule(key: .foregroundColor, value: lighterColor)
+            ]),
         ]
     }
 }

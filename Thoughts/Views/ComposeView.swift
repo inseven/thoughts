@@ -56,7 +56,7 @@ struct ComposeView: View {
                 .edgesIgnoringSafeArea(.all)
                 .focused($focus, equals: .text)
             Divider()
-            TokenView("Add tags...", tokens: $applicationModel.document.tags)
+            TagField("Add tags...", tokens: $applicationModel.document.tags)
                 .focused($focus, equals: .tags)
                 .padding()
         }
