@@ -791,19 +791,19 @@
 /* Begin XCLocalSwiftPackageReference section */
 		D85FC13F2BEEC3EC0004FAB3 /* XCLocalSwiftPackageReference "TagField" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = TagField;
+			relativePath = "dependencies/TagField";
 		};
 		D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "HighlightedTextEditor" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = HighlightedTextEditor;
+			relativePath = "dependencies/HighlightedTextEditor";
 		};
 		D8F06D492B67275B0039AEF4 /* XCLocalSwiftPackageReference "diligence" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = diligence;
+			relativePath = "dependencies/diligence";
 		};
 		D8F06D4C2B6727630039AEF4 /* XCLocalSwiftPackageReference "interact" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = interact;
+			relativePath = "dependencies/interact";
 		};
 /* End XCLocalSwiftPackageReference section */
 
