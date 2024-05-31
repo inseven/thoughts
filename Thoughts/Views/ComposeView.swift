@@ -60,7 +60,8 @@ struct ComposeView: View {
             TagField("Add tags...", tokens: $applicationModel.document.tags) { candidate, tags in
                 let currentTags = Set(tags)
                 return applicationModel.tags
-                    .filter { !currentTags.contains($0) && $0.starts(with: candidate) }
+                    .words(prefix: candidate)
+                    .filter { !currentTags.contains($0) }
             }
             .focused($focus, equals: .tags)
             .padding()

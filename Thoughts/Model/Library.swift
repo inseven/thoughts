@@ -22,6 +22,7 @@ import AppKit
 import Combine
 import CoreLocation
 import Foundation
+import UniformTypeIdentifiers
 
 import FrontmatterSwift
 import Interact
@@ -45,7 +46,7 @@ class Library {
 
     private var files: [Details.Identifier: [String]] = [:]
 
-    @MainActor var tags: Set<String> = []
+    @MainActor var tags = Trie()
 
     init(rootURL: URL) {
         self.rootURL = rootURL
@@ -56,12 +57,12 @@ class Library {
         self.scanner.start {
             return []
         } onFileCreation: { details in
-            for details in details {
+            for details in details.filter({ $0.contentType.conforms(to: .markdown) }) {
                 self.files[details.identifier] = Self.tags(for: details.url)
             }
             self.updateTags()
         } onFileUpdate: { details in
-            for details in details {
+            for details in details.filter({ $0.contentType.conforms(to: .markdown) }) {
                 self.files[details.identifier] = Self.tags(for: details.url)
             }
             self.updateTags()
@@ -77,8 +78,9 @@ class Library {
         let tags = self.files.values.reduce(into: Set<String>()) { partialResult, tags in
             partialResult.formUnion(tags)
         }
+        let trie = Trie(words: tags)
         DispatchQueue.main.async {
-            self.tags = tags
+            self.tags = trie
         }
     }
 
