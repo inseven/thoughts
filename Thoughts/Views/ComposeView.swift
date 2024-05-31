@@ -20,6 +20,7 @@
 
 import SwiftUI
 
+import Combine
 import HighlightedTextEditor
 import TagField
 
@@ -63,6 +64,9 @@ struct ComposeView: View {
             }
             .focused($focus, equals: .tags)
             .padding()
+        }
+        .onReceive(applicationModel.toggleFocusPublisher) { _ in
+            focus = focus == .tags ? .text : .tags
         }
         .onAppear {
             // Unfortunately the `defaultFocus` modifier doesn't work out of the box with `NSViewRepresentable` views
