@@ -106,6 +106,11 @@ class ApplicationModel: NSObject {
             .store(in: &cancellables)
 
         reloadLibrary()
+
+        // Show the compose (configure) window if the root URL is empty.
+        if rootURL == nil {
+            new()
+        }
     }
 
     @MainActor func new() {
