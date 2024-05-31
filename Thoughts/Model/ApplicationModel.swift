@@ -67,6 +67,13 @@ class ApplicationModel: NSObject {
         }
     }
 
+    @MainActor var useDemoData: Bool = false {
+        didSet {
+            useDemoDataChanges.send(useDemoData)
+            new()
+        }
+    }
+
     let toggleFocusPublisher = PassthroughSubject<Void, Never>()
 
     private var cancellables = Set<AnyCancellable>()
@@ -75,6 +82,7 @@ class ApplicationModel: NSObject {
 
     private let documentChanges = PassthroughSubject<Document?, Never>()
     private let rootURLChanges = PassthroughSubject<URL?, Never>()
+    private let useDemoDataChanges = PassthroughSubject<Bool, Never>()
 
     private let keyedDefaults = KeyedDefaults<SettingsKey>()
     private let locationManager = CLLocationManager()
@@ -90,13 +98,22 @@ class ApplicationModel: NSObject {
     }
 
     @MainActor private func start() {
+
+        // Watch the document for changes, debounce, and save changes to disk.
         rootURLChanges
             .prepend(rootURL)
             .compactMap { $0 }
-            .combineLatest(documentChanges
-                .compactMap { $0 })
+            .combineLatest(documentChanges.compactMap { $0 },
+                           useDemoDataChanges.prepend(useDemoData))
             .debounce(for: 0.2, scheduler: DispatchQueue.main)
-            .sink { rootURL, document in
+            .sink { rootURL, document, useDemoData in
+
+                // Don't save the document if we're using demo data.
+                guard !useDemoData else {
+                    return
+                }
+
+                // Write the changes to disk.
                 do {
                     try document.sync(to: rootURL)
                 } catch {
@@ -114,9 +131,27 @@ class ApplicationModel: NSObject {
     }
 
     @MainActor func new() {
-        dispatchPrecondition(condition: .onQueue(.main))
-        document = Document()
-        updateUserLocation()
+        if useDemoData {
+            let location = LocationDetails(latitude: 34.2133,
+                                           longitude: 135.5853,
+                                           name: nil,
+                                           locality: "Waialua")
+            var document = Document()
+            document = Document()
+            document.content = """
+    **Thoughts** is a lightweight note taking app for macOS.
+
+    It’s for recording _ephemeral_ notes. For when you just want to get something down and out of your head, happy in the knowledge that it’s recorded _somewhere_.
+
+    Thoughts doesn’t offer any viewing functionality--it’s all about file-and-forget. It saves notes in **Markdown** and **Frontmatter** so it pairs perfectly with tools like [Obsidian](https://obsidian.md) and static site builders like [Jekyll](https://jekyllrb.com), [Hugo](https://gohugo.io), and [InContext](https://incontext.app).
+    """
+            document.tags = ["software", "apple", "mac", "markdown", "journaling"]
+            document.location = location
+            self.document = document
+        } else {
+            document = Document()
+            updateUserLocation()
+        }
         NSWorkspace.shared.open(.compose)
     }
 
@@ -165,7 +200,7 @@ class ApplicationModel: NSObject {
 
 extension ApplicationModel: CLLocationManagerDelegate {
 
-    @MainActor func requestUserLocation(completion: @escaping (Result<LocationDetails, Error>) -> Void) {
+    @MainActor private func requestUserLocation(completion: @escaping (Result<LocationDetails, Error>) -> Void) {
         guard CLLocationManager.locationServicesEnabled() else {
             completion(.failure(ThoughtsError.locationServicesDisabled))
             return

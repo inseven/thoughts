@@ -24,7 +24,7 @@ import Interact
 
 struct SettingsView: View {
 
-    let applicationModel: ApplicationModel
+    var applicationModel: ApplicationModel
 
     @ObservedObject var application = Application.shared
 
@@ -33,6 +33,7 @@ struct SettingsView: View {
     }
 
     var body: some View {
+        @Bindable var applicationModel = applicationModel
         Form {
             Section {
                 Toggle("Open at Login", isOn: $application.openAtLogin)
@@ -40,6 +41,12 @@ struct SettingsView: View {
                     applicationModel.setRootURL()
                 }
             }
+#if DEBUG
+            Section {
+                Toggle("Use Demo Data", isOn: $applicationModel.useDemoData)
+            }
+#endif
+
         }
         .frame(width: 400, height: 400)
     }
