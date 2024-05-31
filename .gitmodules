@@ -16,3 +16,6 @@
 [submodule "TagField"]
 	path = dependencies/TagField
 	url = git@github.com:jbmorley/TagField.git
+[submodule "dependencies/FrontmatterSwift"]
+	path = dependencies/FrontmatterSwift
+	url = git@github.com:jbmorley/FrontmatterSwift.git

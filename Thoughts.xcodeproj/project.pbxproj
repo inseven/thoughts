@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D804FB112C081A2F004F8666 /* FrontmatterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D804FB102C081A2F004F8666 /* FrontmatterSwift */; };
 		D80E08A12B675AAC0023DD4F /* ComposeWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E08A02B675AAC0023DD4F /* ComposeWindow.swift */; };
 		D80E08A62B6761370023DD4F /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E08A52B6761370023DD4F /* Document.swift */; };
 		D828CFF82BEECDDF00AC8E8B /* highlightedtexteditor-license in Resources */ = {isa = PBXBuildFile; fileRef = D86C389D2BEECDAA00248CD0 /* highlightedtexteditor-license */; };
@@ -25,6 +26,13 @@
 		D852AF662B604B1200B77A3D /* ComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852AF652B604B1200B77A3D /* ComposeView.swift */; };
 		D852AF692B604B3E00B77A3D /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852AF682B604B3E00B77A3D /* MainMenu.swift */; };
 		D85FC1412BEEC3EC0004FAB3 /* TagField in Frameworks */ = {isa = PBXBuildFile; productRef = D85FC1402BEEC3EC0004FAB3 /* TagField */; };
+		D86255842C091CF80044BD37 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86255832C091CF80044BD37 /* Library.swift */; };
+		D86255862C09248D0044BD37 /* DirectoryScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86255852C09248D0044BD37 /* DirectoryScanner.swift */; };
+		D86255892C0924CD0044BD37 /* FSEventsWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = D86255882C0924CD0044BD37 /* FSEventsWrapper */; };
+		D862558B2C0924ED0044BD37 /* fseventswrapper-license in Resources */ = {isa = PBXBuildFile; fileRef = D862558A2C0924ED0044BD37 /* fseventswrapper-license */; };
+		D862558D2C0925B40044BD37 /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D862558C2C0925B40044BD37 /* Details.swift */; };
+		D862558F2C09262E0044BD37 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D862558E2C09262E0044BD37 /* FileManager.swift */; };
+		D86255912C0926B40044BD37 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86255902C0926B40044BD37 /* Date.swift */; };
 		D876ABDB2BEC842800667F8E /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D876ABDA2BEC842800667F8E /* Sequence.swift */; };
 		D87707B52C01592400362786 /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = D87707B42C01592400362786 /* HotKey */; };
 		D892249A2BD70CC300DA0932 /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = D89224992BD70CC300DA0932 /* Yams */; };
@@ -87,6 +95,12 @@
 		D852AF632B604AF500B77A3D /* ApplicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModel.swift; sourceTree = "<group>"; };
 		D852AF652B604B1200B77A3D /* ComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeView.swift; sourceTree = "<group>"; };
 		D852AF682B604B3E00B77A3D /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		D86255832C091CF80044BD37 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
+		D86255852C09248D0044BD37 /* DirectoryScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryScanner.swift; sourceTree = "<group>"; };
+		D862558A2C0924ED0044BD37 /* fseventswrapper-license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "fseventswrapper-license"; sourceTree = "<group>"; };
+		D862558C2C0925B40044BD37 /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
+		D862558E2C09262E0044BD37 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		D86255902C0926B40044BD37 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		D86C389D2BEECDAA00248CD0 /* highlightedtexteditor-license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "highlightedtexteditor-license"; sourceTree = "<group>"; };
 		D876ABDA2BEC842800667F8E /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		D892249B2BD735A100DA0932 /* Metadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
@@ -113,8 +127,10 @@
 				D8F06D4E2B6727630039AEF4 /* Interact in Frameworks */,
 				D8C283E92BD9954F00161C82 /* HashRainbow in Frameworks */,
 				D85FC1412BEEC3EC0004FAB3 /* TagField in Frameworks */,
+				D804FB112C081A2F004F8666 /* FrontmatterSwift in Frameworks */,
 				D8BA4D492BE59E16001A2A26 /* HighlightedTextEditor in Frameworks */,
 				D892249A2BD70CC300DA0932 /* Yams in Frameworks */,
+				D86255892C0924CD0044BD37 /* FSEventsWrapper in Frameworks */,
 				D8F06D4B2B67275B0039AEF4 /* Diligence in Frameworks */,
 				D87707B52C01592400362786 /* HotKey in Frameworks */,
 			);
@@ -141,7 +157,10 @@
 			isa = PBXGroup;
 			children = (
 				D852AF632B604AF500B77A3D /* ApplicationModel.swift */,
+				D862558C2C0925B40044BD37 /* Details.swift */,
+				D86255852C09248D0044BD37 /* DirectoryScanner.swift */,
 				D80E08A52B6761370023DD4F /* Document.swift */,
+				D86255832C091CF80044BD37 /* Library.swift */,
 				D840967E2BD73CBE00926C85 /* LocationDetails.swift */,
 				D892249B2BD735A100DA0932 /* Metadata.swift */,
 				D892249F2BD735DA00DA0932 /* RegionalDate.swift */,
@@ -154,6 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				D8DFFCC72BD82DE900C9532A /* CLAuthorizationStatus.swift */,
+				D86255902C0926B40044BD37 /* Date.swift */,
+				D862558E2C09262E0044BD37 /* FileManager.swift */,
 				D850C2D32B69D85400338546 /* KeyedDefaults.swift */,
 				D8E27EA52BD9EB61001EEE98 /* Licensable.swift */,
 				D876ABDA2BEC842800667F8E /* Sequence.swift */,
@@ -260,6 +281,7 @@
 		D8F06D522B6733440039AEF4 /* Licenses */ = {
 			isa = PBXGroup;
 			children = (
+				D862558A2C0924ED0044BD37 /* fseventswrapper-license */,
 				D86C389D2BEECDAA00248CD0 /* highlightedtexteditor-license */,
 				D8F06D552B6734540039AEF4 /* material-icons-license */,
 				D8F06D532B6733650039AEF4 /* thoughts-license */,
@@ -292,6 +314,8 @@
 				D8BA4D482BE59E16001A2A26 /* HighlightedTextEditor */,
 				D85FC1402BEEC3EC0004FAB3 /* TagField */,
 				D87707B42C01592400362786 /* HotKey */,
+				D804FB102C081A2F004F8666 /* FrontmatterSwift */,
+				D86255882C0924CD0044BD37 /* FSEventsWrapper */,
 			);
 			productName = "Disk Stickies";
 			productReference = D852AEFE2B6027CA00B77A3D /* Thoughts.app */;
@@ -366,13 +390,15 @@
 			);
 			mainGroup = D852AEF52B6027CA00B77A3D;
 			packageReferences = (
-				D8F06D492B67275B0039AEF4 /* XCLocalSwiftPackageReference "diligence" */,
-				D8F06D4C2B6727630039AEF4 /* XCLocalSwiftPackageReference "interact" */,
+				D8F06D492B67275B0039AEF4 /* XCLocalSwiftPackageReference "dependencies/diligence" */,
+				D8F06D4C2B6727630039AEF4 /* XCLocalSwiftPackageReference "dependencies/interact" */,
 				D89224982BD70CC300DA0932 /* XCRemoteSwiftPackageReference "Yams" */,
 				D8C283E72BD9954F00161C82 /* XCRemoteSwiftPackageReference "HashRainbow" */,
-				D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "HighlightedTextEditor" */,
-				D85FC13F2BEEC3EC0004FAB3 /* XCLocalSwiftPackageReference "TagField" */,
+				D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "dependencies/HighlightedTextEditor" */,
+				D85FC13F2BEEC3EC0004FAB3 /* XCLocalSwiftPackageReference "dependencies/TagField" */,
 				D87707B32C01592400362786 /* XCRemoteSwiftPackageReference "HotKey" */,
+				D804FB0F2C081A2F004F8666 /* XCLocalSwiftPackageReference "dependencies/FrontmatterSwift" */,
+				D86255872C0924CD0044BD37 /* XCRemoteSwiftPackageReference "FSEventsWrapper" */,
 			);
 			productRefGroup = D852AEFF2B6027CA00B77A3D /* Products */;
 			projectDirPath = "";
@@ -395,6 +421,7 @@
 				D8F06D562B6734540039AEF4 /* material-icons-license in Resources */,
 				D852AF062B6027CC00B77A3D /* Assets.xcassets in Resources */,
 				D84010C52BD74C760049715E /* yams-license in Resources */,
+				D862558B2C0924ED0044BD37 /* fseventswrapper-license in Resources */,
 				D828CFF82BEECDDF00AC8E8B /* highlightedtexteditor-license in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,12 +453,17 @@
 				D8DFFCC82BD82DE900C9532A /* CLAuthorizationStatus.swift in Sources */,
 				D852AF692B604B3E00B77A3D /* MainMenu.swift in Sources */,
 				D83C2F882B857B8C00CE60F7 /* URL.swift in Sources */,
+				D86255912C0926B40044BD37 /* Date.swift in Sources */,
 				D89224A02BD735DA00DA0932 /* RegionalDate.swift in Sources */,
 				D876ABDB2BEC842800667F8E /* Sequence.swift in Sources */,
+				D862558D2C0925B40044BD37 /* Details.swift in Sources */,
+				D86255842C091CF80044BD37 /* Library.swift in Sources */,
+				D86255862C09248D0044BD37 /* DirectoryScanner.swift in Sources */,
 				D892249E2BD735BE00DA0932 /* ThoughtsError.swift in Sources */,
 				D850C2D42B69D85400338546 /* KeyedDefaults.swift in Sources */,
 				D8E27EA62BD9EB61001EEE98 /* Licensable.swift in Sources */,
 				D852AF662B604B1200B77A3D /* ComposeView.swift in Sources */,
+				D862558F2C09262E0044BD37 /* FileManager.swift in Sources */,
 				D8BA4D4D2BE5A9CB001A2A26 /* SettingsWindow.swift in Sources */,
 				D8F06D512B6731CE0039AEF4 /* SettingsView.swift in Sources */,
 				D8E27EA42BD9EA53001EEE98 /* String.swift in Sources */,
@@ -789,25 +821,37 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		D85FC13F2BEEC3EC0004FAB3 /* XCLocalSwiftPackageReference "TagField" */ = {
+		D804FB0F2C081A2F004F8666 /* XCLocalSwiftPackageReference "dependencies/FrontmatterSwift" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "dependencies/TagField";
+			relativePath = dependencies/FrontmatterSwift;
 		};
-		D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "HighlightedTextEditor" */ = {
+		D85FC13F2BEEC3EC0004FAB3 /* XCLocalSwiftPackageReference "dependencies/TagField" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "dependencies/HighlightedTextEditor";
+			relativePath = dependencies/TagField;
 		};
-		D8F06D492B67275B0039AEF4 /* XCLocalSwiftPackageReference "diligence" */ = {
+		D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "dependencies/HighlightedTextEditor" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "dependencies/diligence";
+			relativePath = dependencies/HighlightedTextEditor;
 		};
-		D8F06D4C2B6727630039AEF4 /* XCLocalSwiftPackageReference "interact" */ = {
+		D8F06D492B67275B0039AEF4 /* XCLocalSwiftPackageReference "dependencies/diligence" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "dependencies/interact";
+			relativePath = dependencies/diligence;
+		};
+		D8F06D4C2B6727630039AEF4 /* XCLocalSwiftPackageReference "dependencies/interact" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = dependencies/interact;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D86255872C0924CD0044BD37 /* XCRemoteSwiftPackageReference "FSEventsWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Frizlab/FSEventsWrapper.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.0;
+			};
+		};
 		D87707B32C01592400362786 /* XCRemoteSwiftPackageReference "HotKey" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/soffes/HotKey";
@@ -835,9 +879,18 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D804FB102C081A2F004F8666 /* FrontmatterSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FrontmatterSwift;
+		};
 		D85FC1402BEEC3EC0004FAB3 /* TagField */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TagField;
+		};
+		D86255882C0924CD0044BD37 /* FSEventsWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D86255872C0924CD0044BD37 /* XCRemoteSwiftPackageReference "FSEventsWrapper" */;
+			productName = FSEventsWrapper;
 		};
 		D87707B42C01592400362786 /* HotKey */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -851,7 +904,7 @@
 		};
 		D8BA4D482BE59E16001A2A26 /* HighlightedTextEditor */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "HighlightedTextEditor" */;
+			package = D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "dependencies/HighlightedTextEditor" */;
 			productName = HighlightedTextEditor;
 		};
 		D8C283E82BD9954F00161C82 /* HashRainbow */ = {
