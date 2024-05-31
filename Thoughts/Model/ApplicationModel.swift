@@ -37,8 +37,7 @@ class ApplicationModel: NSObject {
         return library?.tags ?? []
     }
 
-    // TODO: @MainActor
-    var rootURL: URL? {
+    @MainActor var rootURL: URL? {
         didSet {
             rootURLChanges.send(rootURL)
             reloadLibrary()
@@ -80,7 +79,7 @@ class ApplicationModel: NSObject {
     private let keyedDefaults = KeyedDefaults<SettingsKey>()
     private let locationManager = CLLocationManager()
 
-    override init() {
+    @MainActor override init() {
         rootURL = try? keyedDefaults.securityScopedURL(forKey: .rootURL)
         shouldSaveLocation = keyedDefaults.bool(forKey: .shouldSaveLocation, default: false)
         super.init()
@@ -109,7 +108,7 @@ class ApplicationModel: NSObject {
         }
     }
 
-    private func start() {
+    @MainActor private func start() {
         rootURLChanges
             .prepend(rootURL)
             .compactMap { $0 }
@@ -148,7 +147,7 @@ class ApplicationModel: NSObject {
 
     // Create and start a library instance, stopping any previous library if necessary.
     // This is intended to be called when the rootURL changes. If rootURL is nil, no new library will be created.
-    func reloadLibrary() {
+    @MainActor func reloadLibrary() {
         library?.stop()
         library = nil
         guard let rootURL else {
@@ -158,7 +157,7 @@ class ApplicationModel: NSObject {
         library?.start()
     }
 
-    func setRootURL() {
+    @MainActor func setRootURL() {
         dispatchPrecondition(condition: .onQueue(.main))
         let openPanel = NSOpenPanel()
         openPanel.canChooseFiles = false
