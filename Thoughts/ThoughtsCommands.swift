@@ -39,6 +39,7 @@ struct ThoughtsCommands: Commands {
                     applicationModel.toggleFocus()
                 }
             }
+            .keyboardShortcut("t")
         }
     }
 
