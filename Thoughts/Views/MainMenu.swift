@@ -44,12 +44,14 @@ struct MainMenu: View {
         } label: {
             Text("Settings...")
         }
+        .keyboardShortcut(",")
         Divider()
         Button {
             NSApplication.shared.terminate(nil)
         } label: {
             Text("Quit")
         }
+        .keyboardShortcut("q")
     }
 
 }
