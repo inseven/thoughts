@@ -61,8 +61,7 @@ class ApplicationModel: NSObject {
         }
     }
 
-    // TODO: @MainActor
-    var document = Document() {
+    @MainActor var document = Document() {
         didSet {
             documentChanges.send(document)
         }

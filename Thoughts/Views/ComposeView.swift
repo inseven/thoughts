@@ -38,7 +38,7 @@ struct ComposeView: View {
         self.applicationModel = applicationModel
     }
 
-    var subtitle: String {
+    @MainActor var subtitle: String {
         var components: [String] = [
             applicationModel.document.date.formatted(date: .omitted, time: .standard)
         ]
