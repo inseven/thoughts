@@ -49,12 +49,7 @@ struct ThoughtsApp: App {
             Image(systemName: "text.justify.left")
         }
         .commands {
-            CommandMenu("Edit") {
-                Button("Toggle Focus") {
-                    applicationModel.toggleFocus()
-                }
-                .keyboardShortcut("t")
-            }
+            ThoughtsCommands(applicationModel: applicationModel)
         }
 
         ComposeWindow()
