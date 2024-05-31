@@ -24,8 +24,9 @@ import Foundation
 struct LocationDetails: Codable {
 
     var summary: String {
-        if let name, let locality {
-            return [name, locality].joined(separator: ", ")
+        let names = [name, locality].compactMap { $0 }
+        if !names.isEmpty {
+            return names.joined(separator: ", ")
         } else {
             return "(\(String(format: "%.3f", latitude)), \(String(format: "%.3f", longitude)))"
         }
