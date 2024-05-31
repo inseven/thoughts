@@ -79,8 +79,6 @@ class DirectoryScanner {
                         return
                     }
 
-                    print("File created at path '\(path)'")
-
                     onFileCreation([details])
                     self.identifiers[details.identifier] = details
 
@@ -97,15 +95,11 @@ class DirectoryScanner {
                         // that this rename actuall represents a content modification operation; our file has been
                         // atomically replaced by a new file containing new content.
                         if let old = self.identifiers[details.identifier] {
-                            print("File updated by rename '\(url)'")
-//                            onFileDeletion([details.identifier])
                             let update = old.applying(details: details)
                             self.identifiers[details.identifier] = update
                             onFileUpdate([update])
                             return
                             // TODO: We should ensure we delete all our children if we're a directory.
-                        } else {
-                            print("File added by rename '\(url)'")
                         }
 
                         // We don't get notified about files contained within a directory, so we walk those explicitly.
@@ -121,8 +115,6 @@ class DirectoryScanner {
                         }
 
                     } else {
-                        print("File removed by rename '\(url)'")
-
                         // If it's a directory, then we need to work out what files are being removed.
                         let identifier = Details.Identifier(ownerURL: ownerURL, url: url)
                         if itemType == .dir {
@@ -140,7 +132,6 @@ class DirectoryScanner {
                 case .itemRemoved(path: let path, itemType: let itemType, eventId: _, fromUs: _):
 
                     let url = URL(filePath: path, itemType: itemType)
-                    print("File removed '\(url)'")
                     let identifier = Details.Identifier(ownerURL: ownerURL, url: url)
                     onFileDeletion([identifier])
                     self.identifiers.removeValue(forKey: identifier)
@@ -214,7 +205,6 @@ class DirectoryScanner {
             // Determine the deleted files and apply the changes.
             let deletedIdentifiers = Set(snapshotIdentifiers.keys).subtracting(currentIdentifiers.keys)
             if deletedIdentifiers.count > 0 {
-                print("Removing \(deletedIdentifiers.count) deleted files...")
                 onFileDeletion(deletedIdentifiers)
             }
 
@@ -242,13 +232,11 @@ class DirectoryScanner {
 
             // Add the new files.
             if additions.count > 0 {
-                print("Inserting \(additions.count) new files...")
                 onFileCreation(additions)
             }
 
             // Apply the updates.
             if updates.count > 0 {
-                print("Updating \(updates.count) modified files...")
                 onFileUpdate(updates)
             }
 
