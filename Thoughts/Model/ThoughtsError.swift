@@ -22,6 +22,7 @@ import CoreLocation
 import Foundation
 
 enum ThoughtsError: Error {
+    case accessError
     case encodingError
     case locationServicesDisabled
 }

@@ -1,4 +1,6 @@
-// Copyright (c) 2024 Jason Morley
+// MIT License
+//
+// Copyright (c) 2023-2024 Jason Morley
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,39 +20,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUI
-import UniformTypeIdentifiers
+import Foundation
 
-import Diligence
-import FSEventsWrapper
-import Interact
+extension Date {
 
-extension URL {
-
-    static let about = URL(string: "x-thoughts://about")!
-    static let compose = URL(string: "x-thoughts://compose")!
-    static let settings = URL(string: "x-thoughts://settings")!
-
-    var contentModificationDate: Date? {
-        get throws {
-            return try resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate
-        }
+    var millisecondsSinceReferenceDate: Int {
+        return Int(timeIntervalSinceReferenceDate * 1000)
     }
 
-    var contentType: UTType? {
-        get throws {
-            return try resourceValues(forKeys: [.contentTypeKey]).contentType
-        }
-    }
-
-    var isDirectory: Bool? {
-        get throws {
-            return try resourceValues(forKeys: [.isDirectoryKey]).isDirectory
-        }
-    }
-
-    init(filePath: String, itemType: FSEvent.ItemType) {
-        self.init(filePath: filePath, directoryHint: itemType == .dir ? .isDirectory : .notDirectory)
+    init(millisecondsSinceReferenceDate: Int) {
+        let timeInterval: TimeInterval = Double(millisecondsSinceReferenceDate) / 1000.0
+        self.init(timeIntervalSinceReferenceDate: timeInterval)
     }
 
 }

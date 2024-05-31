@@ -33,8 +33,15 @@ class ApplicationModel: NSObject {
         case shouldSaveLocation
     }
 
+    @MainActor var tags: Set<String> {
+        return library?.tags ?? []
+    }
+
+    // TODO: @MainActor
     var rootURL: URL? {
         didSet {
+            rootURLChanges.send(rootURL)
+            reloadLibrary()
             do {
                 try keyedDefaults.set(securityScopedURL: rootURL, forKey: .rootURL)
             } catch {
@@ -43,6 +50,7 @@ class ApplicationModel: NSObject {
         }
     }
 
+    // TODO: @MainActor
     var shouldSaveLocation: Bool {
         didSet {
             keyedDefaults.set(shouldSaveLocation, forKey: .shouldSaveLocation)
@@ -55,18 +63,20 @@ class ApplicationModel: NSObject {
         }
     }
 
+    // TODO: @MainActor
     var document = Document() {
         didSet {
             documentChanges.send(document)
         }
     }
 
-    var tags: [String] = []
-
     private var cancellables = Set<AnyCancellable>()
     private var locationRequests: [(Result<LocationDetails, Error>) -> Void] = []
+    private var library: Library?
 
     private let documentChanges = PassthroughSubject<Document?, Never>()
+    private let rootURLChanges = PassthroughSubject<URL?, Never>()
+
     private let keyedDefaults = KeyedDefaults<SettingsKey>()
     private let locationManager = CLLocationManager()
 
@@ -74,6 +84,7 @@ class ApplicationModel: NSObject {
         rootURL = try? keyedDefaults.securityScopedURL(forKey: .rootURL)
         shouldSaveLocation = keyedDefaults.bool(forKey: .shouldSaveLocation, default: false)
         super.init()
+        rootURLChanges.send(rootURL)
         locationManager.delegate = self
         locationManager.pausesLocationUpdatesAutomatically = false
         self.start()
@@ -99,20 +110,22 @@ class ApplicationModel: NSObject {
     }
 
     private func start() {
-        documentChanges
+        rootURLChanges
+            .prepend(rootURL)
             .compactMap { $0 }
+            .combineLatest(documentChanges
+                .compactMap { $0 })
             .debounce(for: 0.2, scheduler: DispatchQueue.main)
-            .sink { document in
-                guard let url = self.rootURL else {
-                    return
-                }
+            .sink { rootURL, document in
                 do {
-                    try document.sync(to: url)
+                    try document.sync(to: rootURL)
                 } catch {
-                    print("Failed to save file with error \(error).")
+                    print("Failed to save file with error '\(error)'.")
                 }
             }
             .store(in: &cancellables)
+
+        reloadLibrary()
     }
 
     func new() {
@@ -128,9 +141,21 @@ class ApplicationModel: NSObject {
             case .success(let location):
                 self.document.location = location
             case .failure(let error):
-                print("Failed to fetch location with error \(error)")
+                print("Failed to fetch location with error '\(error)'.")
             }
         }
+    }
+
+    // Create and start a library instance, stopping any previous library if necessary.
+    // This is intended to be called when the rootURL changes. If rootURL is nil, no new library will be created.
+    func reloadLibrary() {
+        library?.stop()
+        library = nil
+        guard let rootURL else {
+            return
+        }
+        library = Library(rootURL: rootURL)
+        library?.start()
     }
 
     func setRootURL() {
@@ -188,7 +213,7 @@ extension ApplicationModel: CLLocationManagerDelegate {
             return LocationDetails(location: location,
                                    placemark: try await geocoder.reverseGeocodeLocation(location).first)
         } catch {
-            print("Failed to geocode location with error \(error).")
+            print("Failed to geocode location with error '\(error)'.")
             return LocationDetails(location: location)
         }
     }
@@ -217,22 +242,22 @@ extension ApplicationModel: CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
-        print("Location manager did fail with error \(error).")
+        print("Location manager did fail with error '\(error)'.")
         resolveRequests(.failure(error))
     }
 
     func locationManager(_ manager: CLLocationManager, 
                          monitoringDidFailFor region: CLRegion?, withError error: any Error) {
-        print("Location manager monitoring did fail with error \(error).")
+        print("Location manager monitoring did fail with error '\(error)'.")
         resolveRequests(.failure(error))
     }
 
     func locationManagerDidPauseLocationUpdates(_ manager: CLLocationManager) {
-        print("Did pause location updates!")
+        print("Did pause location updates.")
     }
 
     func locationManagerDidResumeLocationUpdates(_ manager: CLLocationManager) {
-        print("Did resume location updates!")
+        print("Did resume location updates.")
     }
 
 }

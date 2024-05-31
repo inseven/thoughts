@@ -56,9 +56,13 @@ struct ComposeView: View {
                 .edgesIgnoringSafeArea(.all)
                 .focused($focus, equals: .text)
             Divider()
-            TagField("Add tags...", tokens: $applicationModel.document.tags)
-                .focused($focus, equals: .tags)
-                .padding()
+            TagField("Add tags...", tokens: $applicationModel.document.tags) { candidate, tags in
+                let currentTags = Set(tags)
+                return applicationModel.tags
+                    .filter { !currentTags.contains($0) && $0.starts(with: candidate) }
+            }
+            .focused($focus, equals: .tags)
+            .padding()
         }
         .onAppear {
             // Unfortunately the `defaultFocus` modifier doesn't work out of the box with `NSViewRepresentable` views
