@@ -37,6 +37,16 @@ struct LocationDetails: Codable {
     var name: String?
     var locality: String?
 
+    init(latitude: CLLocationDegrees,
+         longitude: CLLocationDegrees,
+         name: String? = nil,
+         locality: String? = nil) {
+        self.latitude = latitude
+        self.longitude = longitude
+        self.name = name
+        self.locality = locality
+    }
+
     init(location: CLLocation, placemark: CLPlacemark? = nil) {
         self.latitude = location.coordinate.latitude
         self.longitude = location.coordinate.longitude
