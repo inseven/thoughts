@@ -33,8 +33,8 @@ class ApplicationModel: NSObject {
         case shouldSaveLocation
     }
 
-    @MainActor var tags: Set<String> {
-        return library?.tags ?? []
+    @MainActor var tags: Trie {
+        return library?.tags ?? Trie()
     }
 
     @MainActor var rootURL: URL? {
