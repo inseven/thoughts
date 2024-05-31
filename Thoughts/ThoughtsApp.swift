@@ -48,6 +48,14 @@ struct ThoughtsApp: App {
         } label: {
             Image(systemName: "text.justify.left")
         }
+        .commands {
+            CommandMenu("Edit") {
+                Button("Toggle Focus") {
+                    applicationModel.toggleFocus()
+                }
+                .keyboardShortcut("t")
+            }
+        }
 
         ComposeWindow()
             .environment(applicationModel)

@@ -67,6 +67,8 @@ class ApplicationModel: NSObject {
         }
     }
 
+    let toggleFocusPublisher = PassthroughSubject<Void, Never>()
+
     private var cancellables = Set<AnyCancellable>()
     private var locationRequests: [(Result<LocationDetails, Error>) -> Void] = []
     private var library: Library?
@@ -85,25 +87,6 @@ class ApplicationModel: NSObject {
         locationManager.delegate = self
         locationManager.pausesLocationUpdatesAutomatically = false
         self.start()
-
-        Task {
-            guard let rootURL else {
-                return
-            }
-            let fileManager = FileManager.default
-            guard let enumerator = fileManager.enumerator(at: rootURL,
-                                                          includingPropertiesForKeys: [.nameKey, .isDirectoryKey],
-                                                          options: .skipsSubdirectoryDescendants) else {
-                return
-            }
-            for case let url as URL in enumerator {
-                let isDirectory = try url.resourceValues(forKeys: [.isDirectoryKey]).isDirectory!
-                guard !isDirectory else {
-                    continue
-                }
-                print(url)
-            }
-        }
     }
 
     @MainActor private func start() {
@@ -130,6 +113,10 @@ class ApplicationModel: NSObject {
         document = Document()
         updateUserLocation()
         NSWorkspace.shared.open(.compose)
+    }
+
+    @MainActor func toggleFocus() {
+        toggleFocusPublisher.send(())
     }
 
     @MainActor func updateUserLocation() {
