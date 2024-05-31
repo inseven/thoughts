@@ -34,7 +34,7 @@ struct ContentView: View {
 
     var applicationModel: ApplicationModel
 
-    var systemImage: String {
+    @MainActor var systemImage: String {
         if applicationModel.shouldSaveLocation {
             if applicationModel.document.location != nil {
                 return "location.fill"

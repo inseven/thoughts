@@ -49,8 +49,7 @@ class ApplicationModel: NSObject {
         }
     }
 
-    // TODO: @MainActor
-    var shouldSaveLocation: Bool {
+    @MainActor var shouldSaveLocation: Bool {
         didSet {
             keyedDefaults.set(shouldSaveLocation, forKey: .shouldSaveLocation)
             if shouldSaveLocation {
@@ -127,14 +126,14 @@ class ApplicationModel: NSObject {
         reloadLibrary()
     }
 
-    func new() {
+    @MainActor func new() {
         dispatchPrecondition(condition: .onQueue(.main))
         document = Document()
         updateUserLocation()
         NSWorkspace.shared.open(.compose)
     }
 
-    func updateUserLocation() {
+    @MainActor func updateUserLocation() {
         requestUserLocation { result in
             switch result {
             case .success(let location):
@@ -175,7 +174,7 @@ class ApplicationModel: NSObject {
 
 extension ApplicationModel: CLLocationManagerDelegate {
 
-    func requestUserLocation(completion: @escaping (Result<LocationDetails, Error>) -> Void) {
+    @MainActor func requestUserLocation(completion: @escaping (Result<LocationDetails, Error>) -> Void) {
         guard CLLocationManager.locationServicesEnabled() else {
             completion(.failure(ThoughtsError.locationServicesDisabled))
             return
