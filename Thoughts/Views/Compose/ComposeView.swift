@@ -80,14 +80,6 @@ struct ComposeView: View {
         .background(.background)
         .navigationTitle(applicationModel.document.date.formatted(date: .complete, time: .standard))
         .navigationSubtitle(applicationModel.document.location?.summary ?? "")
-        .toolbar {
-            if applicationModel.shouldSaveLocation && applicationModel.document.location == nil {
-                ToolbarItem(placement: .navigation) {
-                    ProgressView()
-                        .controlSize(.small)
-                }
-            }
-        }
         .onOpenURL { url in
             switch url {
             case .compose:

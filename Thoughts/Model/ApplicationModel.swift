@@ -33,6 +33,8 @@ class ApplicationModel: NSObject {
         case shouldSaveLocation
     }
 
+    var bounce: Int = 1
+
     @MainActor var tags: Trie {
         return library?.tags ?? Trie()
     }
@@ -128,6 +130,11 @@ class ApplicationModel: NSObject {
         if rootURL == nil {
             new()
         }
+
+        let window = NSIntroductionWindow(applicationModel: self)
+        window.setContentSize(NSSize(width: 600, height: 600))  // TODO: We could get this from the content view?
+        window.center()
+        window.makeKeyAndOrderFront(nil)
     }
 
     @MainActor func new() {
@@ -182,7 +189,7 @@ class ApplicationModel: NSObject {
         library?.start()
     }
 
-    @MainActor func setRootURL() {
+    @MainActor func setRootURL() -> Bool {
         dispatchPrecondition(condition: .onQueue(.main))
         let openPanel = NSOpenPanel()
         openPanel.canChooseFiles = false
@@ -190,10 +197,11 @@ class ApplicationModel: NSObject {
         openPanel.canCreateDirectories = true
         guard openPanel.runModal() ==  NSApplication.ModalResponse.OK,
               let url = openPanel.url else {
-            return
+            return false
         }
         rootURL = url
         document = Document()
+        return true
     }
 
 }

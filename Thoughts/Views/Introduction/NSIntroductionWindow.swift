@@ -19,39 +19,16 @@
 // SOFTWARE.
 
 import SwiftUI
-import UniformTypeIdentifiers
 
-import Diligence
-import FSEventsWrapper
-import Interact
+class NSIntroductionWindow: NSWindow {
 
-extension URL {
-
-    static let about = URL(string: "x-thoughts://about")!
-    static let compose = URL(string: "x-thoughts://compose")!
-    static let intro = URL(string: "x-thoughts://intro")!
-    static let settings = URL(string: "x-thoughts://settings")!
-
-    var contentModificationDate: Date? {
-        get throws {
-            return try resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate
-        }
-    }
-
-    var contentType: UTType? {
-        get throws {
-            return try resourceValues(forKeys: [.contentTypeKey]).contentType
-        }
-    }
-
-    var isDirectory: Bool? {
-        get throws {
-            return try resourceValues(forKeys: [.isDirectoryKey]).isDirectory
-        }
-    }
-
-    init(filePath: String, itemType: FSEvent.ItemType) {
-        self.init(filePath: filePath, directoryHint: itemType == .dir ? .isDirectory : .notDirectory)
+    convenience init(applicationModel: ApplicationModel) {
+        self.init(contentViewController: NSHostingController(rootView: IntroductionView(applicationModel: applicationModel)))
+        self.title = "Welcome to Thoughts"
+        self.titleVisibility = .hidden
+        self.titlebarAppearsTransparent = true
+        self.styleMask.remove([.miniaturizable, .closable, .resizable, .borderless, .fullSizeContentView])
+        self.isMovableByWindowBackground = true
     }
 
 }

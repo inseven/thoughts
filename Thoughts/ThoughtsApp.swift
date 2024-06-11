@@ -19,15 +19,36 @@
 // SOFTWARE.
 
 import SwiftUI
+import TipKit
 
 import Diligence
 import HotKey
 import Interact
 
+struct FavoriteLandmarkTip: Tip {
+    var title: Text {
+        Text("Save as a Favorite")
+    }
+
+
+    var message: Text? {
+        Text("Your favorite landmarks always appear at the top of the list.")
+    }
+
+
+    var image: Image? {
+        Image(systemName: "star")
+    }
+}
+
 @main
 struct ThoughtsApp: App {
 
     static let title = "Thoughts Support (\(Bundle.main.version ?? "Unknown Version"))"
+
+    @State var foo: Int = 1
+
+    var favoriteLandmarkTip = FavoriteLandmarkTip()
 
     var applicationModel: ApplicationModel
     let hotKey: HotKey
@@ -39,6 +60,10 @@ struct ThoughtsApp: App {
        })
         self.applicationModel = applicationModel
         self.hotKey = hotKey
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            print("BouncyBouncy")
+            applicationModel.bounce += 1
+        }
     }
 
     var body: some Scene {
@@ -47,6 +72,7 @@ struct ThoughtsApp: App {
             MainMenu(applicationModel: applicationModel)
         } label: {
             Image(systemName: "text.justify.left")
+                .symbolEffect(.bounce, value: applicationModel.bounce)
         }
         .commands {
             ThoughtsCommands(applicationModel: applicationModel)
@@ -71,8 +97,10 @@ struct ThoughtsApp: App {
                 Credit("Jason Morley", url: URL(string: "https://jbmorley.co.uk"))
             }
             Acknowledgements("Thanks") {
+                Credit("Joanne Wong")
                 Credit("Jon Mountjoy")
                 Credit("Lukas Fittl")
+                Credit("Mike Rhodes")
                 Credit("Pavlos Vinieratos")
                 Credit("Sarah Barbour")
             }
@@ -80,6 +108,11 @@ struct ThoughtsApp: App {
             (.thoughts)
         }
         .handlesExternalEvents(matching: [.about])
+
+        Window("Welcome", id: "welcome") {
+            IntroductionView(applicationModel: applicationModel)
+        }
+        .handlesExternalEvents(matching: [.intro])
 
     }
 }

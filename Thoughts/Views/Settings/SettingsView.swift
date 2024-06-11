@@ -19,39 +19,36 @@
 // SOFTWARE.
 
 import SwiftUI
-import UniformTypeIdentifiers
 
-import Diligence
-import FSEventsWrapper
 import Interact
 
-extension URL {
+struct SettingsView: View {
 
-    static let about = URL(string: "x-thoughts://about")!
-    static let compose = URL(string: "x-thoughts://compose")!
-    static let intro = URL(string: "x-thoughts://intro")!
-    static let settings = URL(string: "x-thoughts://settings")!
+    var applicationModel: ApplicationModel
 
-    var contentModificationDate: Date? {
-        get throws {
-            return try resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate
-        }
+    @ObservedObject var application = Application.shared
+
+    init(applicationModel: ApplicationModel) {
+        self.applicationModel = applicationModel
     }
 
-    var contentType: UTType? {
-        get throws {
-            return try resourceValues(forKeys: [.contentTypeKey]).contentType
-        }
-    }
+    var body: some View {
+        @Bindable var applicationModel = applicationModel
+        Form {
+            Section {
+                Toggle("Open at Login", isOn: $application.openAtLogin)
+                Button("Set Notes Folder") {
+                    _ = applicationModel.setRootURL()
+                }
+            }
+#if DEBUG
+            Section {
+                Toggle("Use Demo Data", isOn: $applicationModel.useDemoData)
+            }
+#endif
 
-    var isDirectory: Bool? {
-        get throws {
-            return try resourceValues(forKeys: [.isDirectoryKey]).isDirectory
         }
-    }
-
-    init(filePath: String, itemType: FSEvent.ItemType) {
-        self.init(filePath: filePath, directoryHint: itemType == .dir ? .isDirectory : .notDirectory)
+        .frame(width: 400, height: 400)
     }
 
 }
