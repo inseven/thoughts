@@ -83,6 +83,10 @@ class ApplicationModel: NSObject {
         }
     }
 
+    @MainActor var didShowIntroduction: Bool {
+        return introductionVersion == Self.introductionVersion
+    }
+
     let toggleFocusPublisher = PassthroughSubject<Void, Never>()
 
     private var cancellables = Set<AnyCancellable>()
@@ -134,7 +138,7 @@ class ApplicationModel: NSObject {
 
         reloadLibrary()
 
-        if introductionVersion != Self.introductionVersion {
+        if !didShowIntroduction {
             showIntroduction()
         }
     }

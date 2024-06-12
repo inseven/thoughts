@@ -33,6 +33,7 @@ struct MainMenu: View {
             applicationModel.new()
         }
         .keyboardShortcut("t", modifiers: [.command, .option, .control])
+        .disabled(!applicationModel.didShowIntroduction)
         Divider()
         Button {
             openURL(.about)
@@ -45,6 +46,7 @@ struct MainMenu: View {
             Text("Settings...")
         }
         .keyboardShortcut(",")
+        .disabled(!applicationModel.didShowIntroduction)
         Divider()
 #if DEBUG
         Button {
