@@ -11,7 +11,8 @@
 		D80E08A12B675AAC0023DD4F /* ComposeWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E08A02B675AAC0023DD4F /* ComposeWindow.swift */; };
 		D80E08A62B6761370023DD4F /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E08A52B6761370023DD4F /* Document.swift */; };
 		D828CFF82BEECDDF00AC8E8B /* highlightedtexteditor-license in Resources */ = {isa = PBXBuildFile; fileRef = D86C389D2BEECDAA00248CD0 /* highlightedtexteditor-license */; };
-		D83943E02C18FDDF00EB902E /* KeyboardShortcutPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83943DF2C18FDDF00EB902E /* KeyboardShortcutPreview.swift */; };
+		D82ED7912C1924B100BC0BA8 /* PreviewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82ED7902C1924B100BC0BA8 /* PreviewModifier.swift */; };
+		D83943E02C18FDDF00EB902E /* KeyboardPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83943DF2C18FDDF00EB902E /* KeyboardPreview.swift */; };
 		D83943E62C191ED900EB902E /* SymbolHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83943E52C191ED900EB902E /* SymbolHeader.swift */; };
 		D83943E82C191F3900EB902E /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83943E72C191F3900EB902E /* Page.swift */; };
 		D83943EA2C191FA900EB902E /* Pager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83943E92C191FA900EB902E /* Pager.swift */; };
@@ -92,7 +93,8 @@
 		D80E089E2B674E900023DD4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D80E08A02B675AAC0023DD4F /* ComposeWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeWindow.swift; sourceTree = "<group>"; };
 		D80E08A52B6761370023DD4F /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
-		D83943DF2C18FDDF00EB902E /* KeyboardShortcutPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcutPreview.swift; sourceTree = "<group>"; };
+		D82ED7902C1924B100BC0BA8 /* PreviewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewModifier.swift; sourceTree = "<group>"; };
+		D83943DF2C18FDDF00EB902E /* KeyboardPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardPreview.swift; sourceTree = "<group>"; };
 		D83943E52C191ED900EB902E /* SymbolHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolHeader.swift; sourceTree = "<group>"; };
 		D83943E72C191F3900EB902E /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		D83943E92C191FA900EB902E /* Pager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pager.swift; sourceTree = "<group>"; };
@@ -220,13 +222,14 @@
 			children = (
 				D83943ED2C1921F100EB902E /* FinderPreview.swift */,
 				D8CEE5092C0A64FF00D2025A /* IntroductionView.swift */,
-				D83943DF2C18FDDF00EB902E /* KeyboardShortcutPreview.swift */,
+				D83943DF2C18FDDF00EB902E /* KeyboardPreview.swift */,
 				D83943EB2C1920F200EB902E /* LocationPreview.swift */,
 				D8CEE50D2C0A676900D2025A /* MarketingView.swift */,
 				D8B1466C2C1290200063E81F /* MenuPreview.swift */,
 				D8CEE50B2C0A66FD00D2025A /* NSIntroductionWindow.swift */,
 				D83943E72C191F3900EB902E /* Page.swift */,
 				D83943E92C191FA900EB902E /* Pager.swift */,
+				D82ED7902C1924B100BC0BA8 /* PreviewModifier.swift */,
 				D83943E52C191ED900EB902E /* SymbolHeader.swift */,
 			);
 			path = Introduction;
@@ -552,7 +555,7 @@
 				D862558D2C0925B40044BD37 /* Details.swift in Sources */,
 				D86255842C091CF80044BD37 /* Library.swift in Sources */,
 				D86255862C09248D0044BD37 /* DirectoryScanner.swift in Sources */,
-				D83943E02C18FDDF00EB902E /* KeyboardShortcutPreview.swift in Sources */,
+				D83943E02C18FDDF00EB902E /* KeyboardPreview.swift in Sources */,
 				D892249E2BD735BE00DA0932 /* ThoughtsError.swift in Sources */,
 				D850C2D42B69D85400338546 /* KeyedDefaults.swift in Sources */,
 				D8E27EA62BD9EB61001EEE98 /* Licensable.swift in Sources */,
@@ -565,6 +568,7 @@
 				D80E08A62B6761370023DD4F /* Document.swift in Sources */,
 				D8B1466D2C1290200063E81F /* MenuPreview.swift in Sources */,
 				D852AF022B6027CA00B77A3D /* ThoughtsApp.swift in Sources */,
+				D82ED7912C1924B100BC0BA8 /* PreviewModifier.swift in Sources */,
 				D83943EE2C1921F100EB902E /* FinderPreview.swift in Sources */,
 				D83943E62C191ED900EB902E /* SymbolHeader.swift in Sources */,
 				D80E08A12B675AAC0023DD4F /* ComposeWindow.swift in Sources */,

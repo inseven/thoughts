@@ -20,7 +20,7 @@
 
 import SwiftUI
 
-struct KeyboardShortcutPreview: View {
+struct KeyboardPreview: View {
 
     struct Key: View {
 
@@ -79,15 +79,11 @@ struct KeyboardShortcutPreview: View {
             Key("T")
         }
         .foregroundStyle(.white, .gray)
-        .frame(maxWidth: .infinity)
-        .frame(height: 160)
-        .padding()
-        .background(Color(NSColor.textBackgroundColor))
-        .cornerRadius(16)
+        .preview()
     }
 
 }
 
 #Preview {
-    KeyboardShortcutPreview()
+    KeyboardPreview()
 }

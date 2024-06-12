@@ -108,12 +108,8 @@ struct MenuPreview: View {
                 }
             }
         }
-        .frame(maxWidth: .infinity)
-        .frame(height: 160)
         .padding()
-        .background(Color(NSColor.textBackgroundColor))
-        .cornerRadius(16)
-        .font(.body)
+        .preview()
     }
 
 }

@@ -39,10 +39,7 @@ locality: "Hale'iwa"
         }
         .textSelection(.enabled)
         .monospaced()
-        .frame(maxWidth: .infinity)
-        .padding()
-        .background(Color(NSColor.textBackgroundColor))
-        .cornerRadius(8)
+        .preview()
     }
 
 }

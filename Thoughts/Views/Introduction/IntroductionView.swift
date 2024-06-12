@@ -145,7 +145,7 @@ struct IntroductionView: View {
                         AnyPage {
                             MarketingView("Keyboard First", systemImage: "keyboard") {
                                 Text("Use global shortcuts to write and edit notes without taking your hands off the keyboard.")
-                                KeyboardShortcutPreview()
+                                KeyboardPreview()
                             }
                         } actions: {
                             Button("Start Writing") {

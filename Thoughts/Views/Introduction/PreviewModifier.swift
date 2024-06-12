@@ -20,45 +20,31 @@
 
 import SwiftUI
 
-import Interact
+struct PreviewModifier: ViewModifier {
 
-struct FinderPreview: View {
-
-    struct FinderRow: View {
-
-        let title: String
-
-        init(_ title: String) {
-            self.title = title
-        }
-
-        var body: some View {
-            HStack(spacing: 4) {
-                Image(nsImage: NSWorkspace.shared.icon(for: .markdown))
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                    .frame(width: 16, height: 16)
-                Text(title)
-                Spacer()
-            }
-            .frame(maxWidth: .infinity)
-            .padding(2)
-            .frame(maxWidth: 320)
-        }
-
+    struct LayoutMetrics {
+        static let minimumHeight = 160.0
+        static let cornerRadius = 16.0
     }
 
-    var body: some View {
-        VStack(spacing: 1) {
-            FinderRow("2024-05-31-06-28-55.md")
-            FinderRow("2024-05-31-06-29-11.md")
-                .background(Color(NSColor.unemphasizedSelectedTextBackgroundColor)
-                    .cornerRadius(4))
-            FinderRow("2024-05-31-06-57-27.md")
-            FinderRow("2024-06-06-01-08-33.md")
+    func body(content: Content) -> some View {
+        VStack {
+            content
+                .font(.body)
+                .frame(maxWidth: .infinity)
+                .frame(minHeight: LayoutMetrics.minimumHeight)
+                .background(Color(NSColor.textBackgroundColor))
+                .cornerRadius(LayoutMetrics.cornerRadius)
             Spacer()
         }
-        .preview()
+    }
+
+}
+
+extension View {
+
+    func preview() -> some View {
+        return modifier(PreviewModifier())
     }
 
 }
