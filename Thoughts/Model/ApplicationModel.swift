@@ -166,7 +166,7 @@ class ApplicationModel: NSObject {
         toggleFocusPublisher.send(())
     }
 
-    @MainActor func updateUserLocation() {
+    @MainActor func updateUserLocation(completion: (() -> Void)? = nil) {
         requestUserLocation { result in
             switch result {
             case .success(let location):
@@ -174,6 +174,7 @@ class ApplicationModel: NSObject {
             case .failure(let error):
                 print("Failed to fetch location with error '\(error)'.")
             }
+            completion?()
         }
     }
 

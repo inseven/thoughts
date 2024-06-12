@@ -101,11 +101,12 @@ struct IntroductionView: View {
                             }
                             .keyboardShortcut(.cancelAction)
                             Button("Allow Location Access") {
-
-                                // TODO: Request location.
-
-                                withAnimation {
-                                    self.page = .open
+                                applicationModel.updateUserLocation {
+                                    DispatchQueue.main.async {
+                                        withAnimation {
+                                            self.page = .open
+                                        }
+                                    }
                                 }
                             }
                             .keyboardShortcut(.defaultAction)
