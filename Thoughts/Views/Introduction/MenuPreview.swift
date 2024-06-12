@@ -53,6 +53,12 @@ struct MenuPreview: View {
 
     }
 
+    var time: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEE MMM d h:mma"
+        return formatter.string(from: Date())
+    }
+
     var body: some View {
 
         Grid(horizontalSpacing: 0, verticalSpacing: 0) {
@@ -73,7 +79,7 @@ struct MenuPreview: View {
                 .padding(.horizontal, 4)
                 HStack {
                     Spacer()
-                    Text(Date.now, format: .dateTime)
+                    Text(time)
                         .foregroundStyle(.tertiary)
                 }
                 .padding(.horizontal, 4)

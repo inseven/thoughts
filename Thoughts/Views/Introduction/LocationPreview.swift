@@ -29,10 +29,10 @@ struct LocationPreview: View {
             Text("""
 ---
 location:
-latitude: 2.15908069616624e+1
-longitude: -1.58103050228585e+2
-name: "Island Vintage Coffee"
-locality: "Hale'iwa"
+    latitude: 2.15908069616624e+1
+    longitude: -1.58103050228585e+2
+    name: "Island Vintage Coffee"
+    locality: "Hale'iwa"
 ---
 """)
             .multilineTextAlignment(.leading)
