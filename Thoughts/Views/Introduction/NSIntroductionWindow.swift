@@ -20,38 +20,15 @@
 
 import SwiftUI
 
-import Diligence
+class NSIntroductionWindow: NSWindow {
 
-struct MainMenu: View {
-
-    var applicationModel: ApplicationModel
-
-    @Environment(\.openURL) var openURL
-
-    var body: some View {
-        Button("New...") {
-            applicationModel.new()
-        }
-        .keyboardShortcut("t", modifiers: [.command, .option, .control])
-        Divider()
-        Button {
-            openURL(.about)
-        } label: {
-            Text("About...")
-        }
-        Button {
-            openURL(.settings)
-        } label: {
-            Text("Settings...")
-        }
-        .keyboardShortcut(",")
-        Divider()
-        Button {
-            NSApplication.shared.terminate(nil)
-        } label: {
-            Text("Quit")
-        }
-        .keyboardShortcut("q")
+    convenience init(applicationModel: ApplicationModel) {
+        self.init(contentViewController: NSHostingController(rootView: IntroductionView(applicationModel: applicationModel)))
+        self.title = "Welcome to Thoughts"
+        self.titleVisibility = .hidden
+        self.titlebarAppearsTransparent = true
+        self.styleMask.remove([.miniaturizable, .closable, .resizable, .borderless, .fullSizeContentView])
+        self.isMovableByWindowBackground = true
     }
 
 }

@@ -18,12 +18,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreLocation
-import Foundation
+import SwiftUI
 
-enum ThoughtsError: Error {
-    case accessError
-    case encodingError
-    case locationServicesDisabled
-    case userLocationDisabled
+import Interact
+
+struct LocationPreview: View {
+
+    var body: some View {
+        HStack {
+            Text("""
+---
+location:
+    latitude: 2.15908069616624e+1
+    longitude: -1.58103050228585e+2
+    name: "Island Vintage Coffee"
+    locality: "Hale'iwa"
+---
+""")
+            .multilineTextAlignment(.leading)
+        }
+        .textSelection(.enabled)
+        .monospaced()
+        .preview()
+    }
+
 }

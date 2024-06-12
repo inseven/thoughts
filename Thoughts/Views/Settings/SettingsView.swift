@@ -18,12 +18,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreLocation
-import Foundation
+import SwiftUI
 
-enum ThoughtsError: Error {
-    case accessError
-    case encodingError
-    case locationServicesDisabled
-    case userLocationDisabled
+import Interact
+
+struct SettingsView: View {
+
+    var applicationModel: ApplicationModel
+
+    @ObservedObject var application = Application.shared
+
+    init(applicationModel: ApplicationModel) {
+        self.applicationModel = applicationModel
+    }
+
+    var body: some View {
+        @Bindable var applicationModel = applicationModel
+        Form {
+            Section {
+                Toggle("Open at Login", isOn: $application.openAtLogin)
+                Button("Set Notes Folder") {
+                    _ = applicationModel.setRootURL()
+                }
+            }
+#if DEBUG
+            Section {
+                Toggle("Use Demo Data", isOn: $applicationModel.useDemoData)
+            }
+#endif
+
+        }
+        .frame(width: 400, height: 400)
+    }
+
 }

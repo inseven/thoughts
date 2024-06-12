@@ -31,7 +31,10 @@ class ApplicationModel: NSObject {
     enum SettingsKey: String {
         case rootURL
         case shouldSaveLocation
+        case introductionVersion
     }
+
+    static let introductionVersion = 1
 
     @MainActor var tags: Trie {
         return library?.tags ?? Trie()
@@ -61,6 +64,12 @@ class ApplicationModel: NSObject {
         }
     }
 
+    @MainActor var introductionVersion: Int {
+        didSet {
+            keyedDefaults.set(introductionVersion, forKey: .introductionVersion)
+        }
+    }
+
     @MainActor var document = Document() {
         didSet {
             documentChanges.send(document)
@@ -72,6 +81,10 @@ class ApplicationModel: NSObject {
             useDemoDataChanges.send(useDemoData)
             new()
         }
+    }
+
+    @MainActor var didShowIntroduction: Bool {
+        return introductionVersion == Self.introductionVersion
     }
 
     let toggleFocusPublisher = PassthroughSubject<Void, Never>()
@@ -90,6 +103,7 @@ class ApplicationModel: NSObject {
     @MainActor override init() {
         rootURL = try? keyedDefaults.securityScopedURL(forKey: .rootURL)
         shouldSaveLocation = keyedDefaults.bool(forKey: .shouldSaveLocation, default: false)
+        introductionVersion = keyedDefaults.integer(forKey: .introductionVersion, default: 0)
         super.init()
         rootURLChanges.send(rootURL)
         locationManager.delegate = self
@@ -124,13 +138,21 @@ class ApplicationModel: NSObject {
 
         reloadLibrary()
 
-        // Show the compose (configure) window if the root URL is empty.
-        if rootURL == nil {
-            new()
+        if !didShowIntroduction {
+            showIntroduction()
         }
     }
 
+    @MainActor func showIntroduction() {
+        let window = NSIntroductionWindow(applicationModel: self)
+        window.center()
+        window.makeKeyAndOrderFront(nil)
+    }
+
     @MainActor func new() {
+        guard didShowIntroduction else {
+            return
+        }
         if useDemoData {
             let location = LocationDetails(latitude: 34.2133,
                                            longitude: 135.5853,
@@ -143,7 +165,7 @@ class ApplicationModel: NSObject {
 
     It’s for recording _ephemeral_ notes. For when you just want to get something down and out of your head, happy in the knowledge that it’s recorded _somewhere_.
 
-    Thoughts doesn’t offer any viewing functionality--it’s all about file-and-forget. It saves notes in **Markdown** and **Frontmatter** so it pairs perfectly with tools like [Obsidian](https://obsidian.md) and static site builders like [Jekyll](https://jekyllrb.com), [Hugo](https://gohugo.io), and [InContext](https://incontext.app).
+    Thoughts doesn’t offer any viewing functionality---it’s all about file-and-forget. It saves notes in **Markdown** and **Frontmatter** so it pairs perfectly with tools like [Obsidian](https://obsidian.md) and static site builders like [Jekyll](https://jekyllrb.com), [Hugo](https://gohugo.io), and [InContext](https://incontext.app).
     """
             document.tags = ["software", "apple", "mac", "markdown", "journaling"]
             document.location = location
@@ -159,7 +181,7 @@ class ApplicationModel: NSObject {
         toggleFocusPublisher.send(())
     }
 
-    @MainActor func updateUserLocation() {
+    @MainActor func updateUserLocation(completion: (() -> Void)? = nil) {
         requestUserLocation { result in
             switch result {
             case .success(let location):
@@ -167,6 +189,7 @@ class ApplicationModel: NSObject {
             case .failure(let error):
                 print("Failed to fetch location with error '\(error)'.")
             }
+            completion?()
         }
     }
 
@@ -182,7 +205,7 @@ class ApplicationModel: NSObject {
         library?.start()
     }
 
-    @MainActor func setRootURL() {
+    @MainActor func setRootURL() -> Bool {
         dispatchPrecondition(condition: .onQueue(.main))
         let openPanel = NSOpenPanel()
         openPanel.canChooseFiles = false
@@ -190,10 +213,11 @@ class ApplicationModel: NSObject {
         openPanel.canCreateDirectories = true
         guard openPanel.runModal() ==  NSApplication.ModalResponse.OK,
               let url = openPanel.url else {
-            return
+            return false
         }
         rootURL = url
         document = Document()
+        return true
     }
 
 }
@@ -206,6 +230,7 @@ extension ApplicationModel: CLLocationManagerDelegate {
             return
         }
         guard shouldSaveLocation else {
+            completion(.failure(ThoughtsError.userLocationDisabled))
             return
         }
         locationRequests.append(completion)

@@ -18,12 +18,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreLocation
-import Foundation
+import SwiftUI
 
-enum ThoughtsError: Error {
-    case accessError
-    case encodingError
-    case locationServicesDisabled
-    case userLocationDisabled
+struct SymbolHeader: View {
+
+    struct LayoutMetrics {
+        static let size = 72.0
+    }
+
+    let systemImage: String
+
+    var body: some View {
+        Image(systemName: systemImage)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: LayoutMetrics.size, height: LayoutMetrics.size)
+            .foregroundStyle(.tint)
+    }
+
 }

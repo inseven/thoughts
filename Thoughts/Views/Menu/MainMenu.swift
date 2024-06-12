@@ -18,12 +18,50 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreLocation
-import Foundation
+import SwiftUI
 
-enum ThoughtsError: Error {
-    case accessError
-    case encodingError
-    case locationServicesDisabled
-    case userLocationDisabled
+import Diligence
+
+struct MainMenu: View {
+
+    var applicationModel: ApplicationModel
+
+    @Environment(\.openURL) var openURL
+
+    var body: some View {
+        Button("New...") {
+            applicationModel.new()
+        }
+        .keyboardShortcut("t", modifiers: [.command, .option, .control])
+        .disabled(!applicationModel.didShowIntroduction)
+        Divider()
+        Button {
+            openURL(.about)
+        } label: {
+            Text("About...")
+        }
+        Button {
+            openURL(.settings)
+        } label: {
+            Text("Settings...")
+        }
+        .keyboardShortcut(",")
+        .disabled(!applicationModel.didShowIntroduction)
+        Divider()
+#if DEBUG
+        Button {
+            applicationModel.showIntroduction()
+        } label: {
+            Text("Introduction...")
+        }
+        Divider()
+#endif
+        Button {
+            NSApplication.shared.terminate(nil)
+        } label: {
+            Text("Quit")
+        }
+        .keyboardShortcut("q")
+    }
+
 }

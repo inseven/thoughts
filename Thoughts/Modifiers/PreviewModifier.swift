@@ -18,12 +18,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreLocation
-import Foundation
+import SwiftUI
 
-enum ThoughtsError: Error {
-    case accessError
-    case encodingError
-    case locationServicesDisabled
-    case userLocationDisabled
+struct PreviewModifier: ViewModifier {
+
+    struct LayoutMetrics {
+        static let minimumHeight = 160.0
+        static let cornerRadius = 16.0
+    }
+
+    func body(content: Content) -> some View {
+        VStack {
+            content
+                .font(.body)
+                .frame(maxWidth: .infinity)
+                .frame(minHeight: LayoutMetrics.minimumHeight)
+                .background(Color(NSColor.textBackgroundColor))
+                .cornerRadius(LayoutMetrics.cornerRadius)
+            Spacer()
+        }
+    }
+
+}
+
+extension View {
+
+    func preview() -> some View {
+        return modifier(PreviewModifier())
+    }
+
 }

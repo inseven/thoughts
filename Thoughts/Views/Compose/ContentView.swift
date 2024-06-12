@@ -56,7 +56,7 @@ struct ContentView: View {
                 } description: {
                     Text("Select a folder to store your notes.")
                     Button {
-                        applicationModel.setRootURL()
+                        _ = applicationModel.setRootURL()
                     } label: {
                         Text("Set Notes Folder")
                     }
@@ -70,7 +70,8 @@ struct ContentView: View {
                 } label: {
                     let hasLocation = applicationModel.document.location != nil
                     Label("Use Location", systemImage: systemImage)
-                        .foregroundColor(hasLocation ? .purple : nil)
+                        .foregroundColor(hasLocation ? .accent : nil)
+                        .symbolEffect(.pulse, isActive: applicationModel.shouldSaveLocation && applicationModel.document.location == nil)
                 }
                 .disabled(applicationModel.rootURL == nil)
             }

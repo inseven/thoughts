@@ -18,12 +18,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreLocation
-import Foundation
+import SwiftUI
 
-enum ThoughtsError: Error {
-    case accessError
-    case encodingError
-    case locationServicesDisabled
-    case userLocationDisabled
+struct SelectionModifier: ViewModifier {
+
+    let insets: EdgeInsets
+    let cornerRadius: CGFloat
+    let isSelected: Bool
+
+    func body(content: Content) -> some View {
+        if isSelected {
+            content
+                .foregroundStyle(.primary, .primary, .primary)
+                .padding(insets)
+                .background(RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(.secondary)
+                    .foregroundStyle(.tint))
+        } else {
+            content
+                .padding(insets)
+                .background(RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(.clear))
+        }
+    }
+
+}
+
+extension View {
+
+    func selection(insets: EdgeInsets, cornerRadius: CGFloat, isSelected: Bool = false) -> some View {
+        return modifier(SelectionModifier(insets: insets, cornerRadius: cornerRadius, isSelected: isSelected))
+    }
+
 }

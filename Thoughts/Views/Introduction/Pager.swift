@@ -18,12 +18,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreLocation
-import Foundation
+import SwiftUI
 
-enum ThoughtsError: Error {
-    case accessError
-    case encodingError
-    case locationServicesDisabled
-    case userLocationDisabled
+struct Pager<Item: Identifiable & Hashable>: View {
+
+    @Binding var item: Item
+
+    let content: (Item) -> Page
+
+    init(_ item: Binding<Item>, content: @escaping (Item) -> Page) {
+        self._item = item
+        self.content = content
+    }
+
+    var body: some View {
+        VStack(spacing: 0) {
+            content(item).content
+                .id(item)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding()
+                .transition(.push)
+            HStack {
+                Spacer()
+                content(item).actions
+                    .transition(.blurReplace())
+            }
+            .id(item)
+            .controlSize(.large)
+            .padding()
+            .frame(maxWidth: .infinity)
+        }
+    }
+
 }

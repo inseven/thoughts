@@ -18,12 +18,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreLocation
-import Foundation
+import SwiftUI
 
-enum ThoughtsError: Error {
-    case accessError
-    case encodingError
-    case locationServicesDisabled
-    case userLocationDisabled
+extension EdgeInsets {
+
+    init(horizontal: CGFloat, vertical: CGFloat) {
+        self.init(top: vertical, leading: horizontal, bottom: vertical, trailing: horizontal)
+    }
+
+    init(size: CGFloat) {
+        self.init(top: size, leading: size, bottom: size, trailing: size)
+    }
+
 }

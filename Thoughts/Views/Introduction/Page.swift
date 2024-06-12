@@ -18,12 +18,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreLocation
-import Foundation
+import SwiftUI
 
-enum ThoughtsError: Error {
-    case accessError
-    case encodingError
-    case locationServicesDisabled
-    case userLocationDisabled
+struct Page {
+
+    let content: AnyView
+    let actions: AnyView
+
+    init(@ViewBuilder content: () -> some View, @ViewBuilder actions: () -> some View) {
+        self.content = AnyView(content())
+        self.actions = AnyView(actions())
+    }
+
 }

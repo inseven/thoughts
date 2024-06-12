@@ -22,33 +22,20 @@ import SwiftUI
 
 import Interact
 
-struct SettingsView: View {
+extension AnyTransition {
 
-    var applicationModel: ApplicationModel
-
-    @ObservedObject var application = Application.shared
-
-    init(applicationModel: ApplicationModel) {
-        self.applicationModel = applicationModel
+    static var push: AnyTransition {
+        AnyTransition.asymmetric(
+            insertion: .move(edge: .trailing),
+            removal: .move(edge: .leading)
+        )
     }
 
-    var body: some View {
-        @Bindable var applicationModel = applicationModel
-        Form {
-            Section {
-                Toggle("Open at Login", isOn: $application.openAtLogin)
-                Button("Set Notes Folder") {
-                    applicationModel.setRootURL()
-                }
-            }
-#if DEBUG
-            Section {
-                Toggle("Use Demo Data", isOn: $applicationModel.useDemoData)
-            }
-#endif
-
-        }
-        .frame(width: 400, height: 400)
+    static var pop: AnyTransition {
+        AnyTransition.asymmetric(
+            insertion: .move(edge: .leading),
+            removal: .move(edge: .trailing)
+        )
     }
 
 }
