@@ -46,6 +46,14 @@ struct MainMenu: View {
         }
         .keyboardShortcut(",")
         Divider()
+#if DEBUG
+        Button {
+            applicationModel.showIntroduction()
+        } label: {
+            Text("Introduction...")
+        }
+        Divider()
+#endif
         Button {
             NSApplication.shared.terminate(nil)
         } label: {

@@ -83,10 +83,5 @@ struct ThoughtsApp: App {
         }
         .handlesExternalEvents(matching: [.about])
 
-        Window("Welcome", id: "welcome") {
-            IntroductionView(applicationModel: applicationModel)
-        }
-        .handlesExternalEvents(matching: [.intro])
-
     }
 }
