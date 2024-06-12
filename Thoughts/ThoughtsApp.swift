@@ -19,36 +19,15 @@
 // SOFTWARE.
 
 import SwiftUI
-import TipKit
 
 import Diligence
 import HotKey
 import Interact
 
-struct FavoriteLandmarkTip: Tip {
-    var title: Text {
-        Text("Save as a Favorite")
-    }
-
-
-    var message: Text? {
-        Text("Your favorite landmarks always appear at the top of the list.")
-    }
-
-
-    var image: Image? {
-        Image(systemName: "star")
-    }
-}
-
 @main
 struct ThoughtsApp: App {
 
     static let title = "Thoughts Support (\(Bundle.main.version ?? "Unknown Version"))"
-
-    @State var foo: Int = 1
-
-    var favoriteLandmarkTip = FavoriteLandmarkTip()
 
     var applicationModel: ApplicationModel
     let hotKey: HotKey
