@@ -20,38 +20,38 @@
 
 import SwiftUI
 
-struct FakeMenuRow: View {
+struct MenuPreview: View {
 
-    let label: String
-    let shortcut: String?
-    let isSelected: Bool
+    struct MenuItem: View {
 
-    init(_ label: String, shortcut: String? = nil, isSelected: Bool = false) {
-        self.label = label
-        self.shortcut = shortcut
-        self.isSelected = isSelected
-    }
+        let label: String
+        let shortcut: String?
+        let isSelected: Bool
 
-    var body: some View {
-        HStack {
-            HStack {
-                Text(label)
-                Spacer()
-                if let shortcut {
-                    Text(shortcut)
-                        .foregroundStyle(.secondary)
-                }
-            }
-            .padding(.horizontal, 8)
-            .padding(.vertical, 2)
-            .background(RoundedRectangle(cornerRadius: 4)
-                .fill(isSelected ? Color(nsColor: .selectedControlColor) : .clear))
+        init(_ label: String, shortcut: String? = nil, isSelected: Bool = false) {
+            self.label = label
+            self.shortcut = shortcut
+            self.isSelected = isSelected
         }
+
+        var body: some View {
+            HStack {
+                HStack {
+                    Text(label)
+                    Spacer()
+                    if let shortcut {
+                        Text(shortcut)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .padding(.horizontal, 8)
+                .padding(.vertical, 2)
+                .background(RoundedRectangle(cornerRadius: 4)
+                    .fill(isSelected ? Color(nsColor: .selectedControlColor) : .clear))
+            }
+        }
+
     }
-
-}
-
-struct MenuBarMockup: View {
 
     var body: some View {
 
@@ -88,17 +88,19 @@ struct MenuBarMockup: View {
                 }
                 HStack {
                     VStack(spacing: 2) {
-                        FakeMenuRow("New…", shortcut: "⌃⌥⌘T", isSelected: true)
+                        MenuItem("New…", shortcut: "⌃⌥⌘T", isSelected: true)
                         Divider()
-                        FakeMenuRow("About…")
-                        FakeMenuRow("Settings…", shortcut: "⌘,")
+                        MenuItem("About…")
+                        MenuItem("Settings…", shortcut: "⌘,")
                         Divider()
-                        FakeMenuRow("Quit", shortcut: "⌘Q")
+                        MenuItem("Quit", shortcut: "⌘Q")
                     }
                     .frame(maxWidth: 300)
                     .padding(6)
                     .cornerRadius(8)
-                    .overlay(RoundedRectangle(cornerRadius: 8).stroke().foregroundStyle(.tertiary))
+                    .overlay(RoundedRectangle(cornerRadius: 8)
+                        .stroke()
+                        .foregroundStyle(.tertiary))
                 }
                 .padding(.bottom)
                 HStack {
@@ -117,5 +119,5 @@ struct MenuBarMockup: View {
 }
 
 #Preview {
-    MenuBarMockup()
+    MenuPreview()
 }

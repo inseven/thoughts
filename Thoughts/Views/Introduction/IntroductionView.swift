@@ -31,92 +31,6 @@ class IntroductionModel {
 
 }
 
-struct Page<Content: View, Actions: View> {
-
-    let content: Content
-    let actions: Actions
-
-    init(@ViewBuilder content: () -> Content, @ViewBuilder actions: () -> Actions) {
-        self.content = content()
-        self.actions = actions()
-    }
-
-}
-
-struct AnyPage {
-
-    let content: AnyView
-    let actions: AnyView
-
-    init<Content: View, Actions: View>(_ page: Page<Content, Actions>) {
-        content = AnyView(page.content)
-        actions = AnyView(page.actions)
-    }
-
-    init<Content: View, Actions: View>(@ViewBuilder content: () -> Content, @ViewBuilder actions: () -> Actions) {
-        self.content = AnyView(content())
-        self.actions = AnyView(actions())
-    }
-
-}
-
-// TODO How do I get this to accept any page construction?
-struct Pager<Item: Identifiable & Hashable>: View {
-
-    @Binding var item: Item
-
-    let content: (Item) -> AnyPage
-
-    init(_ item: Binding<Item>, content: @escaping (Item) -> AnyPage) {
-        self._item = item
-        self.content = content
-    }
-
-    var body: some View {
-        VStack(spacing: 0) {
-            content(item).content
-                .id(item)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding()
-                .transition(.push)
-            HStack {
-                Spacer()
-                content(item).actions
-                    .transition(.blurReplace())
-            }
-            .id(item)
-            .controlSize(.large)
-            .padding()
-            .frame(maxWidth: .infinity)
-        }
-    }
-
-}
-
-struct FinderRow: View {
-
-    let title: String
-
-    init(_ title: String) {
-        self.title = title
-    }
-
-    var body: some View {
-        HStack(spacing: 4) {
-            Image(nsImage: NSWorkspace.shared.icon(for: .markdown))
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                .frame(width: 16, height: 16)
-            Text(title)
-            Spacer()
-        }
-        .frame(maxWidth: .infinity)
-        .padding(2)
-        .frame(maxWidth: 320)
-    }
-
-}
-
 struct IntroductionView: View {
 
     @Environment(\.closeWindow) private var closeWindow
@@ -139,7 +53,6 @@ struct IntroductionView: View {
     }
 
     @State var page: Page = .welcome
-//    @State var page: Page = .keyboard
 
     var body: some View {
         VStack(spacing: 0) {
@@ -148,7 +61,7 @@ struct IntroductionView: View {
                     switch page {
                     case .welcome:
                         AnyPage {
-                            MarketingView(title: "Welcome to Thoughts") {
+                            MarketingView("Welcome to Thoughts") {
                                 Text("Thoughts works with your workflows to help you quickly get your ideas into your existing systems and tools.")
                                 Text("Pair it with apps like [Obsidian](https://obsidian.md) and [Typora](https://typora.io) to organize and take your notes further.")
                             } header: {
@@ -169,22 +82,9 @@ struct IntroductionView: View {
                         }
                     case .folder:
                         AnyPage {
-                            MarketingView(title: "Capture Your Ideas", systemImage: "tray.and.arrow.down") {
+                            MarketingView("Capture Your Ideas", systemImage: "tray.and.arrow.down") {
                                 Text("Thoughts stores all your notes in a folder of your choosing so you can easily integrate it with your exiting workflows.")
-                                VStack(spacing: 1) {
-                                    FinderRow("2024-05-31-06-28-55.md")
-                                    FinderRow("2024-05-31-06-29-11.md")
-                                        .background(Color(NSColor.unemphasizedSelectedTextBackgroundColor)
-                                            .cornerRadius(4))
-                                    FinderRow("2024-05-31-06-57-27.md")
-                                    FinderRow("2024-06-06-01-08-33.md")
-                                    Spacer()
-                                }
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 160)
-                                .padding()
-                                .background(Color(NSColor.textBackgroundColor))
-                                .cornerRadius(8)
+                                FinderPreview()
                             }
                         } actions: {
                             Button("Set Destination Folder") {
@@ -195,31 +95,13 @@ struct IntroductionView: View {
                                     }
                                 }
                             }
-                            .buttonStyle(.borderedProminent)
                             .keyboardShortcut(.defaultAction)
                         }
                     case .location:
                         AnyPage {
-                            MarketingView(title: "Remember Your Location", systemImage: "location") {
+                            MarketingView("Remember Your Location", systemImage: "location") {
                                 Text("Thoughts can store your location in Frontmatter so you never forget where you were when you had that important idea.")
-                                HStack {
-                                    Text("""
----
-location:
-  latitude: 2.15908069616624e+1
-  longitude: -1.58103050228585e+2
-  name: "Island Vintage Coffee"
-  locality: "Hale'iwa"
----
-""")
-                                    .multilineTextAlignment(.leading)
-                                }
-                                .textSelection(.enabled)
-                                .monospaced()
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color(NSColor.textBackgroundColor))
-                                .cornerRadius(8)
+                                LocationPreview()
                             } footer: {
                                 Text("Thoughts never collects or stores your data. See our [Privacy Policy](https://thoughts.jbmorley.co.uk/#privacy-policy).")
                             }
@@ -236,15 +118,14 @@ location:
                                     self.page = .open
                                 }
                             }
-                            .buttonStyle(.borderedProminent)
                             .keyboardShortcut(.defaultAction)
                         }
                     case .open:
                         AnyPage {
-                            MarketingView(title: "Always Available", systemImage: "menubar.arrow.up.rectangle") {
+                            MarketingView("Always Available", systemImage: "menubar.arrow.up.rectangle") {
                                 Text("Thoughts lives in the menu bar, waiting for your notes.")
                                 Text("Open at login to ensure you never miss something.")
-                                MenuBarMockup()
+                                MenuPreview()
                             }
                         } actions: {
                             Button("Skip") {
@@ -258,20 +139,13 @@ location:
                                     self.page = .keyboard
                                 }
                             }
-                            .buttonStyle(.borderedProminent)
                             .keyboardShortcut(.defaultAction)
                         }
                     case .keyboard:
                         AnyPage {
-                            MarketingView(title: "Keyboard First") {
+                            MarketingView("Keyboard First", systemImage: "keyboard") {
                                 Text("Use global shortcuts to write and edit notes without taking your hands off the keyboard.")
                                 KeyboardShortcutPreview()
-                            } header: {
-                                Image(systemName: "keyboard")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 72, height: 72)
-                                    .foregroundStyle(.tint)
                             }
                         } actions: {
                             Button("Start Writing") {
@@ -280,7 +154,6 @@ location:
                                     applicationModel.new()
                                 }
                             }
-                            .buttonStyle(.borderedProminent)
                             .keyboardShortcut(.defaultAction)
                         }
                     }
@@ -288,7 +161,6 @@ location:
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .ignoresSafeArea()
     }
 
 }

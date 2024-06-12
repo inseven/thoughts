@@ -29,7 +29,7 @@ struct MarketingView<Content: View, Header: View, Footer: View>: View {
     let header: Header
     let footer: Footer
 
-    init(title: String,
+    init(_ title: String,
          subtitle: String? = nil,
          @ViewBuilder content: () -> Content,
          @ViewBuilder header: () -> Header,
@@ -69,7 +69,7 @@ struct MarketingView<Content: View, Header: View, Footer: View>: View {
 
 extension MarketingView where Footer == EmptyView {
 
-    init(title: String,
+    init(_ title: String,
          subtitle: String? = nil,
          @ViewBuilder content: () -> Content,
          @ViewBuilder header: () -> Header) {
@@ -82,9 +82,9 @@ extension MarketingView where Footer == EmptyView {
 
 }
 
-extension MarketingView where Header == AnyView {
+extension MarketingView where Header == SymbolHeader {
 
-    init(title: String,
+    init(_ title: String,
          subtitle: String? = nil,
          systemImage: String,
          @ViewBuilder content: () -> Content,
@@ -92,32 +92,22 @@ extension MarketingView where Header == AnyView {
         self.title = title
         self.subtitle = subtitle
         self.content = content()
-        self.header = AnyView(
-            Image(systemName: systemImage)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 72, height: 72)
-                .foregroundStyle(.tint))
+        self.header = SymbolHeader(systemImage: systemImage)
         self.footer = footer()
     }
 
 }
 
-extension MarketingView where Header == AnyView, Footer == EmptyView {
+extension MarketingView where Header == SymbolHeader, Footer == EmptyView {
 
-    init(title: String,
+    init(_ title: String,
          subtitle: String? = nil,
          systemImage: String,
          @ViewBuilder content: () -> Content) {
         self.title = title
         self.subtitle = subtitle
         self.content = content()
-        self.header = AnyView(
-            Image(systemName: systemImage)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 72, height: 72)
-                .foregroundStyle(.tint))
+        self.header = SymbolHeader(systemImage: systemImage)
         self.footer = EmptyView()
     }
 

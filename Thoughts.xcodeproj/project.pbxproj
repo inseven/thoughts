@@ -12,6 +12,11 @@
 		D80E08A62B6761370023DD4F /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E08A52B6761370023DD4F /* Document.swift */; };
 		D828CFF82BEECDDF00AC8E8B /* highlightedtexteditor-license in Resources */ = {isa = PBXBuildFile; fileRef = D86C389D2BEECDAA00248CD0 /* highlightedtexteditor-license */; };
 		D83943E02C18FDDF00EB902E /* KeyboardShortcutPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83943DF2C18FDDF00EB902E /* KeyboardShortcutPreview.swift */; };
+		D83943E62C191ED900EB902E /* SymbolHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83943E52C191ED900EB902E /* SymbolHeader.swift */; };
+		D83943E82C191F3900EB902E /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83943E72C191F3900EB902E /* Page.swift */; };
+		D83943EA2C191FA900EB902E /* Pager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83943E92C191FA900EB902E /* Pager.swift */; };
+		D83943EC2C1920F200EB902E /* LocationPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83943EB2C1920F200EB902E /* LocationPreview.swift */; };
+		D83943EE2C1921F100EB902E /* FinderPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83943ED2C1921F100EB902E /* FinderPreview.swift */; };
 		D83C2F882B857B8C00CE60F7 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C2F872B857B8C00CE60F7 /* URL.swift */; };
 		D83F58092C0968F300EF69D3 /* Trie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83F58082C0968F300EF69D3 /* Trie.swift */; };
 		D83F580B2C096EA300EF69D3 /* UTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83F580A2C096EA300EF69D3 /* UTType.swift */; };
@@ -49,7 +54,7 @@
 		D89224A42BD7368F00DA0932 /* TimeZoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89224A32BD7368F00DA0932 /* TimeZoneTests.swift */; };
 		D89224A72BD736B900DA0932 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89224A62BD736B900DA0932 /* Date.swift */; };
 		D89224A92BD736DF00DA0932 /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89224A82BD736DF00DA0932 /* TimeZone.swift */; };
-		D8B1466D2C1290200063E81F /* MenuBarMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1466C2C1290200063E81F /* MenuBarMockup.swift */; };
+		D8B1466D2C1290200063E81F /* MenuPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1466C2C1290200063E81F /* MenuPreview.swift */; };
 		D8BA4D492BE59E16001A2A26 /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = D8BA4D482BE59E16001A2A26 /* HighlightedTextEditor */; };
 		D8BA4D4D2BE5A9CB001A2A26 /* SettingsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BA4D4C2BE5A9CB001A2A26 /* SettingsWindow.swift */; };
 		D8C283E92BD9954F00161C82 /* HashRainbow in Frameworks */ = {isa = PBXBuildFile; productRef = D8C283E82BD9954F00161C82 /* HashRainbow */; };
@@ -88,6 +93,11 @@
 		D80E08A02B675AAC0023DD4F /* ComposeWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeWindow.swift; sourceTree = "<group>"; };
 		D80E08A52B6761370023DD4F /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		D83943DF2C18FDDF00EB902E /* KeyboardShortcutPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcutPreview.swift; sourceTree = "<group>"; };
+		D83943E52C191ED900EB902E /* SymbolHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolHeader.swift; sourceTree = "<group>"; };
+		D83943E72C191F3900EB902E /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		D83943E92C191FA900EB902E /* Pager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pager.swift; sourceTree = "<group>"; };
+		D83943EB2C1920F200EB902E /* LocationPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPreview.swift; sourceTree = "<group>"; };
+		D83943ED2C1921F100EB902E /* FinderPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderPreview.swift; sourceTree = "<group>"; };
 		D83C2F872B857B8C00CE60F7 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		D83F58082C0968F300EF69D3 /* Trie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trie.swift; sourceTree = "<group>"; };
 		D83F580A2C096EA300EF69D3 /* UTType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTType.swift; sourceTree = "<group>"; };
@@ -126,7 +136,7 @@
 		D89224A32BD7368F00DA0932 /* TimeZoneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneTests.swift; sourceTree = "<group>"; };
 		D89224A62BD736B900DA0932 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		D89224A82BD736DF00DA0932 /* TimeZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZone.swift; sourceTree = "<group>"; };
-		D8B1466C2C1290200063E81F /* MenuBarMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarMockup.swift; sourceTree = "<group>"; };
+		D8B1466C2C1290200063E81F /* MenuPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPreview.swift; sourceTree = "<group>"; };
 		D8BA4D4C2BE5A9CB001A2A26 /* SettingsWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindow.swift; sourceTree = "<group>"; };
 		D8CEE5092C0A64FF00D2025A /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
 		D8CEE50B2C0A66FD00D2025A /* NSIntroductionWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSIntroductionWindow.swift; sourceTree = "<group>"; };
@@ -208,11 +218,16 @@
 		D83943E12C1910AA00EB902E /* Introduction */ = {
 			isa = PBXGroup;
 			children = (
+				D83943ED2C1921F100EB902E /* FinderPreview.swift */,
 				D8CEE5092C0A64FF00D2025A /* IntroductionView.swift */,
 				D83943DF2C18FDDF00EB902E /* KeyboardShortcutPreview.swift */,
+				D83943EB2C1920F200EB902E /* LocationPreview.swift */,
 				D8CEE50D2C0A676900D2025A /* MarketingView.swift */,
-				D8B1466C2C1290200063E81F /* MenuBarMockup.swift */,
+				D8B1466C2C1290200063E81F /* MenuPreview.swift */,
 				D8CEE50B2C0A66FD00D2025A /* NSIntroductionWindow.swift */,
+				D83943E72C191F3900EB902E /* Page.swift */,
+				D83943E92C191FA900EB902E /* Pager.swift */,
+				D83943E52C191ED900EB902E /* SymbolHeader.swift */,
 			);
 			path = Introduction;
 			sourceTree = "<group>";
@@ -524,13 +539,16 @@
 				D840967F2BD73CBE00926C85 /* LocationDetails.swift in Sources */,
 				D8CEE50E2C0A676900D2025A /* MarketingView.swift in Sources */,
 				D8DFFCC82BD82DE900C9532A /* CLAuthorizationStatus.swift in Sources */,
+				D83943EC2C1920F200EB902E /* LocationPreview.swift in Sources */,
 				D852AF692B604B3E00B77A3D /* MainMenu.swift in Sources */,
 				D83C2F882B857B8C00CE60F7 /* URL.swift in Sources */,
 				D86255912C0926B40044BD37 /* Date.swift in Sources */,
 				D89224A02BD735DA00DA0932 /* RegionalDate.swift in Sources */,
+				D83943EA2C191FA900EB902E /* Pager.swift in Sources */,
 				D876ABDB2BEC842800667F8E /* Sequence.swift in Sources */,
 				D861B4072C0991CC00BA9B80 /* ThoughtsCommands.swift in Sources */,
 				D83F580B2C096EA300EF69D3 /* UTType.swift in Sources */,
+				D83943E82C191F3900EB902E /* Page.swift in Sources */,
 				D862558D2C0925B40044BD37 /* Details.swift in Sources */,
 				D86255842C091CF80044BD37 /* Library.swift in Sources */,
 				D86255862C09248D0044BD37 /* DirectoryScanner.swift in Sources */,
@@ -545,8 +563,10 @@
 				D8F06D512B6731CE0039AEF4 /* SettingsView.swift in Sources */,
 				D8E27EA42BD9EA53001EEE98 /* String.swift in Sources */,
 				D80E08A62B6761370023DD4F /* Document.swift in Sources */,
-				D8B1466D2C1290200063E81F /* MenuBarMockup.swift in Sources */,
+				D8B1466D2C1290200063E81F /* MenuPreview.swift in Sources */,
 				D852AF022B6027CA00B77A3D /* ThoughtsApp.swift in Sources */,
+				D83943EE2C1921F100EB902E /* FinderPreview.swift in Sources */,
+				D83943E62C191ED900EB902E /* SymbolHeader.swift in Sources */,
 				D80E08A12B675AAC0023DD4F /* ComposeWindow.swift in Sources */,
 				D847E9332C1105A800FD6B63 /* AnyTransition.swift in Sources */,
 				D89224A22BD7365C00DA0932 /* TimeZone.swift in Sources */,
