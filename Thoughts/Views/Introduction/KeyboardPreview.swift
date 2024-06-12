@@ -61,9 +61,11 @@ struct KeyboardPreview: View {
                 }
             }
             .padding(LayoutMetrics.padding)
-            .frame(width: LayoutMetrics.unitWidth * width, height: LayoutMetrics.unitHeight)
+            .frame(width: LayoutMetrics.unitWidth * width,
+                   height: LayoutMetrics.unitHeight)
             .background(RoundedRectangle(cornerRadius: LayoutMetrics.cornerRadius)
-                .fill(.secondary))
+                .fill(.secondary)
+                .foregroundStyle(.tint))
         }
 
     }
@@ -74,11 +76,9 @@ struct KeyboardPreview: View {
             Key("⌥", text: "option")
             Key("⌘", text: "command", width: 1.25)
             Text("+")
-                .foregroundStyle(.black)
                 .font(.title)
             Key("T")
         }
-        .foregroundStyle(.white, .gray)
         .preview()
     }
 

@@ -36,19 +36,16 @@ struct MenuPreview: View {
 
         var body: some View {
             HStack {
-                HStack {
-                    Text(label)
-                    Spacer()
-                    if let shortcut {
-                        Text(shortcut)
-                            .foregroundStyle(.secondary)
-                    }
+                Text(label)
+                Spacer()
+                if let shortcut {
+                    Text(shortcut)
+                        .foregroundStyle(.secondary)
                 }
-                .padding(.horizontal, 8)
-                .padding(.vertical, 2)
-                .background(RoundedRectangle(cornerRadius: 4)
-                    .fill(isSelected ? Color(nsColor: .selectedControlColor) : .clear))
             }
+            .selection(insets: EdgeInsets(horizontal: 8, vertical: 2),
+                       cornerRadius: 4.0,
+                       isSelected: isSelected)
         }
 
     }
@@ -115,7 +112,7 @@ struct MenuPreview: View {
                 }
             }
         }
-        .padding()
+        .padding(6)
         .preview()
     }
 

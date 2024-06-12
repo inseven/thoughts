@@ -24,12 +24,20 @@ import Interact
 
 struct FinderPreview: View {
 
+    struct LayoutMetrics {
+
+        static let iconSize = 16.0
+
+    }
+
     struct FinderRow: View {
 
         let title: String
+        let isSelected: Bool
 
-        init(_ title: String) {
+        init(_ title: String, isSelected: Bool = false) {
             self.title = title
+            self.isSelected = isSelected
         }
 
         var body: some View {
@@ -37,13 +45,11 @@ struct FinderPreview: View {
                 Image(nsImage: NSWorkspace.shared.icon(for: .markdown))
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                    .frame(width: 16, height: 16)
+                        .frame(width: LayoutMetrics.iconSize, height: LayoutMetrics.iconSize)
                 Text(title)
                 Spacer()
             }
-            .frame(maxWidth: .infinity)
-            .padding(2)
-            .frame(maxWidth: 320)
+            .selection(insets: EdgeInsets(horizontal: 2, vertical: 2), cornerRadius: 4.0, isSelected: isSelected)
         }
 
     }
@@ -52,13 +58,16 @@ struct FinderPreview: View {
         VStack(spacing: 1) {
             FinderRow("2024-05-31-06-28-55.md")
             FinderRow("2024-05-31-06-29-11.md")
-                .background(Color(NSColor.unemphasizedSelectedTextBackgroundColor)
-                    .cornerRadius(4))
             FinderRow("2024-05-31-06-57-27.md")
-            FinderRow("2024-06-06-01-08-33.md")
+            FinderRow("2024-06-06-01-08-33.md", isSelected: true)
         }
+        .frame(maxWidth: 320)
         .padding()
         .preview()
     }
 
+}
+
+#Preview {
+    FinderPreview()
 }
