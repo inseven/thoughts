@@ -128,6 +128,7 @@ struct IntroductionView: View {
                             .keyboardShortcut(.cancelAction)
                             Button("Open at Login") {
                                 Application.shared.openAtLogin = true
+                                applicationModel.introductionVersion = ApplicationModel.introductionVersion
                                 withAnimation {
                                     self.page = .keyboard
                                 }
@@ -142,7 +143,6 @@ struct IntroductionView: View {
                             }
                         } actions: {
                             Button("Start Writing") {
-                                applicationModel.introductionVersion = ApplicationModel.introductionVersion
                                 withAnimation {
                                     closeWindow()
                                     applicationModel.new()

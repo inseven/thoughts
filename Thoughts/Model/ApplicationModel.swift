@@ -150,6 +150,9 @@ class ApplicationModel: NSObject {
     }
 
     @MainActor func new() {
+        guard didShowIntroduction else {
+            return
+        }
         if useDemoData {
             let location = LocationDetails(latitude: 34.2133,
                                            longitude: 135.5853,
