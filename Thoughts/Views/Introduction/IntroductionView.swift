@@ -115,9 +115,11 @@ struct IntroductionView: View {
                     case .open:
                         Page {
                             MarketingView("Always Available", systemImage: "menubar.arrow.up.rectangle") {
-                                Text("Thoughts lives in the menu bar, waiting for your notes.")
+                                Text("Thoughts lives in the Menu Bar, waiting for your notes.")
                                 Text("Open at login to ensure you never miss something.")
                                 MenuPreview()
+                            } footer: {
+                                Text("If you can't see the Thoughts icon in the Menu Bar, it might be hiding behind the notch. 👀")
                             }
                         } actions: {
                             Button("Skip") {
