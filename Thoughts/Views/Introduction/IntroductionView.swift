@@ -101,6 +101,7 @@ struct IntroductionView: View {
                             }
                             .keyboardShortcut(.cancelAction)
                             Button("Allow Location Access") {
+                                applicationModel.shouldSaveLocation = true
                                 applicationModel.updateUserLocation {
                                     DispatchQueue.main.async {
                                         withAnimation {
@@ -141,6 +142,7 @@ struct IntroductionView: View {
                             }
                         } actions: {
                             Button("Start Writing") {
+                                applicationModel.introductionVersion = ApplicationModel.introductionVersion
                                 withAnimation {
                                     closeWindow()
                                     applicationModel.new()
@@ -151,7 +153,7 @@ struct IntroductionView: View {
                     }
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(width: 600, height: 600)
         }
     }
 

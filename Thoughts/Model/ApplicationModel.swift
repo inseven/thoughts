@@ -31,9 +31,10 @@ class ApplicationModel: NSObject {
     enum SettingsKey: String {
         case rootURL
         case shouldSaveLocation
+        case introductionVersion
     }
 
-    var bounce: Int = 1
+    static let introductionVersion = 1
 
     @MainActor var tags: Trie {
         return library?.tags ?? Trie()
@@ -60,6 +61,12 @@ class ApplicationModel: NSObject {
                 document.location = nil
                 locationManager.stopUpdatingLocation()
             }
+        }
+    }
+
+    @MainActor var introductionVersion: Int {
+        didSet {
+            keyedDefaults.set(introductionVersion, forKey: .introductionVersion)
         }
     }
 
@@ -92,6 +99,7 @@ class ApplicationModel: NSObject {
     @MainActor override init() {
         rootURL = try? keyedDefaults.securityScopedURL(forKey: .rootURL)
         shouldSaveLocation = keyedDefaults.bool(forKey: .shouldSaveLocation, default: false)
+        introductionVersion = keyedDefaults.integer(forKey: .introductionVersion, default: 0)
         super.init()
         rootURLChanges.send(rootURL)
         locationManager.delegate = self
@@ -126,14 +134,13 @@ class ApplicationModel: NSObject {
 
         reloadLibrary()
 
-//        if rootURL == nil {
+        if introductionVersion != Self.introductionVersion {
             showIntroduction()
-//        }
+        }
     }
 
     @MainActor func showIntroduction() {
         let window = NSIntroductionWindow(applicationModel: self)
-        window.setContentSize(NSSize(width: 600, height: 600))  // TODO: We could get this from the content view?
         window.center()
         window.makeKeyAndOrderFront(nil)
     }
@@ -151,7 +158,7 @@ class ApplicationModel: NSObject {
 
     It’s for recording _ephemeral_ notes. For when you just want to get something down and out of your head, happy in the knowledge that it’s recorded _somewhere_.
 
-    Thoughts doesn’t offer any viewing functionality--it’s all about file-and-forget. It saves notes in **Markdown** and **Frontmatter** so it pairs perfectly with tools like [Obsidian](https://obsidian.md) and static site builders like [Jekyll](https://jekyllrb.com), [Hugo](https://gohugo.io), and [InContext](https://incontext.app).
+    Thoughts doesn’t offer any viewing functionality---it’s all about file-and-forget. It saves notes in **Markdown** and **Frontmatter** so it pairs perfectly with tools like [Obsidian](https://obsidian.md) and static site builders like [Jekyll](https://jekyllrb.com), [Hugo](https://gohugo.io), and [InContext](https://incontext.app).
     """
             document.tags = ["software", "apple", "mac", "markdown", "journaling"]
             document.location = location
@@ -216,6 +223,7 @@ extension ApplicationModel: CLLocationManagerDelegate {
             return
         }
         guard shouldSaveLocation else {
+            completion(.failure(ThoughtsError.userLocationDisabled))
             return
         }
         locationRequests.append(completion)

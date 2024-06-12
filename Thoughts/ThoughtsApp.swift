@@ -60,10 +60,6 @@ struct ThoughtsApp: App {
        })
         self.applicationModel = applicationModel
         self.hotKey = hotKey
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            print("BouncyBouncy")
-            applicationModel.bounce += 1
-        }
     }
 
     var body: some Scene {
@@ -72,7 +68,6 @@ struct ThoughtsApp: App {
             MainMenu(applicationModel: applicationModel)
         } label: {
             Image(systemName: "text.justify.left")
-                .symbolEffect(.bounce, value: applicationModel.bounce)
         }
         .commands {
             ThoughtsCommands(applicationModel: applicationModel)
