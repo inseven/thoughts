@@ -126,6 +126,7 @@ struct IntroductionView: View {
                             }
                             .keyboardShortcut(.cancelAction)
                             Button("Open at Login") {
+                                Application.shared.openAtLogin = true
                                 withAnimation {
                                     self.page = .keyboard
                                 }

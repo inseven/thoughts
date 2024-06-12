@@ -126,11 +126,12 @@ class ApplicationModel: NSObject {
 
         reloadLibrary()
 
-        // Show the compose (configure) window if the root URL is empty.
-        if rootURL == nil {
-            new()
-        }
+//        if rootURL == nil {
+            showIntroduction()
+//        }
+    }
 
+    @MainActor func showIntroduction() {
         let window = NSIntroductionWindow(applicationModel: self)
         window.setContentSize(NSSize(width: 600, height: 600))  // TODO: We could get this from the content view?
         window.center()
