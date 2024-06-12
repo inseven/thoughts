@@ -20,14 +20,13 @@
 
 import SwiftUI
 
-// TODO How do I get this to accept any page construction?
 struct Pager<Item: Identifiable & Hashable>: View {
 
     @Binding var item: Item
 
-    let content: (Item) -> AnyPage
+    let content: (Item) -> Page
 
-    init(_ item: Binding<Item>, content: @escaping (Item) -> AnyPage) {
+    init(_ item: Binding<Item>, content: @escaping (Item) -> Page) {
         self._item = item
         self.content = content
     }

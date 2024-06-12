@@ -28,7 +28,7 @@ struct IntroductionView: View {
 
     let applicationModel: ApplicationModel
 
-    enum Page: Identifiable {
+    enum PageIdentifier: Identifiable {
 
         var id: Self {
             return self
@@ -41,7 +41,7 @@ struct IntroductionView: View {
         case keyboard
     }
 
-    @State var page: Page = .welcome
+    @State var page: PageIdentifier = .welcome
 
     var body: some View {
         VStack(spacing: 0) {
@@ -49,7 +49,7 @@ struct IntroductionView: View {
                 Pager($page) { page in
                     switch page {
                     case .welcome:
-                        AnyPage {
+                        Page {
                             MarketingView("Welcome to Thoughts") {
                                 Text("Thoughts works with your workflows to help you quickly get your ideas into your existing systems and tools.")
                                 Text("Pair it with apps like [Obsidian](https://obsidian.md) and [Typora](https://typora.io) to organize and take your notes further.")
@@ -70,7 +70,7 @@ struct IntroductionView: View {
                             .keyboardShortcut(.defaultAction)
                         }
                     case .folder:
-                        AnyPage {
+                        Page {
                             MarketingView("Capture Your Ideas", systemImage: "tray.and.arrow.down") {
                                 Text("Thoughts stores all your notes in a folder of your choosing so you can easily integrate it with your exiting workflows.")
                                 FinderPreview()
@@ -86,7 +86,7 @@ struct IntroductionView: View {
                             .keyboardShortcut(.defaultAction)
                         }
                     case .location:
-                        AnyPage {
+                        Page {
                             MarketingView("Remember Your Location", systemImage: "location") {
                                 Text("Thoughts can store your location in Frontmatter so you never forget where you were when you had that important idea.")
                                 LocationPreview()
@@ -113,7 +113,7 @@ struct IntroductionView: View {
                             .keyboardShortcut(.defaultAction)
                         }
                     case .open:
-                        AnyPage {
+                        Page {
                             MarketingView("Always Available", systemImage: "menubar.arrow.up.rectangle") {
                                 Text("Thoughts lives in the menu bar, waiting for your notes.")
                                 Text("Open at login to ensure you never miss something.")
@@ -136,7 +136,7 @@ struct IntroductionView: View {
                             .keyboardShortcut(.defaultAction)
                         }
                     case .keyboard:
-                        AnyPage {
+                        Page {
                             MarketingView("Keyboard First", systemImage: "keyboard") {
                                 Text("Use global shortcuts to write and edit notes without taking your hands off the keyboard.")
                                 KeyboardPreview()

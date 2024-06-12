@@ -20,29 +20,12 @@
 
 import SwiftUI
 
-struct Page<Content: View, Actions: View> {
-
-    let content: Content
-    let actions: Actions
-
-    init(@ViewBuilder content: () -> Content, @ViewBuilder actions: () -> Actions) {
-        self.content = content()
-        self.actions = actions()
-    }
-
-}
-
-struct AnyPage {
+struct Page {
 
     let content: AnyView
     let actions: AnyView
 
-    init<Content: View, Actions: View>(_ page: Page<Content, Actions>) {
-        content = AnyView(page.content)
-        actions = AnyView(page.actions)
-    }
-
-    init<Content: View, Actions: View>(@ViewBuilder content: () -> Content, @ViewBuilder actions: () -> Actions) {
+    init(@ViewBuilder content: () -> some View, @ViewBuilder actions: () -> some View) {
         self.content = AnyView(content())
         self.actions = AnyView(actions())
     }
