@@ -22,20 +22,9 @@ import SwiftUI
 
 import Interact
 
-@Observable
-class IntroductionModel {
-
-    var openAtLogin: Bool = true
-    var hasFolder: Bool = false
-    var hasLocatonAccess: Bool = false
-
-}
-
 struct IntroductionView: View {
 
     @Environment(\.closeWindow) private var closeWindow
-
-    @State var introductionModel = IntroductionModel()
 
     let applicationModel: ApplicationModel
 
@@ -90,7 +79,6 @@ struct IntroductionView: View {
                             Button("Set Destination Folder") {
                                 if applicationModel.setRootURL() {
                                     withAnimation {
-                                        introductionModel.hasFolder = true
                                         self.page = .location
                                     }
                                 }
@@ -113,8 +101,10 @@ struct IntroductionView: View {
                             }
                             .keyboardShortcut(.cancelAction)
                             Button("Allow Location Access") {
+
+                                // TODO: Request location.
+
                                 withAnimation {
-                                    introductionModel.hasLocatonAccess = true
                                     self.page = .open
                                 }
                             }

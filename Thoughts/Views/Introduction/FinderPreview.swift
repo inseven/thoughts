@@ -56,8 +56,8 @@ struct FinderPreview: View {
                     .cornerRadius(4))
             FinderRow("2024-05-31-06-57-27.md")
             FinderRow("2024-06-06-01-08-33.md")
-            Spacer()
         }
+        .padding()
         .preview()
     }
 

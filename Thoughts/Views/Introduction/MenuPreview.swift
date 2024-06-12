@@ -73,9 +73,10 @@ struct MenuPreview: View {
                 .padding(.horizontal, 4)
                 HStack {
                     Spacer()
-                    Text("Thu 14:40")
+                    Text(Date.now, format: .dateTime)
                         .foregroundStyle(.tertiary)
                 }
+                .padding(.horizontal, 4)
             }
             GridRow {
                 Divider()
