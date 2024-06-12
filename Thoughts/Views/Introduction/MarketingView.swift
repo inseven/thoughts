@@ -66,3 +66,59 @@ struct MarketingView<Content: View, Header: View, Footer: View>: View {
     }
 
 }
+
+extension MarketingView where Footer == EmptyView {
+
+    init(title: String,
+         subtitle: String? = nil,
+         @ViewBuilder content: () -> Content,
+         @ViewBuilder header: () -> Header) {
+        self.title = title
+        self.subtitle = subtitle
+        self.content = content()
+        self.header = header()
+        self.footer = EmptyView()
+    }
+
+}
+
+extension MarketingView where Header == AnyView {
+
+    init(title: String,
+         subtitle: String? = nil,
+         systemImage: String,
+         @ViewBuilder content: () -> Content,
+         @ViewBuilder footer: () -> Footer) {
+        self.title = title
+        self.subtitle = subtitle
+        self.content = content()
+        self.header = AnyView(
+            Image(systemName: systemImage)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 72, height: 72)
+                .foregroundStyle(.tint))
+        self.footer = footer()
+    }
+
+}
+
+extension MarketingView where Header == AnyView, Footer == EmptyView {
+
+    init(title: String,
+         subtitle: String? = nil,
+         systemImage: String,
+         @ViewBuilder content: () -> Content) {
+        self.title = title
+        self.subtitle = subtitle
+        self.content = content()
+        self.header = AnyView(
+            Image(systemName: systemImage)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 72, height: 72)
+                .foregroundStyle(.tint))
+        self.footer = EmptyView()
+    }
+
+}

@@ -169,7 +169,7 @@ struct IntroductionView: View {
                         }
                     case .folder:
                         AnyPage {
-                            MarketingView(title: "Capture Your Ideas") {
+                            MarketingView(title: "Capture Your Ideas", systemImage: "tray.and.arrow.down") {
                                 Text("Thoughts stores all your notes in a folder of your choosing so you can easily integrate it with your exiting workflows.")
                                 VStack(spacing: 1) {
                                     FinderRow("2024-05-31-06-28-55.md")
@@ -185,14 +185,6 @@ struct IntroductionView: View {
                                 .padding()
                                 .background(Color(NSColor.textBackgroundColor))
                                 .cornerRadius(8)
-                            } header: {
-                                Image(systemName: "tray.and.arrow.down")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 72, height: 72)
-                                    .foregroundStyle(.tint)
-                            } footer: {
-                                EmptyView()
                             }
                         } actions: {
                             Button("Set Destination Folder") {
@@ -208,7 +200,7 @@ struct IntroductionView: View {
                         }
                     case .location:
                         AnyPage {
-                            MarketingView(title: "Remember Your Location") {
+                            MarketingView(title: "Remember Your Location", systemImage: "location") {
                                 Text("Thoughts can store your location in Frontmatter so you never forget where you were when you had that important idea.")
                                 HStack {
                                     Text("""
@@ -228,12 +220,6 @@ location:
                                 .padding()
                                 .background(Color(NSColor.textBackgroundColor))
                                 .cornerRadius(8)
-                            } header: {
-                                Image(systemName: "location")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 72, height: 72)
-                                    .foregroundStyle(.tint)
                             } footer: {
                                 Text("Thoughts never collects or stores your data. See our [Privacy Policy](https://thoughts.jbmorley.co.uk/#privacy-policy).")
                             }
@@ -255,18 +241,10 @@ location:
                         }
                     case .open:
                         AnyPage {
-                            MarketingView(title: "Always Available") {
+                            MarketingView(title: "Always Available", systemImage: "menubar.arrow.up.rectangle") {
                                 Text("Thoughts lives in the menu bar, waiting for your notes.")
                                 Text("Open at login to ensure you never miss something.")
                                 MenuBarMockup()
-                            } header: {
-                                Image(systemName: "menubar.arrow.up.rectangle")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 72, height: 72)
-                                    .foregroundStyle(.tint)
-                            } footer: {
-                                EmptyView()
                             }
                         } actions: {
                             Button("Skip") {
@@ -294,8 +272,6 @@ location:
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 72, height: 72)
                                     .foregroundStyle(.tint)
-                            } footer: {
-                                EmptyView()
                             }
                         } actions: {
                             Button("Start Writing") {

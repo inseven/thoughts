@@ -20,53 +20,53 @@
 
 import SwiftUI
 
-struct Key: View {
+struct KeyboardShortcutPreview: View {
 
-    struct LayoutMetrics {
-        static let unitWidth = 56.0
-        static let unitHeight = 56.0
-        static let cornerRadius = 4.0
-        static let padding = 6.0
-    }
+    struct Key: View {
 
-    let legend: String
-    let text: String?
-    let width: CGFloat
+        struct LayoutMetrics {
+            static let unitWidth = 56.0
+            static let unitHeight = 56.0
+            static let cornerRadius = 4.0
+            static let padding = 6.0
+        }
 
-    init(_ legend: String, text: String? = nil, width: CGFloat = 1.0) {
-        self.legend = legend
-        self.text = text
-        self.width = width
-    }
+        let legend: String
+        let text: String?
+        let width: CGFloat
 
-    var body: some View {
-        VStack(alignment: .trailing) {
-            if let text {
-                HStack {
+        init(_ legend: String, text: String? = nil, width: CGFloat = 1.0) {
+            self.legend = legend
+            self.text = text
+            self.width = width
+        }
+
+        var body: some View {
+            VStack(alignment: .trailing) {
+                if let text {
+                    HStack {
+                        Spacer()
+                        Text(legend)
+                            .font(.title2)
+                    }
                     Spacer()
+                    HStack {
+                        Spacer()
+                        Text(text)
+                            .font(.footnote)
+                    }
+                } else {
                     Text(legend)
                         .font(.title2)
                 }
-                Spacer()
-                HStack {
-                    Spacer()
-                    Text(text)
-                        .font(.footnote)
-                }
-            } else {
-                Text(legend)
-                    .font(.title2)
             }
+            .padding(LayoutMetrics.padding)
+            .frame(width: LayoutMetrics.unitWidth * width, height: LayoutMetrics.unitHeight)
+            .background(RoundedRectangle(cornerRadius: LayoutMetrics.cornerRadius)
+                .fill(.secondary))
         }
-        .padding(LayoutMetrics.padding)
-        .frame(width: LayoutMetrics.unitWidth * width, height: LayoutMetrics.unitHeight)
-        .background(RoundedRectangle(cornerRadius: LayoutMetrics.cornerRadius)
-            .fill(.secondary))
+
     }
-
-}
-
-struct KeyboardShortcutPreview: View {
 
     var body: some View {
         HStack {

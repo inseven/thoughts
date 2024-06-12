@@ -40,15 +40,12 @@ struct FakeMenuRow: View {
                 if let shortcut {
                     Text(shortcut)
                         .foregroundStyle(.secondary)
-//                        .foregroundStyle(isSelected ? .white : .secondary)
                 }
             }
             .padding(.horizontal, 8)
             .padding(.vertical, 2)
             .background(RoundedRectangle(cornerRadius: 4)
                 .fill(isSelected ? Color(nsColor: .selectedControlColor) : .clear))
-//            .foregroundStyle(isSelected ? .white : .primary,
-//                             isSelected ? .white : .secondary)
         }
     }
 
@@ -100,10 +97,8 @@ struct MenuBarMockup: View {
                     }
                     .frame(maxWidth: 300)
                     .padding(6)
-//                    .background(.thickMaterial)
                     .cornerRadius(8)
                     .overlay(RoundedRectangle(cornerRadius: 8).stroke().foregroundStyle(.tertiary))
-//                    .shadow(radius: 10)
                 }
                 .padding(.bottom)
                 HStack {
@@ -117,62 +112,6 @@ struct MenuBarMockup: View {
         .background(Color(NSColor.textBackgroundColor))
         .cornerRadius(16)
         .font(.body)
-
-//        ZStack {
-//            VStack(spacing: 0) {
-//                HStack {
-//                    Spacer()
-//                    Image(systemName: "text.justify.left")
-//                        .padding()
-////                        .background(.pink)
-//                    Spacer()
-//                    Text("Thu 14:40")
-//                        .padding()
-//                }
-////                .background(.thinMaterial)
-//                .background(.gray)
-//                Divider()
-//                HStack {
-//                    VStack {
-//                        HStack {
-//                            Text("New...")
-//                            Spacer()
-//                            Text("⌃⌥⌘T")
-//                                .foregroundStyle(.tertiary)
-//                        }
-//                        .background(Color(nsColor: .selectedControlColor))
-//                        .foregroundStyle(.white, .white, .white)
-//                        Divider()
-//                        HStack {
-//                            Text("About...")
-//                            Spacer()
-//                        }
-//                        HStack {
-//                            Text("Settings...")
-//                            Spacer()
-//                            Text("⌘,")
-//                                .foregroundStyle(.tertiary)
-//                        }
-//                        Divider()
-//                        HStack {
-//                            Text("Quit")
-//                            Spacer()
-//                            Text("⌘Q")
-//                                .foregroundStyle(.tertiary)
-//                        }
-//                    }
-//                    .frame(maxWidth: 300)
-//                    .padding()
-//                    .background(.thickMaterial)
-//                    .cornerRadius(8)
-//                    .overlay(RoundedRectangle(cornerRadius: 8).stroke().foregroundStyle(.tertiary))
-//                    .shadow(radius: 10)
-//                }
-//                .padding(.bottom)
-//            }
-//        }
-//        .background(Image("Background").resizable())
-//        .cornerRadius(16)
     }
 
 }
