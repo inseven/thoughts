@@ -29,7 +29,6 @@ extension URL {
 
     static let about = URL(string: "x-thoughts://about")!
     static let compose = URL(string: "x-thoughts://compose")!
-    static let intro = URL(string: "x-thoughts://intro")!
     static let settings = URL(string: "x-thoughts://settings")!
 
     var contentModificationDate: Date? {
