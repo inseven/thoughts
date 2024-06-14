@@ -95,6 +95,7 @@ struct IntroductionView: View {
                             }
                         } actions: {
                             Button("Skip") {
+                                applicationModel.shouldSaveLocation = false
                                 withAnimation {
                                     self.page = .open
                                 }
@@ -123,6 +124,7 @@ struct IntroductionView: View {
                             }
                         } actions: {
                             Button("Skip") {
+                                applicationModel.introductionVersion = ApplicationModel.introductionVersion
                                 withAnimation {
                                     self.page = .keyboard
                                 }
