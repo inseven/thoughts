@@ -74,6 +74,7 @@ struct ThoughtsApp: App {
                 Credit("Joanne Wong")
                 Credit("Jon Mountjoy")
                 Credit("Lukas Fittl")
+                Credit("Matt Sephton")
                 Credit("Mike Rhodes")
                 Credit("Pavlos Vinieratos")
                 Credit("Sarah Barbour")
