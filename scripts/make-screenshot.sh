@@ -3,7 +3,7 @@
 function screenshot_light {
     convert \
         -size 2880x1800 \
-        gradient:"rgb(0 157 238)-rgb(0 206 246)" \
+        radial-gradient:"rgb(0 206 246)-rgb(0 157 238)-" \
         "$1" \
         -gravity Center \
         -geometry +0+36 \
@@ -13,7 +13,7 @@ function screenshot_light {
 function screenshot_dark {
     convert \
         -size 2880x1800 \
-        gradient:"rgb(26 30 47)-rgb(0 58 59)" \
+        radial-gradient:"rgb(0 58 59)-rgb(26 30 47)" \
         -modulate 80,100,100 \
         "$1" \
         -gravity Center \
