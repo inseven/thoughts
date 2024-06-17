@@ -51,8 +51,8 @@ struct IntroductionView: View {
                     case .welcome:
                         Page {
                             MarketingView("Welcome to Thoughts") {
-                                Text("Thoughts works with your workflows to help you quickly get your ideas into your existing systems and tools.")
-                                Text("Pair it with apps like [Obsidian](https://obsidian.md) and [Typora](https://typora.io) to organize and take your notes further.")
+                                Text("Thoughts is a lightweight note taking app. It works with your existing workflows to help you quickly get your ideas into the systems and tools you love.")
+                                Text("Thoughts doesn't offer any viewing functionality—pair it with apps like [Obsidian](https://obsidian.md) and [Typora](https://typora.io) to organize and take your notes further.")
                             } header: {
                                 Image("Icon")
                                     .resizable()
