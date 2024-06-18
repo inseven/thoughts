@@ -101,7 +101,7 @@ struct IntroductionView: View {
                                 }
                             }
                             .keyboardShortcut(.cancelAction)
-                            Button("Allow Location Access") {
+                            Button("Save Locations") {
                                 applicationModel.shouldSaveLocation = true
                                 applicationModel.updateUserLocation {
                                     DispatchQueue.main.async {
