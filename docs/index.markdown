@@ -1,6 +1,5 @@
 ---
-title: About
-layout: index
+layout: showcase
 ---
 
 <div>

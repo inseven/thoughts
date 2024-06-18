@@ -1,6 +1,9 @@
-<ul class="navigation">
-    <li><a href="/">{{ site.title }}</a></li>
-    <li><a href="/release-notes">Release Notes</a></li>
-    <li><a href="/privacy-policy">Privacy Policy</a></li>
-    <li><a href="https://github.com/inseven/thoughts" target="_blank">GitHub</a></li>
-</ul>
+<nav>
+    <ul>
+        <li>{% include link.html url="/" title=site.title %}</li>
+        <li>{% include link.html url="/support/" title="Support" %}</li>
+        <li>{% include link.html url="/release-notes/" title="Release Notes" %}</li>
+        <li>{% include link.html url="/privacy-policy/" title="Privacy Policy" %}</li>
+        <li><a target="_blank" href="https://github.com/inseven/thoughts">GitHub</a></li>
+    </ul>
+</nav>
