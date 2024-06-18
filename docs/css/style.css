@@ -1,7 +1,7 @@
 :root {
-    --color: #000;
+    --foreground-color: #000;
     --background-color: #fff;
-    --link-color: #007aff;
+    --link-color: #00c3f6;
     --accent-color-high: #03fbfe;
     --accent-color-low: #008eeb;
 }
@@ -9,9 +9,9 @@
 @media (prefers-color-scheme: dark) {
 
     :root {
-        --color: #fff;
+        --foreground-color: #fff;
         --background-color: #171616;
-        --link-color: #0b84ff;
+        --link-color: #0790ec;
         --accent-color-high: #003a3b;
         --accent-color-low: #1a1e2f;
 
@@ -23,21 +23,20 @@ body {
     text-align: center;
     margin: 0;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-    color: var(--color);
+    color: var(--foreground-color);
     background-color: var(--background-color);
 }
 
-header {
+header.fullscreen {
+    background-image: radial-gradient(var(--accent-color-high), var(--accent-color-low));
     height: 100vh;
     width: 100vw;
     min-height: 800px;
-    background-image: radial-gradient(var(--accent-color-high), var(--accent-color-low));
 }
 
 header nav {
-    position: absolute;
-    top: 0;
-    right: 0;
+    text-align: center;
+    font-weight: 300;
 }
 
 header ul {
@@ -47,13 +46,16 @@ header ul {
 }
 
 header ul li {
-    display: inline;
+    display: inline-block;
+    padding: 1em 0.5em;
 }
 
 header nav a {
-    color: #fff;
     display: inline-block;
-    padding: 1em 0.5em;
+}
+
+header.fullscreen nav a {
+    color: #fff;
 }
 
 .center {
@@ -110,17 +112,20 @@ header nav a {
     line-height: 1.5em;
     min-height: 500px;
     background-color: var(--background-color);
-    color: var(--color);
+    color: var(--foreground-color);
     transition: all 0.3s ease-in-out;
 }
 
-h1, h2 {
+h1, h2, h3 {
     font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'DejaVu Sans Mono', Menlo, Consolas, monospace;
-    margin-top: 3rem;
+    margin-bottom: 2rem;
 }
 
-.details {
-    font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'DejaVu Sans Mono', Menlo, Consolas, monospace;
+h1 {
+    text-align: center;
+}
+
+.content, footer {
     text-align: left;
     max-width: 720px;
     margin: auto;
@@ -128,8 +133,12 @@ h1, h2 {
     line-height: 1.4em;
 }
 
+.content a {
+    font-weight: 300;
+}
+
 @media (max-width: 760px) {
-    .details {
+    .content {
         margin: 2rem;
     }
 }
@@ -149,8 +158,28 @@ a {
 
 footer {
     text-align: center;
-    font-size: 14px;
-    margin-top: 3rem;
+    margin: 3rem auto 1rem auto;
+    font-weight: 100;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer nav ul li {
+    display: inline;
+    margin-right: 0.5em;
+}
+
+footer a {
+    text-decoration: underline;
+    color: var(--foreground-color);
 }
 
 a.symbol::before {
@@ -159,11 +188,15 @@ a.symbol::before {
     width: 1.2em;
     height: 1.2em;
     background-image: url("/images/github.svg");
-    filter: invert(92%) sepia(100%) saturate(0%) hue-rotate(202deg) brightness(106%) contrast(106%);
+    filter: invert(59%) sepia(86%) saturate(2690%) hue-rotate(153deg) brightness(101%) contrast(105%);
     background-repeat: no-repeat;
     background-size: 1.2em;
     padding-right: 0.3em;
     vertical-align: text-top;
+}
+
+header.fullscreen a.symbol::before {
+    filter: invert(92%) sepia(100%) saturate(0%) hue-rotate(202deg) brightness(106%) contrast(106%);
 }
 
 a.symbol.testflight::before {
