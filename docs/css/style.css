@@ -133,10 +133,6 @@ h1 {
     line-height: 1.4em;
 }
 
-.content a {
-    font-weight: 300;
-}
-
 @media (max-width: 760px) {
     .content {
         margin: 2rem;
@@ -150,6 +146,10 @@ h1 {
 a {
     color: var(--link-color);
     text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 .container a {
@@ -175,11 +175,6 @@ footer nav ul {
 footer nav ul li {
     display: inline;
     margin-right: 0.5em;
-}
-
-footer a {
-    text-decoration: underline;
-    color: var(--foreground-color);
 }
 
 a.symbol::before {

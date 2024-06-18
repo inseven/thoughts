@@ -4,8 +4,9 @@ title: default.html
 
 # Support
 
-Known issues are tracked on [GitHub](https://github.com/inseven/thoughts/issues). I'd love your feedback so please feel free to join in the discussion or, if you don't see your issue there, raise a [new one](https://github.com/inseven/thoughts/issues/new) or drop me an [email](mailto:support@jbmorley.co.uk).
+Thoughts is developed in the open on [GitHub](https://github.com/inseven/thoughts). I'd love your feedback so please feel free to join the discussion on [known issues](https://github.com/inseven/thoughts/issues), raise a [new issue](https://github.com/inseven/thoughts/issues/new), drop me an [email](mailto:support@jbmorley.co.uk?subject=Thoughts%20Support), or reach out on [Mastodon](https://mastodon.me.uk/web/@jbmorley).
 
 - [Known Issues](https://github.com/inseven/thoughts/issues)
 - [New Issue](https://github.com/inseven/thoughts/issues/new)
-- [Email Support](mailto:support@jbmorley.co.uk)
+- [Email](mailto:support@jbmorley.co.uk?subject=Thoughts%20Support)
+- [Mastodon](https://mastodon.me.uk/web/@jbmorley)
