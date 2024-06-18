@@ -27,7 +27,7 @@ import Interact
 @main
 struct ThoughtsApp: App {
 
-    static let title = "Thoughts Support (\(Bundle.main.version ?? "Unknown Version"))"
+    static let title = "Thoughts Support (\(Bundle.main.extendedVersion ?? "Unknown Version"))"
 
     var applicationModel: ApplicationModel
     let hotKey: HotKey
@@ -63,7 +63,7 @@ struct ThoughtsApp: App {
 
         About(repository: "inseven/thoughts", copyright: "Copyright © 2024 Jason Morley") {
             Action("Website", url: URL(string: "https://thoughts.jbmorley.co.uk")!)
-            Action("Privacy Policy", url: URL(string: "https://thoughts.jbmorley.co.uk/#privacy-policy")!)
+            Action("Privacy Policy", url: URL(string: "https://thoughts.jbmorley.co.uk/privacy-policy")!)
             Action("GitHub", url: URL(string: "https://github.com/inseven/thoughts")!)
             Action("Support", url: URL(address: "support@jbmorley.co.uk", subject: Self.title)!)
         } acknowledgements: {
