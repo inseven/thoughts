@@ -88,7 +88,7 @@ struct IntroductionView: View {
                     case .location:
                         Page {
                             MarketingView("Remember Your Location", systemImage: "location") {
-                                Text("Thoughts can store your location in Frontmatter so you never forget where you were when you had that important idea.")
+                                Text("Thoughts can automatically store your location in Frontmatter so you never forget where you were when you had that important idea.")
                                 LocationPreview()
                             } footer: {
                                 Text("Thoughts never collects or stores your data. See our [Privacy Policy](https://thoughts.jbmorley.co.uk/#privacy-policy).")
