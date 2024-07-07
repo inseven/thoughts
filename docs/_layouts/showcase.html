@@ -11,10 +11,14 @@
                 </div>
             </div>
             <div id="source">
-                {{ content }}
+                {% include fetch_page.html page_path='showcase.md' %}
             </div>
         </header>
-        <div class="content"></div>
+        <div class="features">
+
+            {{ content }}
+
+        </div>
         {% include footer.html %}
 
         <script>

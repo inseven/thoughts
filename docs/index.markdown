@@ -2,18 +2,31 @@
 layout: showcase
 ---
 
-<div>
-    <strong>**Thoughts**</strong> is a lightweight note taking app for macOS.
-</div>
-<div>&nbsp;</div>
-<div>
-    It’s for recording <em>_ephemeral_</em> notes. For when you just want to get something down and out of your head, happy in the knowledge that it’s recorded <em>_somewhere_</em>.
-</div>
-<div>&nbsp;</div>
-<div>
-    Thoughts doesn’t offer any viewing functionality--it’s all about file-and-forget. It saves notes in <strong>**Markdown**</strong> and <strong>**Frontmatter**</strong> so it pairs perfectly with tools like <a href="https://obsidian.md" target="_blank">[Obsidian](https://obsidian.md)</a> and static site builders like <a href="https://jekyllrb.com" target="_blank">[Jekyll](https://jekyllrb.com)</a>, <a href="https://gohugo.io" target="_blank">[Hugo](https://gohugo.io)</a>, and <a href="https://incontext.app" target="_blank">[InContext](https://incontext.app)</a>.
-</div>
-<div>&nbsp;</div>
-<div>
-    Get it on <a href="https://testflight.apple.com/join/FgskNeh0" target="_blank">[TestFlight](https://testflight.apple.com/join/FgskNeh0)</a>.
-</div>
+<p class="header">
+    <img src="/images/icon_128x128.png" srcset="/images/icon_128x128.png, /images/icon_128x128@2x.png 2x" width="128" height="128">
+</p>
+
+# Thoughts
+<p class="tagline">Lightweight Note Taking for macOS</p>
+
+<nav class="actions">
+    <a href="https://apps.apple.com/app/thoughts-by-jason-morley/id6476892466">
+        <img src="images/appstore-badge.svg" alt="Download on the Mac App Store" width="250">
+    </a>
+</nav>
+
+- **Capture Your Ideas**
+
+  Thoughts stores all your notes in a folder of your choosing so you can easily integrate it with your exiting workflows.
+
+- **Remember Your Location**
+
+  Thoughts can automatically store your location in Frontmatter so you never forget where you were when you had that important idea.
+
+- **Always Available**
+
+  Thoughts lives in the Menu Bar, waiting for your notes.
+
+- **Keyboard First**
+
+  Use global shortcuts to write and edit notes without taking your hands off the keyboard.

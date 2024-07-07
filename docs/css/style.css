@@ -1,6 +1,7 @@
 :root {
     --foreground-color: #000;
     --background-color: #fff;
+    --secondary-background-color: rgb(246, 246, 246);
     --link-color: #00c3f6;
     --accent-color-high: #03fbfe;
     --accent-color-low: #008eeb;
@@ -11,6 +12,7 @@
     :root {
         --foreground-color: #fff;
         --background-color: #171616;
+        --secondary-background-color: rgb(33, 32, 33);
         --link-color: #0790ec;
         --accent-color-high: #003a3b;
         --accent-color-low: #1a1e2f;
@@ -125,12 +127,42 @@ h1 {
     text-align: center;
 }
 
-.content, footer {
+.content, .features, footer {
     text-align: left;
     max-width: 720px;
     margin: auto;
     font-weight: 200;
     line-height: 1.4em;
+}
+
+.header {
+    text-align: center;
+}
+
+.tagline {
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: 400;
+}
+
+nav.actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.features ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+    row-gap: 1rem;
+}
+
+.features ul li {
+    background-color: var(--secondary-background-color);
+    padding: 1rem 2rem;
+    border-radius: 1rem;
 }
 
 @media (max-width: 760px) {
