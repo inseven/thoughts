@@ -149,6 +149,8 @@ xcodebuild \
     -exportPath "$BUILD_DIRECTORY" \
     -exportOptionsPlist "ExportOptions_App_Store.plist"
 
+PKG_PATH="$BUILD_DIRECTORY/Thoughts.pkg"
+
 # Export the app for Developer ID distribution.
 xcodebuild \
     -archivePath "$ARCHIVE_PATH" \
@@ -156,9 +158,16 @@ xcodebuild \
     -exportPath "$BUILD_DIRECTORY" \
     -exportOptionsPlist "ExportOptions_Developer_ID.plist"
 
+# Apple recommends we use ditto to prepare zips for notarization.
+# https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow
 APP_BASENAME="Thoughts.app"
-APP_PATH="$BUILD_DIRECTORY/$APP_BASENAME"
-PKG_PATH="$BUILD_DIRECTORY/Thoughts.pkg"
+RELEASE_BASENAME="Thoughts-$VERSION_NUMBER-$BUILD_NUMBER"
+RELEASE_ZIP_BASENAME="$RELEASE_BASENAME.zip"
+RELEASE_ZIP_PATH="$BUILD_DIRECTORY/$RELEASE_ZIP_BASENAME"
+pushd "$BUILD_DIRECTORY"
+/usr/bin/ditto -c -k --keepParent "$APP_BASENAME" "$RELEASE_ZIP_BASENAME"
+rm -r "$APP_BASENAME"
+popd
 
 # Install the private key.
 mkdir -p ~/.appstoreconnect/private_keys/
