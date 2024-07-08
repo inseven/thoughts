@@ -140,11 +140,20 @@ xcode_project \
     CURRENT_PROJECT_VERSION=$BUILD_NUMBER \
     MARKETING_VERSION=$VERSION_NUMBER \
     clean archive
+
+# Export the app for App Store distribution.
 xcodebuild \
     -archivePath "$ARCHIVE_PATH" \
     -exportArchive \
     -exportPath "$BUILD_DIRECTORY" \
     -exportOptionsPlist "ExportOptions_App_Store.plist"
+
+# Export the app for Developer ID distribution.
+xcodebuild \
+    -archivePath "$ARCHIVE_PATH" \
+    -exportArchive \
+    -exportPath "$BUILD_DIRECTORY" \
+    -exportOptionsPlist "ExportOptions_Developer_ID.plist"
 
 APP_BASENAME="Thoughts.app"
 APP_PATH="$BUILD_DIRECTORY/$APP_BASENAME"
