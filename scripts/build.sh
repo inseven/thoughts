@@ -144,7 +144,7 @@ xcodebuild \
     -archivePath "$ARCHIVE_PATH" \
     -exportArchive \
     -exportPath "$BUILD_DIRECTORY" \
-    -exportOptionsPlist "ExportOptions.plist"
+    -exportOptionsPlist "ExportOptions_App_Store.plist"
 
 APP_BASENAME="Thoughts.app"
 APP_PATH="$BUILD_DIRECTORY/$APP_BASENAME"

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>destination</key>
+	<string>export</string>
+	<key>method</key>
+	<string>developer-id</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>uk.co.jbmorley.thoughts.apps.appstore</key>
+		<string>Thoughts Developer ID Profile</string>
+	</dict>
+	<key>signingCertificate</key>
+	<string>B5DB546F567DD468E35B78B004E1797C860474F1</string>
+	<key>signingStyle</key>
+	<string>manual</string>
+	<key>teamID</key>
+	<string>QS82QFHKWB</string>
+</dict>
+</plist>
