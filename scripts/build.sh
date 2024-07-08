@@ -124,6 +124,7 @@ BUILD_NUMBER=`build-number.swift`
 
 # Import the certificates into our dedicated keychain.
 echo "$APPLE_DISTRIBUTION_CERTIFICATE_PASSWORD" | build-tools import-base64-certificate --password "$KEYCHAIN_PATH" "$APPLE_DISTRIBUTION_CERTIFICATE_BASE64"
+echo "$DEVELOPER_ID_APPLICATION_CERTIFICATE_PASSWORD" | build-tools import-base64-certificate --password "$KEYCHAIN_PATH" "$DEVELOPER_ID_APPLICATION_CERTIFICATE_BASE64"
 echo "$MACOS_DEVELOPER_INSTALLER_CERTIFICATE_PASSWORD" | build-tools import-base64-certificate --password "$KEYCHAIN_PATH" "$MACOS_DEVELOPER_INSTALLER_CERTIFICATE_BASE64"
 
 # Install the provisioning profiles.
@@ -140,25 +141,65 @@ xcode_project \
     CURRENT_PROJECT_VERSION=$BUILD_NUMBER \
     MARKETING_VERSION=$VERSION_NUMBER \
     clean archive
+
+# Export the app for App Store distribution.
 xcodebuild \
     -archivePath "$ARCHIVE_PATH" \
     -exportArchive \
     -exportPath "$BUILD_DIRECTORY" \
-    -exportOptionsPlist "ExportOptions.plist"
+    -exportOptionsPlist "ExportOptions_App_Store.plist"
 
-APP_BASENAME="Thoughts.app"
-APP_PATH="$BUILD_DIRECTORY/$APP_BASENAME"
 PKG_PATH="$BUILD_DIRECTORY/Thoughts.pkg"
+
+# Export the app for Developer ID distribution.
+xcodebuild \
+    -archivePath "$ARCHIVE_PATH" \
+    -exportArchive \
+    -exportPath "$BUILD_DIRECTORY" \
+    -exportOptionsPlist "ExportOptions_Developer_ID.plist"
+
+# Apple recommends we use ditto to prepare zips for notarization.
+# https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow
+APP_BASENAME="Thoughts.app"
+RELEASE_BASENAME="Thoughts-$VERSION_NUMBER-$BUILD_NUMBER"
+RELEASE_ZIP_BASENAME="$RELEASE_BASENAME.zip"
+RELEASE_ZIP_PATH="$BUILD_DIRECTORY/$RELEASE_ZIP_BASENAME"
+pushd "$BUILD_DIRECTORY"
+/usr/bin/ditto -c -k --keepParent "$APP_BASENAME" "$RELEASE_ZIP_BASENAME"
+rm -r "$APP_BASENAME"
+popd
 
 # Install the private key.
 mkdir -p ~/.appstoreconnect/private_keys/
-echo -n "$APPLE_API_KEY_BASE64" | base64 --decode -o ~/".appstoreconnect/private_keys/AuthKey_${APPLE_API_KEY_ID}.p8"
+API_KEY_PATH=~/".appstoreconnect/private_keys/AuthKey_${APPLE_API_KEY_ID}.p8"
+echo -n "$APPLE_API_KEY_BASE64" | base64 --decode -o "$API_KEY_PATH"
+
+# Notarize the app.
+xcrun notarytool submit "$RELEASE_ZIP_PATH" \
+    --key "$API_KEY_PATH" \
+    --key-id "$APPLE_API_KEY_ID" \
+    --issuer "$APPLE_API_KEY_ISSUER_ID" \
+    --output-format json \
+    --wait | tee command-notarization-response.json
+NOTARIZATION_ID=`cat command-notarization-response.json | jq -r ".id"`
+NOTARIZATION_RESPONSE=`cat command-notarization-response.json | jq -r ".status"`
+
+xcrun notarytool log \
+    --key "$API_KEY_PATH" \
+    --key-id "$APPLE_API_KEY_ID" \
+    --issuer "$APPLE_API_KEY_ISSUER_ID" \
+    "$NOTARIZATION_ID" | tee "$BUILD_DIRECTORY/notarization-log.json"
+
+if [ "$NOTARIZATION_RESPONSE" != "Accepted" ] ; then
+    echo "Failed to notarize command."
+    exit 1
+fi
 
 # Archive the build directory.
-ZIP_BASENAME="build-${VERSION_NUMBER}-${BUILD_NUMBER}.zip"
-ZIP_PATH="${BUILD_DIRECTORY}/${ZIP_BASENAME}"
-pushd "${BUILD_DIRECTORY}"
-zip -r "${ZIP_BASENAME}" .
+ZIP_BASENAME="build-$VERSION_NUMBER-$BUILD_NUMBER.zip"
+ZIP_PATH="$BUILD_DIRECTORY/$ZIP_BASENAME"
+pushd "$BUILD_DIRECTORY"
+zip -r "$ZIP_BASENAME" .
 popd
 
 if $RELEASE ; then
@@ -168,7 +209,7 @@ if $RELEASE ; then
         --skip-if-empty \
         --pre-release \
         --push \
-        --exec "${RELEASE_SCRIPT_PATH}" \
-        "${PKG_PATH}" "${ZIP_PATH}"
+        --exec "$RELEASE_SCRIPT_PATH" \
+        "$PKG_PATH" "$ZIP_PATH" "$RELEASE_ZIP_PATH"
 
 fi
