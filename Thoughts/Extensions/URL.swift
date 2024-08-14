@@ -21,9 +21,7 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-import Diligence
 import FSEventsWrapper
-import Interact
 
 extension URL {
 
