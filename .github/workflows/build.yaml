@@ -67,14 +67,8 @@ jobs:
         git submodule update --init --depth 1 scripts/build-tools
         git submodule update --init --depth 1 scripts/changes
 
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.9"
-
-    - name: Install pipenv
-      run: |
-        python -m pip install --upgrade pipenv wheel
+    - name: Install the tool dependencies
+      uses: jdx/mise-action@v2
 
     - name: Install dependencies
       run: scripts/install-dependencies.sh
