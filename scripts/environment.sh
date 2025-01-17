@@ -21,12 +21,15 @@
 # SOFTWARE.
 
 SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-ROOT_DIRECTORY="${SCRIPTS_DIRECTORY}/.."
+ROOT_DIRECTORY="$SCRIPTS_DIRECTORY/.."
 
-export PYTHONUSERBASE="${ROOT_DIRECTORY}/.local/python"
+export LOCAL_TOOLS_PATH="$ROOT_DIRECTORY/.local"
+
+export PYTHONUSERBASE="$LOCAL_TOOLS_PATH/python"
 mkdir -p "$PYTHONUSERBASE"
-export PATH="${PYTHONUSERBASE}/bin":$PATH
+export PATH="$PYTHONUSERBASE/bin":$PATH
+export PYTHONPATH=$PYTHONUSERBASE
 
-export PATH=$PATH:"${SCRIPTS_DIRECTORY}/changes"
-export PATH=$PATH:"${SCRIPTS_DIRECTORY}/build-tools"
-export PATH=$PATH:"${ROOT_DIRECTORY}/dependencies/diligence/scripts"
+export PATH=$PATH:"$SCRIPTS_DIRECTORY/changes"
+export PATH=$PATH:"$SCRIPTS_DIRECTORY/build-tools"
+export PATH=$PATH:"$ROOT_DIRECTORY/dependencies/diligence/scripts"
