@@ -29,7 +29,6 @@ struct SettingsWindow: Scene {
     var body: some Scene {
         Window("Thoughts Settings", id: Self.windowID) {
             SettingsView(applicationModel: applicationModel)
-                .minimizeDisabled()
         }
         .defaultPosition(.center)
         .windowResizability(.contentSize)
