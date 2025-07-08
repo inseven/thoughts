@@ -13,3 +13,7 @@ title: Showcase
 <div>
     Thoughts doesn’t offer any viewing functionality--it’s all about file-and-forget. It saves notes in <strong>**Markdown**</strong> and <strong>**Frontmatter**</strong> so it pairs perfectly with tools like <a href="https://obsidian.md" target="_blank">[Obsidian](https://obsidian.md)</a> and static site builders like <a href="https://jekyllrb.com" target="_blank">[Jekyll](https://jekyllrb.com)</a>, <a href="https://gohugo.io" target="_blank">[Hugo](https://gohugo.io)</a>, and <a href="https://incontext.app" target="_blank">[InContext](https://incontext.app)</a>.
 </div>
+<div>&nbsp;</div>
+<div>
+    Download it on the <a href="https://apps.apple.com/app/thoughts-by-jason-morley/id6476892466">[App Store](https://apps.apple.com/app/thoughts-by-jason-morley/id6476892466)</a>.
+</div>
