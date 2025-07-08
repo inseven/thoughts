@@ -1,8 +1,8 @@
 ---
-title: Release Notes
+title: Releases
 ---
 
-# Release Notes
+# Releases
 
 {% for release in releases -%}
 ## {{ release.version }}{% if not release.is_released %} (Unreleased){% endif %}
