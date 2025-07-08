@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Jason Morley
+// Copyright (c) 2024-2025 Jason Morley
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -61,7 +61,7 @@ struct ThoughtsApp: App {
             .environment(applicationModel)
             .handlesExternalEvents(matching: [.settings])
 
-        About(repository: "inseven/thoughts", copyright: "Copyright © 2024 Jason Morley") {
+        About(repository: "inseven/thoughts", copyright: "Copyright © 2024-2025 Jason Morley") {
             Action("Website", url: URL(string: "https://thoughts.jbmorley.co.uk")!)
             Action("Privacy Policy", url: URL(string: "https://thoughts.jbmorley.co.uk/privacy-policy")!)
             Action("GitHub", url: URL(string: "https://github.com/inseven/thoughts")!)
