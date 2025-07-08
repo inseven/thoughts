@@ -1,8 +1,8 @@
 [submodule "diligence"]
-	path = dependencies/diligence
+	path = macos/dependencies/diligence
 	url = git@github.com:inseven/diligence.git
 [submodule "interact"]
-	path = dependencies/interact
+	path = macos/dependencies/interact
 	url = git@github.com:inseven/interact.git
 [submodule "scripts/changes"]
 	path = scripts/changes
@@ -11,11 +11,11 @@
 	path = scripts/build-tools
 	url = https://github.com/jbmorley/build-tools.git
 [submodule "HighlightedTextEditor"]
-	path = dependencies/HighlightedTextEditor
+	path = macos/dependencies/HighlightedTextEditor
 	url = git@github.com:jbmorley/HighlightedTextEditor.git
 [submodule "TagField"]
-	path = dependencies/TagField
+	path = macos/dependencies/TagField
 	url = git@github.com:jbmorley/TagField.git
 [submodule "dependencies/FrontmatterSwift"]
-	path = dependencies/FrontmatterSwift
+	path = macos/dependencies/FrontmatterSwift
 	url = git@github.com:jbmorley/FrontmatterSwift.git
