@@ -35,19 +35,20 @@ struct SettingsView: View {
     var body: some View {
         @Bindable var applicationModel = applicationModel
         Form {
-            Section {
+            Section("General") {
                 Toggle("Open at Login", isOn: $application.openAtLogin)
-                Button("Set Notes Folder") {
-                    _ = applicationModel.setRootURL()
-                }
+                FilePicker("Notes Folder",
+                           url: $applicationModel.rootURL,
+                           options: [.canChooseDirectories, .canCreateDirectories])
             }
 #if DEBUG
-            Section {
+            Section("Debug") {
                 Toggle("Use Demo Data", isOn: $applicationModel.useDemoData)
             }
 #endif
 
         }
+        .formStyle(.grouped)
         .frame(width: 400, height: 400)
     }
 
