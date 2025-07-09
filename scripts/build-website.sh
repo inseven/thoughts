@@ -30,19 +30,11 @@ SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd 
 ROOT_DIRECTORY="$SCRIPTS_DIRECTORY/.."
 WEBSITE_DIRECTORY="$ROOT_DIRECTORY/docs"
 
-RELEASE_NOTES_TEMPLATE_PATH="$SCRIPTS_DIRECTORY/release-notes.md"
-HISTORY_PATH="$SCRIPTS_DIRECTORY/history.yaml"
-RELEASE_NOTES_DIRECTORY="$ROOT_DIRECTORY/docs/release-notes"
-RELEASE_NOTES_PATH="$RELEASE_NOTES_DIRECTORY/index.md"
-
 source "$SCRIPTS_DIRECTORY/environment.sh"
 
 cd "$ROOT_DIRECTORY"
 
 # Update the release notes.
-if [ -d "$RELEASE_NOTES_DIRECTORY" ]; then
-    rm -r "$RELEASE_NOTES_DIRECTORY"
-fi
 "$SCRIPTS_DIRECTORY/update-release-notes.sh"
 
 # Install the Jekyll dependencies.
