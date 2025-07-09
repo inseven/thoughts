@@ -132,7 +132,8 @@ build-tools install-provisioning-profile "profiles/Thoughts_Mac_App_Store_Profil
 
 # Build and archive the macOS project.
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
-xcode_project \
+xcodebuild \
+    -project Thoughts.xcodeproj \
     -scheme "Thoughts" \
     -config Release \
     -archivePath "$ARCHIVE_PATH" \
