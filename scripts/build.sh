@@ -84,7 +84,7 @@ sudo xcode-select --switch "$MACOS_XCODE_PATH"
 
 # List the available schemes.
 xcodebuild \
-    -project Folders.xcodeproj \
+    -project Thoughts.xcodeproj \
     -list
 
 # Clean up and recreate the output directories.
