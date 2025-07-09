@@ -39,13 +39,15 @@ jobs:
         APPLE_API_KEY_ISSUER_ID: ${{ secrets.PERSONAL_APPLE_API_KEY_ISSUER_ID }}
         APPLE_API_KEY_ID: ${{ secrets.PERSONAL_APPLE_API_KEY_ID }}
 
+        SPARKLE_PRIVATE_KEY_BASE64: ${{ secrets.SPARKLE_PRIVATE_KEY_BASE64 }}
+
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         RELEASE: ${{ github.ref == 'refs/heads/main' }}
 
       run: |
         scripts/build.sh
 
-    - name: Archive the binary
+    - name: Archive binary
       uses: actions/upload-artifact@v4
       with:
         path: build/build-*.zip
@@ -103,3 +105,17 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4 # or the latest "vX.X.X" version tag for this action
+
+  sparkle-update:
+    needs: macos-build
+    if: ${{ github.ref == 'refs/heads/main' }}
+
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Update Sparkle archives
+      uses: peter-evans/repository-dispatch@v3
+      with:
+        token: ${{ secrets._GITHUB_ACCESS_TOKEN }}
+        repository: inseven/sparkle-archives
+        event-type: build
