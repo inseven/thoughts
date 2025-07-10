@@ -116,6 +116,13 @@ class ApplicationModel: NSObject {
         self.start()
     }
 
+    var isAppStoreRelease: Bool = {
+        guard let appStoreReceiptURL = Bundle.main.appStoreReceiptURL else {
+            return false
+        }
+        return FileManager.default.fileExists(atPath: appStoreReceiptURL.path)
+    }()
+
     @MainActor private func start() {
 
         // Watch the document for changes, debounce, and save changes to disk.
@@ -148,7 +155,7 @@ class ApplicationModel: NSObject {
         }
 
 #if !DEBUG
-        if Bundle.main.appStoreReceiptURL == nil {
+        if !isAppStoreRelease {
             updaterController.startUpdater()
         }
 #endif
