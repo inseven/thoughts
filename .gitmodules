@@ -19,3 +19,6 @@
 [submodule "dependencies/FrontmatterSwift"]
 	path = macos/dependencies/FrontmatterSwift
 	url = git@github.com:jbmorley/FrontmatterSwift.git
+[submodule "scripts/Sparkle"]
+	path = scripts/Sparkle
+	url = https://github.com/sparkle-project/Sparkle

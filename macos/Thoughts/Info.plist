@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>SUEnableInstallerLauncherService</key>
+	<true/>
+	<key>SUFeedURL</key>
+	<string>https://sparkle.jbmorley.co.uk/inseven/thoughts/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>3EjNyhaYtMraXwX9DnIazXbJe4worl2Bktkt8VrZXZk=</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

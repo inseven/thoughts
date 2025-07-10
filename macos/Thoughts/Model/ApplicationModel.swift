@@ -24,6 +24,7 @@ import CoreLocation
 import Foundation
 
 import Interact
+import Sparkle
 
 @Observable
 class ApplicationModel: NSObject {
@@ -100,6 +101,10 @@ class ApplicationModel: NSObject {
     private let keyedDefaults = KeyedDefaults<SettingsKey>()
     private let locationManager = CLLocationManager()
 
+    let updaterController = SPUStandardUpdaterController(startingUpdater: false,
+                                                         updaterDelegate: nil,
+                                                         userDriverDelegate: nil)
+
     @MainActor override init() {
         rootURL = try? keyedDefaults.securityScopedURL(forKey: .rootURL)
         shouldSaveLocation = keyedDefaults.bool(forKey: .shouldSaveLocation, default: false)
@@ -141,6 +146,12 @@ class ApplicationModel: NSObject {
         if !didShowIntroduction {
             showIntroduction()
         }
+
+#if !DEBUG
+        if Bundle.main.appStoreReceiptURL == nil {
+            updaterController.startUpdater()
+        }
+#endif
     }
 
     @MainActor func showIntroduction() {

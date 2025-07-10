@@ -21,6 +21,7 @@
 import Foundation
 
 import FrontmatterSwift
+import Glitter
 import Interact
 import Licensable
 import TagField
@@ -69,6 +70,7 @@ fileprivate let thoughtsLicense = License(id: "https://github.com/inseven/though
                                           ],
                                           licenses: [
                                             .frontmatterSwift,
+                                            .glitter,
                                             .interact,
                                             .licensable,
                                             .tagField,
