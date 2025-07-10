@@ -15,5 +15,5 @@ title: Showcase
 </div>
 <div>&nbsp;</div>
 <div>
-    Download it on the <a href="https://apps.apple.com/app/thoughts-by-jason-morley/id6476892466">[App Store](https://apps.apple.com/app/thoughts-by-jason-morley/id6476892466)</a>.
+    Download it <a href="{{ site.env.DOWNLOAD_URL }}">[here]({{ site.env.DOWNLOAD_URL }})</a>.
 </div>
