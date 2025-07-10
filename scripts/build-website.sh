@@ -45,6 +45,18 @@ gem install bundler
 cd "$WEBSITE_DIRECTORY"
 bundle install
 
+# Get the latest release URL.
+if ! DOWNLOAD_URL=$(build-tools latest-github-release inseven reconnect "Thoughts-*.zip"); then
+    echo >&2 failed
+    exit 1
+fi
+# Belt-and-braces check that we managed to get the download URL.
+if [[ -z "$DOWNLOAD_URL" ]]; then
+    echo "Failed to get release download URL."
+    exit 1
+fi
+export DOWNLOAD_URL
+
 # Build the website.
 cd "$WEBSITE_DIRECTORY"
 bundle exec jekyll build

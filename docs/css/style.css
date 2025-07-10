@@ -1,72 +1,81 @@
 :root {
-    --foreground-color: #000;
-    --background-color: #fff;
+    --primary-foreground-color: #000;
+    --secondary-foreground-color: gray;
     --secondary-background-color: rgb(246, 246, 246);
-    --link-color: #00c3f6;
+    --brand-color: #00c3f6;
     --accent-color-high: #03fbfe;
     --accent-color-low: #008eeb;
+    --background-color: #ffffff;
+    --navigation-background: rgba(255, 255, 255, 0.7);
+    --primary-action-background-color: #007aff;
+    --vertical-spacing: 1rem;
 }
 
 @media (prefers-color-scheme: dark) {
 
     :root {
-        --foreground-color: #fff;
+        --primary-foreground-color: #fff;
+        --secondary-foreground-color: gray;
         --background-color: #171616;
         --secondary-background-color: rgb(33, 32, 33);
-        --link-color: #0790ec;
+        --brand-color: #0790ec;
         --accent-color-high: #003a3b;
         --accent-color-low: #1a1e2f;
 
+        --navigation-background: rgba(24, 24, 24, 0.7);
+        --primary-action-background-color: #0a84ff;
     }
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    text-align: center;
+    font-family: Helvetica, sans-serif;
+    font-weight: 200;
+    font-size: 17px;
     margin: 0;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-    color: var(--foreground-color);
+    color: var(--primary-foreground-color);
     background-color: var(--background-color);
 }
 
-header.fullscreen {
-    background-image: radial-gradient(var(--accent-color-high), var(--accent-color-low));
-    height: 100vh;
-    width: 100vw;
-    min-height: 800px;
+a {
+    text-decoration: underline;
+    color: var(--primary-foreground-color);
 }
 
-header nav {
-    text-align: center;
-    font-weight: 300;
+a:hover {
+    color: var(--brand-color);
 }
 
-header ul {
+ul.navigation {
     list-style: none;
     margin: 0;
-    padding: 0 0.5em;
+    padding: 1em;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+    font-weight: 400;
+    text-align: center;
+    background: var(--navigation-background);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
-header ul li {
+.showcase {
+    background-image: radial-gradient(var(--accent-color-high), var(--accent-color-low));
+    width: 100vw;
+    transition: 0.3s ease-in-out;
+}
+
+ul.navigation a {
+    text-decoration: none;
+}
+
+ul.navigation > li {
     display: inline-block;
-    padding: 1em 0.5em;
-}
-
-header nav a {
-    display: inline-block;
-}
-
-header.fullscreen nav a {
-    color: #fff;
-}
-
-.center {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    padding: 0.4em;
 }
 
 .window {
@@ -78,6 +87,7 @@ header.fullscreen nav a {
     border-style: solid;
     border-image: url("/images/window@2x.png") 182 114 267 114 round;
     transition: border-image 0.3s ease-in-out;
+    position: relative;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -92,8 +102,8 @@ header.fullscreen nav a {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 600;
     position: absolute;
-    left: 146px;
-    top: 49px;
+    left: 88px;
+    top: -42px;
     font-size: 13px;
     color: #494949;
 }
@@ -114,7 +124,7 @@ header.fullscreen nav a {
     line-height: 1.5em;
     min-height: 500px;
     background-color: var(--background-color);
-    color: var(--foreground-color);
+    color: var(--primary-foreground-color);
     transition: all 0.3s ease-in-out;
 }
 
@@ -139,15 +149,30 @@ h1 {
     text-align: center;
 }
 
-.tagline {
+.appname {
+    font-weight: 800;
     text-align: center;
-    font-size: 1.4em;
-    font-weight: 400;
+    font-size: 3em;
+    margin-bottom: var(--vertical-spacing);
 }
 
-nav.actions {
+.tagline {
     text-align: center;
-    margin-top: 30px;
+    font-size: 1.2em;
+    margin-bottom: var(--vertical-spacing);
+}
+
+.actions {
+    text-align: center;
+}
+
+.button, .button:hover {
+    color: white;
+    background-color: var(--primary-action-background-color);
+    border-radius: 100vh;
+    padding: 1rem 1.6rem;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .features ul {
@@ -155,14 +180,8 @@ nav.actions {
     padding: 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: 1rem;
-    row-gap: 1rem;
-}
-
-.features ul li {
-    background-color: var(--secondary-background-color);
-    padding: 1rem 2rem;
-    border-radius: 1rem;
+    column-gap: var(--vertical-spacing);
+    row-gap: var(--vertical-spacing);
 }
 
 @media (max-width: 760px) {
@@ -175,27 +194,25 @@ nav.actions {
     display: none;
 }
 
-a {
-    color: var(--link-color);
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
 .container a {
     font-weight: bold;
 }
 
 footer {
+    max-width: var(--content-width);
+    margin: auto;
+    padding: 2em;
     text-align: center;
-    margin: 3rem auto 1rem auto;
-    font-weight: 100;
+    color: var(--secondary-foreground-color);
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: var(--secondary-foreground-color);
 }
 
 footer p {
-    margin: 0;
+    margin: var(--vertical-spacing) 0 calc(var(--vertical-spacing) / 2) 0;
 }
 
 footer nav ul {
@@ -206,7 +223,7 @@ footer nav ul {
 
 footer nav ul li {
     display: inline;
-    margin-right: 0.5em;
+    margin-right: 0.4em;
 }
 
 a.symbol::before {
