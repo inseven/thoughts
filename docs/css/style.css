@@ -33,8 +33,8 @@ body {
     font-size: 17px;
     margin: 0;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-    color: var(--primary-foreground-color);
     background-color: var(--background-color);
+    color: var(--primary-foreground-color);
 }
 
 a {
@@ -63,12 +63,6 @@ ul.navigation {
     -webkit-backdrop-filter: blur(10px);
 }
 
-.showcase {
-    background-image: radial-gradient(var(--accent-color-high), var(--accent-color-low));
-    width: 100vw;
-    transition: 0.3s ease-in-out;
-}
-
 ul.navigation a {
     text-decoration: none;
 }
@@ -76,6 +70,14 @@ ul.navigation a {
 ul.navigation > li {
     display: inline-block;
     padding: 0.4em;
+}
+
+.showcase {
+    background-image: radial-gradient(var(--accent-color-high), var(--accent-color-low));
+    width: 100vw;
+    transition: 0.3s ease-in-out;
+    margin: calc(2 * var(--vertical-spacing)) 0;
+    padding-top: 38px;
 }
 
 .window {
@@ -224,25 +226,4 @@ footer nav ul {
 footer nav ul li {
     display: inline;
     margin-right: 0.4em;
-}
-
-a.symbol::before {
-    content: "";
-    display: inline-block;
-    width: 1.2em;
-    height: 1.2em;
-    background-image: url("/images/github.svg");
-    filter: invert(59%) sepia(86%) saturate(2690%) hue-rotate(153deg) brightness(101%) contrast(105%);
-    background-repeat: no-repeat;
-    background-size: 1.2em;
-    padding-right: 0.3em;
-    vertical-align: text-top;
-}
-
-header.fullscreen a.symbol::before {
-    filter: invert(92%) sepia(100%) saturate(0%) hue-rotate(202deg) brightness(106%) contrast(106%);
-}
-
-a.symbol.testflight::before {
-    background-image: url("/images/download.svg");
 }

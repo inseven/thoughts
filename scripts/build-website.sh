@@ -46,7 +46,7 @@ cd "$WEBSITE_DIRECTORY"
 bundle install
 
 # Get the latest release URL.
-if ! DOWNLOAD_URL=$(build-tools latest-github-release inseven reconnect "Thoughts-*.zip"); then
+if ! DOWNLOAD_URL=$(build-tools latest-github-release inseven thoughts "Thoughts-*.zip"); then
     echo >&2 failed
     exit 1
 fi
