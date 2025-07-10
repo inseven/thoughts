@@ -2,18 +2,30 @@
 <html lang="en-US">
     {% include head.html %}
     <body>
-        <header class="fullscreen">
-            {% include navigation.html %}
-            <div class="center">
-                <div class="window">
-                    <div id="title" class="title">Friday 3 May 2024 at 11:11:15</div>
-                    <div id="container" class="container"></div>
-                </div>
+        {% include navigation.html %}
+
+        <p class="header">
+            <img src="/images/icon_128x128.png"
+                srcset="/images/icon_128x128.png, /images/icon_128x128@2x.png 2x"
+                width="128"
+                height="128" />
+            <div class="appname">Thoughts</div>
+            <div class="tagline">{{ site.description }}</div>
+            <div class="actions">
+                <a class="button no-rewrite" href="{{ site.env.DOWNLOAD_URL }}">Download</a>
+            </div>
+        </p>
+
+        <div class="showcase">
+            <div class="window">
+                <div id="title" class="title">Friday 3 May 2024 at 11:11:15</div>
+                <div id="container" class="container"></div>
             </div>
             <div id="source">
                 {% include fetch_page.html page_path='showcase.md' %}
             </div>
-        </header>
+        </div>
+
         <div class="features">
 
             {{ content }}
