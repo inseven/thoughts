@@ -28,12 +28,12 @@ set -x
 # to be passed as subsequent arguments.
 
 # Upload the macOS build.
-xcrun altool --upload-app \
-    -f "$1" \
-    --primary-bundle-id "uk.co.jbmorley.thoughts.apps.appstore" \
-    --apiKey "$APPLE_API_KEY_ID" \
-    --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
-    --type macos
+# xcrun altool --upload-app \
+    # -f "$1" \
+    # --primary-bundle-id "uk.co.jbmorley.thoughts.apps.appstore" \
+    # --apiKey "$APPLE_API_KEY_ID" \
+    # --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
+    # --type macos
 
 # Actually make the release.
 FLAGS=()
