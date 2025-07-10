@@ -51,7 +51,7 @@ struct ThoughtsApp: App {
         }
         .commands {
             ThoughtsCommands(applicationModel: applicationModel)
-            if Bundle.main.appStoreReceiptURL == nil {
+            if !applicationModel.isAppStoreRelease {
                 UpdateCommands(updater: applicationModel.updaterController.updater)
             }
         }
