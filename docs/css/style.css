@@ -170,23 +170,6 @@ ul.navigation > li {
     transition: all 0.3s ease-in-out;
 }
 
-h1, h2, h3 {
-    font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'DejaVu Sans Mono', Menlo, Consolas, monospace;
-    margin-bottom: 2rem;
-}
-
-h1 {
-    text-align: center;
-}
-
-/* .content, .features, footer {
-    text-align: left;
-    max-width: 720px;
-    margin: auto;
-    font-weight: 200;
-    line-height: 1.4em;
-} */
-
 .header {
     text-align: center;
 }

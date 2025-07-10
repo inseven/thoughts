@@ -1,8 +1,7 @@
 ---
 title: Releases
+layout: page
 ---
-
-# Releases
 
 {% for release in releases -%}
 ## {% if release.is_released %}<a href="https://github.com/inseven/thoughts/releases/tag/{{ release.version }}">{{ release.version }}</a>{% else %}{{ release.version }} (Unreleased){% endif %}
