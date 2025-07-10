@@ -22,6 +22,7 @@ import SwiftUI
 
 import Diligence
 import HotKey
+import Glitter
 import Interact
 
 @main
@@ -50,6 +51,7 @@ struct ThoughtsApp: App {
         }
         .commands {
             ThoughtsCommands(applicationModel: applicationModel)
+            UpdateCommands(updater: applicationModel.updaterController.updater)
         }
 
         ComposeWindow()

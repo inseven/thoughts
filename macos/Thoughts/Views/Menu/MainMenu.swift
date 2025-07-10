@@ -21,6 +21,7 @@
 import SwiftUI
 
 import Diligence
+import Glitter
 
 struct MainMenu: View {
 
@@ -29,12 +30,15 @@ struct MainMenu: View {
     @Environment(\.openURL) var openURL
 
     var body: some View {
+
         Button("New...") {
             applicationModel.new()
         }
         .keyboardShortcut("t", modifiers: [.command, .option, .control])
         .disabled(!applicationModel.didShowIntroduction)
+
         Divider()
+
         Button {
             openURL(.about)
         } label: {
@@ -47,15 +51,24 @@ struct MainMenu: View {
         }
         .keyboardShortcut(",")
         .disabled(!applicationModel.didShowIntroduction)
+
         Divider()
+
+        UpdateLink(updater: applicationModel.updaterController.updater)
+
+        Divider()
+
 #if DEBUG
+
         Button {
             applicationModel.showIntroduction()
         } label: {
             Text("Introduction...")
         }
+
         Divider()
 #endif
+
         Button {
             NSApplication.shared.terminate(nil)
         } label: {
