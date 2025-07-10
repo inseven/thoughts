@@ -1,30 +1,32 @@
 :root {
-    --primary-foreground-color: #000;
-    --secondary-foreground-color: gray;
-    --secondary-background-color: rgb(246, 246, 246);
     --brand-color: #00c3f6;
+    --primary-foreground-color: #000000;
+    --secondary-foreground-color: gray;
     --accent-color-high: #03fbfe;
     --accent-color-low: #008eeb;
     --background-color: #ffffff;
     --navigation-background: rgba(255, 255, 255, 0.7);
     --primary-action-background-color: #007aff;
+    --content-width: 900px;
     --vertical-spacing: 1rem;
+
+    --line-weight: 0.5px;
 }
 
 @media (prefers-color-scheme: dark) {
 
     :root {
-        --primary-foreground-color: #fff;
-        --secondary-foreground-color: gray;
-        --background-color: #171616;
-        --secondary-background-color: rgb(33, 32, 33);
         --brand-color: #0790ec;
+        --primary-foreground-color: #ffffff;
+        --secondary-foreground-color: gray;
         --accent-color-high: #003a3b;
         --accent-color-low: #1a1e2f;
+        --background-color: #171616;
 
         --navigation-background: rgba(24, 24, 24, 0.7);
         --primary-action-background-color: #0a84ff;
     }
+
 }
 
 body {
@@ -44,6 +46,44 @@ a {
 
 a:hover {
     color: var(--brand-color);
+}
+
+h1, h2, h3 {
+    margin: var(--vertical-spacing) 0 calc(2 * var(--vertical-spacing)) 0;
+}
+
+header h1 {
+    text-align: center;
+    font-size: 2.2em;
+}
+
+@media (min-width:768px) {
+
+    header h1 {
+        font-size: 3em;
+    }
+
+}
+
+p {
+    margin: var(--vertical-spacing) 0 var(--vertical-spacing) 0;
+}
+
+p.center {
+    text-align: center;
+}
+
+hr {
+    border: 0;
+    border-bottom: var(--line-weight) solid var(--secondary-foreground-color);
+}
+
+ul {
+    margin-bottom: calc(2 * var(--vertical-spacing));
+}
+
+li > ul {
+    margin-bottom: 0;
 }
 
 ul.navigation {
@@ -139,13 +179,13 @@ h1 {
     text-align: center;
 }
 
-.content, .features, footer {
+/* .content, .features, footer {
     text-align: left;
     max-width: 720px;
     margin: auto;
     font-weight: 200;
     line-height: 1.4em;
-}
+} */
 
 .header {
     text-align: center;
@@ -175,6 +215,18 @@ h1 {
     padding: 1rem 1.6rem;
     text-decoration: none;
     display: inline-block;
+}
+
+.content {
+    max-width: var(--content-width);
+    margin: auto;
+    padding: 0 calc(2 * var(--vertical-spacing));
+}
+
+.features {
+    max-width: var(--content-width);
+    margin: auto;
+    padding: 0 calc(2 * var(--vertical-spacing));
 }
 
 .features ul {
