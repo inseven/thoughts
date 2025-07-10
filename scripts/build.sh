@@ -223,7 +223,6 @@ if $RELEASE ; then
     changes \
         release \
         --skip-if-empty \
-        --pre-release \
         --push \
         --exec "$RELEASE_SCRIPT_PATH" \
         "$PKG_PATH" "$ZIP_PATH" "$RELEASE_ZIP_PATH" "$BUILD_DIRECTORY/appcast.xml"
