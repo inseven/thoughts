@@ -148,7 +148,9 @@ class ApplicationModel: NSObject {
         }
 
 #if !DEBUG
-        updaterController.startUpdater()
+        if Bundle.main.appStoreReceiptURL == nil {
+            updaterController.startUpdater()
+        }
 #endif
     }
 

@@ -54,9 +54,12 @@ struct MainMenu: View {
 
         Divider()
 
-        UpdateLink(updater: applicationModel.updaterController.updater)
+        if Bundle.main.appStoreReceiptURL == nil {
 
-        Divider()
+            UpdateLink(updater: applicationModel.updaterController.updater)
+
+            Divider()
+        }
 
 #if DEBUG
 

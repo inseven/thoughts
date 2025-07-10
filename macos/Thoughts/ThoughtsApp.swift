@@ -51,7 +51,9 @@ struct ThoughtsApp: App {
         }
         .commands {
             ThoughtsCommands(applicationModel: applicationModel)
-            UpdateCommands(updater: applicationModel.updaterController.updater)
+            if Bundle.main.appStoreReceiptURL == nil {
+                UpdateCommands(updater: applicationModel.updaterController.updater)
+            }
         }
 
         ComposeWindow()
