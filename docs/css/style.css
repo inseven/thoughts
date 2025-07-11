@@ -207,13 +207,7 @@ ul.navigation > li {
     padding: 0 calc(2 * var(--vertical-spacing));
 }
 
-.features {
-    max-width: var(--content-width);
-    margin: auto;
-    padding: 0 calc(2 * var(--vertical-spacing));
-}
-
-.features ul {
+ul.features {
     list-style: none;
     padding: 0;
     display: grid;
@@ -222,7 +216,7 @@ ul.navigation > li {
     row-gap: var(--vertical-spacing);
 }
 
-.features li {
+ul.features li {
     text-align: center;
 }
 
