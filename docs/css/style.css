@@ -67,6 +67,7 @@ header h1 {
 
 p {
     margin: var(--vertical-spacing) 0 var(--vertical-spacing) 0;
+    line-height: 1.5em;
 }
 
 p.center {
