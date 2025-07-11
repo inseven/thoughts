@@ -217,8 +217,12 @@ ul.navigation > li {
     padding: 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: var(--vertical-spacing);
+    column-gap: calc(2 * var(--vertical-spacing));
     row-gap: var(--vertical-spacing);
+}
+
+.features li {
+    text-align: center;
 }
 
 @media (max-width: 760px) {
@@ -261,4 +265,8 @@ footer nav ul {
 footer nav ul li {
     display: inline;
     margin-right: 0.4em;
+}
+
+.symbol {
+    width: 2em;
 }
