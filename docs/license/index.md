@@ -1,6 +1,5 @@
 ---
 title: License
-layout: page
 ---
 
 Thoughts is licensed under the MIT License (see [LICENSE](https://github.com/inseven/thoughts/blob/main/LICENSE)). It depends on the following separately licensed third-party libraries and components:

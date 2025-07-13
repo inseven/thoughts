@@ -22,3 +22,6 @@
 [submodule "scripts/Sparkle"]
 	path = scripts/Sparkle
 	url = https://github.com/sparkle-project/Sparkle
+[submodule "docs/_theme"]
+	path = docs/_theme
+	url = git@github.com:jbmorley/showcase-theme.git

@@ -1,6 +1,5 @@
 ---
 title: Privacy Policy
-layout: page
 ---
 
 Thoughts does not collect or store any personal data.

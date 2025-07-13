@@ -1,9 +1,32 @@
+theme: theme
 title: Thoughts
 author: Jason Morley
 email: support@jbmorley.co.uk
 description: Lightweight Note Taking for macOS
 baseurl: ""
-url: "https://thoughts.jbmorley.co.uk"
+url: https://thoughts.jbmorley.co.uk
+repository: https://github.com/inseven/thoughts
+copyright: 2024-2025 <a href="https://jbmorley.co.uk/about" target="_blank">Jason Morley</a>
+
+navigation:
+  - title: Thoughts
+    href: /
+  - title: Support
+    href: /support
+  - title: Releases
+    href: /releases
+  - title: GitHub
+    href: https://github.com/inseven/thoughts
+
+footer:
+  - title: Privacy Policy
+    href: /privacy-policy
+  - title: License
+    href: /license
+  - title: Donate
+    href: https://jbmorley.co.uk/support/
+  - title: More Software
+    href: https://jbmorley.co.uk/software/
 
 plugins:
   - jekyll-feed
@@ -13,4 +36,4 @@ destination: ../_site
 
 defaults:
   - values:
-      layout: "default"
+      layout: "page"
