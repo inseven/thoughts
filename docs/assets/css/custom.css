@@ -19,6 +19,7 @@
     transition: background-image 0.3s ease-in-out;
     margin: calc(2 * var(--vertical-spacing)) 0;
     padding-top: 38px;
+    font-weight: 400;
 }
 
 .window {
