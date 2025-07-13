@@ -1,0 +1,80 @@
+:root {
+    --accent-color-high: #03fbfe;
+    --accent-color-low: #008eeb;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    :root {
+        --accent-color-high: #003a3b;
+        --accent-color-low: #1a1e2f;
+    }
+
+}
+
+
+.showcase {
+    background-image: radial-gradient(var(--accent-color-high), var(--accent-color-low));
+    width: 100vw;
+    transition: background-image 0.3s ease-in-out;
+    margin: calc(2 * var(--vertical-spacing)) 0;
+    padding-top: 38px;
+}
+
+.window {
+    box-sizing: border-box;
+    background-size: 689px 171px;
+    width: 689px;
+    margin: auto;
+    border-width: 91px 57px 133.5px 57px;
+    border-style: solid;
+    border-image: url("/images/window@2x.png") 182 114 267 114 round;
+    transition: border-image 0.3s ease-in-out;
+    position: relative;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .window {
+        border-image-source: url("/images/window-dark@2x.png");
+    }
+
+}
+
+.title {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 600;
+    position: absolute;
+    left: 88px;
+    top: -42px;
+    font-size: 13px;
+    color: #494949;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .title {
+        color: #eaeaeb;
+    }
+
+}
+
+.container {
+    text-align: left;
+    padding: 1px 4px;
+    font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'DejaVu Sans Mono', Menlo, Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.5em;
+    min-height: 500px;
+    background-color: var(--background-color);
+    color: var(--primary-foreground-color);
+    transition: all 0.3s ease-in-out;
+}
+
+.container a {
+    font-weight: bold;
+}
+
+#source {
+    display: none;
+}

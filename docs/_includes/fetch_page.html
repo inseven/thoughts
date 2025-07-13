@@ -1,6 +1,0 @@
-{% assign page_path = include.page_path %}
-{% for page in site.pages %}
-  {% if page.path == page_path %}
-    {{ page.content | markdownify }}
-  {% endif %}
-{% endfor %}
