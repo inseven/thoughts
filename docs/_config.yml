@@ -17,14 +17,14 @@ navigation:
     href: /releases
   - title: GitHub
     href: https://github.com/inseven/thoughts
+  - title: Donate
+    href: https://jbmorley.co.uk/support/
 
 footer:
   - title: Privacy Policy
     href: /privacy-policy
   - title: License
     href: /license
-  - title: Donate
-    href: https://jbmorley.co.uk/support/
   - title: More Software
     href: https://jbmorley.co.uk/software/
 
