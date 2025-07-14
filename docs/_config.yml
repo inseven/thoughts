@@ -6,7 +6,7 @@ description: Lightweight Note Taking for macOS
 baseurl: ""
 url: https://thoughts.jbmorley.co.uk
 repository: https://github.com/inseven/thoughts
-copyright: 2024-2025 <a href="https://jbmorley.co.uk/about" target="_blank">Jason Morley</a>
+copyright: 2024-2025 <a href="https://jbmorley.co.uk/about">Jason Morley</a>
 
 navigation:
   - title: Thoughts
