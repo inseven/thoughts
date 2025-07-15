@@ -79,6 +79,8 @@ jobs:
       run: scripts/install-dependencies.sh
 
     - name: Build website
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         scripts/build-website.sh
         chmod -v -R +rX "_site/"
