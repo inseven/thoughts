@@ -1,35 +1,27 @@
 :root {
-    --accent-color-high: #03fbfe;
-    --accent-color-low: #008eeb;
+    --brand-color: #00c3f6;
+    --showcase-color-high: #03fbfe;
+    --showcase-color-low: #008eeb;
 }
 
 @media (prefers-color-scheme: dark) {
 
     :root {
-        --accent-color-high: #003a3b;
-        --accent-color-low: #1a1e2f;
+        --brand-color: #0790ec;
+        --showcase-color-high: #003a3b;
+        --showcase-color-low: #1a1e2f;
     }
 
 }
 
-
-.showcase {
-    background-image: radial-gradient(var(--accent-color-high), var(--accent-color-low));
-    width: 100vw;
-    transition: background-image 0.3s ease-in-out;
-    margin: calc(2 * var(--vertical-spacing)) 0;
-    padding-top: 38px;
-    font-weight: 400;
-}
-
 .window {
     box-sizing: border-box;
-    background-size: 689px 171px;
+    background-size: 689px 207px;
     width: 689px;
     margin: auto;
-    border-width: 91px 57px 133.5px 57px;
+    border-width: 127px 57px 133.5px 57px;
     border-style: solid;
-    border-image: url("/images/window@2x.png") 182 114 267 114 round;
+    border-image: url("/images/window@2x.png") 254 114 267 114 round;
     transition: border-image 0.3s ease-in-out;
     position: relative;
 }
