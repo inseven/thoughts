@@ -53,6 +53,7 @@ which gh || (echo "GitHub cli (gh) not available on the path." && exit 1)
 # Process the command line arguments.
 POSITIONAL=()
 RELEASE=${RELEASE:-false}
+UPLOAD_TO_APP_STORE=${UPLOAD_TO_APP_STORE:-false}
 while [[ $# -gt 0 ]]
 do
     key="$1"
@@ -61,12 +62,21 @@ do
         RELEASE=true
         shift
         ;;
+        -u|--upload-to-app-store)
+        UPLOAD_TO_APP_STORE=true
+        shift
+        ;;
         *)
         POSITIONAL+=("$1")
         shift
         ;;
     esac
 done
+
+# We always need to upload to TestFlight if we're attempting to make a release.
+if $RELEASE ; then
+    UPLOAD_TO_APP_STORE=true
+fi
 
 # Generate a random string to secure the local keychain.
 export TEMPORARY_KEYCHAIN_PASSWORD=`openssl rand -base64 14`
@@ -217,6 +227,17 @@ ZIP_PATH="$BUILD_DIRECTORY/$ZIP_BASENAME"
 pushd "$BUILD_DIRECTORY"
 zip -r "$ZIP_BASENAME" .
 popd
+
+if $UPLOAD_TO_APP_STORE ; then
+
+    xcrun altool --upload-app \
+        -f "$PKG_PATH" \
+        --primary-bundle-id "uk.co.jbmorley.thoughts.apps.appstore" \
+        --apiKey "$APPLE_API_KEY_ID" \
+        --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
+        --type macos
+
+fi
 
 if $RELEASE ; then
 
