@@ -210,6 +210,8 @@ cp "$APPCAST_PATH" "$BUILD_DIRECTORY"
 
 ## App Store Build
 
+cd "$SOURCE_DIRECTORY"
+
 # Copy the App Store Package.swift configuration.
 cp ThoughtsCore/Package-App-Store.swift ThoughtsCore/Package.swift
 
@@ -243,6 +245,8 @@ xcrun altool --upload-app \
     --type macos
 
 ## ---
+
+cd "$ROOT_DIRECTORY"
 
 # Archive the build directory.
 ZIP_BASENAME="build-$VERSION_NUMBER-$BUILD_NUMBER.zip"
