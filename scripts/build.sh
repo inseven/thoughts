@@ -54,6 +54,7 @@ which gh || (echo "GitHub cli (gh) not available on the path." && exit 1)
 # Process the command line arguments.
 POSITIONAL=()
 RELEASE=${RELEASE:-false}
+UPLOAD_TO_APP_STORE=${UPLOAD_TO_APP_STORE:-false}
 while [[ $# -gt 0 ]]
 do
     key="$1"
@@ -62,12 +63,21 @@ do
         RELEASE=true
         shift
         ;;
+        -u|--upload-to-app-store)
+        UPLOAD_TO_APP_STORE=true
+        shift
+        ;;
         *)
         POSITIONAL+=("$1")
         shift
         ;;
     esac
 done
+
+# We always need to upload to TestFlight if we're attempting to make a release.
+if $RELEASE ; then
+    UPLOAD_TO_APP_STORE=true
+fi
 
 # Generate a random string to secure the local keychain.
 export TEMPORARY_KEYCHAIN_PASSWORD=`openssl rand -base64 14`
@@ -213,7 +223,7 @@ cp "$APPCAST_PATH" "$BUILD_DIRECTORY"
 cd "$SOURCE_DIRECTORY"
 
 # Copy the App Store Package.swift configuration.
-cp ThoughtsCore/Package-App-Store.swift ThoughtsCore/Package.swift
+cp ThoughtsCore/Package_App_Store.swift ThoughtsCore/Package.swift
 
 # Build and archive the macOS project.
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
@@ -236,13 +246,17 @@ xcodebuild \
 
 PKG_PATH="$BUILD_DIRECTORY/Thoughts.pkg"
 
-# Upload the macOS build.
-xcrun altool --upload-app \
-    -f "$PKG_PATH" \
-    --primary-bundle-id "uk.co.jbmorley.thoughts.apps.appstore" \
-    --apiKey "$APPLE_API_KEY_ID" \
-    --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
-    --type macos
+if $UPLOAD_TO_APP_STORE ; then
+
+    # Upload the macOS build.
+    xcrun altool --upload-app \
+        -f "$PKG_PATH" \
+        --primary-bundle-id "uk.co.jbmorley.thoughts.apps.appstore" \
+        --apiKey "$APPLE_API_KEY_ID" \
+        --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
+        --type macos
+
+fi
 
 ## ---
 
