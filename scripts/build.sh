@@ -130,6 +130,9 @@ echo "$MACOS_DEVELOPER_INSTALLER_CERTIFICATE_PASSWORD" | build-tools import-base
 build-tools install-provisioning-profile "profiles/Thoughts_Developer_ID_Profile.provisionprofile"
 build-tools install-provisioning-profile "profiles/Thoughts_Mac_App_Store_Profile.provisionprofile"
 
+# Copy the App Store Package.swift configuration.
+cp ThoughtsCore/Package-App-Store.swift ThoughtsCore/Package.swift
+
 # Build and archive the macOS project.
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
 xcodebuild \
