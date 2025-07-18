@@ -152,7 +152,7 @@ class ApplicationModel: NSObject {
             showIntroduction()
         }
 
-#if !DEBUG
+#if canImport(Glitter) && !DEBUG
         if !isAppStoreRelease {
             updaterController.startUpdater()
         }
