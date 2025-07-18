@@ -21,10 +21,20 @@
 import Foundation
 
 import FrontmatterSwift
-import Glitter
 import Interact
 import Licensable
 import TagField
+
+#if canImport(Glitter)
+import Glitter
+
+let conditionalLicenses: [Licensable] = [.glitter]
+
+#else
+
+let conditionalLicenses: [Licensable] = []
+
+#endif
 
 fileprivate let fsEventsWrapperLicense = License(id: "https://github.com/Frizlab/FSEventsWrapper",
                                                  name: "FSEventsWrapper",
@@ -70,7 +80,6 @@ fileprivate let thoughtsLicense = License(id: "https://github.com/inseven/though
                                           ],
                                           licenses: [
                                             .frontmatterSwift,
-                                            .glitter,
                                             .interact,
                                             .licensable,
                                             .tagField,
@@ -78,7 +87,7 @@ fileprivate let thoughtsLicense = License(id: "https://github.com/inseven/though
                                             highlightedTextEditorLicense,
                                             materialIconsLicense,
                                             yamsLicense,
-                                          ])
+                                          ] + conditionalLicenses)
 
 extension Licensable where Self == License {
 

@@ -24,7 +24,10 @@ import CoreLocation
 import Foundation
 
 import Interact
+
+#if canImport(Sparkle)
 import Sparkle
+#endif
 
 @Observable
 class ApplicationModel: NSObject {
@@ -101,9 +104,11 @@ class ApplicationModel: NSObject {
     private let keyedDefaults = KeyedDefaults<SettingsKey>()
     private let locationManager = CLLocationManager()
 
+#if canImport(Glitter)
     let updaterController = SPUStandardUpdaterController(startingUpdater: false,
                                                          updaterDelegate: nil,
                                                          userDriverDelegate: nil)
+#endif
 
     @MainActor override init() {
         rootURL = try? keyedDefaults.securityScopedURL(forKey: .rootURL)
@@ -115,13 +120,6 @@ class ApplicationModel: NSObject {
         locationManager.pausesLocationUpdatesAutomatically = false
         self.start()
     }
-
-    var isAppStoreRelease: Bool = {
-        guard let appStoreReceiptURL = Bundle.main.appStoreReceiptURL else {
-            return false
-        }
-        return FileManager.default.fileExists(atPath: appStoreReceiptURL.path)
-    }()
 
     @MainActor private func start() {
 

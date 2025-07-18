@@ -21,7 +21,10 @@
 import SwiftUI
 
 import Diligence
+
+#if canImport(Glitter)
 import Glitter
+#endif
 
 struct MainMenu: View {
 
@@ -54,12 +57,12 @@ struct MainMenu: View {
 
         Divider()
 
-        if !applicationModel.isAppStoreRelease {
+#if canImport(Glitter)
 
             UpdateLink(updater: applicationModel.updaterController.updater)
 
             Divider()
-        }
+#endif
 
 #if DEBUG
 

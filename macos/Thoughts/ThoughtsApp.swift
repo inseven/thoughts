@@ -22,8 +22,10 @@ import SwiftUI
 
 import Diligence
 import HotKey
-import Glitter
 import Interact
+
+#if canImport(Glitter)
+#endif
 
 @main
 struct ThoughtsApp: App {
@@ -51,9 +53,9 @@ struct ThoughtsApp: App {
         }
         .commands {
             ThoughtsCommands(applicationModel: applicationModel)
-            if !applicationModel.isAppStoreRelease {
-                UpdateCommands(updater: applicationModel.updaterController.updater)
-            }
+#if canImport(Glitter)
+            UpdateCommands(updater: applicationModel.updaterController.updater)
+#endif
         }
 
         ComposeWindow()

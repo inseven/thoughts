@@ -20,6 +20,8 @@ let package = Package(
         .target(
             name: "ThoughtsCore",
             dependencies: [
+                .product(name: "Sparkle", package: "Sparkle"),
+                .product(name: "Glitter", package: "glitter"),
             ]
         ),
     ]
