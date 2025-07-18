@@ -40,6 +40,12 @@ class ApplicationModel: NSObject {
 
     static let introductionVersion = 1
 
+#if canImport(Sparkle)
+    static let isAppStoreRelease = false
+#else
+    static let isAppStoreRelease = true
+#endif
+
     @MainActor var tags: Trie {
         return library?.tags ?? Trie()
     }
@@ -153,9 +159,7 @@ class ApplicationModel: NSObject {
         }
 
 #if canImport(Glitter) && !DEBUG
-        if !isAppStoreRelease {
-            updaterController.startUpdater()
-        }
+        updaterController.startUpdater()
 #endif
     }
 

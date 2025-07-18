@@ -25,6 +25,7 @@ import HotKey
 import Interact
 
 #if canImport(Glitter)
+import Glitter
 #endif
 
 @main
