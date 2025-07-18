@@ -43,7 +43,7 @@ jobs:
 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         RELEASE: ${{ github.ref == 'refs/heads/main' }}
-        UPLOAD_TO_APP_STORE: true
+        UPLOAD_TO_APP_STORE: ${{ github.ref == 'refs/heads/main' }}
 
       run: |
         scripts/build.sh
