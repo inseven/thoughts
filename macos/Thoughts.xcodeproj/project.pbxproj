@@ -299,7 +299,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"Removing Sparkle.framework from App Store build...\"\nif $APP_STORE ; then\n    rm -rf \"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sparkle.framework\"\nfi\n";
+			shellScript = "echo \"Removing Sparkle.framework from App Store build...\"\n# if $APP_STORE ; then\n#     rm -rf \"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sparkle.framework\"\n# fi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
