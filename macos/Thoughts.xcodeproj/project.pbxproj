@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D804FB112C081A2F004F8666 /* FrontmatterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D804FB102C081A2F004F8666 /* FrontmatterSwift */; };
-		D83E5B6D2E1F11E900D9D9BA /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = D83E5B6C2E1F11E900D9D9BA /* Sparkle */; };
-		D83ECCF02E1F657800DB5500 /* Glitter in Frameworks */ = {isa = PBXBuildFile; productRef = D83ECCEF2E1F657800DB5500 /* Glitter */; };
+		D8296CEE2E29EBBF005088B6 /* ThoughtsCore in Frameworks */ = {isa = PBXBuildFile; productRef = D8296CED2E29EBBF005088B6 /* ThoughtsCore */; };
 		D85FC1412BEEC3EC0004FAB3 /* TagField in Frameworks */ = {isa = PBXBuildFile; productRef = D85FC1402BEEC3EC0004FAB3 /* TagField */; };
 		D86255892C0924CD0044BD37 /* FSEventsWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = D86255882C0924CD0044BD37 /* FSEventsWrapper */; };
 		D87707B52C01592400362786 /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = D87707B42C01592400362786 /* HotKey */; };
@@ -38,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D8296CEB2E29EB48005088B6 /* ThoughtsCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ThoughtsCore; sourceTree = "<group>"; };
 		D852AEFE2B6027CA00B77A3D /* Thoughts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thoughts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D852AF0F2B6027CD00B77A3D /* ThoughtsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThoughtsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D852AF192B6027CD00B77A3D /* ThoughtsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThoughtsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,11 +66,10 @@
 			files = (
 				D8F06D4E2B6727630039AEF4 /* Interact in Frameworks */,
 				D8C283E92BD9954F00161C82 /* HashRainbow in Frameworks */,
-				D83ECCF02E1F657800DB5500 /* Glitter in Frameworks */,
 				D85FC1412BEEC3EC0004FAB3 /* TagField in Frameworks */,
 				D804FB112C081A2F004F8666 /* FrontmatterSwift in Frameworks */,
 				D8BA4D492BE59E16001A2A26 /* HighlightedTextEditor in Frameworks */,
-				D83E5B6D2E1F11E900D9D9BA /* Sparkle in Frameworks */,
+				D8296CEE2E29EBBF005088B6 /* ThoughtsCore in Frameworks */,
 				D892249A2BD70CC300DA0932 /* Yams in Frameworks */,
 				D86255892C0924CD0044BD37 /* FSEventsWrapper in Frameworks */,
 				D8F06D4B2B67275B0039AEF4 /* Diligence in Frameworks */,
@@ -98,6 +97,7 @@
 		D852AEF52B6027CA00B77A3D = {
 			isa = PBXGroup;
 			children = (
+				D8296CEB2E29EB48005088B6 /* ThoughtsCore */,
 				D8184ABB2E1D27A200D46CE7 /* Thoughts */,
 				D8184A782E1D278C00D46CE7 /* ThoughtsTests */,
 				D8184A6F2E1D278900D46CE7 /* ThoughtsUITests */,
@@ -152,8 +152,7 @@
 				D87707B42C01592400362786 /* HotKey */,
 				D804FB102C081A2F004F8666 /* FrontmatterSwift */,
 				D86255882C0924CD0044BD37 /* FSEventsWrapper */,
-				D83E5B6C2E1F11E900D9D9BA /* Sparkle */,
-				D83ECCEF2E1F657800DB5500 /* Glitter */,
+				D8296CED2E29EBBF005088B6 /* ThoughtsCore */,
 			);
 			productName = "Disk Stickies";
 			productReference = D852AEFE2B6027CA00B77A3D /* Thoughts.app */;
@@ -243,8 +242,7 @@
 				D87707B32C01592400362786 /* XCRemoteSwiftPackageReference "HotKey" */,
 				D804FB0F2C081A2F004F8666 /* XCLocalSwiftPackageReference "dependencies/FrontmatterSwift" */,
 				D86255872C0924CD0044BD37 /* XCRemoteSwiftPackageReference "FSEventsWrapper" */,
-				D83E5B6B2E1F11E900D9D9BA /* XCRemoteSwiftPackageReference "Sparkle" */,
-				D83ECCEE2E1F657800DB5500 /* XCRemoteSwiftPackageReference "glitter" */,
+				D8296CEC2E29EBBF005088B6 /* XCLocalSwiftPackageReference "ThoughtsCore" */,
 			);
 			productRefGroup = D852AEFF2B6027CA00B77A3D /* Products */;
 			projectDirPath = "";
@@ -629,6 +627,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = dependencies/FrontmatterSwift;
 		};
+		D8296CEC2E29EBBF005088B6 /* XCLocalSwiftPackageReference "ThoughtsCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ThoughtsCore;
+		};
 		D85FC13F2BEEC3EC0004FAB3 /* XCLocalSwiftPackageReference "dependencies/TagField" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = dependencies/TagField;
@@ -648,22 +650,6 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D83E5B6B2E1F11E900D9D9BA /* XCRemoteSwiftPackageReference "Sparkle" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sparkle-project/Sparkle";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.7.1;
-			};
-		};
-		D83ECCEE2E1F657800DB5500 /* XCRemoteSwiftPackageReference "glitter" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/inseven/glitter.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.1;
-			};
-		};
 		D86255872C0924CD0044BD37 /* XCRemoteSwiftPackageReference "FSEventsWrapper" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Frizlab/FSEventsWrapper.git";
@@ -703,15 +689,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = FrontmatterSwift;
 		};
-		D83E5B6C2E1F11E900D9D9BA /* Sparkle */ = {
+		D8296CED2E29EBBF005088B6 /* ThoughtsCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D83E5B6B2E1F11E900D9D9BA /* XCRemoteSwiftPackageReference "Sparkle" */;
-			productName = Sparkle;
-		};
-		D83ECCEF2E1F657800DB5500 /* Glitter */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D83ECCEE2E1F657800DB5500 /* XCRemoteSwiftPackageReference "glitter" */;
-			productName = Glitter;
+			productName = ThoughtsCore;
 		};
 		D85FC1402BEEC3EC0004FAB3 /* TagField */ = {
 			isa = XCSwiftPackageProductDependency;

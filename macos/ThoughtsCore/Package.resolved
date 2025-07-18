@@ -1,0 +1,33 @@
+{
+  "originHash" : "e769f862110a38601bbbcff3bb73746a5b54dd120de4a97f068edceafc1aaf20",
+  "pins" : [
+    {
+      "identity" : "glitter",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/inseven/glitter.git",
+      "state" : {
+        "revision" : "24d4be7c71f69968e370b19f1502696c68d00bd9",
+        "version" : "0.1.1"
+      }
+    },
+    {
+      "identity" : "licensable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/inseven/licensable",
+      "state" : {
+        "revision" : "a8ad62c6fde5aca29a47459b0687e580eee203dd",
+        "version" : "0.0.13"
+      }
+    },
+    {
+      "identity" : "sparkle",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sparkle-project/Sparkle",
+      "state" : {
+        "revision" : "df074165274afaa39539c05d57b0832620775b11",
+        "version" : "2.7.1"
+      }
+    }
+  ],
+  "version" : 3
+}
