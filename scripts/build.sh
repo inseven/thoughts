@@ -150,6 +150,7 @@ xcodebuild \
     OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" \
     CURRENT_PROJECT_VERSION=$BUILD_NUMBER \
     MARKETING_VERSION=$VERSION_NUMBER \
+    APP_STORE_BUILD=1 \
     clean archive
 
 # Export the app for App Store distribution.
