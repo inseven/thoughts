@@ -27,14 +27,6 @@ set -x
 # This script expects the macOS PKG as the first argument, and any additional files to be attached to the GitHub release
 # to be passed as subsequent arguments.
 
-# Upload the macOS build.
-# xcrun altool --upload-app \
-    # -f "$1" \
-    # --primary-bundle-id "uk.co.jbmorley.thoughts.apps.appstore" \
-    # --apiKey "$APPLE_API_KEY_ID" \
-    # --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
-    # --type macos
-
 # Actually make the release.
 FLAGS=()
 if $CHANGES_INITIAL_DEVELOPMENT ; then

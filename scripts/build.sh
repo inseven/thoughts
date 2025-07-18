@@ -36,6 +36,7 @@ SPARKLE_DIRECTORY="$SCRIPTS_DIRECTORY/Sparkle"
 
 KEYCHAIN_PATH="$TEMPORARY_DIRECTORY/temporary.keychain"
 ARCHIVE_PATH="$BUILD_DIRECTORY/Thoughts.xcarchive"
+APP_STORE_ARCHIVE_PATH="$BUILD_DIRECTORY/Thoughts_App_Store.xcarchive"
 ENV_PATH="$ROOT_DIRECTORY/.env"
 
 RELEASE_NOTES_TEMPLATE_PATH="$SCRIPTS_DIRECTORY/sparkle-release-notes.html"
@@ -130,6 +131,8 @@ echo "$MACOS_DEVELOPER_INSTALLER_CERTIFICATE_PASSWORD" | build-tools import-base
 build-tools install-provisioning-profile "profiles/Thoughts_Developer_ID_Profile.provisionprofile"
 build-tools install-provisioning-profile "profiles/Thoughts_Mac_App_Store_Profile.provisionprofile"
 
+## Developer ID Build
+
 # Copy the App Store Package.swift configuration.
 cp ThoughtsCore/Package-App-Store.swift ThoughtsCore/Package.swift
 
@@ -144,15 +147,6 @@ xcodebuild \
     CURRENT_PROJECT_VERSION=$BUILD_NUMBER \
     MARKETING_VERSION=$VERSION_NUMBER \
     clean archive
-
-# Export the app for App Store distribution.
-xcodebuild \
-    -archivePath "$ARCHIVE_PATH" \
-    -exportArchive \
-    -exportPath "$BUILD_DIRECTORY" \
-    -exportOptionsPlist "ExportOptions_App_Store.plist"
-
-PKG_PATH="$BUILD_DIRECTORY/Thoughts.pkg"
 
 # Export the app for Developer ID distribution.
 xcodebuild \
@@ -213,6 +207,42 @@ changes notes --all --template "$RELEASE_NOTES_TEMPLATE_PATH" >> "$ARCHIVES_DIRE
 "$GENERATE_APPCAST" --ed-key-file "$SPARKLE_PRIVATE_KEY_FILE" "$ARCHIVES_DIRECTORY"
 APPCAST_PATH="$ARCHIVES_DIRECTORY/appcast.xml"
 cp "$APPCAST_PATH" "$BUILD_DIRECTORY"
+
+## App Store Build
+
+# Copy the App Store Package.swift configuration.
+cp ThoughtsCore/Package-App-Store.swift ThoughtsCore/Package.swift
+
+# Build and archive the macOS project.
+sudo xcode-select --switch "$MACOS_XCODE_PATH"
+xcodebuild \
+    -project Thoughts.xcodeproj \
+    -scheme "Thoughts" \
+    -config Release \
+    -archivePath "$APP_STORE_ARCHIVE_PATH" \
+    OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" \
+    CURRENT_PROJECT_VERSION=$BUILD_NUMBER \
+    MARKETING_VERSION=$VERSION_NUMBER \
+    clean archive
+
+# Export the app for App Store distribution.
+xcodebuild \
+    -archivePath "$APP_STORE_ARCHIVE_PATH" \
+    -exportArchive \
+    -exportPath "$BUILD_DIRECTORY" \
+    -exportOptionsPlist "ExportOptions_App_Store.plist"
+
+PKG_PATH="$BUILD_DIRECTORY/Thoughts.pkg"
+
+# Upload the macOS build.
+xcrun altool --upload-app \
+    -f "$PKG_PATH" \
+    --primary-bundle-id "uk.co.jbmorley.thoughts.apps.appstore" \
+    --apiKey "$APPLE_API_KEY_ID" \
+    --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
+    --type macos
+
+## ---
 
 # Archive the build directory.
 ZIP_BASENAME="build-$VERSION_NUMBER-$BUILD_NUMBER.zip"
