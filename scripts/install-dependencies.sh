@@ -25,17 +25,30 @@ set -o pipefail
 set -x
 set -u
 
-SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-ROOT_DIRECTORY="$SCRIPTS_DIRECTORY/.."
+ROOT_DIRECTORY="$( cd "$( dirname "$( dirname "${BASH_SOURCE[0]}" )" )" &> /dev/null && pwd )"
+SCRIPTS_DIRECTORY="$ROOT_DIRECTORY/scripts"
+
+LOCAL_TOOLS_PATH="$ROOT_DIRECTORY/.local"
 CHANGES_DIRECTORY="$SCRIPTS_DIRECTORY/changes"
 BUILD_TOOLS_DIRECTORY="$SCRIPTS_DIRECTORY/build-tools"
 
-source "$SCRIPTS_DIRECTORY/environment.sh"
+# Install tools defined in `.tool-versions`.
+cd "$ROOT_DIRECTORY"
+mise install
 
+# Clean up and recreate the local tools directory.
 if [ -d "$LOCAL_TOOLS_PATH" ] ; then
     rm -r "$LOCAL_TOOLS_PATH"
 fi
+mkdir -p "$LOCAL_TOOLS_PATH"
 
-python -m pip install --target "$PYTHONUSERBASE" --upgrade pipenv wheel
+# Set up a Python venv to bootstrap our python dependency on `pipenv`.
+python -m venv "$LOCAL_TOOLS_PATH/python"
+
+# Source `environment.sh` to ensure the remainder of our paths are set up correctly.
+source "$SCRIPTS_DIRECTORY/environment.sh"
+
+# Install the Python dependencies.
+pip install --upgrade pip pipenv wheel certifi
 PIPENV_PIPFILE="$CHANGES_DIRECTORY/Pipfile" pipenv install
 PIPENV_PIPFILE="$BUILD_TOOLS_DIRECTORY/Pipfile" pipenv install
