@@ -2,4 +2,5 @@
 .local
 _site
 
+/docs/current.json
 /docs/releases

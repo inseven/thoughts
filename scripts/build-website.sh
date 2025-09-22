@@ -57,6 +57,17 @@ if [[ -z "$DOWNLOAD_URL" ]]; then
 fi
 export DOWNLOAD_URL
 
+# Determine the version.
+VERSION_NUMBER=`changes version`
+export VERSION_NUMBER
+
+# Create a JSON file pointing to the latest download.
+echo """{
+    "version": "$VERSION_NUMBER",
+    "url": "$DOWNLOAD_URL"
+}
+""" > "$WEBSITE_DIRECTORY/current.json"
+
 # Build the website.
 cd "$WEBSITE_DIRECTORY"
 bundle exec jekyll build
