@@ -34,8 +34,10 @@ struct MainMenu: View {
 
     var body: some View {
 
-        Button("New...") {
+        Button {
             applicationModel.new()
+        } label: {
+            Text("New...")
         }
         .keyboardShortcut("t", modifiers: [.command, .option, .control])
         .disabled(!applicationModel.didShowIntroduction)
@@ -54,6 +56,45 @@ struct MainMenu: View {
         }
         .keyboardShortcut(",")
         .disabled(!applicationModel.didShowIntroduction)
+
+        Divider()
+
+        Menu("Help") {
+
+            Button {
+                openURL(URL(string: "https://thoughts.jbmorley.co.uk")!)
+            } label: {
+                Label("Website", systemImage: "globe")
+            }
+
+            Button {
+                openURL(URL(string: "https://thoughts.jbmorley.co.uk/privacy-policy")!)
+            } label: {
+                Label("Privacy Policy", systemImage: "globe")
+            }
+
+            Button {
+                openURL(URL(string: "https://github.com/inseven/thoughts")!)
+            } label: {
+                Label("GitHub", systemImage: "globe")
+            }
+
+            Button {
+                let subject = "Thoughts Support (\(Bundle.main.extendedVersion ?? "Unknown Version"))"
+                openURL(URL(address: "support@jbmorley.co.uk", subject: subject)!)
+            } label: {
+                Label("Support", systemImage: "mail")
+            }
+
+            Divider()
+
+            Button {
+                openURL(URL(string: "https://jbmorley.co.uk/software")!)
+            } label: {
+                Label("More Software by Jason Morley", systemImage: "globe")
+            }
+
+        }
 
         Divider()
 

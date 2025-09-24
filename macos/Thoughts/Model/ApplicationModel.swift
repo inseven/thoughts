@@ -36,15 +36,10 @@ class ApplicationModel: NSObject {
         case rootURL
         case shouldSaveLocation
         case introductionVersion
+        case suppressUpdateCheck
     }
 
     static let introductionVersion = 1
-
-#if canImport(Sparkle)
-    static let isAppStoreRelease = false
-#else
-    static let isAppStoreRelease = true
-#endif
 
     @MainActor var tags: Trie {
         return library?.tags ?? Trie()
@@ -77,6 +72,12 @@ class ApplicationModel: NSObject {
     @MainActor var introductionVersion: Int {
         didSet {
             keyedDefaults.set(introductionVersion, forKey: .introductionVersion)
+        }
+    }
+
+    @MainActor var suppressUpdateCheck: Bool {
+        didSet {
+            keyedDefaults.set(suppressUpdateCheck, forKey: .suppressUpdateCheck)
         }
     }
 
@@ -116,14 +117,18 @@ class ApplicationModel: NSObject {
                                                          userDriverDelegate: nil)
 #endif
 
+    private let storeUpdateChecker = StoreUpdateChecker()
+
     @MainActor override init() {
         rootURL = try? keyedDefaults.securityScopedURL(forKey: .rootURL)
         shouldSaveLocation = keyedDefaults.bool(forKey: .shouldSaveLocation, default: false)
         introductionVersion = keyedDefaults.integer(forKey: .introductionVersion, default: 0)
+        suppressUpdateCheck = keyedDefaults.bool(forKey: .suppressUpdateCheck, default: false)
         super.init()
         rootURLChanges.send(rootURL)
         locationManager.delegate = self
         locationManager.pausesLocationUpdatesAutomatically = false
+        storeUpdateChecker.delegate = self
         self.start()
     }
 
@@ -161,6 +166,13 @@ class ApplicationModel: NSObject {
 #if canImport(Glitter) && !DEBUG
         updaterController.startUpdater()
 #endif
+
+#if !canImport(Glitter)
+        if !suppressUpdateCheck {
+            storeUpdateChecker.check()
+        }
+#endif
+
     }
 
     @MainActor func showIntroduction() {
@@ -327,6 +339,15 @@ extension ApplicationModel: CLLocationManagerDelegate {
 
     func locationManagerDidResumeLocationUpdates(_ manager: CLLocationManager) {
         print("Did resume location updates.")
+    }
+
+}
+
+extension ApplicationModel: StoreUpdateCheckerDelegate {
+
+    @MainActor func storeUpdateChecker(_ storeUpdateChecker: StoreUpdateChecker,
+                                       didDismissAlertWithSuppressionState suppressionState: Bool) {
+        self.suppressUpdateCheck = suppressionState
     }
 
 }
