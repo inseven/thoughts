@@ -13,7 +13,7 @@ jobs:
 
   macos-build:
 
-    runs-on: inseven-macos-14
+    runs-on: inseven-macos-26
 
     steps:
 
