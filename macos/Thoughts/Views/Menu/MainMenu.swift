@@ -37,7 +37,7 @@ struct MainMenu: View {
         Button {
             applicationModel.new()
         } label: {
-            Text("New...")
+            Label("New...", systemImage: "plus")
         }
         .keyboardShortcut("t", modifiers: [.command, .option, .control])
         .disabled(!applicationModel.didShowIntroduction)
@@ -47,12 +47,12 @@ struct MainMenu: View {
         Button {
             openURL(.about)
         } label: {
-            Text("About...")
+            Label("About...", systemImage: "info.circle")
         }
         Button {
             openURL(.settings)
         } label: {
-            Text("Settings...")
+            Label("Settings...", systemImage: "gear")
         }
         .keyboardShortcut(",")
         .disabled(!applicationModel.didShowIntroduction)
@@ -110,7 +110,7 @@ struct MainMenu: View {
         Button {
             applicationModel.showIntroduction()
         } label: {
-            Text("Introduction...")
+            Label("Introduction...", systemImage: "wand.and.rays")
         }
 
         Divider()
