@@ -25,6 +25,8 @@ import FSEventsWrapper
 
 extension URL {
 
+    static let donate = URL(string: "https://jbmorley.co.uk/support")!
+
     static let about = URL(string: "x-thoughts://about")!
     static let compose = URL(string: "x-thoughts://compose")!
     static let settings = URL(string: "x-thoughts://settings")!

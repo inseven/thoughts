@@ -88,6 +88,14 @@ struct MainMenu: View {
 
             Divider()
 
+#if canImport(Glitter)
+            Button {
+                openURL(.donate)
+            } label: {
+                Label("Donate", systemImage: "globe")
+            }
+#endif
+
             Button {
                 openURL(URL(string: "https://jbmorley.co.uk/software")!)
             } label: {
