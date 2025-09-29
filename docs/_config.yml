@@ -11,8 +11,6 @@ copyright: 2024-2025 <a href="https://jbmorley.co.uk/about">Jason Morley</a>
 navigation:
   - title: Thoughts
     href: /
-  - title: Support
-    href: /support
   - title: Releases
     href: /releases
   - title: GitHub
@@ -23,6 +21,8 @@ navigation:
 footer:
   - title: Privacy Policy
     href: /privacy-policy
+  - title: Support
+    href: /support
   - title: License
     href: /license
   - title: More Software
