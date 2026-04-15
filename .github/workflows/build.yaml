@@ -87,7 +87,7 @@ jobs:
         chmod -v -R +rX "_site/"
 
     - name: Upload Pages artifact
-      uses: actions/upload-pages-artifact@v3
+      uses: actions/upload-pages-artifact@v5
 
   website-deploy:
 
@@ -107,7 +107,7 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
   sparkle-update:
     needs: macos-build
