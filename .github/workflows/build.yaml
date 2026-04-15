@@ -18,7 +18,7 @@ jobs:
     steps:
 
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         submodules: recursive
         fetch-depth: 0
@@ -49,7 +49,7 @@ jobs:
         scripts/build.sh
 
     - name: Archive binary
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         path: build/build-*.zip
         if-no-files-found: error
@@ -63,7 +63,7 @@ jobs:
     steps:
 
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         fetch-depth: 0
 
@@ -74,7 +74,7 @@ jobs:
         git submodule update --init --depth 1 docs/_theme
 
     - name: Install the tool dependencies
-      uses: jdx/mise-action@v2
+      uses: jdx/mise-action@v4
 
     - name: Install dependencies
       run: scripts/install-dependencies.sh
@@ -117,7 +117,7 @@ jobs:
     steps:
 
     - name: Update Sparkle archives
-      uses: peter-evans/repository-dispatch@v3
+      uses: peter-evans/repository-dispatch@v4
       with:
         token: ${{ secrets._GITHUB_ACCESS_TOKEN }}
         repository: inseven/sparkle-archives
