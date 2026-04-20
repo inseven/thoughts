@@ -34,25 +34,20 @@ struct MainMenu: View {
 
     var body: some View {
 
-        Button {
+        Button("New...", systemImage: "plus") {
             applicationModel.new()
-        } label: {
-            Label("New...", systemImage: "plus")
         }
         .keyboardShortcut("t", modifiers: [.command, .option, .control])
         .disabled(!applicationModel.didShowIntroduction)
 
         Divider()
 
-        Button {
+        Button("About...", systemImage: "info.circle") {
             openURL(.about)
-        } label: {
-            Label("About...", systemImage: "info.circle")
         }
-        Button {
+
+        Button("Settings...", systemImage: "gear") {
             openURL(.settings)
-        } label: {
-            Label("Settings...", systemImage: "gear")
         }
         .keyboardShortcut(",")
         .disabled(!applicationModel.didShowIntroduction)
@@ -61,45 +56,33 @@ struct MainMenu: View {
 
         Menu("Help") {
 
-            Button {
+            Button("Website", systemImage: "globe") {
                 openURL(URL(string: "https://thoughts.jbmorley.co.uk")!)
-            } label: {
-                Label("Website", systemImage: "globe")
             }
 
-            Button {
+            Button("Privacy Policy", systemImage: "globe") {
                 openURL(URL(string: "https://thoughts.jbmorley.co.uk/privacy-policy")!)
-            } label: {
-                Label("Privacy Policy", systemImage: "globe")
             }
 
-            Button {
+            Button("GitHub", systemImage: "globe") {
                 openURL(URL(string: "https://github.com/inseven/thoughts")!)
-            } label: {
-                Label("GitHub", systemImage: "globe")
             }
 
-            Button {
+            Button("Support", systemImage: "mail") {
                 let subject = "Thoughts Support (\(Bundle.main.extendedVersion ?? "Unknown Version"))"
                 openURL(URL(address: "support@jbmorley.co.uk", subject: subject)!)
-            } label: {
-                Label("Support", systemImage: "mail")
             }
 
             Divider()
 
 #if canImport(Glitter)
-            Button {
+            Button("Donate", systemImage: "globe") {
                 openURL(.donate)
-            } label: {
-                Label("Donate", systemImage: "globe")
             }
 #endif
 
-            Button {
+            Button("More Software by Jason Morley", systemImage: "globe") {
                 openURL(URL(string: "https://jbmorley.co.uk/software")!)
-            } label: {
-                Label("More Software by Jason Morley", systemImage: "globe")
             }
 
         }
@@ -115,19 +98,15 @@ struct MainMenu: View {
 
 #if DEBUG
 
-        Button {
+        Button("Introduction...", systemImage: "wand.and.rays") {
             applicationModel.showIntroduction()
-        } label: {
-            Label("Introduction...", systemImage: "wand.and.rays")
         }
 
         Divider()
 #endif
 
-        Button {
+        Button("Quit", systemImage: "xmark.rectangle") {
             NSApplication.shared.terminate(nil)
-        } label: {
-            Text("Quit")
         }
         .keyboardShortcut("q")
     }
