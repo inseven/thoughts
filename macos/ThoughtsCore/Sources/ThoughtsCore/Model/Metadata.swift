@@ -21,12 +21,16 @@
 import CoreLocation
 import Foundation
 
-import ThoughtsCore
+public struct Metadata: Codable {
 
-struct Metadata: Codable {
+    public let date: RegionalDate
+    public let tags: [String]
+    public let location: LocationDetails?
 
-    let date: RegionalDate
-    let tags: [String]
-    let location: LocationDetails?
+    public init(date: RegionalDate, tags: [String], location: LocationDetails?) {
+        self.date = date
+        self.tags = tags
+        self.location = location
+    }
 
 }
