@@ -5,7 +5,8 @@ import PackageDescription
 let package = Package(
     name: "ThoughtsCore",
     platforms: [
-        .macOS(.v13),
+        .macOS(.v14),
+        .iOS(.v18),
     ],
     products: [
         .library(
