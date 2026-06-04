@@ -22,9 +22,9 @@ import Foundation
 
 extension String {
 
-    init(contentsOfResource resource: String) {
+    public init(contentsOfResource resource: String) {
         let url = Bundle.main.url(forResource: resource, withExtension: nil)!
-        try! self.init(contentsOf: url)
+        try! self.init(contentsOf: url, encoding: .utf8)
     }
 
 }
