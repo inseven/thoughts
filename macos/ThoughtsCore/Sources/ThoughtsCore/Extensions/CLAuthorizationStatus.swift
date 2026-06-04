@@ -22,7 +22,7 @@ import CoreLocation
 
 extension CLAuthorizationStatus {
 
-    var name: String {
+    public var name: String {
         switch self {
         case .notDetermined:
             return "not determined"
@@ -32,6 +32,8 @@ extension CLAuthorizationStatus {
             return "denied"
         case .authorizedAlways:
             return "authorized always"
+        case .authorizedWhenInUse:
+            return "authorized when in use"
         @unknown default:
             return "unknown (\(self.rawValue))"
         }

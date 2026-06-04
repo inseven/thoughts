@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import ThoughtsCore
+
 struct Pager<Item: Identifiable & Hashable>: View {
 
     @Binding var item: Item
