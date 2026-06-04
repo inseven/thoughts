@@ -36,8 +36,8 @@ private let htmlRegex = try! NSRegularExpression(
 )
 
 #if os(macOS)
-let defaultEditorFont = NSFont.monospacedSystemFont(ofSize: 14.0, weight: .regular)
-let codeFont = NSFont.monospacedSystemFont(ofSize: 14.0, weight: .thin)
+nonisolated(unsafe) let defaultEditorFont = NSFont.monospacedSystemFont(ofSize: 14.0, weight: .regular)
+nonisolated(unsafe) let codeFont = NSFont.monospacedSystemFont(ofSize: 14.0, weight: .thin)
 let headingTraits: NSFontDescriptor.SymbolicTraits = [.bold, .expanded]
 let boldTraits: NSFontDescriptor.SymbolicTraits = [.bold]
 let emphasisTraits: NSFontDescriptor.SymbolicTraits = [.italic]
@@ -79,7 +79,7 @@ public extension Sequence where Iterator.Element == HighlightRule {
                 pattern: linkOrImageRegex,
                 formattingRules: [
                     TextFormattingRule(fontTraits: boldTraits),
-                    TextFormattingRule(key: .foregroundColor, value: NSColor.systemBlue),
+                    TextFormattingRule(key: .foregroundColor, value: Color.accentColor),
                 ]
             ),
             HighlightRule(
