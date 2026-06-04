@@ -23,20 +23,18 @@ import Foundation
 
 import Yams
 
-import ThoughtsCore
+public struct Document {
 
-struct Document {
+    public var date: Date
+    public var content: String
+    public var tags: [String]
+    public var location: LocationDetails? = nil
 
-    var date: Date
-    var content: String
-    var tags: [String]
-    var location: LocationDetails? = nil
-
-    var isEmpty: Bool {
+    public var isEmpty: Bool {
         return content.isEmpty
     }
 
-    init(date: Date = Date()) {
+    public init(date: Date = Date()) {
         self.date = date
         self.content = ""
         self.tags = []
@@ -56,7 +54,7 @@ struct Document {
         }
     }
 
-    func sync(to rootURL: URL) throws {
+    public func sync(to rootURL: URL) throws {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd-HH-mm-ss"
         formatter.timeZone = .gmt

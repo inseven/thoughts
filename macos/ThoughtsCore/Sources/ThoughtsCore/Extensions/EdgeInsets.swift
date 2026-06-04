@@ -22,11 +22,11 @@ import SwiftUI
 
 extension EdgeInsets {
 
-    init(horizontal: CGFloat, vertical: CGFloat) {
+    public init(horizontal: CGFloat, vertical: CGFloat) {
         self.init(top: vertical, leading: horizontal, bottom: vertical, trailing: horizontal)
     }
 
-    init(size: CGFloat) {
+    public init(size: CGFloat) {
         self.init(top: size, leading: size, bottom: size, trailing: size)
     }
 
