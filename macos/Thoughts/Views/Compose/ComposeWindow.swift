@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import ThoughtsCore
+
 struct ComposeWindow: Scene {
 
     @Environment(ApplicationModel.self) var applicationModel: ApplicationModel

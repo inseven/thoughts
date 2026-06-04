@@ -28,21 +28,65 @@ import Interact
 import Glitter
 #endif
 
+import ThoughtsCore
+
 @main
 struct ThoughtsApp: App {
+
+    class ModelDelegate: NSObject, ApplicationModelDelegate {
+
+        func showIntroduction(applicationModel: ApplicationModel) {
+            let window = NSIntroductionWindow(applicationModel: applicationModel)
+            window.center()
+            window.makeKeyAndOrderFront(nil)
+        }
+
+        func showUpdateAlert(applicationModel: ApplicationModel) {
+            let alert = NSAlert()
+            alert.alertStyle = .informational
+            alert.messageText = "Update Available"
+            alert.informativeText = "Thoughts is no longer being updated on the Mac App Store. Please download the latest update from the website."
+            alert.showsSuppressionButton = true
+            _ = alert.addButton(withTitle: "OK")
+            alert.runModal()
+            let suppressionState = alert.suppressionButton?.state as? NSControl.StateValue ?? .off
+            applicationModel.suppressUpdateCheck = suppressionState == .on
+        }
+
+        func setRootURL(applicationModel: ApplicationModel) -> Bool {
+            dispatchPrecondition(condition: .onQueue(.main))
+            let openPanel = NSOpenPanel()
+            openPanel.canChooseFiles = false
+            openPanel.canChooseDirectories = true
+            openPanel.canCreateDirectories = true
+            guard openPanel.runModal() ==  NSApplication.ModalResponse.OK,
+                  let url = openPanel.url else {
+                return false
+            }
+            applicationModel.rootURL = url
+            applicationModel.document = Document()
+            return true
+        }
+
+    }
 
     static let title = "Thoughts Support (\(Bundle.main.extendedVersion ?? "Unknown Version"))"
 
     var applicationModel: ApplicationModel
+    var modelDelegate: ModelDelegate
     let hotKey: HotKey
 
     init() {
         let applicationModel = ApplicationModel()
+        let modelDelegate = ModelDelegate()
         let hotKey = HotKey(key: .t, modifiers: [.command, .option, .control], keyDownHandler: {
-           applicationModel.new()
-       })
+            applicationModel.new()
+        })
+        applicationModel.delegate = modelDelegate
         self.applicationModel = applicationModel
+        self.modelDelegate = modelDelegate
         self.hotKey = hotKey
+        self.applicationModel.start()
     }
 
     var body: some Scene {

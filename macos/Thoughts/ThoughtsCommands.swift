@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import ThoughtsCore
+
 struct ThoughtsCommands: Commands {
 
     let applicationModel: ApplicationModel

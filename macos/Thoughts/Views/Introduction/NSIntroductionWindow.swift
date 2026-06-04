@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import ThoughtsCore
+
 class NSIntroductionWindow: NSWindow {
 
     convenience init(applicationModel: ApplicationModel) {
