@@ -60,7 +60,8 @@ let textColor = UIColor.label
 private let maxHeadingLevel = 6
 
 public extension Sequence where Iterator.Element == HighlightRule {
-    static var markdown: [HighlightRule] {
+
+    static var thoughtsMarkdown: [HighlightRule] {
         [
             HighlightRule(pattern: .all, formattingRule: TextFormattingRule(key: .font, value: defaultEditorFont)),
             HighlightRule(pattern: inlineCodeRegex, formattingRule: TextFormattingRule(key: .font, value: codeFont)),
@@ -79,7 +80,7 @@ public extension Sequence where Iterator.Element == HighlightRule {
                 pattern: linkOrImageRegex,
                 formattingRules: [
                     TextFormattingRule(fontTraits: boldTraits),
-                    TextFormattingRule(key: .foregroundColor, value: Color.accentColor),
+                    TextFormattingRule(key: .foregroundColor, value: NSColor.accentColor),
                 ]
             ),
             HighlightRule(
