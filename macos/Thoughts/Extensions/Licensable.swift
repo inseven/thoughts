@@ -36,15 +36,6 @@ let conditionalLicenses: [Licensable] = []
 
 #endif
 
-fileprivate let fsEventsWrapperLicense = License(id: "https://github.com/Frizlab/FSEventsWrapper",
-                                                 name: "FSEventsWrapper",
-                                                 author: "François Lamboley",
-                                                 text: String(contentsOfResource: "fseventswrapper-license"),
-                                                 attributes: [
-                                                    .url(URL(string: "https://github.com/Frizlab/FSEventsWrapper")!,
-                                                         title: "GitHub"),
-                                                 ])
-
 fileprivate let materialIconsLicense = License(id: "https://github.com/google/material-design-icons",
                                                name: "Material Icons",
                                                author: "Google",
@@ -83,7 +74,6 @@ fileprivate let thoughtsLicense = License(id: "https://github.com/inseven/though
                                             .interact,
                                             .licensable,
                                             .tagField,
-                                            fsEventsWrapperLicense,
                                             highlightedTextEditorLicense,
                                             materialIconsLicense,
                                             yamsLicense,
