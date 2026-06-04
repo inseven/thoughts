@@ -31,7 +31,10 @@ let package = Package(
                 .product(name: "Sparkle", package: "Sparkle", condition: .when(platforms: [.macOS])),
                 .product(name: "Glitter", package: "glitter", condition: .when(platforms: [.macOS])),
                 .product(name: "Yams", package: "Yams"),
-            ]
+            ],
+            resources: [
+                .process("Licenses"),
+            ],
         ),
     ]
 )
