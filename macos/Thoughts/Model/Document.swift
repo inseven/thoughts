@@ -23,6 +23,8 @@ import Foundation
 
 import Yams
 
+import ThoughtsCore
+
 struct Document {
 
     var date: Date

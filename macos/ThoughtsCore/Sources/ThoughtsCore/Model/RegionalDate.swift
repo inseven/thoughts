@@ -21,37 +21,45 @@
 import CoreLocation
 import Foundation
 
-struct LocationDetails: Codable {
+import Yams
 
-    var summary: String {
-        let names = [name, locality].compactMap { $0 }
-        if !names.isEmpty {
-            return names.joined(separator: ", ")
-        } else {
-            return "(\(String(format: "%.3f", latitude)), \(String(format: "%.3f", longitude)))"
+public struct RegionalDate: Codable, Equatable {
+
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        if lhs.date != rhs.date {
+            return false
         }
+        if lhs.timeZone.secondsFromGMT() != rhs.timeZone.secondsFromGMT() {
+            return false
+        }
+        return true
     }
 
-    var latitude: CLLocationDegrees
-    var longitude: CLLocationDegrees
-    var name: String?
-    var locality: String?
+    let date: Date
+    let timeZone: TimeZone
 
-    init(latitude: CLLocationDegrees,
-         longitude: CLLocationDegrees,
-         name: String? = nil,
-         locality: String? = nil) {
-        self.latitude = latitude
-        self.longitude = longitude
-        self.name = name
-        self.locality = locality
+    public init(_ date: Date, timeZone: TimeZone) {
+        self.date = date
+        self.timeZone = timeZone
     }
 
-    init(location: CLLocation, placemark: CLPlacemark? = nil) {
-        self.latitude = location.coordinate.latitude
-        self.longitude = location.coordinate.longitude
-        self.name = placemark?.name
-        self.locality = placemark?.locality
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let string = try container.decode(String.self)
+
+        let dateFormatter = ISO8601DateFormatter()
+        guard let date = dateFormatter.date(from: string) else {
+            throw ThoughtsError.encodingError
+        }
+        self.date = date
+        self.timeZone = TimeZone(iso8601: string) ?? .gmt
+    }
+
+    public func encode(to encoder: any Encoder) throws {
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.timeZone = timeZone
+        var container = encoder.singleValueContainer()
+        try container.encode(dateFormatter.string(from: date))
     }
 
 }

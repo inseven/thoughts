@@ -18,48 +18,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreLocation
-import Foundation
+import SwiftUI
+import UniformTypeIdentifiers
 
-import Yams
+extension URL {
 
-struct RegionalDate: Codable, Equatable {
+    public static let donate = URL(string: "https://jbmorley.co.uk/support")!
 
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        if lhs.date != rhs.date {
-            return false
+    public static let about = URL(string: "x-thoughts://about")!
+    public static let compose = URL(string: "x-thoughts://compose")!
+    public static let settings = URL(string: "x-thoughts://settings")!
+
+    public var contentModificationDate: Date? {
+        get throws {
+            return try resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate
         }
-        if lhs.timeZone.secondsFromGMT() != rhs.timeZone.secondsFromGMT() {
-            return false
+    }
+
+    public var contentType: UTType? {
+        get throws {
+            return try resourceValues(forKeys: [.contentTypeKey]).contentType
         }
-        return true
     }
 
-    let date: Date
-    let timeZone: TimeZone
-
-    init(_ date: Date, timeZone: TimeZone) {
-        self.date = date
-        self.timeZone = timeZone
-    }
-
-    init(from decoder: any Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        let string = try container.decode(String.self)
-
-        let dateFormatter = ISO8601DateFormatter()
-        guard let date = dateFormatter.date(from: string) else {
-            throw ThoughtsError.encodingError
+    public var isDirectory: Bool? {
+        get throws {
+            return try resourceValues(forKeys: [.isDirectoryKey]).isDirectory
         }
-        self.date = date
-        self.timeZone = TimeZone(iso8601: string) ?? .gmt
     }
 
-    func encode(to encoder: any Encoder) throws {
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.timeZone = timeZone
-        var container = encoder.singleValueContainer()
-        try container.encode(dateFormatter.string(from: date))
-    }
+//    public init(filePath: String, itemType: FSEvent.ItemType) {
+//        self.init(filePath: filePath, directoryHint: itemType == .dir ? .isDirectory : .notDirectory)
+//    }
 
 }

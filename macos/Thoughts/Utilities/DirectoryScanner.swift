@@ -24,9 +24,19 @@ import SwiftUI
 
 import FSEventsWrapper
 
+import ThoughtsCore
+
 protocol DirectoryScannerDelegate: NSObject {
 
     func directoryScannerDidStart(_ directoryScanner: DirectoryScanner)
+
+}
+
+extension FSEvent.ItemType {
+
+    var directoryHint: URL.DirectoryHint {
+        return (self == .dir) ? .isDirectory : .notDirectory
+    }
 
 }
 
@@ -65,12 +75,13 @@ class DirectoryScanner {
             let fileManager = FileManager.default
 
             do {
+
                 switch event {
                 case .itemClonedAtPath:
                     return
                 case .itemCreated(path: let path, itemType: let itemType, eventId: _, fromUs: _):
 
-                    let url = URL(filePath: path, itemType: itemType)
+                    let url = URL(filePath: path, directoryHint: itemType.directoryHint)
                     let details = try fileManager.details(for: url, owner: ownerURL)
 
                     // Depending on the system load, it seems like we sometimes receive events for file operations that
@@ -86,7 +97,7 @@ class DirectoryScanner {
 
                     // Helpfully, file renames can be additions or removals, so we check to see if the file exists at the
                     // new location to determine which.
-                    let url = URL(filePath: path, itemType: itemType)
+                    let url = URL(filePath: path, directoryHint: itemType.directoryHint)
                     if fileManager.fileExists(atPath: url.path) {
 
                         let details = try fileManager.details(for: url, owner: ownerURL)
@@ -131,7 +142,7 @@ class DirectoryScanner {
 
                 case .itemRemoved(path: let path, itemType: let itemType, eventId: _, fromUs: _):
 
-                    let url = URL(filePath: path, itemType: itemType)
+                    let url = URL(filePath: path, directoryHint: itemType.directoryHint)
                     let identifier = Details.Identifier(ownerURL: ownerURL, url: url)
                     onFileDeletion([identifier])
                     self.identifiers.removeValue(forKey: identifier)
@@ -142,7 +153,7 @@ class DirectoryScanner {
                     // TODO: We need to handle directories carefully here.
 
                     // TODO: Consider generalising this code.
-                    let url = URL(filePath: path, itemType: itemType)
+                    let url = URL(filePath: path, directoryHint: itemType.directoryHint)
                     let identifier = Details.Identifier(ownerURL: ownerURL, url: url)
                     let details = try fileManager.details(for: url, owner: ownerURL)
 

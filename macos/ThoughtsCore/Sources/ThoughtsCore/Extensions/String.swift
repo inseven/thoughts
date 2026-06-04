@@ -18,12 +18,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreLocation
 import Foundation
 
-enum ThoughtsError: Error {
-    case accessError
-    case encodingError
-    case locationServicesDisabled
-    case userLocationDisabled
+extension String {
+
+    public init(contentsOfResource resource: String) {
+        let url = Bundle.main.url(forResource: resource, withExtension: nil)!
+        try! self.init(contentsOf: url, encoding: .utf8)
+    }
+
 }

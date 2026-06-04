@@ -23,30 +23,36 @@
 import Foundation
 import UniformTypeIdentifiers
 
-struct Details: Hashable {
+public struct Details: Hashable {
 
     // TODO: This isn't really an identifier anymore is it.
-    struct Identifier: Equatable, Hashable {
-        let ownerURL: URL
-        let url: URL
+    public struct Identifier: Equatable, Hashable {
 
-        var parent: Identifier {
+        public let ownerURL: URL
+        public let url: URL
+
+        public var parent: Identifier {
             return Identifier(ownerURL: ownerURL, url: url.deletingLastPathComponent())
+        }
+
+        public init(ownerURL: URL, url: URL) {
+            self.ownerURL = ownerURL
+            self.url = url
         }
     }
 
-    let identifier: Identifier
-    let ownerURL: URL
-    let uuid: UUID
-    let url: URL
-    let contentType: UTType
+    public let identifier: Identifier
+    public let ownerURL: URL
+    public let uuid: UUID
+    public let url: URL
+    public let contentType: UTType
 
     // Even though modern Swift APIs expose the content modification date, round-tripping this into SQLite looses
     // precision causing us to incorrectly think files have changed. To make it much harder to make this mistake, we
     // instead store the contentModificationDate as an Int which represents milliseconds since the reference data.
-    let contentModificationDate: Int
+    public let contentModificationDate: Int
 
-    init(uuid: UUID, ownerURL: URL, url: URL, contentType: UTType, contentModificationDate: Int) {
+    public init(uuid: UUID, ownerURL: URL, url: URL, contentType: UTType, contentModificationDate: Int) {
         self.uuid = uuid
         self.identifier = Identifier(ownerURL: ownerURL, url: url)
         self.ownerURL = ownerURL
@@ -55,11 +61,11 @@ struct Details: Hashable {
         self.contentModificationDate = contentModificationDate
     }
 
-    var parentURL: URL {
+    public var parentURL: URL {
         return url.deletingLastPathComponent()
     }
 
-    func setting(ownerURL: URL) -> Details {
+    public func setting(ownerURL: URL) -> Details {
         return Details(uuid: uuid,
                        ownerURL: ownerURL,
                        url: url,
@@ -67,7 +73,7 @@ struct Details: Hashable {
                        contentModificationDate: contentModificationDate)
     }
 
-    func equivalent(to details: Details) -> Bool {
+    public func equivalent(to details: Details) -> Bool {
         // TODO: Does the content type ever change?
         // TODO: Function overload?
         return (ownerURL == details.ownerURL &&
@@ -76,7 +82,7 @@ struct Details: Hashable {
                 contentModificationDate == details.contentModificationDate)
     }
 
-    func applying(details: Details) -> Details {
+    public func applying(details: Details) -> Details {
         return Details(uuid: uuid,
                        ownerURL: ownerURL,
                        url: url,

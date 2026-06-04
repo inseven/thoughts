@@ -25,12 +25,12 @@ import UniformTypeIdentifiers
 
 extension FileManager {
 
-    func details(for path: String, owner: URL) throws -> Details {
+    public func details(for path: String, owner: URL) throws -> Details {
         let url = URL(filePath: path)
         return try details(for: url, owner: owner)
     }
 
-    func details(for url: URL, owner: URL) throws -> Details {
+    public func details(for url: URL, owner: URL) throws -> Details {
         guard let isDirectory = try url.isDirectory else {
             throw ThoughtsError.accessError
         }
@@ -51,7 +51,7 @@ extension FileManager {
     }
 
     // Returns all the files contained within directoryURL, including the root.
-    func files(directoryURL: URL, ownerURL: URL? = nil) throws -> [Details]  {
+    public func files(directoryURL: URL, ownerURL: URL? = nil) throws -> [Details]  {
         precondition(directoryURL.hasDirectoryPath)
         precondition(ownerURL?.hasDirectoryPath ?? true)
         let date = Date()

@@ -20,7 +20,7 @@
 
 import Foundation
 
-class Trie {
+public class Trie {
 
     private class TrieNode {
         var children: [Character: TrieNode] = [:]
@@ -29,14 +29,14 @@ class Trie {
 
     private var root: TrieNode
 
-    init(words: any Collection<String> = []) {
+    public init(words: any Collection<String> = []) {
         self.root = TrieNode()
         for word in words {
             insert(word)
         }
     }
 
-    func insert(_ word: String) {
+    public func insert(_ word: String) {
         var current = root
         for char in word {
             if current.children[char] == nil {
@@ -47,7 +47,7 @@ class Trie {
         current.isEndOfWord = true
     }
 
-    func contains(_ word: String) -> Bool {
+    public func contains(_ word: String) -> Bool {
         var current = root
         for char in word {
             if let node = current.children[char] {
@@ -59,7 +59,7 @@ class Trie {
         return current.isEndOfWord
     }
 
-    func words(prefix: String) -> [String] {
+    public func words(prefix: String) -> [String] {
         var current = root
         for char in prefix {
             if let node = current.children[char] {

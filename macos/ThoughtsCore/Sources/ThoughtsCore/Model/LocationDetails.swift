@@ -18,13 +18,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import CoreLocation
 import Foundation
 
-extension String {
+public struct LocationDetails: Codable, Sendable {
 
-    init(contentsOfResource resource: String) {
-        let url = Bundle.main.url(forResource: resource, withExtension: nil)!
-        try! self.init(contentsOf: url)
+    public var summary: String {
+        let names = [name, locality].compactMap { $0 }
+        if !names.isEmpty {
+            return names.joined(separator: ", ")
+        } else {
+            return "(\(String(format: "%.3f", latitude)), \(String(format: "%.3f", longitude)))"
+        }
+    }
+
+    var latitude: CLLocationDegrees
+    var longitude: CLLocationDegrees
+    var name: String?
+    var locality: String?
+
+    public init(latitude: CLLocationDegrees,
+                longitude: CLLocationDegrees,
+                name: String? = nil,
+                locality: String? = nil) {
+        self.latitude = latitude
+        self.longitude = longitude
+        self.name = name
+        self.locality = locality
+    }
+
+    public init(location: CLLocation, placemark: CLPlacemark? = nil) {
+        self.latitude = location.coordinate.latitude
+        self.longitude = location.coordinate.longitude
+        self.name = placemark?.name
+        self.locality = placemark?.locality
     }
 
 }
