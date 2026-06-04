@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		D804FB112C081A2F004F8666 /* FrontmatterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D804FB102C081A2F004F8666 /* FrontmatterSwift */; };
 		D8296CEE2E29EBBF005088B6 /* ThoughtsCore in Frameworks */ = {isa = PBXBuildFile; productRef = D8296CED2E29EBBF005088B6 /* ThoughtsCore */; };
-		D85FC1412BEEC3EC0004FAB3 /* TagField in Frameworks */ = {isa = PBXBuildFile; productRef = D85FC1402BEEC3EC0004FAB3 /* TagField */; };
 		D87707B52C01592400362786 /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = D87707B42C01592400362786 /* HotKey */; };
 		D8BA4D492BE59E16001A2A26 /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = D8BA4D482BE59E16001A2A26 /* HighlightedTextEditor */; };
 		D8C283E92BD9954F00161C82 /* HashRainbow in Frameworks */ = {isa = PBXBuildFile; productRef = D8C283E82BD9954F00161C82 /* HashRainbow */; };
@@ -62,7 +61,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8C283E92BD9954F00161C82 /* HashRainbow in Frameworks */,
-				D85FC1412BEEC3EC0004FAB3 /* TagField in Frameworks */,
 				D804FB112C081A2F004F8666 /* FrontmatterSwift in Frameworks */,
 				D8BA4D492BE59E16001A2A26 /* HighlightedTextEditor in Frameworks */,
 				D8296CEE2E29EBBF005088B6 /* ThoughtsCore in Frameworks */,
@@ -140,7 +138,6 @@
 				D8F06D4A2B67275B0039AEF4 /* Diligence */,
 				D8C283E82BD9954F00161C82 /* HashRainbow */,
 				D8BA4D482BE59E16001A2A26 /* HighlightedTextEditor */,
-				D85FC1402BEEC3EC0004FAB3 /* TagField */,
 				D87707B42C01592400362786 /* HotKey */,
 				D804FB102C081A2F004F8666 /* FrontmatterSwift */,
 				D8296CED2E29EBBF005088B6 /* ThoughtsCore */,
@@ -227,7 +224,6 @@
 				D8F06D492B67275B0039AEF4 /* XCLocalSwiftPackageReference "dependencies/diligence" */,
 				D8C283E72BD9954F00161C82 /* XCRemoteSwiftPackageReference "HashRainbow" */,
 				D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "dependencies/HighlightedTextEditor" */,
-				D85FC13F2BEEC3EC0004FAB3 /* XCLocalSwiftPackageReference "dependencies/TagField" */,
 				D87707B32C01592400362786 /* XCRemoteSwiftPackageReference "HotKey" */,
 				D8296CEC2E29EBBF005088B6 /* XCLocalSwiftPackageReference "ThoughtsCore" */,
 			);
@@ -616,10 +612,6 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ThoughtsCore;
 		};
-		D85FC13F2BEEC3EC0004FAB3 /* XCLocalSwiftPackageReference "dependencies/TagField" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = dependencies/TagField;
-		};
 		D8BA4D472BE59DC5001A2A26 /* XCLocalSwiftPackageReference "dependencies/HighlightedTextEditor" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = dependencies/HighlightedTextEditor;
@@ -657,10 +649,6 @@
 		D8296CED2E29EBBF005088B6 /* ThoughtsCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ThoughtsCore;
-		};
-		D85FC1402BEEC3EC0004FAB3 /* TagField */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = TagField;
 		};
 		D87707B42C01592400362786 /* HotKey */ = {
 			isa = XCSwiftPackageProductDependency;
