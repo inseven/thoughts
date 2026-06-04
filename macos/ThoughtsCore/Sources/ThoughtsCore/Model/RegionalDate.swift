@@ -23,11 +23,9 @@ import Foundation
 
 import Yams
 
-import ThoughtsCore
+public struct RegionalDate: Codable, Equatable {
 
-struct RegionalDate: Codable, Equatable {
-
-    static func == (lhs: Self, rhs: Self) -> Bool {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
         if lhs.date != rhs.date {
             return false
         }
@@ -40,12 +38,12 @@ struct RegionalDate: Codable, Equatable {
     let date: Date
     let timeZone: TimeZone
 
-    init(_ date: Date, timeZone: TimeZone) {
+    public init(_ date: Date, timeZone: TimeZone) {
         self.date = date
         self.timeZone = timeZone
     }
 
-    init(from decoder: any Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.singleValueContainer()
         let string = try container.decode(String.self)
 
@@ -57,7 +55,7 @@ struct RegionalDate: Codable, Equatable {
         self.timeZone = TimeZone(iso8601: string) ?? .gmt
     }
 
-    func encode(to encoder: any Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         let dateFormatter = ISO8601DateFormatter()
         dateFormatter.timeZone = timeZone
         var container = encoder.singleValueContainer()
