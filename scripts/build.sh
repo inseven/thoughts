@@ -140,6 +140,12 @@ echo "$MACOS_DEVELOPER_INSTALLER_CERTIFICATE_PASSWORD" | build-tools import-base
 build-tools install-provisioning-profile "profiles/Thoughts_Developer_ID_Profile.provisionprofile"
 build-tools install-provisioning-profile "profiles/Thoughts_Mac_App_Store_Profile.provisionprofile"
 
+# ThoughtsCore
+
+cd "$ROOT_DIRECTORY/macos/ThoughtsCore"
+xcodebuild -scheme ThoughtsCore -destination "platform=macOS"
+xcodebuild -scheme ThoughtsCore -destination "platform=iOS Simulator,name=iPhone 17 Pro"
+
 ## Developer ID Build
 
 # Build and archive the macOS project.
