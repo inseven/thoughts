@@ -21,9 +21,9 @@
 import CoreLocation
 import Foundation
 
-struct LocationDetails: Codable {
+public struct LocationDetails: Codable, Sendable {
 
-    var summary: String {
+    public var summary: String {
         let names = [name, locality].compactMap { $0 }
         if !names.isEmpty {
             return names.joined(separator: ", ")
@@ -37,17 +37,17 @@ struct LocationDetails: Codable {
     var name: String?
     var locality: String?
 
-    init(latitude: CLLocationDegrees,
-         longitude: CLLocationDegrees,
-         name: String? = nil,
-         locality: String? = nil) {
+    public init(latitude: CLLocationDegrees,
+                longitude: CLLocationDegrees,
+                name: String? = nil,
+                locality: String? = nil) {
         self.latitude = latitude
         self.longitude = longitude
         self.name = name
         self.locality = locality
     }
 
-    init(location: CLLocation, placemark: CLPlacemark? = nil) {
+    public init(location: CLLocation, placemark: CLPlacemark? = nil) {
         self.latitude = location.coordinate.latitude
         self.longitude = location.coordinate.longitude
         self.name = placemark?.name

@@ -21,6 +21,8 @@
 import CoreLocation
 import Foundation
 
+import ThoughtsCore
+
 struct Metadata: Codable {
 
     let date: RegionalDate
