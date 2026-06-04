@@ -20,12 +20,14 @@
 
 #if os(macOS)
 
-import SwiftUI
+import AppKit
 
-extension NSColor {
+typealias NativeColor = NSColor
 
-    static let accentColor = NSColor(Color("AccentColor", bundle: .main))
+#else
 
-}
+import UIKit
+
+typealias NativeColor = UIColor
 
 #endif

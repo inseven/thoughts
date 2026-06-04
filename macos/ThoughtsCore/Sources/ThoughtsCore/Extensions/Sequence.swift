@@ -80,7 +80,7 @@ public extension Sequence where Iterator.Element == HighlightRule {
                 pattern: linkOrImageRegex,
                 formattingRules: [
                     TextFormattingRule(fontTraits: boldTraits),
-                    TextFormattingRule(key: .foregroundColor, value: NSColor.accentColor),
+                    TextFormattingRule(key: .foregroundColor, value: Color("AccentColor", bundle: .main).nativeColor),
                 ]
             ),
             HighlightRule(
