@@ -30,6 +30,9 @@ let package = Package(
                 .product(name: "FrontmatterSwift", package: "FrontmatterSwift"),
                 .product(name: "Yams", package: "Yams"),
             ]
+            resources: [
+                .process("Licenses"),
+            ],
         ),
     ]
 )
