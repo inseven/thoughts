@@ -27,9 +27,7 @@ import UniformTypeIdentifiers
 import FrontmatterSwift
 import Interact
 
-import ThoughtsCore
-
-class Library {
+public class Library: @unchecked Sendable {
 
     private static func tags(for url: URL) -> [String] {
         do {
@@ -43,51 +41,63 @@ class Library {
 
     private let rootURL: URL
 
-    private let scanner: DirectoryScanner
+    private let directoryMonitor: DirectoryMonitor
     private let workQueue = DispatchQueue(label: "Library.workQueue")
 
     private var files: [Details.Identifier: [String]] = [:]
 
-    @MainActor var tags = Trie()
+    @MainActor public var tags = Trie()
 
-    init(rootURL: URL) {
+    public init(rootURL: URL) {
         self.rootURL = rootURL
-        self.scanner = DirectoryScanner(url: rootURL)
+        self.directoryMonitor = try! DirectoryMonitor(url: rootURL, queue: workQueue)
+        self.directoryMonitor.delegate = self
     }
 
-    func start() {
-        self.scanner.start {
-            return []
-        } onFileCreation: { details in
-            for details in details.filter({ $0.contentType.conforms(to: .markdown) }) {
-                self.files[details.identifier] = Self.tags(for: details.url)
-            }
-            self.updateTags()
-        } onFileUpdate: { details in
-            for details in details.filter({ $0.contentType.conforms(to: .markdown) }) {
-                self.files[details.identifier] = Self.tags(for: details.url)
-            }
-            self.updateTags()
-        } onFileDeletion: { identifiers in
-            for identifier in identifiers {
-                self.files.removeValue(forKey: identifier)
-            }
-            self.updateTags()
+    public func start() {
+        self.directoryMonitor.start()
+        workQueue.async {
+            self.workQueue_updateTags()
         }
     }
 
-    private func updateTags() {
+    private func workQueue_updateTags() {
+        dispatchPrecondition(condition: .onQueue(workQueue))
+
+        // Reload the tags.
+        let fileManager = FileManager.default
+        let files = Set(try! fileManager
+            .files(directoryURL: rootURL)
+            .filter {
+                $0.contentType.conforms(to: .markdown)
+            }
+        )
+        self.files = files.reduce(into: [Details.Identifier: [String]]()) { partialResult, details in
+            partialResult[details.identifier] = Self.tags(for: details.url)
+        }
+
+        // Generate the full set of tags.
         let tags = self.files.values.reduce(into: Set<String>()) { partialResult, tags in
             partialResult.formUnion(tags)
         }
+
+        // Construct a trie for quick lookup.
         let trie = Trie(words: tags)
         DispatchQueue.main.async {
             self.tags = trie
         }
     }
 
-    func stop() {
-        scanner.stop()
+    public func stop() {
+        directoryMonitor.cancel()
+    }
+
+}
+
+extension Library: DirectoryMonitorDelegate {
+
+    public func directoryMonitor(_ directoryMonitor: DirectoryMonitor, contentsDidChangeForUrl url: URL) {
+        self.workQueue_updateTags()
     }
 
 }

@@ -54,7 +54,10 @@ extension FileManager {
     public func files(directoryURL: URL, ownerURL: URL? = nil) throws -> [Details]  {
         precondition(directoryURL.hasDirectoryPath)
         precondition(ownerURL?.hasDirectoryPath ?? true)
+
+#if DEBUG
         let date = Date()
+#endif
         let resourceKeys = Set<URLResourceKey>([.nameKey,
                                                 .isDirectoryKey,
                                                 .contentTypeKey,
@@ -78,8 +81,10 @@ extension FileManager {
                                  contentModificationDate: contentModificationDate.millisecondsSinceReferenceDate))
         }
 
+#if DEBUG
         let duration = date.distance(to: Date())
         print("Listing for '\(directoryURL.displayName)' took \(duration.formatted()) seconds (\(files.count) files).")
+#endif
 
         return files
     }
