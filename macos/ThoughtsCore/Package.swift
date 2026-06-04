@@ -6,6 +6,7 @@ let package = Package(
     name: "ThoughtsCore",
     platforms: [
         .macOS(.v13),
+        .iOS(.v18),
     ],
     products: [
         .library(
@@ -20,8 +21,8 @@ let package = Package(
         .target(
             name: "ThoughtsCore",
             dependencies: [
-                .product(name: "Sparkle", package: "Sparkle"),
-                .product(name: "Glitter", package: "glitter"),
+                .product(name: "Sparkle", package: "Sparkle", condition: .when(platforms: [.macOS])),
+                .product(name: "Glitter", package: "glitter", condition: .when(platforms: [.macOS])),
             ]
         ),
     ]
