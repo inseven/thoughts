@@ -23,7 +23,7 @@ import Foundation
 extension String {
 
     public init(contentsOfResource resource: String) {
-        let url = Bundle.main.url(forResource: resource, withExtension: nil)!
+        let url = Bundle.module.url(forResource: resource, withExtension: nil)!
         try! self.init(contentsOf: url, encoding: .utf8)
     }
 
