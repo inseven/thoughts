@@ -29,6 +29,8 @@ import Interact
 import Sparkle
 #endif
 
+import ThoughtsCore
+
 @Observable
 class ApplicationModel: NSObject {
 

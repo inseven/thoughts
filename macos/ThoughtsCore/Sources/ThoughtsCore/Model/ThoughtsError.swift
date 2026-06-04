@@ -18,39 +18,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUI
-import UniformTypeIdentifiers
+import CoreLocation
+import Foundation
 
-import FSEventsWrapper
-
-extension URL {
-
-    static let donate = URL(string: "https://jbmorley.co.uk/support")!
-
-    static let about = URL(string: "x-thoughts://about")!
-    static let compose = URL(string: "x-thoughts://compose")!
-    static let settings = URL(string: "x-thoughts://settings")!
-
-    var contentModificationDate: Date? {
-        get throws {
-            return try resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate
-        }
-    }
-
-    var contentType: UTType? {
-        get throws {
-            return try resourceValues(forKeys: [.contentTypeKey]).contentType
-        }
-    }
-
-    var isDirectory: Bool? {
-        get throws {
-            return try resourceValues(forKeys: [.isDirectoryKey]).isDirectory
-        }
-    }
-
-    init(filePath: String, itemType: FSEvent.ItemType) {
-        self.init(filePath: filePath, directoryHint: itemType == .dir ? .isDirectory : .notDirectory)
-    }
-
+public enum ThoughtsError: Error {
+    case accessError
+    case encodingError
+    case locationServicesDisabled
+    case userLocationDisabled
 }

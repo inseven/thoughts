@@ -27,6 +27,8 @@ import UniformTypeIdentifiers
 import FrontmatterSwift
 import Interact
 
+import ThoughtsCore
+
 class Library {
 
     private static func tags(for url: URL) -> [String] {

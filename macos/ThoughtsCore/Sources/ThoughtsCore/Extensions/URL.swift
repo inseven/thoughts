@@ -18,12 +18,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CoreLocation
-import Foundation
+import SwiftUI
+import UniformTypeIdentifiers
 
-enum ThoughtsError: Error {
-    case accessError
-    case encodingError
-    case locationServicesDisabled
-    case userLocationDisabled
+extension URL {
+
+    public static let donate = URL(string: "https://jbmorley.co.uk/support")!
+
+    public static let about = URL(string: "x-thoughts://about")!
+    public static let compose = URL(string: "x-thoughts://compose")!
+    public static let settings = URL(string: "x-thoughts://settings")!
+
+    public var contentModificationDate: Date? {
+        get throws {
+            return try resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate
+        }
+    }
+
+    public var contentType: UTType? {
+        get throws {
+            return try resourceValues(forKeys: [.contentTypeKey]).contentType
+        }
+    }
+
+    public var isDirectory: Bool? {
+        get throws {
+            return try resourceValues(forKeys: [.isDirectoryKey]).isDirectory
+        }
+    }
+
+//    public init(filePath: String, itemType: FSEvent.ItemType) {
+//        self.init(filePath: filePath, directoryHint: itemType == .dir ? .isDirectory : .notDirectory)
+//    }
+
 }
