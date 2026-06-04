@@ -52,7 +52,7 @@ struct ComposeView: View {
     var body: some View {
         @Bindable var applicationModel = applicationModel
         VStack(spacing: 0) {
-            HighlightedTextEditor(text: $applicationModel.document.content, highlightRules: .markdown)
+            HighlightedTextEditor(text: $applicationModel.document.content, highlightRules: .thoughtsMarkdown)
                 .frame(minWidth: 400)
                 .edgesIgnoringSafeArea(.all)
                 .focused($focus, equals: .text)
