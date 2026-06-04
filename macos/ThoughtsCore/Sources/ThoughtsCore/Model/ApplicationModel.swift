@@ -18,7 +18,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import AppKit
 import Combine
 import CoreLocation
 import Foundation
@@ -35,6 +34,7 @@ public protocol ApplicationModelDelegate: AnyObject {
     func showIntroduction(applicationModel: ApplicationModel)
     func showUpdateAlert(applicationModel: ApplicationModel)
     func setRootURL(applicationModel: ApplicationModel) -> Bool
+    func showThought(applicationModel: ApplicationModel)
 
 }
 
@@ -59,7 +59,9 @@ public class ApplicationModel: NSObject, @unchecked Sendable {
             rootURLChanges.send(rootURL)
             reloadLibrary()
             do {
+#if os(macOS)
                 try keyedDefaults.set(securityScopedURL: rootURL, forKey: .rootURL)
+#endif
             } catch {
                 print("Failed to save bookmark data with error \(error).")
             }
@@ -122,7 +124,7 @@ public class ApplicationModel: NSObject, @unchecked Sendable {
     private let keyedDefaults = KeyedDefaults<SettingsKey>()
     private let locationManager = CLLocationManager()
 
-#if canImport(Glitter)
+#if canImport(Glitter) && os(macOS)
     @MainActor public let updaterController = SPUStandardUpdaterController(startingUpdater: false,
                                                                            updaterDelegate: nil,
                                                                            userDriverDelegate: nil)
@@ -131,7 +133,9 @@ public class ApplicationModel: NSObject, @unchecked Sendable {
     private let storeUpdateChecker = StoreUpdateChecker()
 
     @MainActor public override init() {
+#if os(macOS)
         rootURL = try? keyedDefaults.securityScopedURL(forKey: .rootURL)
+#endif
         shouldSaveLocation = keyedDefaults.bool(forKey: .shouldSaveLocation, default: false)
         introductionVersion = keyedDefaults.integer(forKey: .introductionVersion, default: 0)
         suppressUpdateCheck = keyedDefaults.bool(forKey: .suppressUpdateCheck, default: false)
@@ -214,7 +218,7 @@ public class ApplicationModel: NSObject, @unchecked Sendable {
             document = Document()
             updateUserLocation()
         }
-        NSWorkspace.shared.open(.compose)
+        delegate?.showThought(applicationModel: self)
     }
 
     @MainActor public func toggleFocus() {
@@ -275,7 +279,7 @@ extension ApplicationModel: CLLocationManagerDelegate {
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         dispatchPrecondition(condition: .onQueue(.main))
         print("Location authorization status = \(manager.authorizationStatus.name)")
-        guard manager.authorizationStatus == .authorized else {
+        guard manager.authorizationStatus == .authorizedAlways else {
             return
         }
         guard locationRequests.count > 0 else {

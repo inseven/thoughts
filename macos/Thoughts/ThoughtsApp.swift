@@ -68,6 +68,10 @@ struct ThoughtsApp: App {
             return true
         }
 
+        func showThought(applicationModel: ApplicationModel) {
+            NSWorkspace.shared.open(.compose)
+        }
+
     }
 
     static let title = "Thoughts Support (\(Bundle.main.extendedVersion ?? "Unknown Version"))"
