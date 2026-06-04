@@ -347,9 +347,16 @@ extension ApplicationModel: CLLocationManagerDelegate {
 
 extension ApplicationModel: StoreUpdateCheckerDelegate {
 
-    @MainActor func storeUpdateChecker(_ storeUpdateChecker: StoreUpdateChecker,
-                                       didDismissAlertWithSuppressionState suppressionState: Bool) {
-        self.suppressUpdateCheck = suppressionState
+    @MainActor func storeUpdateCheckerDidComplete(_ storeUpdateChecker: StoreUpdateChecker, needsUpdate: Bool) {
+        let alert = NSAlert()
+        alert.alertStyle = .informational
+        alert.messageText = "Update Available"
+        alert.informativeText = "Thoughts is no longer being updated on the Mac App Store. Please download the latest update from the website."
+        alert.showsSuppressionButton = true
+        _ = alert.addButton(withTitle: "OK")
+        alert.runModal()
+        let suppressionState = alert.suppressionButton?.state as? NSControl.StateValue ?? .off
+        self.suppressUpdateCheck = suppressionState == .on
     }
 
 }

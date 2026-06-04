@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import Diligence
+
 struct Update: Codable {
 
     let url: URL
@@ -28,51 +30,34 @@ struct Update: Codable {
 }
 
 // Guaranteed to be called on the main thread.
-protocol StoreUpdateCheckerDelegate: NSObject {
+public protocol StoreUpdateCheckerDelegate: NSObject {
 
-    @MainActor func storeUpdateChecker(_ storeUpdateChecker: StoreUpdateChecker,
-                                       didDismissAlertWithSuppressionState suppressionState: Bool)
+    @MainActor func storeUpdateCheckerDidComplete(_ storeUpdateChecker: StoreUpdateChecker, needsUpdate: Bool)
 
 }
 
-class StoreUpdateChecker: @unchecked Sendable {
+public class StoreUpdateChecker: @unchecked Sendable {
 
-    weak var delegate: StoreUpdateCheckerDelegate? = nil
+    public weak var delegate: StoreUpdateCheckerDelegate? = nil
 
-    init() {
+    public init() {
     }
 
-    func check() {
+    public func check() {
         Task {
             do {
                 let (data, _) = try await URLSession.shared.data(from: URL(string: "https://thoughts.jbmorley.co.uk/current.json")!)
                 let decoder = JSONDecoder()
                 let current = try decoder.decode(Update.self, from: data)
 
-                guard Bundle.main.version != current.version else {
-                    return
-                }
-
                 DispatchQueue.main.async {
-                    self.present()
+                    self.delegate?.storeUpdateCheckerDidComplete(self, needsUpdate: Bundle.main.version != current.version)
                 }
 
             } catch {
                 print("Failed to check for update with error '\(error)'.")
             }
         }
-    }
-
-    @MainActor func present() {
-        let alert = NSAlert()
-        alert.alertStyle = .informational
-        alert.messageText = "Update Available"
-        alert.informativeText = "Thoughts is no longer being updated on the Mac App Store. Please download the latest update from the website."
-        alert.showsSuppressionButton = true
-        _ = alert.addButton(withTitle: "OK")
-        alert.runModal()
-        let suppressionState = alert.suppressionButton?.state as? NSControl.StateValue ?? .off
-        delegate?.storeUpdateChecker(self, didDismissAlertWithSuppressionState: suppressionState == .on)
     }
 
 }
