@@ -74,8 +74,6 @@ struct ThoughtsApp: App {
 
     }
 
-    static let title = "Thoughts Support (\(Bundle.main.extendedVersion ?? "Unknown Version"))"
-
     var applicationModel: ApplicationModel
     var modelDelegate: ModelDelegate
     let hotKey: HotKey
@@ -116,28 +114,8 @@ struct ThoughtsApp: App {
             .environment(applicationModel)
             .handlesExternalEvents(matching: [.settings])
 
-        About(repository: "inseven/thoughts", copyright: "Copyright © 2021-2026 Jason Morley") {
-            Action("Website", url: URL(string: "https://thoughts.jbmorley.co.uk")!)
-            Action("Privacy Policy", url: URL(string: "https://thoughts.jbmorley.co.uk/privacy-policy")!)
-            Action("GitHub", url: URL(string: "https://github.com/inseven/thoughts")!)
-            Action("Support", url: URL(address: "support@jbmorley.co.uk", subject: Self.title)!)
-        } acknowledgements: {
-            Acknowledgements("Developers") {
-                Credit("Jason Morley", url: URL(string: "https://jbmorley.co.uk"))
-            }
-            Acknowledgements("Thanks") {
-                Credit("Joanne Wong")
-                Credit("Jon Mountjoy")
-                Credit("Lukas Fittl")
-                Credit("Matt Sephton")
-                Credit("Mike Rhodes")
-                Credit("Pavlos Vinieratos")
-                Credit("Sarah Barbour")
-            }
-        } licenses: {
-            (.thoughts)
-        }
-        .handlesExternalEvents(matching: [.about])
+        About(Legal.contents)
+            .handlesExternalEvents(matching: [.about])
 
     }
 }
