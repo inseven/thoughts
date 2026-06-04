@@ -148,6 +148,8 @@ xcodebuild -scheme ThoughtsCore -destination "platform=iOS Simulator,name=iPhone
 
 ## Developer ID Build
 
+cd "$SOURCE_DIRECTORY"
+
 # Build and archive the macOS project.
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
 xcodebuild \
