@@ -22,6 +22,8 @@ import SwiftUI
 
 import Interact
 
+import ThoughtsCore
+
 struct SettingsView: View {
 
     var applicationModel: ApplicationModel

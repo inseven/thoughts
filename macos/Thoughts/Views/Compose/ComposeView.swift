@@ -24,6 +24,8 @@ import Combine
 import HighlightedTextEditor
 import TagField
 
+import ThoughtsCore
+
 struct ComposeView: View {
 
     enum Focus {

@@ -22,6 +22,8 @@ import SwiftUI
 
 import Interact
 
+import ThoughtsCore
+
 struct IntroductionView: View {
 
     @Environment(\.closeWindow) private var closeWindow

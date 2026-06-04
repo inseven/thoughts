@@ -20,15 +20,7 @@
 
 import SwiftUI
 
-struct FontInspector: View {
-
-    @Environment(\.font) var font
-
-    var body: some View {
-        Text("Cheeese")
-    }
-
-}
+import ThoughtsCore
 
 struct ContentView: View {
 

@@ -18,7 +18,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import AppKit
 import Combine
 import CoreLocation
 import Foundation
@@ -29,10 +28,18 @@ import Interact
 import Sparkle
 #endif
 
-import ThoughtsCore
+@MainActor
+public protocol ApplicationModelDelegate: AnyObject {
+
+    func showIntroduction(applicationModel: ApplicationModel)
+    func showUpdateAlert(applicationModel: ApplicationModel)
+    func setRootURL(applicationModel: ApplicationModel) -> Bool
+    func showThought(applicationModel: ApplicationModel)
+
+}
 
 @Observable
-class ApplicationModel: NSObject {
+public class ApplicationModel: NSObject, @unchecked Sendable {
 
     enum SettingsKey: String {
         case rootURL
@@ -41,25 +48,27 @@ class ApplicationModel: NSObject {
         case suppressUpdateCheck
     }
 
-    static let introductionVersion = 1
+    public static let introductionVersion = 1
 
-    @MainActor var tags: Trie {
+    @MainActor public var tags: Trie {
         return library?.tags ?? Trie()
     }
 
-    @MainActor var rootURL: URL? {
+    @MainActor public var rootURL: URL? {
         didSet {
             rootURLChanges.send(rootURL)
             reloadLibrary()
             do {
+#if os(macOS)
                 try keyedDefaults.set(securityScopedURL: rootURL, forKey: .rootURL)
+#endif
             } catch {
                 print("Failed to save bookmark data with error \(error).")
             }
         }
     }
 
-    @MainActor var shouldSaveLocation: Bool {
+    @MainActor public var shouldSaveLocation: Bool {
         didSet {
             keyedDefaults.set(shouldSaveLocation, forKey: .shouldSaveLocation)
             if shouldSaveLocation {
@@ -71,36 +80,38 @@ class ApplicationModel: NSObject {
         }
     }
 
-    @MainActor var introductionVersion: Int {
+    @MainActor public var introductionVersion: Int {
         didSet {
             keyedDefaults.set(introductionVersion, forKey: .introductionVersion)
         }
     }
 
-    @MainActor var suppressUpdateCheck: Bool {
+    @MainActor public var suppressUpdateCheck: Bool {
         didSet {
             keyedDefaults.set(suppressUpdateCheck, forKey: .suppressUpdateCheck)
         }
     }
 
-    @MainActor var document = Document() {
+    @MainActor public var document = Document() {
         didSet {
             documentChanges.send(document)
         }
     }
 
-    @MainActor var useDemoData: Bool = false {
+    @MainActor public var useDemoData: Bool = false {
         didSet {
             useDemoDataChanges.send(useDemoData)
             new()
         }
     }
 
-    @MainActor var didShowIntroduction: Bool {
+    @MainActor public var didShowIntroduction: Bool {
         return introductionVersion == Self.introductionVersion
     }
 
-    let toggleFocusPublisher = PassthroughSubject<Void, Never>()
+    @MainActor public weak var delegate: ApplicationModelDelegate?
+
+    public let toggleFocusPublisher = PassthroughSubject<Void, Never>()
 
     private var cancellables = Set<AnyCancellable>()
     private var locationRequests: [(Result<LocationDetails, Error>) -> Void] = []
@@ -113,16 +124,18 @@ class ApplicationModel: NSObject {
     private let keyedDefaults = KeyedDefaults<SettingsKey>()
     private let locationManager = CLLocationManager()
 
-#if canImport(Glitter)
-    let updaterController = SPUStandardUpdaterController(startingUpdater: false,
-                                                         updaterDelegate: nil,
-                                                         userDriverDelegate: nil)
+#if canImport(Glitter) && os(macOS)
+    @MainActor public let updaterController = SPUStandardUpdaterController(startingUpdater: false,
+                                                                           updaterDelegate: nil,
+                                                                           userDriverDelegate: nil)
 #endif
 
     private let storeUpdateChecker = StoreUpdateChecker()
 
-    @MainActor override init() {
+    @MainActor public override init() {
+#if os(macOS)
         rootURL = try? keyedDefaults.securityScopedURL(forKey: .rootURL)
+#endif
         shouldSaveLocation = keyedDefaults.bool(forKey: .shouldSaveLocation, default: false)
         introductionVersion = keyedDefaults.integer(forKey: .introductionVersion, default: 0)
         suppressUpdateCheck = keyedDefaults.bool(forKey: .suppressUpdateCheck, default: false)
@@ -131,10 +144,9 @@ class ApplicationModel: NSObject {
         locationManager.delegate = self
         locationManager.pausesLocationUpdatesAutomatically = false
         storeUpdateChecker.delegate = self
-        self.start()
     }
 
-    @MainActor private func start() {
+    @MainActor public func start() {
 
         // Watch the document for changes, debounce, and save changes to disk.
         rootURLChanges
@@ -177,13 +189,11 @@ class ApplicationModel: NSObject {
 
     }
 
-    @MainActor func showIntroduction() {
-        let window = NSIntroductionWindow(applicationModel: self)
-        window.center()
-        window.makeKeyAndOrderFront(nil)
+    @MainActor public func showIntroduction() {
+        delegate?.showIntroduction(applicationModel: self)
     }
 
-    @MainActor func new() {
+    @MainActor public func new() {
         guard didShowIntroduction else {
             return
         }
@@ -208,14 +218,14 @@ class ApplicationModel: NSObject {
             document = Document()
             updateUserLocation()
         }
-        NSWorkspace.shared.open(.compose)
+        delegate?.showThought(applicationModel: self)
     }
 
-    @MainActor func toggleFocus() {
+    @MainActor public func toggleFocus() {
         toggleFocusPublisher.send(())
     }
 
-    @MainActor func updateUserLocation(completion: (() -> Void)? = nil) {
+    @MainActor public func updateUserLocation(completion: (() -> Void)? = nil) {
         requestUserLocation { result in
             switch result {
             case .success(let location):
@@ -239,19 +249,8 @@ class ApplicationModel: NSObject {
         library?.start()
     }
 
-    @MainActor func setRootURL() -> Bool {
-        dispatchPrecondition(condition: .onQueue(.main))
-        let openPanel = NSOpenPanel()
-        openPanel.canChooseFiles = false
-        openPanel.canChooseDirectories = true
-        openPanel.canCreateDirectories = true
-        guard openPanel.runModal() ==  NSApplication.ModalResponse.OK,
-              let url = openPanel.url else {
-            return false
-        }
-        rootURL = url
-        document = Document()
-        return true
+    @MainActor public func setRootURL() -> Bool {
+        return delegate?.setRootURL(applicationModel: self) ?? false
     }
 
 }
@@ -277,10 +276,10 @@ extension ApplicationModel: CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
     }
 
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+    public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         dispatchPrecondition(condition: .onQueue(.main))
         print("Location authorization status = \(manager.authorizationStatus.name)")
-        guard manager.authorizationStatus == .authorized else {
+        guard manager.authorizationStatus == .authorizedAlways else {
             return
         }
         guard locationRequests.count > 0 else {
@@ -311,7 +310,7 @@ extension ApplicationModel: CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
     }
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("Did update locations.")
         Task {
             guard let location = locations.first else {
@@ -324,22 +323,22 @@ extension ApplicationModel: CLLocationManagerDelegate {
         }
     }
 
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
         print("Location manager did fail with error '\(error)'.")
         resolveRequests(.failure(error))
     }
 
-    func locationManager(_ manager: CLLocationManager, 
+    public func locationManager(_ manager: CLLocationManager,
                          monitoringDidFailFor region: CLRegion?, withError error: any Error) {
         print("Location manager monitoring did fail with error '\(error)'.")
         resolveRequests(.failure(error))
     }
 
-    func locationManagerDidPauseLocationUpdates(_ manager: CLLocationManager) {
+    public func locationManagerDidPauseLocationUpdates(_ manager: CLLocationManager) {
         print("Did pause location updates.")
     }
 
-    func locationManagerDidResumeLocationUpdates(_ manager: CLLocationManager) {
+    public func locationManagerDidResumeLocationUpdates(_ manager: CLLocationManager) {
         print("Did resume location updates.")
     }
 
@@ -347,16 +346,8 @@ extension ApplicationModel: CLLocationManagerDelegate {
 
 extension ApplicationModel: StoreUpdateCheckerDelegate {
 
-    @MainActor func storeUpdateCheckerDidComplete(_ storeUpdateChecker: StoreUpdateChecker, needsUpdate: Bool) {
-        let alert = NSAlert()
-        alert.alertStyle = .informational
-        alert.messageText = "Update Available"
-        alert.informativeText = "Thoughts is no longer being updated on the Mac App Store. Please download the latest update from the website."
-        alert.showsSuppressionButton = true
-        _ = alert.addButton(withTitle: "OK")
-        alert.runModal()
-        let suppressionState = alert.suppressionButton?.state as? NSControl.StateValue ?? .off
-        self.suppressUpdateCheck = suppressionState == .on
+    @MainActor public func storeUpdateCheckerDidComplete(_ storeUpdateChecker: StoreUpdateChecker, needsUpdate: Bool) {
+        delegate?.showUpdateAlert(applicationModel: self)
     }
 
 }

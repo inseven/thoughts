@@ -26,6 +26,8 @@ import Diligence
 import Glitter
 #endif
 
+import ThoughtsCore
+
 struct MainMenu: View {
 
     var applicationModel: ApplicationModel
