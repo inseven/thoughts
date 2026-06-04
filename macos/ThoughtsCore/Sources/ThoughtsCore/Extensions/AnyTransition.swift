@@ -1,6 +1,4 @@
-// MIT License
-//
-// Copyright (c) 2023-2025 Jason Morley
+// Copyright (c) 2024-2025 Jason Morley
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,17 +18,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import SwiftUI
 
-extension Date {
+import Interact
 
-    var millisecondsSinceReferenceDate: Int {
-        return Int(timeIntervalSinceReferenceDate * 1000)
+public extension AnyTransition {
+
+    static var push: AnyTransition {
+        AnyTransition.asymmetric(
+            insertion: .move(edge: .trailing),
+            removal: .move(edge: .leading)
+        )
     }
 
-    init(millisecondsSinceReferenceDate: Int) {
-        let timeInterval: TimeInterval = Double(millisecondsSinceReferenceDate) / 1000.0
-        self.init(timeIntervalSinceReferenceDate: timeInterval)
+    static var pop: AnyTransition {
+        AnyTransition.asymmetric(
+            insertion: .move(edge: .leading),
+            removal: .move(edge: .trailing)
+        )
     }
 
 }

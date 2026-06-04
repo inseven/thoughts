@@ -16,7 +16,6 @@
 		D8BA4D492BE59E16001A2A26 /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = D8BA4D482BE59E16001A2A26 /* HighlightedTextEditor */; };
 		D8C283E92BD9954F00161C82 /* HashRainbow in Frameworks */ = {isa = PBXBuildFile; productRef = D8C283E82BD9954F00161C82 /* HashRainbow */; };
 		D8F06D4B2B67275B0039AEF4 /* Diligence in Frameworks */ = {isa = PBXBuildFile; productRef = D8F06D4A2B67275B0039AEF4 /* Diligence */; };
-		D8F06D4E2B6727630039AEF4 /* Interact in Frameworks */ = {isa = PBXBuildFile; productRef = D8F06D4D2B6727630039AEF4 /* Interact */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +63,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8F06D4E2B6727630039AEF4 /* Interact in Frameworks */,
 				D8C283E92BD9954F00161C82 /* HashRainbow in Frameworks */,
 				D85FC1412BEEC3EC0004FAB3 /* TagField in Frameworks */,
 				D804FB112C081A2F004F8666 /* FrontmatterSwift in Frameworks */,
@@ -144,7 +142,6 @@
 			name = Thoughts;
 			packageProductDependencies = (
 				D8F06D4A2B67275B0039AEF4 /* Diligence */,
-				D8F06D4D2B6727630039AEF4 /* Interact */,
 				D89224992BD70CC300DA0932 /* Yams */,
 				D8C283E82BD9954F00161C82 /* HashRainbow */,
 				D8BA4D482BE59E16001A2A26 /* HighlightedTextEditor */,
@@ -725,10 +722,6 @@
 		D8F06D4A2B67275B0039AEF4 /* Diligence */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Diligence;
-		};
-		D8F06D4D2B6727630039AEF4 /* Interact */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Interact;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
