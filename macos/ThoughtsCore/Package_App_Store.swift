@@ -31,7 +31,7 @@ let package = Package(
                 .product(name: "TagField", package: "TagField"),
                 .product(name: "FrontmatterSwift", package: "FrontmatterSwift"),
                 .product(name: "Yams", package: "Yams"),
-            ]
+            ],
             resources: [
                 .process("Licenses"),
             ],
