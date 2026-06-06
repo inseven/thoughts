@@ -25,7 +25,8 @@ import ThoughtsCore
 class NSIntroductionWindow: NSWindow {
 
     convenience init(applicationModel: ApplicationModel) {
-        self.init(contentViewController: NSHostingController(rootView: IntroductionView(applicationModel: applicationModel)))
+        self.init(contentViewController: NSHostingController(rootView: IntroductionView()
+            .environment(applicationModel)))
         self.title = "Welcome to Thoughts"
         self.titleVisibility = .hidden
         self.titlebarAppearsTransparent = true

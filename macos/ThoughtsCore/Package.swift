@@ -1,4 +1,4 @@
-// swift-tools-version: 6.1
+// swift-tools-version: 6.2
 
 import PackageDescription
 
@@ -6,7 +6,7 @@ let package = Package(
     name: "ThoughtsCore",
     platforms: [
         .macOS(.v14),
-        .iOS(.v18),
+        .iOS(.v26),
     ],
     products: [
         .library(

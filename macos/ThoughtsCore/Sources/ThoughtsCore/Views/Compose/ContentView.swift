@@ -20,11 +20,9 @@
 
 import SwiftUI
 
-import ThoughtsCore
+public struct ContentView: View {
 
-struct ContentView: View {
-
-    var applicationModel: ApplicationModel
+    @Environment(ApplicationModel.self) private var applicationModel
 
     @MainActor var systemImage: String {
         if applicationModel.shouldSaveLocation {
@@ -38,7 +36,10 @@ struct ContentView: View {
         }
     }
 
-    var body: some View {
+    public init() {
+    }
+
+    public var body: some View {
         HStack {
             if applicationModel.rootURL != nil {
                 ComposeView(applicationModel: applicationModel)
@@ -62,13 +63,12 @@ struct ContentView: View {
                 } label: {
                     let hasLocation = applicationModel.document.location != nil
                     Label("Use Location", systemImage: systemImage)
-                        .foregroundColor(hasLocation ? .accent : nil)
+                        .foregroundColor(hasLocation ? .accentColor : nil)
                         .symbolEffect(.pulse, isActive: applicationModel.shouldSaveLocation && applicationModel.document.location == nil)
                 }
                 .disabled(applicationModel.rootURL == nil)
             }
         }
     }
-
 
 }
