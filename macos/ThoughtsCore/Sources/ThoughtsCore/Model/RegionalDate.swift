@@ -43,16 +43,19 @@ public struct RegionalDate: Codable, Equatable {
         self.timeZone = timeZone
     }
 
-    public init(from decoder: any Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        let string = try container.decode(String.self)
-
+    public init(string: String) throws {
         let dateFormatter = ISO8601DateFormatter()
         guard let date = dateFormatter.date(from: string) else {
             throw ThoughtsError.encodingError
         }
         self.date = date
         self.timeZone = TimeZone(iso8601: string) ?? .gmt
+    }
+
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let string = try container.decode(String.self)
+        try self.init(string: string)
     }
 
     public func encode(to encoder: any Encoder) throws {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D804FB112C081A2F004F8666 /* FrontmatterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D804FB102C081A2F004F8666 /* FrontmatterSwift */; };
+		D818BD022FD163FE0028C860 /* ThoughtsCore in Frameworks */ = {isa = PBXBuildFile; productRef = D818BD012FD163FE0028C860 /* ThoughtsCore */; };
 		D8296CEE2E29EBBF005088B6 /* ThoughtsCore in Frameworks */ = {isa = PBXBuildFile; productRef = D8296CED2E29EBBF005088B6 /* ThoughtsCore */; };
 		D87707B52C01592400362786 /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = D87707B42C01592400362786 /* HotKey */; };
 		D8C283E92BD9954F00161C82 /* HashRainbow in Frameworks */ = {isa = PBXBuildFile; productRef = D8C283E82BD9954F00161C82 /* HashRainbow */; };
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D818BCF62FD1616E0028C860 /* Thoughts-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Thoughts-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8296CEB2E29EB48005088B6 /* ThoughtsCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ThoughtsCore; sourceTree = "<group>"; };
 		D852AEFE2B6027CA00B77A3D /* Thoughts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thoughts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D852AF0F2B6027CD00B77A3D /* ThoughtsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThoughtsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,9 +54,18 @@
 		D8184A6F2E1D278900D46CE7 /* ThoughtsUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ThoughtsUITests; sourceTree = "<group>"; };
 		D8184A782E1D278C00D46CE7 /* ThoughtsTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ThoughtsTests; sourceTree = "<group>"; };
 		D8184ABB2E1D27A200D46CE7 /* Thoughts */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (D8184AED2E1D27A200D46CE7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Thoughts; sourceTree = "<group>"; };
+		D818BCF72FD1616E0028C860 /* Thoughts-iOS */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Thoughts-iOS"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D818BCF32FD1616E0028C860 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D818BD022FD163FE0028C860 /* ThoughtsCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D852AEFB2B6027CA00B77A3D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -91,6 +102,7 @@
 				D8184ABB2E1D27A200D46CE7 /* Thoughts */,
 				D8184A782E1D278C00D46CE7 /* ThoughtsTests */,
 				D8184A6F2E1D278900D46CE7 /* ThoughtsUITests */,
+				D818BCF72FD1616E0028C860 /* Thoughts-iOS */,
 				D852AEFF2B6027CA00B77A3D /* Products */,
 				D8C283EA2BD9955D00161C82 /* Frameworks */,
 			);
@@ -102,6 +114,7 @@
 				D852AEFE2B6027CA00B77A3D /* Thoughts.app */,
 				D852AF0F2B6027CD00B77A3D /* ThoughtsTests.xctest */,
 				D852AF192B6027CD00B77A3D /* ThoughtsUITests.xctest */,
+				D818BCF62FD1616E0028C860 /* Thoughts-iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -116,6 +129,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D818BCF52FD1616E0028C860 /* Thoughts-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D818BCFE2FD1616F0028C860 /* Build configuration list for PBXNativeTarget "Thoughts-iOS" */;
+			buildPhases = (
+				D818BCF22FD1616E0028C860 /* Sources */,
+				D818BCF32FD1616E0028C860 /* Frameworks */,
+				D818BCF42FD1616E0028C860 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D818BCF72FD1616E0028C860 /* Thoughts-iOS */,
+			);
+			name = "Thoughts-iOS";
+			packageProductDependencies = (
+				D818BD012FD163FE0028C860 /* ThoughtsCore */,
+			);
+			productName = "Thoughts-iOS";
+			productReference = D818BCF62FD1616E0028C860 /* Thoughts-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 		D852AEFD2B6027CA00B77A3D /* Thoughts */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D852AF232B6027CD00B77A3D /* Build configuration list for PBXNativeTarget "Thoughts" */;
@@ -192,9 +228,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1520;
+				LastSwiftUpdateCheck = 2650;
 				LastUpgradeCheck = 2650;
 				TargetAttributes = {
+					D818BCF52FD1616E0028C860 = {
+						CreatedOnToolsVersion = 26.5;
+					};
 					D852AEFD2B6027CA00B77A3D = {
 						CreatedOnToolsVersion = 15.2;
 					};
@@ -230,11 +269,19 @@
 				D852AEFD2B6027CA00B77A3D /* Thoughts */,
 				D852AF0E2B6027CD00B77A3D /* ThoughtsTests */,
 				D852AF182B6027CD00B77A3D /* ThoughtsUITests */,
+				D818BCF52FD1616E0028C860 /* Thoughts-iOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D818BCF42FD1616E0028C860 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D852AEFC2B6027CA00B77A3D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -259,6 +306,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D818BCF22FD1616E0028C860 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D852AEFA2B6027CA00B77A3D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -296,6 +350,87 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		D818BCFF2FD1616F0028C860 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QS82QFHKWB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Thoughts;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Thoughts needs access to your location to save it in notes metadata.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.jbmorley.thoughts.apps.appstore;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		D818BD002FD1616F0028C860 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QS82QFHKWB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Thoughts;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Thoughts needs access to your location to save it in notes metadata.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.jbmorley.thoughts.apps.appstore;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		D852AF212B6027CD00B77A3D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -565,6 +700,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D818BCFE2FD1616F0028C860 /* Build configuration list for PBXNativeTarget "Thoughts-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D818BCFF2FD1616F0028C860 /* Debug */,
+				D818BD002FD1616F0028C860 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D852AEF92B6027CA00B77A3D /* Build configuration list for PBXProject "Thoughts" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -637,6 +781,10 @@
 		D804FB102C081A2F004F8666 /* FrontmatterSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FrontmatterSwift;
+		};
+		D818BD012FD163FE0028C860 /* ThoughtsCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ThoughtsCore;
 		};
 		D8296CED2E29EBBF005088B6 /* ThoughtsCore */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -20,9 +20,9 @@
 
 import SwiftUI
 
-import ThoughtsCore
+public struct ContentView: View {
 
-struct ContentView: View {
+    @State var showFileImporter = false
 
     var applicationModel: ApplicationModel
 
@@ -38,7 +38,11 @@ struct ContentView: View {
         }
     }
 
-    var body: some View {
+    public init(applicationModel: ApplicationModel) {
+        self.applicationModel = applicationModel
+    }
+
+    public var body: some View {
         HStack {
             if applicationModel.rootURL != nil {
                 ComposeView(applicationModel: applicationModel)
@@ -47,10 +51,14 @@ struct ContentView: View {
                     Label("No Folder Set", systemImage: "folder")
                 } description: {
                     Text("Select a folder to store your notes.")
-                    Button {
-                        _ = applicationModel.setRootURL()
-                    } label: {
-                        Text("Set Notes Folder")
+                    Button("Set Notes Folder") {
+                        showFileImporter = true
+                    }
+                    .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.folder]) { result in
+                        guard case .success(let url) = result else {
+                            return
+                        }
+                        applicationModel.rootURL = url
                     }
                 }
             }
@@ -62,13 +70,28 @@ struct ContentView: View {
                 } label: {
                     let hasLocation = applicationModel.document.location != nil
                     Label("Use Location", systemImage: systemImage)
-                        .foregroundColor(hasLocation ? .accent : nil)
+                        .foregroundColor(hasLocation ? .accentColor : nil)
                         .symbolEffect(.pulse, isActive: applicationModel.shouldSaveLocation && applicationModel.document.location == nil)
                 }
                 .disabled(applicationModel.rootURL == nil)
             }
+#if os(iOS)
+            ToolbarItem {
+                Button {
+                    applicationModel.new()
+                } label: {
+                    Label("New", systemImage: "document.badge.plus")
+                }
+            }
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+
+                } label: {
+                    Label("Settings", systemImage: "gear")
+                }
+            }
+#endif
         }
     }
-
 
 }
