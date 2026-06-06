@@ -73,10 +73,10 @@ public class ApplicationModel: NSObject, @unchecked Sendable {
 #if os(macOS)
                     try keyedDefaults.set(securityScopedURL: rootURL, forKey: .rootURL)
 #else
-                    let data = try rootURL.bookmarkData(options: .suitableForBookmarkFile,
-                                                        includingResourceValuesForKeys: nil,
-                                                        relativeTo: nil)
-                    try URL.writeBookmarkData(data, to: .rootBookmarkURL)
+                    try URL.writeBookmarkData(try rootURL.bookmarkData(options: .suitableForBookmarkFile,
+                                                                       includingResourceValuesForKeys: nil,
+                                                                       relativeTo: nil),
+                                              to: .rootBookmarkURL)
 #endif
                 } catch {
                     print("Failed to save bookmark data with error \(error).")
