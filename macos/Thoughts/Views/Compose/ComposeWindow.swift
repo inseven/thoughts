@@ -24,13 +24,11 @@ import ThoughtsCore
 
 struct ComposeWindow: Scene {
 
-    @Environment(ApplicationModel.self) var applicationModel: ApplicationModel
-
     static let windowID = "compose-window"
 
     var body: some Scene {
         Window("Thoughts", id: Self.windowID) {
-            ContentView(applicationModel: applicationModel)
+            ContentView()
         }
     }
 

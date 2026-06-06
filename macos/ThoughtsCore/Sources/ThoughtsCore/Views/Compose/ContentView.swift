@@ -24,7 +24,7 @@ public struct ContentView: View {
 
     @State var showFileImporter = false
 
-    var applicationModel: ApplicationModel
+    @Environment(ApplicationModel.self) private var applicationModel
 
     @MainActor var systemImage: String {
         if applicationModel.shouldSaveLocation {
@@ -38,8 +38,7 @@ public struct ContentView: View {
         }
     }
 
-    public init(applicationModel: ApplicationModel) {
-        self.applicationModel = applicationModel
+    public init() {
     }
 
     public var body: some View {
