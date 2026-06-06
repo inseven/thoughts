@@ -28,7 +28,7 @@ struct IntroductionView: View {
 
     @Environment(\.closeWindow) private var closeWindow
 
-    let applicationModel: ApplicationModel
+    @Environment(ApplicationModel.self) private var applicationModel
 
     enum PageIdentifier: Identifiable {
 

@@ -22,8 +22,6 @@ import SwiftUI
 
 public struct ContentView: View {
 
-    @State var showFileImporter = false
-
     @Environment(ApplicationModel.self) private var applicationModel
 
     @MainActor var systemImage: String {
@@ -76,7 +74,6 @@ public struct ContentView: View {
             }
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
-
                 } label: {
                     Label("Settings", systemImage: "gear")
                 }
