@@ -53,21 +53,6 @@ struct ThoughtsApp: App {
             applicationModel.suppressUpdateCheck = suppressionState == .on
         }
 
-        func setRootURL(applicationModel: ApplicationModel) -> Bool {
-            dispatchPrecondition(condition: .onQueue(.main))
-            let openPanel = NSOpenPanel()
-            openPanel.canChooseFiles = false
-            openPanel.canChooseDirectories = true
-            openPanel.canCreateDirectories = true
-            guard openPanel.runModal() ==  NSApplication.ModalResponse.OK,
-                  let url = openPanel.url else {
-                return false
-            }
-            applicationModel.rootURL = url
-            applicationModel.document = Document()
-            return true
-        }
-
         func showThought(applicationModel: ApplicationModel) {
             NSWorkspace.shared.open(.compose)
         }

@@ -42,10 +42,6 @@ struct ThoughtsApp: App {
         func showUpdateAlert(applicationModel: ApplicationModel) {
         }
 
-        func setRootURL(applicationModel: ApplicationModel) -> Bool {
-            return false
-        }
-
         func showThought(applicationModel: ApplicationModel) {
         }
 
@@ -81,6 +77,7 @@ struct ThoughtsApp: App {
                         }
                     }
             }
+            .environment(applicationModel)
         }
         .onChange(of: applicationModel.didShowIntroduction, initial: true) { _, didShowIntroduction in
             guard !didShowIntroduction else {

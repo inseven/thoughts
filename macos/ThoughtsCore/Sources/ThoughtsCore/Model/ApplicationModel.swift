@@ -33,7 +33,6 @@ public protocol ApplicationModelDelegate: AnyObject {
 
     func showIntroduction(applicationModel: ApplicationModel)
     func showUpdateAlert(applicationModel: ApplicationModel)
-    func setRootURL(applicationModel: ApplicationModel) -> Bool
     func showThought(applicationModel: ApplicationModel)
 
 }
@@ -64,15 +63,9 @@ public class ApplicationModel: NSObject, @unchecked Sendable {
 
     @MainActor public var rootURL: URL? {
         didSet {
-
-            #if os(iOS)
-            if let rootURL {
-                guard rootURL.startAccessingSecurityScopedResource() else {
-                    return
-                }
+            guard rootURL?.startAccessingSecurityScopedResource() ?? false else {
+                return
             }
-            #endif
-
             rootURLChanges.send(rootURL)
             reloadLibrary()
             do {
@@ -328,10 +321,6 @@ public class ApplicationModel: NSObject, @unchecked Sendable {
         }
         library = Library(rootURL: rootURL)
         library?.start()
-    }
-
-    @MainActor public func setRootURL() -> Bool {
-        return delegate?.setRootURL(applicationModel: self) ?? false
     }
 
 }

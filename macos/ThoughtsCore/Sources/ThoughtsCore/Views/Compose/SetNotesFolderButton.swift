@@ -20,18 +20,29 @@
 
 import SwiftUI
 
-import ThoughtsCore
+public struct SetNotesFolderButton: View {
 
-class NSIntroductionWindow: NSWindow {
+    @Environment(ApplicationModel.self) private var applicationModel
 
-    convenience init(applicationModel: ApplicationModel) {
-        self.init(contentViewController: NSHostingController(rootView: IntroductionView(applicationModel: applicationModel)
-            .environment(applicationModel)))
-        self.title = "Welcome to Thoughts"
-        self.titleVisibility = .hidden
-        self.titlebarAppearsTransparent = true
-        self.styleMask.remove([.miniaturizable, .closable, .resizable, .borderless, .fullSizeContentView])
-        self.isMovableByWindowBackground = true
+    @State var showFileImporter = false
+
+    let completion: () -> Void
+
+    public init(completion: @escaping () -> Void = {}) {
+        self.completion = completion
+    }
+
+    public var body: some View {
+        Button("Set Notes Folder") {
+            showFileImporter = true
+        }
+        .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.folder]) { result in
+            guard case .success(let url) = result else {
+                return
+            }
+            applicationModel.rootURL = url
+            completion()
+        }
     }
 
 }

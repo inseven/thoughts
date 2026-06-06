@@ -51,15 +51,7 @@ public struct ContentView: View {
                     Label("No Folder Set", systemImage: "folder")
                 } description: {
                     Text("Select a folder to store your notes.")
-                    Button("Set Notes Folder") {
-                        showFileImporter = true
-                    }
-                    .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.folder]) { result in
-                        guard case .success(let url) = result else {
-                            return
-                        }
-                        applicationModel.rootURL = url
-                    }
+                    SetNotesFolderButton()
                 }
             }
         }
