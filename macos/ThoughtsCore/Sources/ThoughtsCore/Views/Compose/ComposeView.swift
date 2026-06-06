@@ -53,8 +53,8 @@ struct ComposeView: View {
         @Bindable var applicationModel = applicationModel
         VStack(spacing: 0) {
             HighlightedTextEditor(text: $applicationModel.document.content, highlightRules: .thoughtsMarkdown)
-                .frame(minWidth: 400)
-                .edgesIgnoringSafeArea(.all)
+//                .frame(minWidth: 400)
+//                .edgesIgnoringSafeArea(.all)
                 .focused($focus, equals: .text)
             Divider()
             TagField("Add tags...", tokens: $applicationModel.document.tags) { candidate, tags in
@@ -79,7 +79,7 @@ struct ComposeView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.background)
         .navigationTitle(applicationModel.document.date.formatted(date: .complete, time: .standard))
-        .navigationSubtitle(applicationModel.document.location?.summary ?? "")
+        .navigationSubtitle(applicationModel.document.location?.summary ?? "-")
         .onOpenURL { url in
             switch url {
             case .compose:

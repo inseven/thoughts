@@ -33,8 +33,13 @@ public protocol ApplicationModelDelegate: AnyObject {
 
     func showIntroduction(applicationModel: ApplicationModel)
     func showUpdateAlert(applicationModel: ApplicationModel)
-    func setRootURL(applicationModel: ApplicationModel) -> Bool
     func showThought(applicationModel: ApplicationModel)
+
+}
+
+extension URL {
+
+    static let rootBookmarkURL: URL = URL.applicationSupportDirectory.appendingPathComponent("RootBookmark")
 
 }
 
@@ -46,6 +51,8 @@ public class ApplicationModel: NSObject, @unchecked Sendable {
         case shouldSaveLocation
         case introductionVersion
         case suppressUpdateCheck
+        case lastBackgroundDate
+        case lastDocumentDate
     }
 
     public static let introductionVersion = 1
@@ -56,14 +63,26 @@ public class ApplicationModel: NSObject, @unchecked Sendable {
 
     @MainActor public var rootURL: URL? {
         didSet {
-            rootURLChanges.send(rootURL)
-            reloadLibrary()
-            do {
+            if let rootURL {
+                guard rootURL.startAccessingSecurityScopedResource() else {
+                    return
+                }
+                rootURLChanges.send(rootURL)
+                reloadLibrary()
+                do {
 #if os(macOS)
-                try keyedDefaults.set(securityScopedURL: rootURL, forKey: .rootURL)
+                    try keyedDefaults.set(securityScopedURL: rootURL, forKey: .rootURL)
+#else
+                    try URL.writeBookmarkData(try rootURL.bookmarkData(options: .suitableForBookmarkFile,
+                                                                       includingResourceValuesForKeys: nil,
+                                                                       relativeTo: nil),
+                                              to: .rootBookmarkURL)
 #endif
-            } catch {
-                print("Failed to save bookmark data with error \(error).")
+                } catch {
+                    print("Failed to save bookmark data with error \(error).")
+                }
+            } else {
+                // TODO: Remove the default.
             }
         }
     }
@@ -92,8 +111,21 @@ public class ApplicationModel: NSObject, @unchecked Sendable {
         }
     }
 
+    @MainActor public var lastBackgroundDate: Date {
+        didSet {
+            keyedDefaults.set(lastBackgroundDate, forKey: .lastBackgroundDate)
+        }
+    }
+
+    @MainActor public var lastDocumentDate: Date? {
+        didSet {
+            keyedDefaults.set(lastDocumentDate, forKey: .lastDocumentDate)
+        }
+    }
+
     @MainActor public var document = Document() {
         didSet {
+            lastDocumentDate = document.date
             documentChanges.send(document)
         }
     }
@@ -133,17 +165,54 @@ public class ApplicationModel: NSObject, @unchecked Sendable {
     private let storeUpdateChecker = StoreUpdateChecker()
 
     @MainActor public override init() {
+
+        // Ensure the Application Support directory exists.
+        let fileManager = FileManager.default
+        if !fileManager.fileExists(at: .applicationSupportDirectory) {
+            try! FileManager.default.createDirectory(at: .applicationSupportDirectory, withIntermediateDirectories: true)
+        }
+
+        // Load the root URL.
 #if os(macOS)
-        rootURL = try? keyedDefaults.securityScopedURL(forKey: .rootURL)
+        _rootURL = try? keyedDefaults.securityScopedURL(forKey: .rootURL)
+#else
+        if fileManager.fileExists(at: .rootBookmarkURL),
+            let data = try? URL.bookmarkData(withContentsOf: .rootBookmarkURL) {
+            var isStale = true
+            _rootURL = try? URL(resolvingBookmarkData: data, bookmarkDataIsStale: &isStale)
+            _ = _rootURL?.startAccessingSecurityScopedResource()
+        }
 #endif
+
+        // Load the other settings.
         shouldSaveLocation = keyedDefaults.bool(forKey: .shouldSaveLocation, default: false)
         introductionVersion = keyedDefaults.integer(forKey: .introductionVersion, default: 0)
         suppressUpdateCheck = keyedDefaults.bool(forKey: .suppressUpdateCheck, default: false)
+        lastBackgroundDate = keyedDefaults.object(forKey: .lastBackgroundDate) as? Date ?? Date.distantFuture
+        lastDocumentDate = keyedDefaults.object(forKey: .lastDocumentDate) as? Date
+
         super.init()
         rootURLChanges.send(rootURL)
         locationManager.delegate = self
         locationManager.pausesLocationUpdatesAutomatically = false
         storeUpdateChecker.delegate = self
+
+        // Reload the last document if necessary.
+        if let lastDocumentDate,
+           let fileURL = rootURL?.appendingPathComponent(Self.filename(for: lastDocumentDate)),
+           let document = Document(contentsOf: fileURL)
+        {
+            self.document = document
+        } else {
+            new()
+        }
+    }
+
+    public static func filename(for date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd-HH-mm-ss"
+        formatter.timeZone = .gmt
+        return formatter.string(from: date).appending(".md")
     }
 
     @MainActor public func start() {
@@ -164,7 +233,8 @@ public class ApplicationModel: NSObject, @unchecked Sendable {
 
                 // Write the changes to disk.
                 do {
-                    try document.sync(to: rootURL)
+                    let fileURL = rootURL.appendingPathComponent(Self.filename(for: document.date))
+                    try document.sync(to: fileURL)
                 } catch {
                     print("Failed to save file with error '\(error)'.")
                 }
@@ -247,10 +317,6 @@ public class ApplicationModel: NSObject, @unchecked Sendable {
         }
         library = Library(rootURL: rootURL)
         library?.start()
-    }
-
-    @MainActor public func setRootURL() -> Bool {
-        return delegate?.setRootURL(applicationModel: self) ?? false
     }
 
 }

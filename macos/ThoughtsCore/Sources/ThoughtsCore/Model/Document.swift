@@ -23,8 +23,11 @@ import Foundation
 
 import Yams
 
+import FrontmatterSwift
+
 public struct Document {
 
+    // TODO: Store the timezone.
     public var date: Date
     public var content: String
     public var tags: [String]
@@ -32,6 +35,39 @@ public struct Document {
 
     public var isEmpty: Bool {
         return content.isEmpty
+    }
+
+    public init?(contentsOf url: URL) {
+
+        guard FileManager.default.fileExists(at: url) else {
+            return nil
+        }
+
+        var options = DecodeOptions()
+        options.detectDates = false
+        guard let frontmatterDocument = try? FrontmatterDocument(contentsOf: url, options: options) else {
+            return nil
+        }
+
+        // TODO: Location should be optional.
+        // TODO: We should preserve other metadata.
+        // TODO: Custom date handling might not be necessary with `FrontmatterDocument`.
+        guard let tags = frontmatterDocument.metadata["tags"] as? [String],
+              let location = frontmatterDocument.metadata["location"] as? [String: Any],
+              let locality = location["locality"] as? String,
+              let name = location["name"] as? String,
+              let longitude = location["longitude"] as? CLLocationDegrees,
+              let latitude = location["latitude"] as? CLLocationDegrees,
+              let dateString = frontmatterDocument.metadata["date"] as? String,
+              let date = try? RegionalDate(string: dateString)
+        else {
+            return nil
+        }
+
+        self.location = LocationDetails(latitude: latitude, longitude: longitude, name: name, locality: locality)
+        self.date = date.date
+        self.tags = tags
+        self.content = frontmatterDocument.content
     }
 
     public init(date: Date = Date()) {
@@ -54,12 +90,7 @@ public struct Document {
         }
     }
 
-    public func sync(to rootURL: URL) throws {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd-HH-mm-ss"
-        formatter.timeZone = .gmt
-        let filename = formatter.string(from: date)
-        let url = rootURL.appendingPathComponent(filename).appendingPathExtension("md")
+    public func sync(to url: URL) throws {
         if isEmpty {
             let fileManager = FileManager.default
             if fileManager.fileExists(atPath: url.path) {

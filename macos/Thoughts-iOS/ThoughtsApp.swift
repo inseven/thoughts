@@ -20,87 +20,87 @@
 
 import SwiftUI
 
-import Diligence
-import HotKey
-import Interact
-
-#if canImport(Glitter)
-import Glitter
-#endif
-
 import ThoughtsCore
 
 @main
 struct ThoughtsApp: App {
 
+    enum SheetType: Identifiable {
+
+        var id: Self {
+            return self
+        }
+
+        case introduction
+    }
+
     class ModelDelegate: NSObject, ApplicationModelDelegate {
 
         func showIntroduction(applicationModel: ApplicationModel) {
-            let window = NSIntroductionWindow(applicationModel: applicationModel)
-            window.center()
-            window.makeKeyAndOrderFront(nil)
         }
 
         func showUpdateAlert(applicationModel: ApplicationModel) {
-            let alert = NSAlert()
-            alert.alertStyle = .informational
-            alert.messageText = "Update Available"
-            alert.informativeText = "Thoughts is no longer being updated on the Mac App Store. Please download the latest update from the website."
-            alert.showsSuppressionButton = true
-            _ = alert.addButton(withTitle: "OK")
-            alert.runModal()
-            let suppressionState = alert.suppressionButton?.state as? NSControl.StateValue ?? .off
-            applicationModel.suppressUpdateCheck = suppressionState == .on
         }
 
         func showThought(applicationModel: ApplicationModel) {
-            NSWorkspace.shared.open(.compose)
         }
 
     }
 
+    @Environment(\.scenePhase) private var scenePhase
+
+    @State private var sheet: SheetType?
+
     var applicationModel: ApplicationModel
     var modelDelegate: ModelDelegate
-    let hotKey: HotKey
 
     init() {
         let applicationModel = ApplicationModel()
         let modelDelegate = ModelDelegate()
-        let hotKey = HotKey(key: .t, modifiers: [.command, .option, .control], keyDownHandler: {
-            applicationModel.new()
-        })
         applicationModel.delegate = modelDelegate
         self.applicationModel = applicationModel
         self.modelDelegate = modelDelegate
-        self.hotKey = hotKey
         self.applicationModel.start()
     }
 
     var body: some Scene {
-
-        MenuBarExtra {
-            MainMenu(applicationModel: applicationModel)
-        } label: {
-            Image(systemName: "text.justify.left")
-        }
-        .commands {
-            ThoughtsCommands(applicationModel: applicationModel)
-#if canImport(Glitter)
-            UpdateCommands(updater: applicationModel.updaterController.updater)
-#endif
-        }
-
-        ComposeWindow()
+        WindowGroup {
+            NavigationView {
+                ContentView(applicationModel: applicationModel)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .sheet(item: $sheet) { sheet in
+                        switch sheet {
+                        case .introduction:
+                            NavigationView {
+                                IntroductionView(applicationModel: applicationModel)
+                            }
+                        }
+                    }
+            }
             .environment(applicationModel)
-            .handlesExternalEvents(matching: [.compose])
-            .defaultSize(width: 800, height: 600)
-
-        SettingsWindow()
-            .environment(applicationModel)
-            .handlesExternalEvents(matching: [.settings])
-
-        About(Legal.contents)
-            .handlesExternalEvents(matching: [.about])
-
+        }
+        .onChange(of: applicationModel.didShowIntroduction, initial: true) { _, didShowIntroduction in
+            guard !didShowIntroduction else {
+                return
+            }
+            sheet = .introduction
+        }
+        .onChange(of: scenePhase) { _, scenePhase in
+            switch scenePhase {
+            case .background, .inactive:
+                applicationModel.lastBackgroundDate = min(Date(), applicationModel.lastBackgroundDate)
+            case .active:
+                let backgroundDuration = applicationModel.lastBackgroundDate.timeIntervalSinceNow * -1
+                print("Opened after \(backgroundDuration) seconds.")
+                guard backgroundDuration > 60 * 5 else {
+                    break
+                }
+                print("Creating new thought...")
+                applicationModel.lastBackgroundDate = Date.distantFuture
+                applicationModel.new()
+            @unknown default:
+                break
+            }
+        }
     }
 }

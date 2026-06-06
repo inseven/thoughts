@@ -78,11 +78,9 @@ struct IntroductionView: View {
                                 FinderPreview()
                             }
                         } actions: {
-                            Button("Set Destination Folder") {
-                                if applicationModel.setRootURL() {
-                                    withAnimation {
-                                        self.page = .location
-                                    }
+                            SetNotesFolderButton {
+                                withAnimation {
+                                    self.page = .location
                                 }
                             }
                             .keyboardShortcut(.defaultAction)

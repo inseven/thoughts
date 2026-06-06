@@ -89,4 +89,8 @@ extension FileManager {
         return files
     }
 
+    public func fileExists(at url: URL) -> Bool {
+        return fileExists(atPath: url.path)
+    }
+
 }

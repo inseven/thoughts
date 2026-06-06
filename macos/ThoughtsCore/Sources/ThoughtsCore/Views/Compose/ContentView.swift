@@ -48,11 +48,7 @@ public struct ContentView: View {
                     Label("No Folder Set", systemImage: "folder")
                 } description: {
                     Text("Select a folder to store your notes.")
-                    Button {
-                        _ = applicationModel.setRootURL()
-                    } label: {
-                        Text("Set Notes Folder")
-                    }
+                    SetNotesFolderButton()
                 }
             }
         }
@@ -68,6 +64,21 @@ public struct ContentView: View {
                 }
                 .disabled(applicationModel.rootURL == nil)
             }
+#if os(iOS)
+            ToolbarItem {
+                Button {
+                    applicationModel.new()
+                } label: {
+                    Label("New", systemImage: "document.badge.plus")
+                }
+            }
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                } label: {
+                    Label("Settings", systemImage: "gear")
+                }
+            }
+#endif
         }
     }
 

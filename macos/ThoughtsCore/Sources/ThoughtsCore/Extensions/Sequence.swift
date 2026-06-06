@@ -46,7 +46,7 @@ let secondaryBackground = NSColor.windowBackgroundColor
 let lighterColor = NSColor.lightGray
 let textColor = NSColor.labelColor
 #else
-let defaultEditorFont = UIFont.preferredFont(forTextStyle: .body)
+let defaultEditorFont = UIFont.monospacedSystemFont(ofSize: UIFont.systemFontSize, weight: .regular)
 let codeFont = UIFont.monospacedSystemFont(ofSize: UIFont.systemFontSize, weight: .thin)
 let headingTraits: UIFontDescriptor.SymbolicTraits = [.traitBold, .traitExpanded]
 let boldTraits: UIFontDescriptor.SymbolicTraits = [.traitBold]
