@@ -22,25 +22,6 @@ import SwiftUI
 
 import ThoughtsCore
 
-
-struct IntroductionView: View {
-
-    @Environment(\.dismiss) private var dismiss
-
-    let applicationModel: ApplicationModel
-
-    var body: some View {
-        Button("Done") {
-            applicationModel.introductionVersion = ApplicationModel.introductionVersion
-            applicationModel.new()
-            dismiss()
-        }
-        .navigationTitle("Introduction")
-    }
-
-}
-
-
 @main
 struct ThoughtsApp: App {
 
@@ -56,41 +37,16 @@ struct ThoughtsApp: App {
     class ModelDelegate: NSObject, ApplicationModelDelegate {
 
         func showIntroduction(applicationModel: ApplicationModel) {
-//            let window = NSIntroductionWindow(applicationModel: applicationModel)
-//            window.center()
-//            window.makeKeyAndOrderFront(nil)
         }
 
         func showUpdateAlert(applicationModel: ApplicationModel) {
-//            let alert = NSAlert()
-//            alert.alertStyle = .informational
-//            alert.messageText = "Update Available"
-//            alert.informativeText = "Thoughts is no longer being updated on the Mac App Store. Please download the latest update from the website."
-//            alert.showsSuppressionButton = true
-//            _ = alert.addButton(withTitle: "OK")
-//            alert.runModal()
-//            let suppressionState = alert.suppressionButton?.state as? NSControl.StateValue ?? .off
-//            applicationModel.suppressUpdateCheck = suppressionState == .on
         }
 
         func setRootURL(applicationModel: ApplicationModel) -> Bool {
-//            dispatchPrecondition(condition: .onQueue(.main))
-//            let openPanel = NSOpenPanel()
-//            openPanel.canChooseFiles = false
-//            openPanel.canChooseDirectories = true
-//            openPanel.canCreateDirectories = true
-//            guard openPanel.runModal() ==  NSApplication.ModalResponse.OK,
-//                  let url = openPanel.url else {
-//                return false
-//            }
-//            applicationModel.rootURL = url
-//            applicationModel.document = Document()
-//            return true
             return false
         }
 
         func showThought(applicationModel: ApplicationModel) {
-//            NSWorkspace.shared.open(.compose)
         }
 
     }
@@ -109,8 +65,6 @@ struct ThoughtsApp: App {
         self.applicationModel = applicationModel
         self.modelDelegate = modelDelegate
         self.applicationModel.start()
-
-//        self.applicationModel.new()
     }
 
     var body: some Scene {
