@@ -63,30 +63,26 @@ public class ApplicationModel: NSObject, @unchecked Sendable {
 
     @MainActor public var rootURL: URL? {
         didSet {
-            guard rootURL?.startAccessingSecurityScopedResource() ?? false else {
-                return
-            }
-            rootURLChanges.send(rootURL)
-            reloadLibrary()
-            do {
-#if os(macOS)
-                try keyedDefaults.set(securityScopedURL: rootURL, forKey: .rootURL)
-#else
-                guard let rootURL else {
-                    // TODO: Clean up.
-                    return
-                }
-
+            if let rootURL {
                 guard rootURL.startAccessingSecurityScopedResource() else {
                     return
                 }
-                let data = try rootURL.bookmarkData(options: .suitableForBookmarkFile,
-                                                    includingResourceValuesForKeys: nil,
-                                                    relativeTo: nil)
-                try URL.writeBookmarkData(data, to: .rootBookmarkURL)
+                rootURLChanges.send(rootURL)
+                reloadLibrary()
+                do {
+#if os(macOS)
+                    try keyedDefaults.set(securityScopedURL: rootURL, forKey: .rootURL)
+#else
+                    let data = try rootURL.bookmarkData(options: .suitableForBookmarkFile,
+                                                        includingResourceValuesForKeys: nil,
+                                                        relativeTo: nil)
+                    try URL.writeBookmarkData(data, to: .rootBookmarkURL)
 #endif
-            } catch {
-                print("Failed to save bookmark data with error \(error).")
+                } catch {
+                    print("Failed to save bookmark data with error \(error).")
+                }
+            } else {
+                // TODO: Remove the default.
             }
         }
     }
