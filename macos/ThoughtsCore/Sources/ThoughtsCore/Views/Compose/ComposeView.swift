@@ -53,6 +53,9 @@ struct ComposeView: View {
         @Bindable var applicationModel = applicationModel
         VStack(spacing: 0) {
             HighlightedTextEditor(text: $applicationModel.document.content, highlightRules: .thoughtsMarkdown)
+                .introspect { internals in
+                    internals.textView.isContinuousSpellCheckingEnabled = true
+                }
                 .frame(minWidth: 400)
                 .edgesIgnoringSafeArea(.all)
                 .focused($focus, equals: .text)
