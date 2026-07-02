@@ -54,7 +54,11 @@ struct ComposeView: View {
         VStack(spacing: 0) {
             HighlightedTextEditor(text: $applicationModel.document.content, highlightRules: .thoughtsMarkdown)
                 .introspect { internals in
+#if os(macOS)
                     internals.textView.isContinuousSpellCheckingEnabled = true
+#else
+                    internals.textView.spellCheckingType = .yes
+#endif
                 }
                 .frame(minWidth: 400)
                 .edgesIgnoringSafeArea(.all)
