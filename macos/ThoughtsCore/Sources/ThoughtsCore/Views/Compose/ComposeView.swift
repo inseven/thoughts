@@ -56,8 +56,12 @@ struct ComposeView: View {
                 .introspect { internals in
 #if os(macOS)
                     internals.textView.isContinuousSpellCheckingEnabled = true
+                    internals.textView.isAutomaticQuoteSubstitutionEnabled = false
+                    internals.textView.isAutomaticDashSubstitutionEnabled = false
 #else
                     internals.textView.spellCheckingType = .yes
+                    internals.textView.smartQuotesType = .no
+                    internals.textView.smartDashesType = .no
 #endif
                 }
                 .frame(minWidth: 400)
