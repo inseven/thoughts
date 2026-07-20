@@ -1,9 +1,9 @@
 [submodule "diligence"]
 	path = macos/dependencies/diligence
-	url = git@github.com:inseven/diligence.git
+	url = https://github.com/inseven/diligence.git
 [submodule "interact"]
 	path = macos/dependencies/interact
-	url = git@github.com:inseven/interact.git
+	url = https://github.com/inseven/interact.git
 [submodule "scripts/changes"]
 	path = scripts/changes
 	url = https://github.com/jbmorley/changes.git
@@ -12,13 +12,13 @@
 	url = https://github.com/jbmorley/build-tools.git
 [submodule "HighlightedTextEditor"]
 	path = macos/dependencies/HighlightedTextEditor
-	url = git@github.com:jbmorley/HighlightedTextEditor.git
+	url = https://github.com/jbmorley/HighlightedTextEditor.git
 [submodule "TagField"]
 	path = macos/dependencies/TagField
-	url = git@github.com:jbmorley/TagField.git
+	url = https://github.com/jbmorley/TagField.git
 [submodule "dependencies/FrontmatterSwift"]
 	path = macos/dependencies/FrontmatterSwift
-	url = git@github.com:jbmorley/FrontmatterSwift.git
+	url = https://github.com/jbmorley/FrontmatterSwift.git
 [submodule "scripts/Sparkle"]
 	path = scripts/Sparkle
 	url = https://github.com/sparkle-project/Sparkle
