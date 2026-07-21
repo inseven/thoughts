@@ -3,6 +3,11 @@ PATH
   specs:
     theme (0.5.0)
       jekyll (~> 4.2)
+      jekyll-environment-variables
+      jekyll-feed (~> 0.12)
+      jekyll-gfm-admonitions
+      jekyll-image-size (~> 1.2)
+      jekyll-toc
 
 GEM
   remote: https://rubygems.org/
@@ -11,10 +16,12 @@ GEM
       public_suffix (>= 2.0.2, < 6.0)
     colorator (1.1.0)
     concurrent-ruby (1.1.10)
+    cssminify (1.0.2)
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
     eventmachine (1.2.7)
+    fastimage (2.4.1)
     ffi (1.15.5)
     forwardable-extended (2.6.0)
     http_parser.rb (0.8.0)
@@ -39,6 +46,13 @@ GEM
       jekyll (>= 3.0, < 5.x)
     jekyll-feed (0.16.0)
       jekyll (>= 3.7, < 5.0)
+    jekyll-gfm-admonitions (1.4.4)
+      cssminify (~> 1.0)
+      jekyll (>= 3.0, < 5.0)
+      octicons (~> 19.8)
+    jekyll-image-size (1.2.1)
+      fastimage (>= 1.8)
+      jekyll (>= 3.7)
     jekyll-sass-converter (2.2.0)
       sassc (> 2.0.1, < 3.0)
     jekyll-toc (0.19.0)
@@ -59,6 +73,11 @@ GEM
     nokogiri (1.18.8)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
+    nokogiri (1.18.8-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.8-x86_64-darwin)
+      racc (~> 1.4)
+    octicons (19.29.2)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
     public_suffix (5.0.0)
@@ -81,13 +100,9 @@ PLATFORMS
   arm64-darwin-24
   x86_64-darwin-20
   x86_64-darwin-22
-  x86_64-linux
 
 DEPENDENCIES
   jekyll (~> 4.2.0)
-  jekyll-environment-variables
-  jekyll-feed (~> 0.12)
-  jekyll-toc
   theme!
   tzinfo (~> 1.2)
   tzinfo-data
@@ -95,4 +110,4 @@ DEPENDENCIES
   webrick (~> 1.7)
 
 BUNDLED WITH
-   2.2.18
+   2.6.9
