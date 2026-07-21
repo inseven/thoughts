@@ -14,12 +14,23 @@
 
 }
 
+.showcase {
+    container-type: inline-size;  /* Required to allow us to use container query width units (cqw). */
+}
+
 .window {
     box-sizing: border-box;
-    background-size: 689px 207px;
-    width: 689px;
+
+    /* Computed size of a single pixel for displaying the preview---all other dimensions are computed using this.
+       This is given as the minimum of 1px and a magic value relative to our container, which which will shrink on
+       smaller screens. The 'calc' and no-op divide by 1 is required to make Firefox and Chrome behave correctly. */
+    --pixel-unit: calc(min(1px, 0.13125cqw) / 1);
+
+    font-size: calc(16 * var(--pixel-unit));
+    background-size: calc(689 * var(--pixel-unit)) calc(207 * var(--pixel-unit));
+    width: calc(689 * var(--pixel-unit));
     margin: auto;
-    border-width: 127px 57px 133.5px 57px;
+    border-width: calc(127 * var(--pixel-unit)) calc(57 * var(--pixel-unit)) calc(133.5 * var(--pixel-unit)) calc(57 * var(--pixel-unit));
     border-style: solid;
     border-image: url("/images/window@2x.png") 254 114 267 114 round;
     transition: border-image 0.3s ease-in-out;
@@ -38,9 +49,9 @@
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 600;
     position: absolute;
-    left: 88px;
-    top: -42px;
-    font-size: 13px;
+    left: calc(88 * var(--pixel-unit));
+    top: calc(-42 * var(--pixel-unit));
+    font-size: calc(13 * var(--pixel-unit));
     color: #494949;
 }
 
@@ -54,11 +65,11 @@
 
 .container {
     text-align: left;
-    padding: 1px 4px;
     font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'DejaVu Sans Mono', Menlo, Consolas, monospace;
-    font-size: 14px;
+    font-size: calc(14 * var(--pixel-unit));
+    padding: calc(1 * var(--pixel-unit)) calc(4 * var(--pixel-unit));
     line-height: 1.5em;
-    min-height: 500px;
+    min-height: calc(500 * var(--pixel-unit));
     background-color: var(--primary-background-color);
     color: var(--primary-foreground-color);
     transition: all 0.3s ease-in-out;
