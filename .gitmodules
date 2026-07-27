@@ -17,7 +17,7 @@
 [submodule "HighlightedTextEditor"]
 	path = macos/dependencies/HighlightedTextEditor
 	url = https://github.com/jbmorley/HighlightedTextEditor.git
-	branch = main
+	branch = thoughts-main
 [submodule "TagField"]
 	path = macos/dependencies/TagField
 	url = https://github.com/jbmorley/TagField.git
