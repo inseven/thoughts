@@ -25,14 +25,20 @@ SCRIPTS_DIRECTORY="$ROOT_DIRECTORY/scripts"
 
 export LOCAL_TOOLS_PATH="$ROOT_DIRECTORY/.local"
 
-export BIN_DIRECTORY="$ROOT_DIRECTORY/.local/bin"
-export PATH=$BIN_DIRECTORY:$PATH
+# Keep Python user installs local to the project instead of polluting the host.
+export PYTHONUSERBASE="$LOCAL_TOOLS_PATH/python"
+mkdir -p "$PYTHONUSERBASE"
+export PATH="$PYTHONUSERBASE/bin":$PATH
 
-source "$LOCAL_TOOLS_PATH/python/bin/activate"
-
-export PIPENV_VENV_IN_PROJECT=1
+# Keep pipenv virtualenvs local and predictable.
+export WORKON_HOME="$LOCAL_TOOLS_PATH"
+export PIPENV_CUSTOM_VENV_NAME="venv"
+export PIPENV_VENV_IN_PROJECT=0
 export PIPENV_IGNORE_VIRTUALENVS=1
+export PIPENV_PIPFILE="$SCRIPTS_DIRECTORY/Pipfile"
 
-export PATH=$PATH:"$SCRIPTS_DIRECTORY/changes"
-export PATH=$PATH:"$SCRIPTS_DIRECTORY/build-tools"
-export PATH=$PATH:"$ROOT_DIRECTORY/macos/dependencies/diligence/scripts"
+# Add the tools to the path.
+export PATH="$LOCAL_TOOLS_PATH/venv/bin":$PATH
+
+# Activate mise to pin the Python version used to run the tools.
+eval "$(mise activate bash)"

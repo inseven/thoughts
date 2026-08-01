@@ -4,3 +4,4 @@ _site
 
 /docs/current.json
 /docs/releases
+/scripts/Pipfile.lock
