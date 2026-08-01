@@ -129,7 +129,7 @@ trap cleanup EXIT
 
 # Determine the version and build number.
 VERSION_NUMBER=`changes version`
-BUILD_NUMBER=`build-number.swift`
+BUILD_NUMBER=`build-tools generate-version-number`
 
 # Import the certificates into our dedicated keychain.
 echo "$APPLE_DISTRIBUTION_CERTIFICATE_PASSWORD" | build-tools import-base64-certificate --password "$KEYCHAIN_PATH" "$APPLE_DISTRIBUTION_CERTIFICATE_BASE64"
@@ -180,7 +180,8 @@ echo -n "$APPLE_API_KEY_BASE64" | base64 --decode -o "$API_KEY_PATH"
 build-tools notarize "$BUILD_DIRECTORY/Thoughts.app" \
     --key "$API_KEY_PATH" \
     --key-id "$APPLE_API_KEY_ID" \
-    --issuer "$APPLE_API_KEY_ISSUER_ID"
+    --issuer "$APPLE_API_KEY_ISSUER_ID" \
+    --log-directory "$BUILD_DIRECTORY"
 
 # Compress the app.
 APP_BASENAME="Thoughts.app"
