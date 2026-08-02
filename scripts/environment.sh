@@ -39,6 +39,3 @@ export PIPENV_PIPFILE="$SCRIPTS_DIRECTORY/Pipfile"
 
 # Add the tools to the path.
 export PATH="$LOCAL_TOOLS_PATH/venv/bin":$PATH
-
-# Activate mise to pin the Python version used to run the tools.
-eval "$(mise activate bash)"
