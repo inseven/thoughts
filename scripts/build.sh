@@ -169,8 +169,6 @@ xcodebuild \
     -exportPath "$BUILD_DIRECTORY" \
     -exportOptionsPlist "ExportOptions_Developer_ID.plist"
 
-# Apple recommends we use ditto to prepare zips for notarization.
-# https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow
 # Install the private key.
 mkdir -p ~/.appstoreconnect/private_keys/
 API_KEY_PATH=~/".appstoreconnect/private_keys/AuthKey_${APPLE_API_KEY_ID}.p8"
