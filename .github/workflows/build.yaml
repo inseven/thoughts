@@ -22,13 +22,22 @@ jobs:
     steps:
 
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
       with:
         submodules: recursive
         fetch-depth: 0
 
-    - name: Install dependencies
-      run: scripts/install-dependencies.sh
+    # Ensure we're using the latest version of mise in an attempt to catch upstream errors early.
+    - name: Get the latest mise version
+      id: mise
+      run: echo "version=$(curl -fsSL https://mise.jdx.dev/VERSION)" >> "$GITHUB_OUTPUT"
+
+    - name: Install mise
+      uses: jdx/mise-action@v4
+      with:
+        version: ${{ steps.mise.outputs.version }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build and test
       env:
@@ -67,7 +76,7 @@ jobs:
     steps:
 
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -75,11 +84,24 @@ jobs:
       run: |
         git submodule update --init --depth 1 docs/_theme
 
-    - name: Install the tool dependencies
-      uses: jdx/mise-action@v4
+    # Ensure we're using the latest version of mise in an attempt to catch upstream errors early.
+    - name: Get the latest mise version
+      id: mise
+      run: echo "version=$(curl -fsSL https://mise.jdx.dev/VERSION)" >> "$GITHUB_OUTPUT"
 
-    - name: Install dependencies
-      run: scripts/install-dependencies.sh
+    - name: Install mise
+      uses: jdx/mise-action@v4
+      with:
+        version: ${{ steps.mise.outputs.version }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Cache the Jekyll dependencies
+      uses: actions/cache@v6
+      with:
+        path: docs/vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('docs/Gemfile.lock') }}
+        restore-keys: ${{ runner.os }}-gems-
 
     - name: Build website
       env:

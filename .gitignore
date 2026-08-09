@@ -1,7 +1,6 @@
 .jekyll-cache
-.local
 _site
 
 /docs/current.json
 /docs/releases
-/scripts/Pipfile.lock
+/docs/vendor

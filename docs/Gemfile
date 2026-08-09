@@ -3,6 +3,10 @@ source "https://rubygems.org"
 gem "jekyll", "~> 4.2.0"
 gem "webrick", "~> 1.7"
 
+gem "base64"
+gem "bigdecimal"
+gem "csv"
+
 group :jekyll_plugins do
   gem "theme", path: "_theme"
 end
