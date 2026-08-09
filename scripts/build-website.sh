@@ -30,18 +30,12 @@ SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd 
 ROOT_DIRECTORY="$SCRIPTS_DIRECTORY/.."
 WEBSITE_DIRECTORY="$ROOT_DIRECTORY/docs"
 
-source "$SCRIPTS_DIRECTORY/environment.sh"
-
 cd "$ROOT_DIRECTORY"
 
 # Update the release notes.
 "$SCRIPTS_DIRECTORY/update-release-notes.sh"
 
 # Install the Jekyll dependencies.
-export GEM_HOME="$ROOT_DIRECTORY/.local/ruby"
-mkdir -p "$GEM_HOME"
-export PATH="$GEM_HOME/bin":$PATH
-gem install bundler
 cd "$WEBSITE_DIRECTORY"
 bundle install
 
