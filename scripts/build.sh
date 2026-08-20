@@ -42,11 +42,16 @@ RELEASE_NOTES_TEMPLATE_PATH="$SCRIPTS_DIRECTORY/sparkle-release-notes.html"
 
 RELEASE_SCRIPT_PATH="$SCRIPTS_DIRECTORY/release.sh"
 
+BUNDLE_IDENTIFIER="uk.co.jbmorley.thoughts.apps.appstore"
+APP_STORE_APP_ID="6476892466"
+
 IOS_XCODE_PATH=${IOS_XCODE_PATH:-/Applications/Xcode.app}
 MACOS_XCODE_PATH=${MACOS_XCODE_PATH:-/Applications/Xcode.app}
 
-# Check that the GitHub command is available on the path.
+# Check the system-wide commands are available.
 which gh || (echo "GitHub cli (gh) not available on the path." && exit 1)
+which asc || (echo "App Store Connect cli (asc) not available on the path." && exit 1)
+which jq || (echo "jq not available on the path." && exit 1)
 
 # Process the command line arguments.
 POSITIONAL=()
@@ -171,6 +176,7 @@ xcodebuild \
 mkdir -p ~/.appstoreconnect/private_keys/
 API_KEY_PATH=~/".appstoreconnect/private_keys/AuthKey_${APPLE_API_KEY_ID}.p8"
 echo -n "$APPLE_API_KEY_BASE64" | base64 --decode -o "$API_KEY_PATH"
+chmod 600 "$API_KEY_PATH"
 
 # Notarize and staple the app.
 build-tools notarize "$BUILD_DIRECTORY/Thoughts.app" \
@@ -233,12 +239,37 @@ xcodebuild \
 
 PKG_PATH="$BUILD_DIRECTORY/Thoughts.pkg"
 
+# Check if we can upload to TestFlight
+# App Store Connect doesn't accept submissions for published releases so we don't bother if we know it'll fail. This
+# catches the scenario where we're performing builds without new features that would bump the version number.
+if $UPLOAD_TO_APP_STORE ; then
+
+    export ASC_KEY_ID="$APPLE_API_KEY_ID"
+    export ASC_ISSUER_ID="$APPLE_API_KEY_ISSUER_ID"
+    export ASC_PRIVATE_KEY_PATH="$API_KEY_PATH"
+    export ASC_BYPASS_KEYCHAIN=1
+
+    # Check to see if the current version has been published.
+    PUBLISHED_VERSION=`asc versions list \
+        --app "$APP_STORE_APP_ID" \
+        --platform "MAC_OS" \
+        --version "$VERSION_NUMBER" \
+        --state "PENDING_APPLE_RELEASE,PENDING_DEVELOPER_RELEASE,PROCESSING_FOR_DISTRIBUTION,READY_FOR_DISTRIBUTION,REPLACED_WITH_NEW_VERSION" \
+        --output json \
+        | jq -r 'first(.data[].attributes.versionString) // ""'`
+    if [ -n "$PUBLISHED_VERSION" ] ; then
+        echo "Version $VERSION_NUMBER has already been published to the App Store; skipping TestFlight upload."
+        UPLOAD_TO_APP_STORE=false
+    fi
+
+fi
+
 if $UPLOAD_TO_APP_STORE ; then
 
     # Upload the macOS build.
     xcrun altool --upload-app \
         -f "$PKG_PATH" \
-        --primary-bundle-id "uk.co.jbmorley.thoughts.apps.appstore" \
+        --primary-bundle-id "$BUNDLE_IDENTIFIER" \
         --apiKey "$APPLE_API_KEY_ID" \
         --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
         --type macos
