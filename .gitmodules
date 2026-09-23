@@ -18,9 +18,6 @@
 	path = macos/dependencies/FrontmatterSwift
 	url = https://github.com/jbmorley/FrontmatterSwift.git
 	branch = main
-[submodule "scripts/Sparkle"]
-	path = scripts/Sparkle
-	url = https://github.com/sparkle-project/Sparkle
 [submodule "docs/_theme"]
 	path = docs/_theme
 	url = https://github.com/jbmorley/showcase-theme.git
