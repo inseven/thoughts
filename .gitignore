@@ -1,6 +1,6 @@
-.jekyll-cache
 _site
-
+.jekyll-cache
+/build
 /docs/current.json
 /docs/releases
 /docs/vendor

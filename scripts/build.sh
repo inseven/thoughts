@@ -31,7 +31,7 @@ SOURCE_DIRECTORY="$ROOT_DIRECTORY/macos"
 BUILD_DIRECTORY="$ROOT_DIRECTORY/build"
 ARCHIVES_DIRECTORY="$ROOT_DIRECTORY/archives"
 TEMPORARY_DIRECTORY="$ROOT_DIRECTORY/temp"
-SOURCE_PACKAGES_DIRECTORY="$ROOT_DIRECTORY/source-packages"
+PACKAGE_SOURCE_DIRECTORY="BUILD_DIRECTORY/package-source"
 
 KEYCHAIN_PATH="$TEMPORARY_DIRECTORY/temporary.keychain"
 ARCHIVE_PATH="$BUILD_DIRECTORY/Thoughts.xcarchive"
@@ -106,16 +106,12 @@ if [ -d "$BUILD_DIRECTORY" ] ; then
     rm -r "$BUILD_DIRECTORY"
 fi
 mkdir -p "$BUILD_DIRECTORY"
+mkdir -p "$PACKAGE_SOURCE_DIRECTORY"
 
 if [ -d "$ARCHIVES_DIRECTORY" ] ; then
     rm -r "$ARCHIVES_DIRECTORY"
 fi
 mkdir -p "$ARCHIVES_DIRECTORY"
-
-if [ -d "$SOURCE_PACKAGES_DIRECTORY" ] ; then
-    rm -rf "$SOURCE_PACKAGES_DIRECTORY"
-fi
-mkdir -p "$SOURCE_PACKAGES_DIRECTORY"
 
 # Create the a new keychain.
 if [ -d "$TEMPORARY_DIRECTORY" ] ; then
@@ -154,11 +150,11 @@ cd "$ROOT_DIRECTORY/macos/ThoughtsCore"
 xcodebuild \
     -scheme ThoughtsCore \
     -destination "platform=macOS" \
-    -clonedSourcePackagesDirPath "$SOURCE_PACKAGES_DIRECTORY"
+    -clonedSourcePackagesDirPath "$PACKAGE_SOURCE_DIRECTORY"
 xcodebuild \
     -scheme ThoughtsCore \
     -destination "platform=iOS Simulator,name=iPhone 17 Pro" \
-    -clonedSourcePackagesDirPath "$SOURCE_PACKAGES_DIRECTORY"
+    -clonedSourcePackagesDirPath "$PACKAGE_SOURCE_DIRECTORY"
 
 ## Developer ID Build
 
@@ -169,7 +165,7 @@ xcodebuild \
     -project Thoughts.xcodeproj \
     -scheme "Thoughts" \
     -config Release \
-    -clonedSourcePackagesDirPath "$SOURCE_PACKAGES_DIRECTORY" \
+    -clonedSourcePackagesDirPath "$PACKAGE_SOURCE_DIRECTORY" \
     -archivePath "$ARCHIVE_PATH" \
     OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" \
     CURRENT_PROJECT_VERSION=$BUILD_NUMBER \
@@ -230,6 +226,7 @@ xcodebuild \
     -project Thoughts.xcodeproj \
     -scheme "Thoughts" \
     -config Release \
+    -clonedSourcePackagesDirPath "$PACKAGE_SOURCE_DIRECTORY" \
     -archivePath "$APP_STORE_ARCHIVE_PATH" \
     OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" \
     CURRENT_PROJECT_VERSION=$BUILD_NUMBER \
@@ -292,7 +289,7 @@ SOURCE_DEPENDENCIES_PATH="$BUILD_DIRECTORY/$SOURCE_DEPENDENCIES_BASENAME"
 COPYFILE_DISABLE=1 tar \
     --exclude ".git" \
     -czf "$SOURCE_DEPENDENCIES_PATH" \
-    -C "$SOURCE_PACKAGES_DIRECTORY" \
+    -C "$PACKAGE_SOURCE_DIRECTORY" \
     checkouts
 
 # Archive the build directory.
