@@ -68,11 +68,19 @@ jobs:
       run: |
         scripts/build.sh
 
+    - name: Archive build artifacts
+      uses: actions/upload-artifact@v7
+      with:
+        path: "build/*-package-source.tar.gz"
+        retention-days: 1
+        archive: false
+
     - name: Archive binary
       uses: actions/upload-artifact@v7
       with:
         path: build/build-*.zip
         if-no-files-found: error
+        retention-days: 1
 
   website-build:
 

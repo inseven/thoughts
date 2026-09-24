@@ -284,11 +284,11 @@ fi
 cd "$ROOT_DIRECTORY"
 
 # Archive the sources of the Swift package dependencies used by the builds.
-SOURCE_DEPENDENCIES_BASENAME="$RELEASE_BASENAME-source-dependencies.tar.gz"
-SOURCE_DEPENDENCIES_PATH="$BUILD_DIRECTORY/$SOURCE_DEPENDENCIES_BASENAME"
+PACKAGE_SOURCE_BASENAME="$RELEASE_BASENAME-package-source.tar.gz"
+PACKAGE_SOURCE_PATH="$BUILD_DIRECTORY/$PACKAGE_SOURCE_BASENAME"
 COPYFILE_DISABLE=1 tar \
     --exclude ".git" \
-    -czf "$SOURCE_DEPENDENCIES_PATH" \
+    -czf "$PACKAGE_SOURCE_PATH" \
     -C "$PACKAGE_SOURCE_DIRECTORY" \
     checkouts
 
@@ -306,6 +306,6 @@ if $RELEASE ; then
         --skip-if-empty \
         --push \
         --exec "$RELEASE_SCRIPT_PATH" \
-        "$PKG_PATH" "$ZIP_PATH" "$RELEASE_ZIP_PATH" "$SOURCE_DEPENDENCIES_PATH" "$BUILD_DIRECTORY/appcast.xml"
+        "$PKG_PATH" "$ZIP_PATH" "$RELEASE_ZIP_PATH" "$PACKAGE_SOURCE_PATH" "$BUILD_DIRECTORY/appcast.xml"
 
 fi
