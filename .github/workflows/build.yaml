@@ -68,21 +68,13 @@ jobs:
       run: |
         scripts/build.sh
 
-    - name: Upload package source
+    - name: Upload the notarized App Store build
       uses: actions/upload-artifact@v7
       with:
-        path: "build/*-package-source.tar.gz"
+        path: "build/Thoughts-*-*.zip"
         retention-days: 1
         archive: false
 
-    - name: Upload Xcode archive
-      uses: actions/upload-artifact@v7
-      with:
-        path: "build/*.xcarchive.tar.gz"
-        retention-days: 1
-        archive: false
-
-    # TODO: Only do this if it fails.
     - name: Upload build directory
       uses: actions/upload-artifact@v7
       with:
