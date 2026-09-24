@@ -31,6 +31,7 @@ SOURCE_DIRECTORY="$ROOT_DIRECTORY/macos"
 BUILD_DIRECTORY="$ROOT_DIRECTORY/build"
 ARCHIVES_DIRECTORY="$ROOT_DIRECTORY/archives"
 TEMPORARY_DIRECTORY="$ROOT_DIRECTORY/temp"
+SOURCE_PACKAGES_DIRECTORY="$ROOT_DIRECTORY/source-packages"
 
 KEYCHAIN_PATH="$TEMPORARY_DIRECTORY/temporary.keychain"
 ARCHIVE_PATH="$BUILD_DIRECTORY/Thoughts.xcarchive"
@@ -111,6 +112,11 @@ if [ -d "$ARCHIVES_DIRECTORY" ] ; then
 fi
 mkdir -p "$ARCHIVES_DIRECTORY"
 
+if [ -d "$SOURCE_PACKAGES_DIRECTORY" ] ; then
+    rm -rf "$SOURCE_PACKAGES_DIRECTORY"
+fi
+mkdir -p "$SOURCE_PACKAGES_DIRECTORY"
+
 # Create the a new keychain.
 if [ -d "$TEMPORARY_DIRECTORY" ] ; then
     rm -rf "$TEMPORARY_DIRECTORY"
@@ -145,19 +151,25 @@ build-tools install-provisioning-profile "profiles/Thoughts_Mac_App_Store_Profil
 # ThoughtsCore
 
 cd "$ROOT_DIRECTORY/macos/ThoughtsCore"
-xcodebuild -scheme ThoughtsCore -destination "platform=macOS"
-xcodebuild -scheme ThoughtsCore -destination "platform=iOS Simulator,name=iPhone 17 Pro"
+xcodebuild \
+    -scheme ThoughtsCore \
+    -destination "platform=macOS" \
+    -clonedSourcePackagesDirPath "$SOURCE_PACKAGES_DIRECTORY"
+xcodebuild \
+    -scheme ThoughtsCore \
+    -destination "platform=iOS Simulator,name=iPhone 17 Pro" \
+    -clonedSourcePackagesDirPath "$SOURCE_PACKAGES_DIRECTORY"
 
 ## Developer ID Build
 
 cd "$SOURCE_DIRECTORY"
 
 # Build and archive the macOS project.
-sudo xcode-select --switch "$MACOS_XCODE_PATH"
 xcodebuild \
     -project Thoughts.xcodeproj \
     -scheme "Thoughts" \
     -config Release \
+    -clonedSourcePackagesDirPath "$SOURCE_PACKAGES_DIRECTORY" \
     -archivePath "$ARCHIVE_PATH" \
     OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" \
     CURRENT_PROJECT_VERSION=$BUILD_NUMBER \
@@ -274,6 +286,15 @@ fi
 
 cd "$ROOT_DIRECTORY"
 
+# Archive the sources of the Swift package dependencies used by the builds.
+SOURCE_DEPENDENCIES_BASENAME="$RELEASE_BASENAME-source-dependencies.tar.gz"
+SOURCE_DEPENDENCIES_PATH="$BUILD_DIRECTORY/$SOURCE_DEPENDENCIES_BASENAME"
+COPYFILE_DISABLE=1 tar \
+    --exclude ".git" \
+    -czf "$SOURCE_DEPENDENCIES_PATH" \
+    -C "$SOURCE_PACKAGES_DIRECTORY" \
+    checkouts
+
 # Archive the build directory.
 ZIP_BASENAME="build-$VERSION_NUMBER-$BUILD_NUMBER.zip"
 ZIP_PATH="$BUILD_DIRECTORY/$ZIP_BASENAME"
@@ -288,6 +309,6 @@ if $RELEASE ; then
         --skip-if-empty \
         --push \
         --exec "$RELEASE_SCRIPT_PATH" \
-        "$PKG_PATH" "$ZIP_PATH" "$RELEASE_ZIP_PATH" "$BUILD_DIRECTORY/appcast.xml"
+        "$PKG_PATH" "$ZIP_PATH" "$RELEASE_ZIP_PATH" "$SOURCE_DEPENDENCIES_PATH" "$BUILD_DIRECTORY/appcast.xml"
 
 fi
