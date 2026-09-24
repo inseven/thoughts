@@ -285,19 +285,19 @@ cd "$ROOT_DIRECTORY"
 
 # Swift package sources.
 PACKAGE_SOURCE_BASENAME="$RELEASE_BASENAME-package-source.tar.gz"
-PACKAGE_SOURCE_PATH="$BUILD_DIRECTORY/$PACKAGE_SOURCE_BASENAME"
+PACKAGE_SOURCE_TAR_GZ_PATH="$BUILD_DIRECTORY/$PACKAGE_SOURCE_BASENAME"
 COPYFILE_DISABLE=1 tar \
     --exclude ".git" \
-    -zcf "$PACKAGE_SOURCE_PATH" \
-    -C "$PACKAGE_SOURCE_DIRECTORY" \
-    checkouts
+    -zcf "$PACKAGE_SOURCE_TAR_GZ_PATH" \
+    -C "$PACKAGE_SOURCE_DIRECTORY/checkouts" \
+    .
 
 # Xcode archive.
 ARCHIVE_TAR_GZ_PATH="$BUILD_DIRECTORY/$RELEASE_BASENAME.xcarchive.tar.gz"
 COPYFILE_DISABLE=1 tar \
     -zcf "$ARCHIVE_TAR_GZ_PATH" \
     -C "$BUILD_DIRECTORY" \
-    "$ARCHIVE_PATH"
+    Thoughts.xcarchive
 
 if $RELEASE ; then
 
@@ -309,7 +309,7 @@ if $RELEASE ; then
         "$PKG_PATH" \
         "$RELEASE_ZIP_PATH" \
         "$ARCHIVE_TAR_GZ_PATH" \
-        "$PACKAGE_SOURCE_PATH" \
+        "$PACKAGE_SOURCE_TAR_GZ_PATH" \
         "$BUILD_DIRECTORY/appcast.xml"
 
 fi
