@@ -31,6 +31,7 @@ SOURCE_DIRECTORY="$ROOT_DIRECTORY/macos"
 BUILD_DIRECTORY="$ROOT_DIRECTORY/build"
 ARCHIVES_DIRECTORY="$ROOT_DIRECTORY/archives"
 TEMPORARY_DIRECTORY="$ROOT_DIRECTORY/temp"
+PACKAGE_SOURCE_DIRECTORY="$BUILD_DIRECTORY/package-source"
 
 KEYCHAIN_PATH="$TEMPORARY_DIRECTORY/temporary.keychain"
 ARCHIVE_PATH="$BUILD_DIRECTORY/Thoughts.xcarchive"
@@ -105,6 +106,7 @@ if [ -d "$BUILD_DIRECTORY" ] ; then
     rm -r "$BUILD_DIRECTORY"
 fi
 mkdir -p "$BUILD_DIRECTORY"
+mkdir -p "$PACKAGE_SOURCE_DIRECTORY"
 
 if [ -d "$ARCHIVES_DIRECTORY" ] ; then
     rm -r "$ARCHIVES_DIRECTORY"
@@ -145,19 +147,25 @@ build-tools install-provisioning-profile "profiles/Thoughts_Mac_App_Store_Profil
 # ThoughtsCore
 
 cd "$ROOT_DIRECTORY/macos/ThoughtsCore"
-xcodebuild -scheme ThoughtsCore -destination "platform=macOS"
-xcodebuild -scheme ThoughtsCore -destination "platform=iOS Simulator,name=iPhone 17 Pro"
+xcodebuild \
+    -scheme ThoughtsCore \
+    -destination "platform=macOS" \
+    -clonedSourcePackagesDirPath "$PACKAGE_SOURCE_DIRECTORY"
+xcodebuild \
+    -scheme ThoughtsCore \
+    -destination "platform=iOS Simulator,name=iPhone 17 Pro" \
+    -clonedSourcePackagesDirPath "$PACKAGE_SOURCE_DIRECTORY"
 
 ## Developer ID Build
 
 cd "$SOURCE_DIRECTORY"
 
 # Build and archive the macOS project.
-sudo xcode-select --switch "$MACOS_XCODE_PATH"
 xcodebuild \
     -project Thoughts.xcodeproj \
     -scheme "Thoughts" \
     -config Release \
+    -clonedSourcePackagesDirPath "$PACKAGE_SOURCE_DIRECTORY" \
     -archivePath "$ARCHIVE_PATH" \
     OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" \
     CURRENT_PROJECT_VERSION=$BUILD_NUMBER \
@@ -218,6 +226,7 @@ xcodebuild \
     -project Thoughts.xcodeproj \
     -scheme "Thoughts" \
     -config Release \
+    -clonedSourcePackagesDirPath "$PACKAGE_SOURCE_DIRECTORY" \
     -archivePath "$APP_STORE_ARCHIVE_PATH" \
     OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" \
     CURRENT_PROJECT_VERSION=$BUILD_NUMBER \
@@ -274,12 +283,21 @@ fi
 
 cd "$ROOT_DIRECTORY"
 
-# Archive the build directory.
-ZIP_BASENAME="build-$VERSION_NUMBER-$BUILD_NUMBER.zip"
-ZIP_PATH="$BUILD_DIRECTORY/$ZIP_BASENAME"
-pushd "$BUILD_DIRECTORY"
-zip -r "$ZIP_BASENAME" .
-popd
+# Swift package sources.
+PACKAGE_SOURCE_BASENAME="$RELEASE_BASENAME-package-source.tar.gz"
+PACKAGE_SOURCE_TAR_GZ_PATH="$BUILD_DIRECTORY/$PACKAGE_SOURCE_BASENAME"
+COPYFILE_DISABLE=1 tar \
+    --exclude ".git" \
+    -zcf "$PACKAGE_SOURCE_TAR_GZ_PATH" \
+    -C "$PACKAGE_SOURCE_DIRECTORY/checkouts" \
+    .
+
+# Xcode archive.
+ARCHIVE_TAR_GZ_PATH="$BUILD_DIRECTORY/$RELEASE_BASENAME.xcarchive.tar.gz"
+COPYFILE_DISABLE=1 tar \
+    -zcf "$ARCHIVE_TAR_GZ_PATH" \
+    -C "$BUILD_DIRECTORY" \
+    Thoughts.xcarchive
 
 if $RELEASE ; then
 
@@ -288,6 +306,10 @@ if $RELEASE ; then
         --skip-if-empty \
         --push \
         --exec "$RELEASE_SCRIPT_PATH" \
-        "$PKG_PATH" "$ZIP_PATH" "$RELEASE_ZIP_PATH" "$BUILD_DIRECTORY/appcast.xml"
+        "$PKG_PATH" \
+        "$RELEASE_ZIP_PATH" \
+        "$ARCHIVE_TAR_GZ_PATH" \
+        "$PACKAGE_SOURCE_TAR_GZ_PATH" \
+        "$BUILD_DIRECTORY/appcast.xml"
 
 fi

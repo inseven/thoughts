@@ -68,11 +68,21 @@ jobs:
       run: |
         scripts/build.sh
 
-    - name: Archive binary
+    - name: Upload the notarized App Store build
       uses: actions/upload-artifact@v7
       with:
-        path: build/build-*.zip
+        path: "build/Thoughts-*-*.zip"
+        retention-days: 1
+        archive: false
+
+    - name: Upload build directory
+      uses: actions/upload-artifact@v7
+      if: failure()
+      with:
+        name: build
+        path: build
         if-no-files-found: error
+        retention-days: 1
 
   website-build:
 
