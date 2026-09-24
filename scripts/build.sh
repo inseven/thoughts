@@ -283,21 +283,21 @@ fi
 
 cd "$ROOT_DIRECTORY"
 
-# Archive the sources of the Swift package dependencies used by the builds.
+# Swift package sources.
 PACKAGE_SOURCE_BASENAME="$RELEASE_BASENAME-package-source.tar.gz"
 PACKAGE_SOURCE_PATH="$BUILD_DIRECTORY/$PACKAGE_SOURCE_BASENAME"
 COPYFILE_DISABLE=1 tar \
     --exclude ".git" \
-    -czf "$PACKAGE_SOURCE_PATH" \
+    -zcf "$PACKAGE_SOURCE_PATH" \
     -C "$PACKAGE_SOURCE_DIRECTORY" \
     checkouts
 
-# Archive the build directory.
-ZIP_BASENAME="build-$VERSION_NUMBER-$BUILD_NUMBER.zip"
-ZIP_PATH="$BUILD_DIRECTORY/$ZIP_BASENAME"
-pushd "$BUILD_DIRECTORY"
-zip -r "$ZIP_BASENAME" .
-popd
+# Xcode archive.
+ARCHIVE_TAR_GZ_PATH="$BUILD_DIRECTORY/$RELEASE_BASENAME.xcarchive.tar.gz"
+COPYFILE_DISABLE=1 tar \
+    -zcf "$ARCHIVE_TAR_GZ_PATH" \
+    -C "$BUILD_DIRECTORY"
+    "$ARCHIVE_PATH"
 
 if $RELEASE ; then
 
@@ -306,6 +306,10 @@ if $RELEASE ; then
         --skip-if-empty \
         --push \
         --exec "$RELEASE_SCRIPT_PATH" \
-        "$PKG_PATH" "$ZIP_PATH" "$RELEASE_ZIP_PATH" "$PACKAGE_SOURCE_PATH" "$BUILD_DIRECTORY/appcast.xml"
+        "$PKG_PATH" \
+        "$RELEASE_ZIP_PATH" \
+        "$ARCHIVE_TAR_GZ_PATH" \
+        "$PACKAGE_SOURCE_PATH" \
+        "$BUILD_DIRECTORY/appcast.xml"
 
 fi

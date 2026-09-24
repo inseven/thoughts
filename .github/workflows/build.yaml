@@ -75,10 +75,11 @@ jobs:
         retention-days: 1
         archive: false
 
-    - name: Archive binary
+    # TODO: Only do this if it fails.
+    - name: Archive build directory
       uses: actions/upload-artifact@v7
       with:
-        path: build/build-*.zip
+        path: build
         if-no-files-found: error
         retention-days: 1
 
