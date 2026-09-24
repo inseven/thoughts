@@ -6,7 +6,7 @@ on:
   push:
     branches: [ main ]
   schedule:
-    - cron: '0 9 * * *'
+    - cron: '0 14 * * 1'  # 04:00 Monday, HST.
   workflow_dispatch:
 
 concurrency:
