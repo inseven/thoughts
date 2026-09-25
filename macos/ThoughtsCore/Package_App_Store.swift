@@ -21,7 +21,7 @@ let package = Package(
         .package(path: "./../dependencies/TagField"),
         .package(url: "https://github.com/sparkle-project/Sparkle", .upToNextMajor(from: "2.7.1")),
         .package(url: "https://github.com/inseven/glitter.git", .upToNextMajor(from: "0.1.3")),
-        .package(url: "https://github.com/jpsim/Yams.git", .upToNextMajor(from: "5.1.2")),
+        .package(url: "https://github.com/jpsim/Yams.git", .upToNextMajor(from: "5.4.0")),
     ],
     targets: [
         .target(
