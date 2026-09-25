@@ -45,9 +45,6 @@ RELEASE_SCRIPT_PATH="$SCRIPTS_DIRECTORY/release.sh"
 BUNDLE_IDENTIFIER="uk.co.jbmorley.thoughts.apps.appstore"
 APP_STORE_APP_ID="6476892466"
 
-IOS_XCODE_PATH=${IOS_XCODE_PATH:-/Applications/Xcode.app}
-MACOS_XCODE_PATH=${MACOS_XCODE_PATH:-/Applications/Xcode.app}
-
 # Check the system-wide commands are available.
 which gh || (echo "GitHub cli (gh) not available on the path." && exit 1)
 which asc || (echo "App Store Connect cli (asc) not available on the path." && exit 1)
@@ -91,9 +88,6 @@ if [ -f "$ENV_PATH" ] ; then
 fi
 
 cd "$SOURCE_DIRECTORY"
-
-# Select the correct Xcode.
-sudo xcode-select --switch "$MACOS_XCODE_PATH"
 
 # List the available schemes.
 xcodebuild \
