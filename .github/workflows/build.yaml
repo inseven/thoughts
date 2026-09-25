@@ -68,7 +68,7 @@ jobs:
       run: |
         scripts/build.sh
 
-    - name: Upload the notarized App Store build
+    - name: Upload the notarized Developer ID build
       uses: actions/upload-artifact@v7
       with:
         path: "build/Thoughts-*-*.zip"
