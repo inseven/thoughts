@@ -62,8 +62,8 @@ jobs:
         SPARKLE_PRIVATE_KEY_BASE64: ${{ secrets.SPARKLE_PRIVATE_KEY_BASE64 }}
 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        RELEASE: ${{ github.ref == 'refs/heads/main' }}
-        UPLOAD_TO_APP_STORE: ${{ github.ref == 'refs/heads/main' }}
+        RELEASE: ${{ github.event_name == 'schedule' && github.ref == 'refs/heads/main' }}
+        UPLOAD_TO_APP_STORE: ${{ github.event_name == 'schedule' && github.ref == 'refs/heads/main' }}
 
       run: |
         scripts/build.sh
