@@ -215,7 +215,6 @@
 			);
 			mainGroup = D852AEF52B6027CA00B77A3D;
 			packageReferences = (
-				D8F06D492B67275B0039AEF4 /* XCLocalSwiftPackageReference "dependencies/diligence" */,
 				D87707B32C01592400362786 /* XCRemoteSwiftPackageReference "HotKey" */,
 				D8296CEC2E29EBBF005088B6 /* XCLocalSwiftPackageReference "ThoughtsCore" */,
 			);
@@ -603,10 +602,6 @@
 		D8296CEC2E29EBBF005088B6 /* XCLocalSwiftPackageReference "ThoughtsCore" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ThoughtsCore;
-		};
-		D8F06D492B67275B0039AEF4 /* XCLocalSwiftPackageReference "dependencies/diligence" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = dependencies/diligence;
 		};
 /* End XCLocalSwiftPackageReference section */
 
