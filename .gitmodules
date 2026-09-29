@@ -1,11 +1,3 @@
-[submodule "diligence"]
-	path = macos/dependencies/diligence
-	url = https://github.com/inseven/diligence.git
-	branch = main
-[submodule "interact"]
-	path = macos/dependencies/interact
-	url = https://github.com/inseven/interact.git
-	branch = main
 [submodule "HighlightedTextEditor"]
 	path = macos/dependencies/HighlightedTextEditor
 	url = https://github.com/jbmorley/HighlightedTextEditor.git
