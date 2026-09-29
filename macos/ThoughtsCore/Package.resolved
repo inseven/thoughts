@@ -1,5 +1,5 @@
 {
-  "originHash" : "b12f13ce6fb1c04b9b8f664af1a238f8a38affccd10649c73d074c4ffa16a507",
+  "originHash" : "d0b59d5ce31367463b65c003563b1a3f09e0699ee606106a429c51a14dd49bfe",
   "pins" : [
     {
       "identity" : "glitter",
@@ -11,12 +11,30 @@
       }
     },
     {
+      "identity" : "hashrainbow",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/inseven/HashRainbow",
+      "state" : {
+        "revision" : "3eb3d2ce3b3fce35bcde312ed074a9c237d714ab",
+        "version" : "0.1.0"
+      }
+    },
+    {
+      "identity" : "hotkey",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/soffes/HotKey",
+      "state" : {
+        "branch" : "main",
+        "revision" : "a3cf605d7a96f6ff50e04fcb6dea6e2613cfcbe4"
+      }
+    },
+    {
       "identity" : "licensable",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/inseven/licensable",
       "state" : {
-        "revision" : "a8ad62c6fde5aca29a47459b0687e580eee203dd",
-        "version" : "0.0.13"
+        "revision" : "71a2e900833316ea7bc8a29205c374a628be7784",
+        "version" : "0.1.2"
       }
     },
     {
@@ -26,6 +44,15 @@
       "state" : {
         "revision" : "eef1a539a373c1f1a320624b1130fc5de7b2e100",
         "version" : "2.10.0"
+      }
+    },
+    {
+      "identity" : "tagfield",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jbmorley/TagField.git",
+      "state" : {
+        "revision" : "4515298e2f58351eb0996c5af8d6fc7594956e6a",
+        "version" : "0.0.11"
       }
     },
     {
