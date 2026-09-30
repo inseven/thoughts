@@ -1,5 +1,5 @@
 {
-  "originHash" : "23038d30401b1902293517657325ed5d40b686d581743b8128375ea2b342cbcf",
+  "originHash" : "a55911fa8d8b7e784cfafb92570ffca83ef6e901e67043d7a92f3783b21cfa45",
   "pins" : [
     {
       "identity" : "diligence",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "5faa62e7f528faa6aa2d1b5d022b78fe3698c62a",
         "version" : "2.0.1"
+      }
+    },
+    {
+      "identity" : "frontmatterswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jbmorley/FrontmatterSwift.git",
+      "state" : {
+        "revision" : "c813606beabfb60a5901e94c548dc45a85f07507",
+        "version" : "0.2.1"
       }
     },
     {
@@ -26,15 +35,6 @@
       "state" : {
         "revision" : "3eb3d2ce3b3fce35bcde312ed074a9c237d714ab",
         "version" : "0.1.0"
-      }
-    },
-    {
-      "identity" : "hotkey",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/soffes/HotKey",
-      "state" : {
-        "branch" : "main",
-        "revision" : "a3cf605d7a96f6ff50e04fcb6dea6e2613cfcbe4"
       }
     },
     {
