@@ -14,7 +14,6 @@ let package = Package(
             targets: ["ThoughtsCore"]),
     ],
     dependencies: [
-        .package(path: "./../dependencies/FrontmatterSwift"),
         .package(path: "./../dependencies/HighlightedTextEditor"),
         .package(url: "https://github.com/sparkle-project/Sparkle", .upToNextMajor(from: "2.10.0")),
         .package(url: "https://github.com/inseven/glitter.git", .upToNextMajor(from: "0.1.3")),
@@ -22,6 +21,7 @@ let package = Package(
         .package(url: "https://github.com/jbmorley/TagField.git", .upToNextMajor(from: "0.0.11")),
         .package(url: "https://github.com/inseven/diligence.git", from: "2.0.1"),
         .package(url: "https://github.com/inseven/interact.git", from: "3.10.5"),
+        .package(url: "https://github.com/jbmorley/FrontmatterSwift.git", from: "0.2.1"),
     ],
     targets: [
         .target(

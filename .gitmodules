@@ -2,10 +2,6 @@
 	path = macos/dependencies/HighlightedTextEditor
 	url = https://github.com/jbmorley/HighlightedTextEditor.git
 	branch = thoughts-main
-[submodule "dependencies/FrontmatterSwift"]
-	path = macos/dependencies/FrontmatterSwift
-	url = https://github.com/jbmorley/FrontmatterSwift.git
-	branch = main
 [submodule "docs/_theme"]
 	path = docs/_theme
 	url = https://github.com/jbmorley/showcase-theme.git
