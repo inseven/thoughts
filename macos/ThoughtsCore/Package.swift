@@ -20,7 +20,7 @@ let package = Package(
         .package(url: "https://github.com/jpsim/Yams.git", .upToNextMajor(from: "5.4.0")),
         .package(url: "https://github.com/jbmorley/TagField.git", .upToNextMajor(from: "0.0.11")),
         .package(url: "https://github.com/inseven/diligence.git", from: "2.0.1"),
-        .package(url: "https://github.com/inseven/interact.git", from: "3.10.5"),
+        .package(url: "https://github.com/inseven/interact.git", from: "3.10.7"),
         .package(url: "https://github.com/jbmorley/FrontmatterSwift.git", from: "0.2.1"),
     ],
     targets: [
