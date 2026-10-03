@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/inseven/interact.git",
       "state" : {
-        "revision" : "1144be7db0f5ce867b3560bdc8902c792cfd3cc9",
-        "version" : "3.10.5"
+        "revision" : "f54eb2dcd05b40f02ecab721044d87049fbaca78",
+        "version" : "3.10.7"
       }
     },
     {
