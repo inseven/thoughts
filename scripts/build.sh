@@ -147,7 +147,7 @@ xcodebuild \
     -clonedSourcePackagesDirPath "$PACKAGE_SOURCE_DIRECTORY"
 xcodebuild \
     -scheme ThoughtsCore \
-    -destination "platform=iOS Simulator,name=iPhone 17 Pro" \
+    -destination "$DEFAULT_IPHONE_DESTINATION" \
     -clonedSourcePackagesDirPath "$PACKAGE_SOURCE_DIRECTORY"
 
 ## Developer ID Build
