@@ -1,7 +1,7 @@
 [tools]
 
 python = "3.15.1"
-ruby = "4.0.8"
+ruby = "4.0.9"
 uv = "latest"
 
 "pipx:changes-semver" = "6.0.8"
