@@ -1,6 +1,6 @@
 [tools]
 
-python = "3.15.1"
+python = "3.15.2"
 ruby = "4.0.9"
 uv = "latest"
 
