@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/inseven/diligence.git",
       "state" : {
-        "revision" : "5faa62e7f528faa6aa2d1b5d022b78fe3698c62a",
-        "version" : "2.0.1"
+        "revision" : "66763531c4b05d2768ad03776ca4a0a8ac4c4513",
+        "version" : "2.0.2"
       }
     },
     {
